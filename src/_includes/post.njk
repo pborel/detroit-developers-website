@@ -1,0 +1,22 @@
+---
+layout: base.njk
+breadcrumb: posts / {{ title | slug }}.md
+---
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// {{ title | upper }}</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">{{ title }}</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      {{ date | dateFormat }}
+      {% if author %} · {{ author }}{% endif %}
+      · {{ content | readingTime }}
+    </div>
+
+    <div class="prose">
+      {{ content | safe }}
+    </div>
+  </div>
+</div>

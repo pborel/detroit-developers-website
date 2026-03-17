@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: Blog
+breadcrumb: blog.html
+permalink: /blog/
+---
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
+  <div class="section-content">
+    <div class="section-comment">// ALL POSTS</div>
+
+    {% if collections.posts.length %}
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        {% for post in collections.posts %}
+          <a href="{{ post.url }}" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+            <div>
+              <div class="card-title">{{ post.data.title }}</div>
+              <div class="card-meta">
+                {{ post.date | dateFormat }}
+                {% if post.data.author %} · {{ post.data.author }}{% endif %}
+                · {{ post.content | readingTime }}
+              </div>
+              {% if post.data.excerpt %}
+                <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">{{ post.data.excerpt }}</p>
+              {% else %}
+                <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">{{ post.content | excerpt }}</p>
+              {% endif %}
+            </div>
+            <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No blog posts yet. Check back soon!</p>
+    {% endif %}
+  </div>
+</div>
