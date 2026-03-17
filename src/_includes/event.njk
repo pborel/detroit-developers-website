@@ -1,0 +1,52 @@
+---
+layout: base.njk
+breadcrumb: events / {{ title | slug }}.md
+---
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
+  <div class="section-content">
+    <div class="section-comment">// EVENT DETAILS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">{{ title }}</h1>
+    <div class="event-meta" style="margin-bottom: 24px;">
+      <span>📅 {{ date | dateFormat }}</span>
+      <span>📍 {{ location }}</span>
+      {% if attendees %}
+        <span>👥 {{ attendees }} attended</span>
+      {% endif %}
+    </div>
+
+    {% if video %}
+      <div class="video-embed">
+        <iframe
+          src="{{ video | replace('watch?v=', 'embed/') | replace('youtu.be/', 'youtube.com/embed/') }}"
+          title="{{ title }} — Video Recording"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    {% endif %}
+
+    {% if photos %}
+      <h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 16px;">Photos</h3>
+      <div class="photo-gallery">
+        {% for photo in photos %}
+          <a href="{{ photo }}" target="_blank">
+            <img src="{{ photo }}" alt="Photo from {{ title }}" loading="lazy">
+          </a>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if content | trim %}
+      <div class="prose" style="margin-top: 24px;">
+        {{ content | safe }}
+      </div>
+    {% endif %}
+
+    {% if meetup_url %}
+      <a href="{{ meetup_url }}" class="btn-primary" style="margin-top: 24px;" target="_blank" rel="noopener">View on Meetup →</a>
+    {% endif %}
+  </div>
+</div>
