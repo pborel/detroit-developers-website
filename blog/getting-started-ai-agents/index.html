@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started with AI Agents in Production — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Getting Started with AI Agents in Production — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/getting-started-ai-agents/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ posts/</div>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ events/</div>
+      
+      <a href="/events/sboms-frontend/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">SBOMs for Frontend...</span>
+      </a>
+      
+      <a href="/events/pm-talk/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Keep Projects on...</span>
+      </a>
+      
+      <a href="/events/ai-k8s/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">AI Agents for...</span>
+      </a>
+      
+      <a href="/events/feature-flags-logging/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Feature Flag System...</span>
+      </a>
+      
+      <a href="/events/data-pipelines-sdlc/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Workshop: Data...</span>
+      </a>
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">getting-started-ai-agents.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// GETTING STARTED WITH AI AGENTS IN PRODUCTION</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Getting Started with AI Agents in Production</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Mar 9, 2026
+       · Phil
+      · 1 min read
+    </div>
+
+    <div class="prose">
+      <p>AI agents are transforming how we build software. In this post, we'll explore the fundamentals of deploying AI agents in production environments.</p>
+<h2>What Are AI Agents?</h2>
+<p>AI agents are autonomous systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional chatbots, agents can use tools, maintain state across interactions, and handle multi-step workflows.</p>
+<h2>Key Considerations</h2>
+<p>When deploying AI agents in production, there are several important factors to keep in mind:</p>
+<ul>
+<li><strong>Reliability</strong> — Agents need fallback strategies when tool calls fail</li>
+<li><strong>Observability</strong> — You need to see what decisions the agent is making and why</li>
+<li><strong>Cost management</strong> — Token usage can scale quickly with complex agent workflows</li>
+<li><strong>Safety</strong> — Guardrails and human-in-the-loop patterns are essential</li>
+</ul>
+<h2>Getting Started</h2>
+<p>The simplest way to start is with a single-purpose agent that handles one well-defined task. From there, you can expand to multi-agent architectures as your confidence grows.</p>
+<p>Stay tuned for our upcoming panel discussion on Agentic Software Development on March 23rd!</p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+</html>

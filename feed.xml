@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Detroit Software Developers</title>
+  <subtitle>Monthly meetups on software development and startups in Detroit</subtitle>
+  <link href="https://detroitdevelopers.com/feed.xml" rel="self"/>
+  <link href="https://detroitdevelopers.com/"/>
+  <updated>2026-03-10T00:00:00Z</updated>
+  <id>https://detroitdevelopers.com/</id>
+  <entry>
+    <title>Getting Started with AI Agents in Production</title>
+    <link href="https://detroitdevelopers.com/blog/getting-started-ai-agents/"/>
+    <updated>2026-03-10T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/getting-started-ai-agents/</id>
+    <content type="html">&lt;p&gt;AI agents are transforming how we build software. In this post, we&#39;ll explore the fundamentals of deploying AI agents in production environments.&lt;/p&gt;
+&lt;h2&gt;What Are AI Agents?&lt;/h2&gt;
+&lt;p&gt;AI agents are autonomous systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional chatbots, agents can use tools, maintain state across interactions, and handle multi-step workflows.&lt;/p&gt;
+&lt;h2&gt;Key Considerations&lt;/h2&gt;
+&lt;p&gt;When deploying AI agents in production, there are several important factors to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Reliability&lt;/strong&gt; — Agents need fallback strategies when tool calls fail&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt; — You need to see what decisions the agent is making and why&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cost management&lt;/strong&gt; — Token usage can scale quickly with complex agent workflows&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Safety&lt;/strong&gt; — Guardrails and human-in-the-loop patterns are essential&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;The simplest way to start is with a single-purpose agent that handles one well-defined task. From there, you can expand to multi-agent architectures as your confidence grows.&lt;/p&gt;
+&lt;p&gt;Stay tuned for our upcoming panel discussion on Agentic Software Development on March 23rd!&lt;/p&gt;
+</content>
+  </entry>
+</feed>
