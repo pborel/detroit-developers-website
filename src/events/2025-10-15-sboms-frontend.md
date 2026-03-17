@@ -4,7 +4,7 @@ title: "SBOMs for Frontend Developers & Code-Level Observability"
 date: 2025-10-15
 location: "The Madison Loft, Detroit"
 attendees: 21
-meetup_url: "https://www.meetup.com/detroit-developers/events/"
+meetup_url: "https://www.meetup.com/detroit-developers/events/311183285"
 permalink: /events/{{ page.fileSlug }}/
 ---
 
