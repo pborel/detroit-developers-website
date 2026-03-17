@@ -40,7 +40,7 @@ export default function (eleventyConfig) {
     return new Date(date).toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "2-digit",
-      timeZoneName: "short",
+      timeZone: "America/Detroit",
     });
   });
 
