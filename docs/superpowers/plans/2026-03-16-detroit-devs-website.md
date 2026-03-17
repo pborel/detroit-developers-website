@@ -982,7 +982,7 @@ git commit -m "feat: add IDE chrome base layout with Catppuccin Mocha theme"
 [
   {
     "title": "Agentic Software Development",
-    "description": "Panel Discussion with GitHub, RIVET Work, Signal Advisors & Inngest discussing GenAI applications in software development.",
+    "description": "Panel Discussion featuring Engineers from GitHub, RIVET Work, Signal Advisors & Inngest discussing GenAI applications in software development.",
     "date": "2026-03-23T17:30:00-04:00",
     "location": "The Madison Loft & Auditorium, 1555 Broadway St, Detroit",
     "url": "https://www.meetup.com/detroit-developers/events/306217637/"
