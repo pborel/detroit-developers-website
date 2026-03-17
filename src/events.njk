@@ -1,0 +1,80 @@
+---
+layout: base.njk
+title: Events
+breadcrumb: events.html
+permalink: /events/
+---
+
+{# Resolve upcoming events: prefer scraper data, fall back to JSON file #}
+{% set upcomingEvents = meetup.upcoming or upcoming %}
+
+{# --- UPCOMING --- #}
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// UPCOMING</div>
+
+    {% if upcomingEvents and upcomingEvents.length %}
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 700px;">
+        {% for event in upcomingEvents %}
+          <div class="event-card event-card--upcoming">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+              <div style="flex: 1; min-width: 200px;">
+                <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">{{ event.title }}</h2>
+                <p style="color: var(--subtext0); font-size: 14px; margin-bottom: 12px;">{{ event.description }}</p>
+              </div>
+              <span class="event-badge">NEXT UP</span>
+            </div>
+            <div class="event-meta" style="margin-bottom: 16px;">
+              <span>📅 {{ event.date | dateFormat }}</span>
+              <span>📍 {{ event.location }}</span>
+              {% if event.attendeeCount %}
+                <span>👥 {{ event.attendeeCount }} attending</span>
+              {% endif %}
+            </div>
+            <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No upcoming events. <a href="{{ site.meetup_url }}" target="_blank" rel="noopener">Check our Meetup page</a> for updates.</p>
+    {% endif %}
+  </div>
+</div>
+
+{# --- PAST EVENTS --- #}
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">6<br>7<br>8<br>9<br>10<br>11<br>12</div>
+  <div class="section-content">
+    <div class="section-comment">// PAST EVENTS</div>
+
+    {% if collections.events.length %}
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        {% for event in collections.events %}
+          <a href="{{ event.url }}" class="card" style="text-decoration: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="card-title" style="color: var(--text); font-weight: 500;">{{ event.data.title }}</div>
+                <div class="card-meta" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                  <span>{{ event.date | dateFormat }}</span>
+                  {% if event.data.attendees %}
+                    <span>{{ event.data.attendees }} attended</span>
+                  {% endif %}
+                  {% if event.data.video %}
+                    <span style="color: var(--blue);">🎥 video</span>
+                  {% endif %}
+                  {% if event.data.photos %}
+                    <span style="color: var(--yellow);">📷 photos</span>
+                  {% endif %}
+                </div>
+              </div>
+              <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0;">→</span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No past events recorded yet.</p>
+    {% endif %}
+  </div>
+</div>
