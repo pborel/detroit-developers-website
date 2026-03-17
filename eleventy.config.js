@@ -1,7 +1,9 @@
 import pluginRss from "@11ty/eleventy-plugin-rss";
+import { EleventyHtmlBasePlugin } from "@11ty/eleventy";
 
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
   // Passthrough copy
   eleventyConfig.addPassthroughCopy("src/assets");
@@ -55,6 +57,7 @@ export default function (eleventyConfig) {
   });
 
   return {
+    pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/",
     dir: {
       input: "src",
       includes: "_includes",
