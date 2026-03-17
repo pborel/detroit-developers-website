@@ -540,7 +540,7 @@ a:hover {
   .sidebar {
     position: fixed;
     top: 0;
-    left: var(--activity-bar-width);
+    left: 0;
     bottom: var(--status-bar-height);
     z-index: 100;
     transform: translateX(-100%);
@@ -557,14 +557,6 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-  .activity-bar {
-    display: none;
-  }
-
-  .sidebar {
-    left: 0;
-  }
-
   .line-gutter {
     display: none;
   }

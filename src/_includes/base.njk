@@ -32,13 +32,6 @@
 
   <div class="ide-layout">
 
-    <!-- Activity Bar -->
-    <div class="activity-bar" aria-hidden="true">
-      <div class="activity-bar-icon active" title="Explorer">📁</div>
-      <div class="activity-bar-icon" title="Search">🔍</div>
-      <div class="activity-bar-icon" title="Source Control">⑂</div>
-    </div>
-
     <!-- Sidebar -->
     <nav class="sidebar" role="navigation" aria-label="Site navigation">
       <div class="sidebar-header">Explorer</div>
@@ -105,7 +98,7 @@
         <span class="breadcrumb-separator">/</span>
         src
         <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current">{{ breadcrumb or "index.html" }}</span>
+        <span class="breadcrumb-current">{% if breadcrumb %}{{ breadcrumb }}{% elif page.fileSlug %}{{ page.fileSlug }}.html{% else %}index.html{% endif %}</span>
       </div>
 
       <!-- Page Content -->
