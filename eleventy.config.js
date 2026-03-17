@@ -7,6 +7,7 @@ export default function (eleventyConfig) {
 
   // Passthrough copy
   eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/CNAME");
 
   // Custom filters
   eleventyConfig.addFilter("readingTime", (content) => {
