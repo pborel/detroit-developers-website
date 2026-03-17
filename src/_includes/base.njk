@@ -4,8 +4,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title }} — {{ site.title }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ title }} — {{ site.title }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ ogImage or site.url + '/assets/images/og-default.png' }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="/feed.xml">
 </head>
 <body>
-  {{ content | safe }}
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Activity Bar -->
+    <div class="activity-bar" aria-hidden="true">
+      <div class="activity-bar-icon active" title="Explorer">📁</div>
+      <div class="activity-bar-icon" title="Search">🔍</div>
+      <div class="activity-bar-icon" title="Source Control">⑂</div>
+    </div>
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item{% if page.url == '/' %} active{% endif %}">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item{% if page.url.startsWith('/events') %} active{% endif %}">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item{% if page.url.startsWith('/blog') %} active{% endif %}">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item{% if page.url == '/about/' %} active{% endif %}">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      {% if collections.posts.length %}
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ posts/</div>
+      {% for post in collections.posts %}
+      <a href="{{ post.url }}" class="sidebar-item{% if page.url == post.url %} active{% endif %}">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">{{ post.data.title | truncate(20) }}</span>
+      </a>
+      {% endfor %}
+      {% endif %}
+
+      {% if collections.events.length %}
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ events/</div>
+      {% for event in collections.events %}
+      <a href="{{ event.url }}" class="sidebar-item{% if page.url == event.url %} active{% endif %}">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">{{ event.data.title | truncate(20) }}</span>
+      </a>
+      {% endfor %}
+      {% endif %}
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab{% if page.url == '/' %} active{% endif %}">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab{% if page.url.startsWith('/events') %} active{% endif %}">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab{% if page.url.startsWith('/blog') %} active{% endif %}">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab{% if page.url == '/about/' %} active{% endif %}">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">{{ breadcrumb or "index.html" }}</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        {{ content | safe }}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
 </body>
 </html>
