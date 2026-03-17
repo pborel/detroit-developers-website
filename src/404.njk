@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: "404"
+breadcrumb: "404.html"
+permalink: /404.html
+---
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment" style="color: var(--pink);">// ERROR: FILE NOT FOUND</div>
+
+    <div style="max-width: 500px;">
+      <h1 style="font-size: 48px; font-weight: 700; color: var(--pink); margin-bottom: 8px; font-family: var(--font-mono);">404</h1>
+      <p style="color: var(--subtext0); font-family: var(--font-mono); font-size: 14px; margin-bottom: 24px;">
+        <span style="color: var(--pink);">Error:</span> The requested file could not be found in the workspace.
+      </p>
+      <div style="background: var(--mantle); border: 1px solid var(--surface0); border-radius: 6px; padding: 16px; font-family: var(--font-mono); font-size: 13px; color: var(--subtext0); margin-bottom: 24px;">
+        <div><span style="color: var(--blue);">path</span>=<span style="color: var(--green);">"{{ page.url }}"</span></div>
+        <div><span style="color: var(--blue);">status</span>=<span style="color: var(--pink);">404</span></div>
+      </div>
+      <a href="/" class="btn-primary">← Back to index.html</a>
+    </div>
+  </div>
+</div>
