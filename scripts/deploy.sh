@@ -4,7 +4,8 @@ set -e
 echo "Bumping version..."
 node scripts/bump-version.js
 git add src/_data/buildInfo.json
-git commit src/_data/buildInfo.json -m "Bump build version" || true
+VERSION=$(node --input-type=module -e 'import fs from "fs"; console.log(JSON.parse(fs.readFileSync("src/_data/buildInfo.json", "utf-8")).buildNumber);')
+git commit src/_data/buildInfo.json -m "Bump build version to v$VERSION" || true
 
 echo "Building site..."
 npm run build
