@@ -384,6 +384,10 @@ But there's also a deeper cultural issue: Engineers who are used to shipping lar
 
 We're tracking PRs per week, projects per quarter, points per sprint, and support ticket throughput... but not all in perfect ways. We're working on getting better at this & seeing a lot of improvement, but it's not there yet. We're planning to move toward proper DORA metrics to get a clearer picture of what's working and what's not.
 
+## Multi-agent Parallelization
+
+We have some of this going on using GitHub Copilot, the Support Bot Agent and running 1-3  tasks locally at any given time. I’ve read some pretty sensational claims from companies like Ramp & Stripe. We don’t have things tuned to the level that these companies purport & I haven’t figured out how to multiplex my brain, yet. We’re not operating in the “multi-agent nirvana” future.
+
 ---
 
 # What You Can Do This Week
