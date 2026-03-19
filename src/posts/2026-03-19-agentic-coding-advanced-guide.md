@@ -408,6 +408,6 @@ None of this requires a BHAG or an executive mandate. It requires a week of focu
 
 ---
 
-*Phil works at [RIVET](https://rivet.works/), building software to ensure the right people are on the right job at the right time. This post reflects lessons from an experiment still in progress.*
+*Phil works at [RIVET](https://rivet.work/), building software to ensure the right people are on the right job at the right time. This post reflects lessons from an experiment still in progress.*
 
 *References: [DORA AI Capabilities Model (2025)](https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf) · [Building an Elite AI Engineering Culture (CJ Roth, Feb 2026)](https://www.cjroth.com/blog/2026-02-18-building-an-elite-engineering-culture) · [Harness Engineering (OpenAI, Feb 2026)](https://openai.com/index/harness-engineering/) · [Spec-Driven Development (Thoughtworks)](https://www.thoughtworks.com/radar/techniques/spec-driven-development) · [Are AI Agents Actually Slowing Us Down? (Pragmatic Engineer, Mar 2026)](https://newsletter.pragmaticengineer.com/p/are-ai-agents-actually-slowing-us) · [Speed at the Cost of Quality (Carnegie Mellon, 2026)](https://arxiv.org/abs/2511.04427) · [The 70% Problem (Addy Osmani, Dec 2024)](https://addyo.substack.com/p/the-70-problem-hard-truths-about) · [The Future of Software Engineering with AI (Pragmatic Engineer, Feb 2026)](https://newsletter.pragmaticengineer.com/p/the-future-of-software-engineering-with-ai)*
