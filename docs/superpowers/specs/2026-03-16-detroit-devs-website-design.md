@@ -115,7 +115,7 @@ Meetup.com is a React SPA — a plain `fetch()` of the group page returns an HTM
     "title": "Agentic Software Development",
     "description": "Panel Discussion with GitHub, RIVET Work, Signal Advisors & Inngest",
     "date": "2026-03-23T17:30:00-04:00",
-    "location": "The Madison Loft & Auditorium, 1555 Broadway St, Detroit",
+    "location": "The Madison 2nd Floor, 1555 Broadway St, Detroit",
     "url": "https://www.meetup.com/detroit-developers/events/306217637/"
   }
 ]

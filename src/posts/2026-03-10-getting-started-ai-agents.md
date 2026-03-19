@@ -2,7 +2,7 @@
 layout: post.njk
 title: "Getting Started with AI Agents in Production"
 date: 2026-03-10
-author: "Phil"
+author: "Phil Borel"
 excerpt: "A primer on deploying AI agents in real-world applications."
 permalink: /blog/{{ page.fileSlug }}/
 ---
