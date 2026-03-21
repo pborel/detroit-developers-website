@@ -1,0 +1,80 @@
+<h2>Site Architecture</h2>
+<p class="subtitle">11ty static site with CLI/IDE aesthetic</p>
+
+<div class="section">
+  <h3>Project Structure</h3>
+  <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 24px; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 14px; color: #8b949e; line-height: 1.8;">
+    <div style="color: #7ee787;">detroit-developers-website/</div>
+    <div>&nbsp;&nbsp;├── <span style="color: #79c0ff;">src/</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span style="color: #79c0ff;">_includes/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Nunjucks layouts & partials</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── base.njk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># HTML shell, nav, footer</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;├── post.njk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Blog post layout</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└── event.njk&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Past event layout</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span style="color: #79c0ff;">_data/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># 11ty global data files</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;│&nbsp;&nbsp;└── meetup.js&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Build-time scraper for upcoming events</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span style="color: #79c0ff;">posts/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Blog posts (Markdown)</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span style="color: #79c0ff;">events/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Past events (Markdown + frontmatter)</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── <span style="color: #79c0ff;">assets/</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># CSS, images, fonts</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── index.njk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Home page</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── events.njk&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Events listing page</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;├── blog.njk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># Blog listing page</span></div>
+    <div>&nbsp;&nbsp;│&nbsp;&nbsp;└── about.njk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># About page</span></div>
+    <div>&nbsp;&nbsp;├── .eleventy.js&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #484f58;"># 11ty config</span></div>
+    <div>&nbsp;&nbsp;└── package.json</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Data Flow</h3>
+  <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 24px; font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; color: #8b949e; line-height: 2;">
+    <div style="color: #484f58;"># Upcoming events (automatic)</div>
+    <div><span style="color: #ff7b72;">Build</span> → meetup.js scrapes meetup.com/detroit-developers/</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ extracts event JSON-LD / HTML</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color: #7ee787;">available as {{ meetup.upcoming }}</span> in templates</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ fallback: "Visit us on Meetup" link</div>
+    <div style="margin-top: 12px; color: #484f58;"># Past events (manual Markdown)</div>
+    <div><span style="color: #ff7b72;">Author</span> → writes events/2026-03-agentic-panel.md</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ frontmatter: title, date, video, photos</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color: #7ee787;">auto-listed on /events page</span></div>
+    <div style="margin-top: 12px; color: #484f58;"># Blog posts (manual Markdown)</div>
+    <div><span style="color: #ff7b72;">Author</span> → writes posts/my-post.md</div>
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <span style="color: #7ee787;">auto-listed on /blog page</span></div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Pages</h3>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px;">
+      <div style="color: #7ee787; font-family: monospace; font-weight: bold; margin-bottom: 8px;">/ (Home)</div>
+      <ul style="color: #8b949e; font-size: 14px; padding-left: 20px; margin: 0;">
+        <li>Hero: next upcoming event</li>
+        <li>About blurb</li>
+        <li>Recent blog posts (3)</li>
+        <li>CTA: Join on Meetup</li>
+      </ul>
+    </div>
+    <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px;">
+      <div style="color: #7ee787; font-family: monospace; font-weight: bold; margin-bottom: 8px;">/events</div>
+      <ul style="color: #8b949e; font-size: 14px; padding-left: 20px; margin: 0;">
+        <li>Upcoming event(s) from scraper</li>
+        <li>Past events archive (cards with video/photo thumbnails)</li>
+      </ul>
+    </div>
+    <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px;">
+      <div style="color: #7ee787; font-family: monospace; font-weight: bold; margin-bottom: 8px;">/blog</div>
+      <ul style="color: #8b949e; font-size: 14px; padding-left: 20px; margin: 0;">
+        <li>Post listing (title, date, excerpt)</li>
+        <li>Individual post pages</li>
+      </ul>
+    </div>
+    <div style="background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px;">
+      <div style="color: #7ee787; font-family: monospace; font-weight: bold; margin-bottom: 8px;">/about</div>
+      <ul style="color: #8b949e; font-size: 14px; padding-left: 20px; margin: 0;">
+        <li>Community description</li>
+        <li>Organizer info</li>
+        <li>Links: Meetup, LinkedIn</li>
+      </ul>
+    </div>
+  </div>
+</div>

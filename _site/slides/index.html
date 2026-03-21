@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slides — Detroit Developers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/slides.css">
+</head>
+<body>
+  
+<div class="slideshow" id="slideshow">
+
+  
+  <div class="slide active" id="slide-1">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// welcome</div>
+      <div>
+        <div class="opener-title">Detroit<br><span class="accent">Developers</span></div>
+        <div class="opener-subtitle">monthly meetup&nbsp;<span class="cursor"></span></div>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com"
+          alt="detroitdevelopers.com QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● welcome.md</span>
+      <div class="slide-status-right">
+        <span>1 / 3</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="slide" id="slide-2">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// thank you to our sponsor</div>
+      <div class="sponsor-center">
+        <img
+          class="sponsor-logo"
+          src="https://www.rivet.work/wp-content/uploads/2022/07/Rivet_Logo_UnionBlue_NoTagline.png"
+          alt="RIVET"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+        >
+        <div class="sponsor-logo-fallback">RIVET</div>
+        <div class="sponsor-divider"></div>
+        <div class="sponsor-tagline">Construction Labor Planning for increased Productivity</div>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://www.rivet.work/careers/"
+          alt="RIVET Careers QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">We're hiring →<br>rivet.work/careers</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● sponsors.md</span>
+      <div class="slide-status-right">
+        <span>2 / 3</span>
+        <span>rivet.work</span>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="slide" id="slide-3">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// your organizers</div>
+      <div class="team-grid">
+        <div class="person">
+          <img class="person-photo" src="/assets/images/phil_headshot.jpeg" alt="Phil Borel">
+          <div class="person-name">Phil Borel</div>
+          <div class="person-role">Organizer</div>
+          <div class="person-qr">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://philborel.com"
+              alt="Phil Borel QR code"
+              loading="lazy"
+            >
+          </div>
+          <div class="person-qr-label">philborel.com</div>
+        </div>
+        <div class="person">
+          <img class="person-photo" src="/assets/images/louis_headshot.jpeg" alt="Louis Gelinas">
+          <div class="person-name">Louis Gelinas</div>
+          <div class="person-role">Organizer</div>
+          <div class="person-qr">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://www.linkedin.com/in/louis-gelinas/"
+              alt="Louis Gelinas QR code"
+              loading="lazy"
+            >
+          </div>
+          <div class="person-qr-label">linkedin.com/in/louis-gelinas</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● organizers.md</span>
+      <div class="slide-status-right">
+        <span>3 / 3</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  function getHashIndex() {
+    const n = parseInt(window.location.hash.replace('#', ''), 10);
+    return (!isNaN(n) && n >= 1 && n <= total) ? n - 1 : 0;
+  }
+
+  function showSlide(index) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, index));
+    slides[current].classList.add('active');
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  // Init from URL hash (supports direct links like /slides/#2)
+  showSlide(getHashIndex());
+
+  // Keyboard: right/down = next, left/up = prev
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (current < total - 1) showSlide(current + 1);
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (current > 0) showSlide(current - 1);
+    }
+  });
+
+  // Click anywhere to advance
+  document.getElementById('slideshow').addEventListener('click', function () {
+    if (current < total - 1) showSlide(current + 1);
+  });
+})();
+</script>
+
+</body>
+</html>

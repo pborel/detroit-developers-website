@@ -1,0 +1,105 @@
+<h2>Visual Design Direction</h2>
+<p class="subtitle">CLI/IDE-inspired aesthetic — pick the direction that feels right</p>
+
+<div class="cards">
+  <div class="card" data-choice="terminal" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #0a0a0a; padding: 24px; min-height: 300px; font-family: 'SF Mono', monospace; font-size: 13px;">
+        <!-- Terminal chrome -->
+        <div style="background: #1a1a2e; border-radius: 8px; overflow: hidden; border: 1px solid #2a2a4a;">
+          <div style="background: #12121f; padding: 8px 16px; display: flex; align-items: center; gap: 8px;">
+            <div style="display: flex; gap: 6px;">
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #ff5f57;"></div>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #febc2e;"></div>
+              <div style="width: 10px; height: 10px; border-radius: 50%; background: #28c840;"></div>
+            </div>
+            <span style="color: #6a6a8a; font-size: 12px;">detroit-devs — zsh</span>
+          </div>
+          <div style="padding: 20px; line-height: 2;">
+            <div><span style="color: #7ee787;">❯</span> <span style="color: #79c0ff;">cat</span> next-event.md</div>
+            <div style="color: #e6edf3; font-size: 15px; font-weight: bold; margin: 8px 0 4px;">Agentic Software Development</div>
+            <div style="color: #8b949e;">Panel Discussion // Mar 23, 2026</div>
+            <div style="color: #8b949e;">The Madison Loft // Detroit, MI</div>
+            <div style="margin-top: 12px;"><span style="color: #7ee787;">❯</span> <span style="color: #79c0ff;">open</span> <span style="color: #a5d6ff; text-decoration: underline;">meetup.com/detroit-developers</span></div>
+          </div>
+        </div>
+        <!-- Nav hint -->
+        <div style="margin-top: 16px; color: #6a6a8a; display: flex; gap: 24px; font-size: 12px;">
+          <span style="color: #7ee787;">[H]</span>ome
+          <span style="color: #7ee787;">[E]</span>vents
+          <span style="color: #7ee787;">[B]</span>log
+          <span style="color: #7ee787;">[A]</span>bout
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Terminal</h3>
+      <p>Full terminal emulation. Command-prompt navigation metaphor, terminal window chrome, monospace everything. The whole site feels like a CLI app.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="ide" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #1e1e2e; min-height: 300px; font-family: system-ui, sans-serif; font-size: 13px; display: flex;">
+        <!-- Sidebar -->
+        <div style="width: 200px; background: #181825; border-right: 1px solid #313244; padding: 16px;">
+          <div style="color: #cdd6f4; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; font-family: monospace;">Explorer</div>
+          <div style="color: #89b4fa; padding: 6px 8px; background: #313244; border-radius: 4px; font-family: monospace; font-size: 12px; margin-bottom: 4px;">index.html</div>
+          <div style="color: #6c7086; padding: 6px 8px; font-family: monospace; font-size: 12px; margin-bottom: 4px;">events.html</div>
+          <div style="color: #6c7086; padding: 6px 8px; font-family: monospace; font-size: 12px; margin-bottom: 4px;">blog.html</div>
+          <div style="color: #6c7086; padding: 6px 8px; font-family: monospace; font-size: 12px;">about.html</div>
+        </div>
+        <!-- Main content -->
+        <div style="flex: 1; padding: 24px;">
+          <!-- Tabs -->
+          <div style="display: flex; gap: 0; margin: -24px -24px 20px; border-bottom: 1px solid #313244;">
+            <div style="padding: 10px 20px; background: #1e1e2e; color: #cdd6f4; font-family: monospace; font-size: 12px; border-bottom: 2px solid #89b4fa;">index.html</div>
+            <div style="padding: 10px 20px; background: #181825; color: #6c7086; font-family: monospace; font-size: 12px;">events.html</div>
+          </div>
+          <div style="color: #a6e3a1; font-family: monospace; font-size: 11px; margin-bottom: 4px;">// NEXT EVENT</div>
+          <div style="color: #cdd6f4; font-size: 18px; font-weight: 600; margin-bottom: 8px;">Agentic Software Development</div>
+          <div style="color: #6c7086; font-size: 13px; margin-bottom: 4px;">Panel Discussion</div>
+          <div style="color: #6c7086; font-size: 13px; margin-bottom: 16px;">Mar 23, 2026 — The Madison Loft</div>
+          <div style="display: inline-block; padding: 8px 20px; background: #89b4fa; color: #1e1e2e; border-radius: 4px; font-weight: 600; font-size: 13px;">RSVP on Meetup</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: IDE / VS Code</h3>
+      <p>Sidebar file explorer as navigation, editor tabs for pages, code comments as section headers. Feels like opening a project. Mix of monospace and sans-serif.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="hybrid" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background: #0d1117; min-height: 300px; padding: 24px;">
+        <!-- Nav -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #21262d;">
+          <div style="font-family: 'SF Mono', monospace; color: #58a6ff; font-size: 16px; font-weight: bold;">detroit<span style="color: #8b949e;">.dev</span></div>
+          <div style="display: flex; gap: 24px; font-family: monospace; font-size: 13px; color: #8b949e;">
+            <span style="color: #f0f6fc;">Home</span>
+            <span>Events</span>
+            <span>Blog</span>
+            <span>About</span>
+          </div>
+        </div>
+        <!-- Hero -->
+        <div style="margin-bottom: 24px;">
+          <div style="font-family: monospace; color: #7ee787; font-size: 12px; margin-bottom: 8px;">$ next-event --details</div>
+          <div style="color: #f0f6fc; font-size: 22px; font-weight: bold; font-family: system-ui, sans-serif; margin-bottom: 8px;">Agentic Software Development</div>
+          <div style="color: #8b949e; font-family: system-ui, sans-serif; font-size: 14px; margin-bottom: 4px;">Panel Discussion // Mar 23, 2026 // 5:30 PM</div>
+          <div style="color: #8b949e; font-family: system-ui, sans-serif; font-size: 14px; margin-bottom: 16px;">The Madison Loft & Auditorium, Detroit MI</div>
+          <div style="display: inline-block; padding: 10px 24px; background: #238636; color: #fff; border-radius: 6px; font-weight: 600; font-size: 14px; font-family: system-ui;">RSVP on Meetup →</div>
+        </div>
+        <!-- Code block accent -->
+        <div style="background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 12px 16px; font-family: monospace; font-size: 12px; color: #8b949e;">
+          <span style="color: #484f58;">// </span><span style="color: #7ee787;">748 members</span> · <span style="color: #79c0ff;">monthly meetups</span> · <span style="color: #ff7b72;">downtown detroit</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: GitHub Dark Hybrid</h3>
+      <p>GitHub's dark theme as the foundation. Monospace accents and code-block styling for flair, but readable sans-serif for body content. Professional yet unmistakably dev-oriented. Most accessible of the three.</p>
+    </div>
+  </div>
+</div>
