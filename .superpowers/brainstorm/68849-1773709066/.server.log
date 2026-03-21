@@ -1,9 +1,0 @@
-{"type":"server-started","port":51108,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:51108","screen_dir":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066"}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/site-architecture.html"}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/visual-design.html"}
-{"source":"user-event","type":"click","text":"detroit.dev\n          \n            Home\n            Events\n            Blog\n            About\n          \n        \n        \n        \n          $ next-event --details\n          Agentic Software Development\n          Panel Discussion // Mar 23, 2026 // 5:30 PM\n          The Madison Loft & Auditorium, Detroit MI\n          RSVP on Meetup →\n        \n        \n        \n          // 748 members · monthly meetups · downtown detroit\n        \n      \n    \n    \n      C: GitHub Dark Hybrid\n      GitHub's dark theme as the foundation. Monospace accents and code-block styling for flair, but readable sans-serif for body content. Professional yet unmistakably dev-oriented. Most accessible of the three.","choice":"hybrid","id":null,"timestamp":1773710280463}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/homepage-layout.html"}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/homepage-layout-ide.html"}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/events-page.html"}
-{"type":"screen-added","file":"/Users/phil/code/detroit-developers-website/.superpowers/brainstorm/68849-1773709066/waiting-1.html"}
-{"type":"server-stopped","reason":"idle timeout"}
