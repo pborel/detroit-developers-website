@@ -200,8 +200,8 @@ html, body {
 /* ── Slide 3: Organizers ── */
 .team-grid {
   display: flex;
-  gap: clamp(32px, 6vw, 96px);
-  align-items: flex-start;
+  gap: clamp(48px, 10vw, 160px);
+  align-items: flex-end;
 }
 
 .person {
@@ -247,4 +247,33 @@ html, body {
 .person-qr-label {
   font-size: clamp(8px, 0.8vw, 10px);
   color: var(--overlay0);
+}
+
+.meetup-logo {
+  width: clamp(150px, 20vw, 280px);
+  height: auto;
+  object-fit: contain;
+  border: 3px solid var(--blue);
+  border-radius: 8px;
+}
+
+.meetup-qr-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.meetup-qr-center img:not(.meetup-logo) {
+  width: clamp(80px, 10vw, 140px);
+  height: clamp(80px, 10vw, 140px);
+  background: white;
+  border-radius: 4px;
+  display: block;
+}
+
+.meetup-qr-label {
+  font-size: clamp(8px, 0.9vw, 11px);
+  color: var(--overlay0);
+  text-align: center;
 }
