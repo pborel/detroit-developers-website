@@ -65,11 +65,28 @@
       {% if collections.events.length %}
       <div class="sidebar-divider"></div>
       <div class="sidebar-section">▾ events/</div>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      {% set hasUpcoming = false %}
       {% for event in collections.events %}
-      <a href="{{ event.url }}" class="sidebar-item{% if page.url == event.url %} active{% endif %}">
-        <span class="icon" style="color: var(--teal);">◇</span>
-        <span style="font-size: 12px;">{{ event.data.title | truncate(20) }}</span>
-      </a>
+        {% if event.date | isUpcoming %}
+          {% set hasUpcoming = true %}
+          <a href="{{ event.url }}" class="sidebar-item sidebar-item--sub{% if page.url == event.url %} active{% endif %}">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">{{ event.data.title | truncate(20) }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% if not hasUpcoming %}
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      {% endif %}
+      <div class="sidebar-subsection">▾ past/</div>
+      {% for event in collections.events %}
+        {% if not (event.date | isUpcoming) %}
+          <a href="{{ event.url }}" class="sidebar-item sidebar-item--sub{% if page.url == event.url %} active{% endif %}">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">{{ event.data.title | truncate(20) }}</span>
+          </a>
+        {% endif %}
       {% endfor %}
       {% endif %}
     </nav>
@@ -117,7 +134,7 @@
       <span>✓ 0 problems</span>
     </div>
     <div class="status-bar-group">
-      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <a href="{{ slides or '/slides/' }}" style="color: inherit; text-decoration: none;">⬡ slides</a>
       <span>detroit-devs</span>
       <span>UTF-8</span>
       <span>Nunjucks</span>

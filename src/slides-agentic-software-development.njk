@@ -1,13 +1,17 @@
 ---
 layout: slides-layout.njk
-title: Slides
-permalink: /slides/
+title: Agentic Software Development — Slides
+permalink: /slides/agentic-software-development/
 ---
 
 {% set slideTotal = 3 %}
 
 <div class="slideshow" id="slideshow">
   {% include "slides-default.njk" %}
+
+  {# ── Event-specific slides go here ── #}
+  {# Increment slideTotal above to match the total number of slides #}
+
 </div>
 
 <script>
@@ -28,10 +32,8 @@ permalink: /slides/
     history.replaceState(null, '', '#' + (current + 1));
   }
 
-  // Init from URL hash (supports direct links like /slides/#2)
   showSlide(getHashIndex());
 
-  // Keyboard: right/down = next, left/up = prev
   document.addEventListener('keydown', function (e) {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
       if (current < total - 1) showSlide(current + 1);
@@ -41,7 +43,6 @@ permalink: /slides/
     }
   });
 
-  // Click anywhere to advance
   document.getElementById('slideshow').addEventListener('click', function () {
     if (current < total - 1) showSlide(current + 1);
   });

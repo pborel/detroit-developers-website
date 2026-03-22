@@ -33,7 +33,12 @@ export default function (eleventyConfig) {
       year: "numeric",
       month: "short",
       day: "numeric",
+      timeZone: "UTC",
     });
+  });
+
+  eleventyConfig.addFilter("isUpcoming", (date) => {
+    return new Date(date) >= new Date();
   });
 
   eleventyConfig.addFilter("timeFormat", (date) => {
