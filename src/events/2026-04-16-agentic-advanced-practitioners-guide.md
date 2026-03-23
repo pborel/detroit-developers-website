@@ -3,6 +3,7 @@ layout: event.njk
 title: "Agentic Software Development: Advanced Practitioner's Guide"
 date: 2026-04-16
 location: "The Madison 2nd Floor, 1555 Broadway St, Detroit"
+slides: /slides/agentic-advanced-practitioners-guide/
 permalink: /events/{{ page.fileSlug }}/
 ---
 
