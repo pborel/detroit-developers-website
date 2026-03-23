@@ -981,7 +981,7 @@ git commit -m "feat: add IDE chrome base layout with Catppuccin Mocha theme"
 ```json
 [
   {
-    "title": "Agentic Software Development",
+    "title": "Agentic Software Development: Panel Discussion",
     "description": "Panel Discussion featuring Engineers from GitHub, RIVET Work, Signal Advisors & Inngest discussing GenAI applications in software development.",
     "date": "2026-03-23T17:30:00-04:00",
     "location": "The Madison 2nd Floor, 1555 Broadway St, Detroit",

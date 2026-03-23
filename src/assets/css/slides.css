@@ -277,3 +277,55 @@ html, body {
   color: var(--overlay0);
   text-align: center;
 }
+
+/* ── Question / panel slides ── */
+.question-slide {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 28px);
+  max-width: clamp(520px, 72vw, 960px);
+  width: 100%;
+}
+
+.question-text {
+  font-size: clamp(18px, 2.8vw, 42px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+.question-text--large {
+  font-size: clamp(22px, 3.6vw, 54px);
+}
+
+.question-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 0.9vw, 14px);
+}
+
+.question-bullets li {
+  font-size: clamp(13px, 1.6vw, 22px);
+  color: var(--subtext0);
+  padding-left: 1.4em;
+  position: relative;
+  line-height: 1.4;
+}
+
+.question-bullets li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--blue);
+}
+
+.question-bullets li.sub-note {
+  font-size: clamp(11px, 1.2vw, 17px);
+  color: var(--overlay0);
+  font-style: italic;
+}
+
+.question-bullets li.sub-note::before {
+  content: '·';
+}

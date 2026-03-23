@@ -112,7 +112,7 @@ Meetup.com is a React SPA — a plain `fetch()` of the group page returns an HTM
 ```json
 [
   {
-    "title": "Agentic Software Development",
+    "title": "Agentic Software Development: Panel Discussion",
     "description": "Panel Discussion with GitHub, RIVET Work, Signal Advisors & Inngest",
     "date": "2026-03-23T17:30:00-04:00",
     "location": "The Madison 2nd Floor, 1555 Broadway St, Detroit",
