@@ -9,6 +9,8 @@
   --text:     #cdd6f4;
   --green:    #a6e3a1;
   --blue:     #89b4fa;
+  --pink:     #f38ba8;
+  --peach:    #fab387;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
