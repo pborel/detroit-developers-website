@@ -157,6 +157,23 @@ a:hover {
   flex-shrink: 0;
 }
 
+.sidebar-subsection {
+  color: var(--overlay0);
+  font-size: 11px;
+  padding: 4px 16px 4px 28px;
+  font-family: var(--font-sans);
+}
+
+.sidebar-item--sub {
+  padding-left: 36px;
+}
+
+.sidebar-item--empty {
+  font-style: italic;
+  font-size: 11px;
+  pointer-events: none;
+}
+
 .sidebar-divider {
   margin: 8px 16px;
   border-top: 1px solid var(--surface0);
