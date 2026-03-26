@@ -331,3 +331,37 @@ html, body {
 .question-bullets li.sub-note::before {
   content: '·';
 }
+
+/* ── Two-image side-by-side layout ── */
+.slide-images {
+  display: flex;
+  gap: clamp(16px, 2vw, 40px);
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 0 28px;
+}
+
+.slide-images figure {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  min-width: 0;
+}
+
+.slide-images img {
+  max-width: 100%;
+  max-height: 52vh;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid var(--surface1);
+}
+
+.slide-images figcaption {
+  font-size: clamp(11px, 1.1vw, 15px);
+  color: var(--subtext0);
+  text-align: center;
+}
