@@ -75,7 +75,7 @@
 - Month two: velocity gains gone. Back to pre-adoption levels.
 - Static analysis warnings up ~30%, code complexity up ~41% — permanently
 - "Slop creep" — Boris Tane: individually reasonable, collectively destructive
-- The velocity gains were real and temporary. The tech debt was real and permanent.
+- The velocity gains were temporary. The tech debt was permanent.
 
 **Slide 10 — The Decision**
 - We could scale output fast, or we could invest in the harness first

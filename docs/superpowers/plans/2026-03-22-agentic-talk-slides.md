@@ -362,7 +362,7 @@ Replace `{# ── Act 1: AI Is an Amplifier ── #}` with:
   <div class="slide-content">
     <div class="ide-comment">// act-1: ai is an amplifier</div>
     <div class="question-slide">
-      <div class="question-text">The velocity gains were real and temporary. The tech debt was real and permanent.</div>
+      <div class="question-text">The velocity gains were temporary. The tech debt was permanent.</div>
       <ul class="question-bullets">
         <li>CMU — 807 repos after Cursor adoption</li>
         <li>281% increase in lines added, month one</li>
@@ -683,7 +683,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">From prompting to context engineering</div>
       <ul class="question-bullets">
@@ -714,7 +714,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">CLAUDE.md: map, not encyclopedia</div>
       <ul class="question-bullets">
@@ -747,7 +747,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">PILRs: context that accumulates</div>
       <ul class="question-bullets">
@@ -780,7 +780,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">Rules and hooks</div>
       <ul class="question-bullets">
@@ -812,7 +812,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">Skills: making agent usage programmable</div>
       <ul class="question-bullets">
@@ -844,7 +844,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">The /implement skill</div>
       <ul class="question-bullets">
@@ -878,7 +878,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">The support bot agent: "re-purchased half a developer"</div>
       <ul class="question-bullets">
@@ -912,7 +912,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">Spec-Driven Development</div>
       <ul class="question-bullets">
@@ -945,7 +945,7 @@ Replace `{# ── Act 3: Harness Engineering ── #}` with:
     <span>5</span><span>6</span><span>7</span><span>8</span>
   </div>
   <div class="slide-content">
-    <div class="ide-comment">// act-3: harness engineering</div>
+    <div class="ide-comment">// act-3: context engineering</div>
     <div class="question-slide">
       <div class="question-text">4-layer review</div>
       <ul class="question-bullets">

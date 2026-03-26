@@ -58,7 +58,7 @@
 - Static analysis warnings up ~30%, code complexity up ~41% — permanently
 - Complexity increase associated with ~65% drop in future velocity
 - "Slop creep" — Boris Tane: individually reasonable decisions, collectively destructive
-- The velocity gains were real and temporary. The tech debt was real and permanent.
+- The velocity gains were temporary. The tech debt was permanent.
 
 **Slide 8 — Taste x Discipline x Leverage**
 - CJ Roth's framework. Multiplicative, not additive.
