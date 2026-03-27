@@ -53,7 +53,7 @@
 
       {% if collections.posts.length %}
       <div class="sidebar-divider"></div>
-      <div class="sidebar-section">▾ posts/</div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
       {% for post in collections.posts %}
       <a href="{{ post.url }}" class="sidebar-item{% if page.url == post.url %} active{% endif %}">
         <span class="icon" style="color: var(--teal);">◇</span>
@@ -64,7 +64,7 @@
 
       {% if collections.events.length %}
       <div class="sidebar-divider"></div>
-      <div class="sidebar-section">▾ events/</div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
       <div class="sidebar-subsection">▾ upcoming/</div>
       {% set hasUpcoming = false %}
       {% for event in collections.events %}
