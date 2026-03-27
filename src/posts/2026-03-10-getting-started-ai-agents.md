@@ -17,10 +17,10 @@ AI agents are autonomous systems that can perceive their environment, make decis
 
 When deploying AI agents in production, there are several important factors to keep in mind:
 
-- **Reliability** — Agents need fallback strategies when tool calls fail
-- **Observability** — You need to see what decisions the agent is making and why
-- **Cost management** — Token usage can scale quickly with complex agent workflows
-- **Safety** — Guardrails and human-in-the-loop patterns are essential
+- **Reliability** - Agents need fallback strategies when tool calls fail
+- **Observability** - You need to see what decisions the agent is making and why
+- **Cost management** - Token usage can scale quickly with complex agent workflows
+- **Safety** - Guardrails and human-in-the-loop patterns are essential
 
 ## Getting Started
 
