@@ -4,8 +4,150 @@
   <subtitle>Monthly meetups on software development and startups in Detroit</subtitle>
   <link href="https://detroitdevelopers.com/feed.xml" rel="self"/>
   <link href="https://detroitdevelopers.com/"/>
-  <updated>2026-03-19T00:00:00Z</updated>
+  <updated>2026-03-27T00:00:00Z</updated>
   <id>https://detroitdevelopers.com/</id>
+  <entry>
+    <title>Agentic Coding: Context Engineering</title>
+    <link href="https://detroitdevelopers.com/blog/context-engineering-pilrs/"/>
+    <updated>2026-03-27T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/context-engineering-pilrs/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;This post expands on the context engineering section of my &lt;a href=&quot;https://detroitdevelopers.com/blog/2026-03-19-agentic-coding-advanced-guide/&quot;&gt;Advanced Practitioner&#39;s Guide&lt;/a&gt; talk. If you haven&#39;t read that one, it&#39;s worth starting there for the broader picture.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;There&#39;s a distinction that took me too long to make clearly in my own head: the difference between &lt;strong&gt;prompting&lt;/strong&gt; and &lt;strong&gt;context engineering&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Prompting is telling an AI what to do in a single interaction. It&#39;s how most developers start, and it delivers real value - a well-written prompt gets you dramatically better output than a vague one. But prompting is inherently ephemeral. The next session starts from scratch. The next engineer on your team has to figure out the same things you figured out. And an agent working across a complex codebase without persistent context is basically a very smart contractor on their first day, every day.&lt;/p&gt;
+&lt;p&gt;Context engineering is different. It&#39;s building the persistent, structured environment that makes an agent reliably useful over time - across your team, your codebase, and sessions. The agent accumulates knowledge instead of losing it. Behavior becomes consistent instead of probabilistic.&lt;/p&gt;
+&lt;p&gt;This is where the real leverage is.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The Foundation: CLAUDE.md&lt;/h2&gt;
+&lt;p&gt;Every repository your team works in needs a &lt;code&gt;CLAUDE.md&lt;/code&gt; - a project-level context document checked into the repo and treated as seriously as any other infrastructure configuration.&lt;/p&gt;
+&lt;p&gt;The instinct is to make it comprehensive. Resist that. A large instruction file actively degrades agent performance: it crowds out the actual task, and when everything is marked &amp;quot;important,&amp;quot; agents fall back to local pattern-matching rather than applying your instructions. Aim for roughly 100 lines. Think of it as a &lt;strong&gt;map, not an encyclopedia&lt;/strong&gt; - it tells the agent where to look, not everything the agent needs to know.&lt;/p&gt;
+&lt;p&gt;A good CLAUDE.md covers:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tech stack and the architectural pattern the codebase follows&lt;/li&gt;
+&lt;li&gt;A pointer to deeper documentation for each major area&lt;/li&gt;
+&lt;li&gt;Three to five things you wish every new engineer knew before touching the codebase&lt;/li&gt;
+&lt;li&gt;Explicit do&#39;s and don&#39;ts that aren&#39;t obvious from the code itself&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It&#39;s a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone&#39;s personal settings, it&#39;s not doing its job.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The Cold-Start Problem&lt;/h2&gt;
+&lt;p&gt;CLAUDE.md solves the immediate context problem. But it doesn&#39;t solve the &lt;strong&gt;cold-start problem&lt;/strong&gt;: the fact that documenting everything your agent needs to know upfront is an enormous amount of work, and most teams simply won&#39;t do it all before they need the agent to be useful.&lt;/p&gt;
+&lt;p&gt;The cold-start problem is why a lot of teams end up with CLAUDE.md files that are either too sparse to help or too bloated to be effective. They write them once, don&#39;t maintain them, and the agent&#39;s behavior drifts as the codebase evolves.&lt;/p&gt;
+&lt;p&gt;PILRs are the answer.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;PILRs: Persistent Indexed Learning Repositories&lt;/h2&gt;
+&lt;p&gt;A PILR is a structured knowledge base the agent can reference on demand. The key word is &lt;em&gt;indexed&lt;/em&gt; - a central &lt;code&gt;index.json&lt;/code&gt; maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.&lt;/p&gt;
+&lt;p&gt;The other key word is &lt;em&gt;persistent&lt;/em&gt;. PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built.&lt;/p&gt;
+&lt;p&gt;This is the inverse of the upfront documentation approach. You don&#39;t have to document everything before you get value. You document as you go, and the value compounds.&lt;/p&gt;
+&lt;h3&gt;Structure&lt;/h3&gt;
+&lt;p&gt;A minimal PILR looks something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;docs/
+  index.json          ← maps topics to files
+  architecture.md     ← how the system is designed
+  patterns/
+    api-patterns.md
+    state-patterns.md
+  decisions/
+    2026-02-14-auth-refactor.md
+    2026-03-10-state-migration.md
+  issues/
+    solved-problems.md
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;index.json&lt;/code&gt; is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Three Implementations&lt;/h2&gt;
+&lt;h3&gt;RIVET: Local PILRs in the repo&lt;/h3&gt;
+&lt;p&gt;At RIVET, PILRs live inside our repos as a &lt;code&gt;temp/projects&lt;/code&gt; directory. Each feature or significant PR gets a planning document before code is written (more on spec-driven development in a later post), a per-PR plan, and a test plan. These documents serve two audiences: the human reviewing the plan before implementation begins, and the agent referencing the plan while implementing.&lt;/p&gt;
+&lt;p&gt;The support bot agent shows this in practice. When a support ticket comes in, the agent has access to our CLAUDE.md, our codebase, and a persistent directory of previously solved problems with an index. The agent can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing &amp;quot;we&#39;ve seen this pattern before&amp;quot; and applying the documented solution.&lt;/p&gt;
+&lt;p&gt;Why it works: the harness came first. Without CLAUDE.md and documented patterns, the agent would be guessing. With them, it&#39;s operating with genuine knowledge of the system.&lt;/p&gt;
+&lt;h3&gt;Superpowers: PILRs as a plugin pattern&lt;/h3&gt;
+&lt;p&gt;The &lt;a href=&quot;https://github.com/obra/superpowers&quot;&gt;Superpowers plugin for Claude Code&lt;/a&gt; formalizes this structure as a first-class concept. Plans and specs live in &lt;code&gt;docs/superpowers/plans&lt;/code&gt; and &lt;code&gt;docs/superpowers/specs&lt;/code&gt;, organized so the agent can reference them without loading the whole knowledge base into the context window.&lt;/p&gt;
+&lt;p&gt;What&#39;s interesting about this implementation is that it treats the PILR structure itself as a reusable pattern - something you install, not something you invent from scratch. The plugin handles the indexing and retrieval mechanics so your team can focus on the content.&lt;/p&gt;
+&lt;h3&gt;Signal Advisors: PILRs via MCP server&lt;/h3&gt;
+&lt;p&gt;Signal Advisors takes the same concept and scales it across multiple repositories. Their agents retrieve PRDs and technical specs from an MCP (Model Context Protocol) server - meaning the domain knowledge doesn&#39;t live in any single repo&#39;s files, it lives in a purpose-built context delivery system.&lt;/p&gt;
+&lt;p&gt;The agents get exactly the documentation they need for the task at hand, regardless of which codebase they&#39;re working in. This is a more sophisticated delivery mechanism than local files, but the underlying principle is identical: give agents indexed, on-demand access to the knowledge they need to do their job well, without flooding the context window with everything at once.&lt;/p&gt;
+&lt;h3&gt;Indexer: automated PILR generation&lt;/h3&gt;
+&lt;p&gt;One of the more interesting tools in this space is &lt;a href=&quot;https://github.com/AndyInternet/indexer&quot;&gt;Indexer&lt;/a&gt; - an AI-powered codebase index generator that uses Tree-sitter AST parsing, code skeleton extraction, and PageRank-based repo mapping to automatically generate structured context from an existing codebase.&lt;/p&gt;
+&lt;p&gt;This matters for the cold-start problem. If you&#39;re starting from a codebase with no documentation, generating an index manually is a significant investment. Indexer reduces that bootstrapping cost by generating a useful starting point automatically - which you then refine over time as the agent works.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Beyond PILRs: Rules, Hooks, and Skills&lt;/h2&gt;
+&lt;p&gt;PILRs and CLAUDE.md are the knowledge layer. The enforcement layer is where context engineering becomes a system rather than a collection of documents.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Rules&lt;/strong&gt; are constraints the agent follows automatically - coding standards, naming patterns, things that should always or never happen. The key insight from OpenAI&#39;s harness engineering work: encode these as custom linters with error messages written as remediation instructions. When the agent violates a rule, the linter tells it exactly how to fix the violation. Documentation drifts; lint rules don&#39;t.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hooks&lt;/strong&gt; automate responses to agent behavior - running linters after generation, formatting files after edits, triggering tests after changes. The combination of rules and hooks creates continuous mechanical enforcement: constraints that apply everywhere at once, without human attention.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Skills&lt;/strong&gt; are reusable packaged workflows. Complex multi-step processes - implement a feature from a spec, write and execute a test plan, create a PR with documentation - become a single command that any engineer on the team can invoke. Skills are the point where agent usage becomes programmable, where you stop re-explaining your process every session and start encoding it once.&lt;/p&gt;
+&lt;p&gt;At RIVET, &lt;code&gt;/review-pr&lt;/code&gt;, &lt;code&gt;/implement&lt;/code&gt;, and &lt;code&gt;/update-project-docs&lt;/code&gt; are the skills we&#39;ve built so far. The &lt;code&gt;/implement&lt;/code&gt; skill in particular has expanded the &amp;quot;safe delegation window&amp;quot; - the range of tasks we can hand to an agent with confidence - from 10–20 minute tasks to multi-hour feature delivery.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The System as a Whole&lt;/h2&gt;
+&lt;p&gt;Context engineering isn&#39;t a single thing you add to your workflow. It&#39;s a system:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;CLAUDE.md&lt;/strong&gt; gives the agent a reliable starting point in every session&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PILRs&lt;/strong&gt; let knowledge accumulate instead of evaporate&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rules and linters&lt;/strong&gt; enforce patterns mechanically, at scale&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hooks&lt;/strong&gt; automate the tedious parts of the workflow&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Skills&lt;/strong&gt; make the whole system reusable and programmable&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each layer makes the others more valuable. CLAUDE.md works better when it can point to PILRs for depth. Rules work better when the agent has PILR context to understand &lt;em&gt;why&lt;/em&gt; the rules exist. Skills work better when they can rely on consistent patterns being enforced by rules.&lt;/p&gt;
+&lt;p&gt;The goal is an agent that behaves like a senior engineer who knows your codebase - not because you wrote an exhaustive prompt, but because you built an environment where that knowledge accumulates, is enforced, and is accessible on demand.&lt;/p&gt;
+&lt;p&gt;That&#39;s context engineering. It&#39;s slower to set up than writing a good prompt. It pays off at a completely different scale.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;We&#39;ll be going deep on this at the &lt;a href=&quot;https://detroitdevelopers.com/events/2026-04-16-agentic-advanced-practitioners-guide/&quot;&gt;April Detroit Developers meetup&lt;/a&gt;. Come find me there if you want to dig into any of this.&lt;/em&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Agentic Coding: Lessons Learned from a Panel of Engineering Leaders</title>
+    <link href="https://detroitdevelopers.com/blog/agentic-coding-panel-takeaways/"/>
+    <updated>2026-03-25T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/agentic-coding-panel-takeaways/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;On March 23rd, Detroit Developers hosted a panel in downtown Detroit with engineers and leaders from four software organizations at different stages of their agentic development journey. This is a write-up of what we talked about.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;We had &lt;a href=&quot;https://www.linkedin.com/in/djfarrelly/&quot;&gt;Dan Farrelly&lt;/a&gt; (CTO, Inngest), &lt;a href=&quot;https://www.linkedin.com/in/kunle-oshiyoye-915b22b1/&quot;&gt;Kunle Oshiyoye&lt;/a&gt; (GitHub), &lt;a href=&quot;https://www.linkedin.com/in/scott-kirschner/&quot;&gt;Scott Kirschner&lt;/a&gt; (RIVET Work), and &lt;a href=&quot;https://www.linkedin.com/in/ryan-burr2/&quot;&gt;Ryan Burr&lt;/a&gt; (Signal Advisors) on stage. Thirty-two people in the room. The conversation ran for over an hour and felt different from most AI panels I&#39;ve sat through - less hype, more honesty about what&#39;s actually hard.&lt;/p&gt;
+&lt;p&gt;Here&#39;s what stood out.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;AI is a productivity tool, not a replacement - and everyone agrees on this&lt;/h2&gt;
+&lt;p&gt;Every panelist described AI as a significant accelerator for individual output. None described it as a path to replacing engineers. This wasn&#39;t hedging - it was an accurate description of where the technology is and what it&#39;s actually useful for.&lt;/p&gt;
+&lt;p&gt;The common thread: AI has dramatically compressed the time it takes to produce a first draft of code. What used to take a few hours of focused work now takes 10–20 minutes for a well-scoped task. But the work after that first draft - understanding whether or not it meets the customer&#39;s needs, how it will scale, if it will handle the edge cases - still requires an engineer who knows the system.&lt;/p&gt;
+&lt;p&gt;The framing I keep coming back to: AI compresses the coding portion of development, which was never most of the job. The thinking, the design, the review, the validation - that&#39;s still on you.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Code review is the hardest problem AI has created, not solved&lt;/h2&gt;
+&lt;p&gt;This came up across multiple panelists independently, and it&#39;s worth sitting with.&lt;/p&gt;
+&lt;p&gt;AI makes it trivially easy to generate code. It does not make it easier to validate that code. And teams are discovering that the two aren&#39;t symmetric - generating is faster, but reviewing is not proportionally faster, and in some cases it&#39;s gotten harder.&lt;/p&gt;
+&lt;p&gt;Why harder? A few reasons:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Volume.&lt;/strong&gt; When one engineer can open three or four PRs in the time it previously took to open one, the review queue grows faster than the team&#39;s capacity to clear it.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Quality signals are noisier.&lt;/strong&gt; AI-generated code tends to look clean. It passes linters, it&#39;s syntactically correct, it often includes comments. The bugs hide in the logic - in assumptions the model made that don&#39;t match your system, in edge cases it didn&#39;t consider, in architectural decisions that technically work but compound your tech debt. These are exactly the bugs that look fine on a skim.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The reviewer&#39;s mental model is being asked to do more work.&lt;/strong&gt; When you review code a colleague wrote, you have some signal about how they think, what they&#39;re likely to have missed, what shortcuts they take. With AI-generated code, those heuristics don&#39;t apply.&lt;/p&gt;
+&lt;p&gt;The practical implication: strong engineering fundamentals and rigorous human review aren&#39;t optional in an agentic workflow - they&#39;re more important than before. Teams that are skipping review because the code &amp;quot;looks fine&amp;quot; are storing up problems.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Context is the bottleneck - and different teams are solving it differently&lt;/h2&gt;
+&lt;p&gt;This was the most technically interesting part of the conversation, and the one where the panelists had the most different approaches.&lt;/p&gt;
+&lt;p&gt;Ryan Burr described what Signal Advisors built: an MCP (Model Context Protocol) server that loads PRDs and technical specs as context for agents working across multiple code repositories. The agents retrieve exactly the documentation they need for a given task - product requirements, architectural context, API contracts - without any of it having to live in the repositories themselves.&lt;/p&gt;
+&lt;p&gt;The insight behind this: agents working across a codebase without domain context are essentially guessing. They can read the code, but they can&#39;t read the decisions behind the code - why things are structured the way they are, what constraints were in play, what the product is actually trying to do. An MCP server that serves that context on demand is a meaningful step toward agents that behave like informed collaborators rather than pattern-matching engines.&lt;/p&gt;
+&lt;p&gt;Dan Farrelly echoed the principle from a different angle: &amp;quot;Context is key for agents, and for humans - document your code and architecture.&amp;quot; The tooling is different; the underlying problem is the same.&lt;/p&gt;
+&lt;p&gt;This connects to work I&#39;ve been doing at RIVET on what I call &lt;a href=&quot;https://detroitdevelopers.com/blog/context-engineering-pilrs/&quot;&gt;PILRs - Persistent Indexed Learning Repositories&lt;/a&gt; - a pattern for building up indexed knowledge bases that agents can reference selectively, without flooding the context window. Signal Advisors&#39; MCP server is a more sophisticated delivery mechanism for the same core idea: give agents the right knowledge, at the right time, in a format they can use.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Task parallelism is real, but the bottleneck is your brain&lt;/h2&gt;
+&lt;p&gt;The conversation around multi-agent workflows was notably measured. Everyone on the panel had experimented with running multiple agents in parallel. Nobody was doing it at the scale the breathless coverage suggests.&lt;/p&gt;
+&lt;p&gt;The practical challenge isn&#39;t the tooling - it&#39;s cognitive load. Managing two or three concurrent agent tasks requires a fundamentally different way of working than managing one. You&#39;re not just doing the same thing faster; you&#39;re context-switching between threads that are in different states of completion, each with its own open questions and decisions waiting.&lt;/p&gt;
+&lt;p&gt;The one framing that resonated in the room: &lt;strong&gt;task parallelism works best when the tasks are genuinely different in nature.&lt;/strong&gt; Running one agent on research while another builds a prototype, then collating the findings and spinning up a third to write an implementation plan - that&#39;s more manageable than trying to run two agents both writing features in the same codebase. Different task types mean less cognitive collision.&lt;/p&gt;
+&lt;p&gt;The human mind is the bottleneck, not the tooling. That&#39;s probably fixable with practice and better workflows, but it&#39;s where we are.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Budget approval isn&#39;t the obstacle anyone&lt;/h2&gt;
+&lt;p&gt;This surprised some people in the room. Every panelist reported that management is largely green-lighting AI tooling spend. The objections that slowed adoption in 2023–2024 - cost concerns, security questions, &amp;quot;we should wait and see&amp;quot; conservatism - have mostly dissolved.&lt;/p&gt;
+&lt;p&gt;The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code and Cursor and GitHub Copilot Workspace are discovering that the constraint is now on the engineering side: building the context, the review processes, the harness that makes agents reliably useful. Budget isn&#39;t the blocker. Engineering investment is.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Background agents are promising - but you have to earn them&lt;/h2&gt;
+&lt;p&gt;The panel&#39;s consensus on autonomous background agents (agents working independently on separate branches, outside the main development loop) was consistent: real potential, not production-ready for most teams, and heavily dependent on work you probably haven&#39;t done yet.&lt;/p&gt;
+&lt;p&gt;Dan described it well: background agents require all of the foundational work - clean architecture, documented context, reliable review processes - to already be in place before they can work reliably. Without that foundation, you get more output, but you can&#39;t trust it. And output you can&#39;t trust isn&#39;t velocity.&lt;/p&gt;
+&lt;p&gt;This matches what I&#39;ve observed trying to run multiple Claude Code agents on RIVET work. When the harness is solid - when CLAUDE.md is well-written, when patterns are documented, when the architecture is clean and consistent - agents can operate more independently. When those things aren&#39;t in place, more agents means more noise to filter, not more throughput.&lt;/p&gt;
+&lt;p&gt;The j-curve is real. You invest in the foundation before you see the payoff. Teams that try to skip to multi-agent workflows before building the foundation are going to have a bad time.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;One line that stayed with me&lt;/h2&gt;
+&lt;p&gt;Attendee &lt;a href=&quot;https://www.linkedin.com/feed/update/urn:li:activity:7442166665569759232/&quot;&gt;Soham Mhatre&lt;/a&gt; wrote this up in a LinkedIn post after the event:&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&amp;quot;AI speeds up coding, but it doesn&#39;t replace thinking.&amp;quot;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Simple. Accurate. Worth keeping close.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;We&#39;ll be going deeper on the RIVET side of this story - harness engineering, context engineering, spec-driven development - at the &lt;a href=&quot;https://detroitdevelopers.com/events/agentic-advanced-practitioners-guide/&quot;&gt;April Detroit Developers meetup&lt;/a&gt;. If this is territory you&#39;re navigating, come find us.&lt;/em&gt;&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Advanced Agentic Coding &amp; The Journey Towards 3x Product Development Velocity</title>
     <link href="https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/"/>
@@ -235,10 +377,10 @@
 &lt;h2&gt;Key Considerations&lt;/h2&gt;
 &lt;p&gt;When deploying AI agents in production, there are several important factors to keep in mind:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Reliability&lt;/strong&gt; — Agents need fallback strategies when tool calls fail&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt; — You need to see what decisions the agent is making and why&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cost management&lt;/strong&gt; — Token usage can scale quickly with complex agent workflows&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Safety&lt;/strong&gt; — Guardrails and human-in-the-loop patterns are essential&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reliability&lt;/strong&gt; - Agents need fallback strategies when tool calls fail&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt; - You need to see what decisions the agent is making and why&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cost management&lt;/strong&gt; - Token usage can scale quickly with complex agent workflows&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Safety&lt;/strong&gt; - Guardrails and human-in-the-loop patterns are essential&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2&gt;Getting Started&lt;/h2&gt;
 &lt;p&gt;The simplest way to start is with a single-purpose agent that handles one well-defined task. From there, you can expand to multi-agent architectures as your confidence grows.&lt;/p&gt;

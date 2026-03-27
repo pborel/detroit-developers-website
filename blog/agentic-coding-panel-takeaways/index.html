@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Coding: Lessons Learned from a Panel of Engineering Leaders — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Agentic Coding: Lessons Learned from a Panel of Engineering Leaders — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/agentic-coding-panel-takeaways/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ posts/</div>
+      
+      <a href="/blog/context-engineering-pilrs/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ events/</div>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+          
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">agentic-coding-panel-takeaways.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// AGENTIC CODING: LESSONS LEARNED FROM A PANEL OF ENGINEERING LEADERS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Agentic Coding: Lessons Learned from a Panel of Engineering Leaders</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Mar 25, 2026
+       · Phil Borel
+      · 6 min read
+    </div>
+
+    <div class="prose">
+      <p><em>On March 23rd, Detroit Developers hosted a panel in downtown Detroit with engineers and leaders from four software organizations at different stages of their agentic development journey. This is a write-up of what we talked about.</em></p>
+<hr>
+<p>We had <a href="https://www.linkedin.com/in/djfarrelly/">Dan Farrelly</a> (CTO, Inngest), <a href="https://www.linkedin.com/in/kunle-oshiyoye-915b22b1/">Kunle Oshiyoye</a> (GitHub), <a href="https://www.linkedin.com/in/scott-kirschner/">Scott Kirschner</a> (RIVET Work), and <a href="https://www.linkedin.com/in/ryan-burr2/">Ryan Burr</a> (Signal Advisors) on stage. Thirty-two people in the room. The conversation ran for over an hour and felt different from most AI panels I've sat through - less hype, more honesty about what's actually hard.</p>
+<p>Here's what stood out.</p>
+<hr>
+<h2>AI is a productivity tool, not a replacement - and everyone agrees on this</h2>
+<p>Every panelist described AI as a significant accelerator for individual output. None described it as a path to replacing engineers. This wasn't hedging - it was an accurate description of where the technology is and what it's actually useful for.</p>
+<p>The common thread: AI has dramatically compressed the time it takes to produce a first draft of code. What used to take a few hours of focused work now takes 10–20 minutes for a well-scoped task. But the work after that first draft - understanding whether or not it meets the customer's needs, how it will scale, if it will handle the edge cases - still requires an engineer who knows the system.</p>
+<p>The framing I keep coming back to: AI compresses the coding portion of development, which was never most of the job. The thinking, the design, the review, the validation - that's still on you.</p>
+<hr>
+<h2>Code review is the hardest problem AI has created, not solved</h2>
+<p>This came up across multiple panelists independently, and it's worth sitting with.</p>
+<p>AI makes it trivially easy to generate code. It does not make it easier to validate that code. And teams are discovering that the two aren't symmetric - generating is faster, but reviewing is not proportionally faster, and in some cases it's gotten harder.</p>
+<p>Why harder? A few reasons:</p>
+<p><strong>Volume.</strong> When one engineer can open three or four PRs in the time it previously took to open one, the review queue grows faster than the team's capacity to clear it.</p>
+<p><strong>Quality signals are noisier.</strong> AI-generated code tends to look clean. It passes linters, it's syntactically correct, it often includes comments. The bugs hide in the logic - in assumptions the model made that don't match your system, in edge cases it didn't consider, in architectural decisions that technically work but compound your tech debt. These are exactly the bugs that look fine on a skim.</p>
+<p><strong>The reviewer's mental model is being asked to do more work.</strong> When you review code a colleague wrote, you have some signal about how they think, what they're likely to have missed, what shortcuts they take. With AI-generated code, those heuristics don't apply.</p>
+<p>The practical implication: strong engineering fundamentals and rigorous human review aren't optional in an agentic workflow - they're more important than before. Teams that are skipping review because the code &quot;looks fine&quot; are storing up problems.</p>
+<hr>
+<h2>Context is the bottleneck - and different teams are solving it differently</h2>
+<p>This was the most technically interesting part of the conversation, and the one where the panelists had the most different approaches.</p>
+<p>Ryan Burr described what Signal Advisors built: an MCP (Model Context Protocol) server that loads PRDs and technical specs as context for agents working across multiple code repositories. The agents retrieve exactly the documentation they need for a given task - product requirements, architectural context, API contracts - without any of it having to live in the repositories themselves.</p>
+<p>The insight behind this: agents working across a codebase without domain context are essentially guessing. They can read the code, but they can't read the decisions behind the code - why things are structured the way they are, what constraints were in play, what the product is actually trying to do. An MCP server that serves that context on demand is a meaningful step toward agents that behave like informed collaborators rather than pattern-matching engines.</p>
+<p>Dan Farrelly echoed the principle from a different angle: &quot;Context is key for agents, and for humans - document your code and architecture.&quot; The tooling is different; the underlying problem is the same.</p>
+<p>This connects to work I've been doing at RIVET on what I call <a href="/blog/context-engineering-pilrs/">PILRs - Persistent Indexed Learning Repositories</a> - a pattern for building up indexed knowledge bases that agents can reference selectively, without flooding the context window. Signal Advisors' MCP server is a more sophisticated delivery mechanism for the same core idea: give agents the right knowledge, at the right time, in a format they can use.</p>
+<hr>
+<h2>Task parallelism is real, but the bottleneck is your brain</h2>
+<p>The conversation around multi-agent workflows was notably measured. Everyone on the panel had experimented with running multiple agents in parallel. Nobody was doing it at the scale the breathless coverage suggests.</p>
+<p>The practical challenge isn't the tooling - it's cognitive load. Managing two or three concurrent agent tasks requires a fundamentally different way of working than managing one. You're not just doing the same thing faster; you're context-switching between threads that are in different states of completion, each with its own open questions and decisions waiting.</p>
+<p>The one framing that resonated in the room: <strong>task parallelism works best when the tasks are genuinely different in nature.</strong> Running one agent on research while another builds a prototype, then collating the findings and spinning up a third to write an implementation plan - that's more manageable than trying to run two agents both writing features in the same codebase. Different task types mean less cognitive collision.</p>
+<p>The human mind is the bottleneck, not the tooling. That's probably fixable with practice and better workflows, but it's where we are.</p>
+<hr>
+<h2>Budget approval isn't the obstacle anyone</h2>
+<p>This surprised some people in the room. Every panelist reported that management is largely green-lighting AI tooling spend. The objections that slowed adoption in 2023–2024 - cost concerns, security questions, &quot;we should wait and see&quot; conservatism - have mostly dissolved.</p>
+<p>The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code and Cursor and GitHub Copilot Workspace are discovering that the constraint is now on the engineering side: building the context, the review processes, the harness that makes agents reliably useful. Budget isn't the blocker. Engineering investment is.</p>
+<hr>
+<h2>Background agents are promising - but you have to earn them</h2>
+<p>The panel's consensus on autonomous background agents (agents working independently on separate branches, outside the main development loop) was consistent: real potential, not production-ready for most teams, and heavily dependent on work you probably haven't done yet.</p>
+<p>Dan described it well: background agents require all of the foundational work - clean architecture, documented context, reliable review processes - to already be in place before they can work reliably. Without that foundation, you get more output, but you can't trust it. And output you can't trust isn't velocity.</p>
+<p>This matches what I've observed trying to run multiple Claude Code agents on RIVET work. When the harness is solid - when CLAUDE.md is well-written, when patterns are documented, when the architecture is clean and consistent - agents can operate more independently. When those things aren't in place, more agents means more noise to filter, not more throughput.</p>
+<p>The j-curve is real. You invest in the foundation before you see the payoff. Teams that try to skip to multi-agent workflows before building the foundation are going to have a bad time.</p>
+<hr>
+<h2>One line that stayed with me</h2>
+<p>Attendee <a href="https://www.linkedin.com/feed/update/urn:li:activity:7442166665569759232/">Soham Mhatre</a> wrote this up in a LinkedIn post after the event:</p>
+<p><em>&quot;AI speeds up coding, but it doesn't replace thinking.&quot;</em></p>
+<p>Simple. Accurate. Worth keeping close.</p>
+<hr>
+<p><em>We'll be going deeper on the RIVET side of this story - harness engineering, context engineering, spec-driven development - at the <a href="/events/agentic-advanced-practitioners-guide/">April Detroit Developers meetup</a>. If this is territory you're navigating, come find us.</em></p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+</html>

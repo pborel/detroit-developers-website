@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Coding: Context Engineering — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Agentic Coding: Context Engineering — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/context-engineering-pilrs/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ posts/</div>
+      
+      <a href="/blog/context-engineering-pilrs/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">▾ events/</div>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+          
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">context-engineering-pilrs.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// AGENTIC CODING: CONTEXT ENGINEERING</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Agentic Coding: Context Engineering</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Mar 27, 2026
+       · Phil Borel
+      · 7 min read
+    </div>
+
+    <div class="prose">
+      <p><em>This post expands on the context engineering section of my <a href="/blog/2026-03-19-agentic-coding-advanced-guide/">Advanced Practitioner's Guide</a> talk. If you haven't read that one, it's worth starting there for the broader picture.</em></p>
+<hr>
+<p>There's a distinction that took me too long to make clearly in my own head: the difference between <strong>prompting</strong> and <strong>context engineering</strong>.</p>
+<p>Prompting is telling an AI what to do in a single interaction. It's how most developers start, and it delivers real value - a well-written prompt gets you dramatically better output than a vague one. But prompting is inherently ephemeral. The next session starts from scratch. The next engineer on your team has to figure out the same things you figured out. And an agent working across a complex codebase without persistent context is basically a very smart contractor on their first day, every day.</p>
+<p>Context engineering is different. It's building the persistent, structured environment that makes an agent reliably useful over time - across your team, your codebase, and sessions. The agent accumulates knowledge instead of losing it. Behavior becomes consistent instead of probabilistic.</p>
+<p>This is where the real leverage is.</p>
+<hr>
+<h2>The Foundation: CLAUDE.md</h2>
+<p>Every repository your team works in needs a <code>CLAUDE.md</code> - a project-level context document checked into the repo and treated as seriously as any other infrastructure configuration.</p>
+<p>The instinct is to make it comprehensive. Resist that. A large instruction file actively degrades agent performance: it crowds out the actual task, and when everything is marked &quot;important,&quot; agents fall back to local pattern-matching rather than applying your instructions. Aim for roughly 100 lines. Think of it as a <strong>map, not an encyclopedia</strong> - it tells the agent where to look, not everything the agent needs to know.</p>
+<p>A good CLAUDE.md covers:</p>
+<ul>
+<li>Tech stack and the architectural pattern the codebase follows</li>
+<li>A pointer to deeper documentation for each major area</li>
+<li>Three to five things you wish every new engineer knew before touching the codebase</li>
+<li>Explicit do's and don'ts that aren't obvious from the code itself</li>
+</ul>
+<p>It's a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone's personal settings, it's not doing its job.</p>
+<hr>
+<h2>The Cold-Start Problem</h2>
+<p>CLAUDE.md solves the immediate context problem. But it doesn't solve the <strong>cold-start problem</strong>: the fact that documenting everything your agent needs to know upfront is an enormous amount of work, and most teams simply won't do it all before they need the agent to be useful.</p>
+<p>The cold-start problem is why a lot of teams end up with CLAUDE.md files that are either too sparse to help or too bloated to be effective. They write them once, don't maintain them, and the agent's behavior drifts as the codebase evolves.</p>
+<p>PILRs are the answer.</p>
+<hr>
+<h2>PILRs: Persistent Indexed Learning Repositories</h2>
+<p>A PILR is a structured knowledge base the agent can reference on demand. The key word is <em>indexed</em> - a central <code>index.json</code> maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.</p>
+<p>The other key word is <em>persistent</em>. PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built.</p>
+<p>This is the inverse of the upfront documentation approach. You don't have to document everything before you get value. You document as you go, and the value compounds.</p>
+<h3>Structure</h3>
+<p>A minimal PILR looks something like this:</p>
+<pre><code>docs/
+  index.json          ← maps topics to files
+  architecture.md     ← how the system is designed
+  patterns/
+    api-patterns.md
+    state-patterns.md
+  decisions/
+    2026-02-14-auth-refactor.md
+    2026-03-10-state-migration.md
+  issues/
+    solved-problems.md
+</code></pre>
+<p>The <code>index.json</code> is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management.</p>
+<hr>
+<h2>Three Implementations</h2>
+<h3>RIVET: Local PILRs in the repo</h3>
+<p>At RIVET, PILRs live inside our repos as a <code>temp/projects</code> directory. Each feature or significant PR gets a planning document before code is written (more on spec-driven development in a later post), a per-PR plan, and a test plan. These documents serve two audiences: the human reviewing the plan before implementation begins, and the agent referencing the plan while implementing.</p>
+<p>The support bot agent shows this in practice. When a support ticket comes in, the agent has access to our CLAUDE.md, our codebase, and a persistent directory of previously solved problems with an index. The agent can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing &quot;we've seen this pattern before&quot; and applying the documented solution.</p>
+<p>Why it works: the harness came first. Without CLAUDE.md and documented patterns, the agent would be guessing. With them, it's operating with genuine knowledge of the system.</p>
+<h3>Superpowers: PILRs as a plugin pattern</h3>
+<p>The <a href="https://github.com/obra/superpowers">Superpowers plugin for Claude Code</a> formalizes this structure as a first-class concept. Plans and specs live in <code>docs/superpowers/plans</code> and <code>docs/superpowers/specs</code>, organized so the agent can reference them without loading the whole knowledge base into the context window.</p>
+<p>What's interesting about this implementation is that it treats the PILR structure itself as a reusable pattern - something you install, not something you invent from scratch. The plugin handles the indexing and retrieval mechanics so your team can focus on the content.</p>
+<h3>Signal Advisors: PILRs via MCP server</h3>
+<p>Signal Advisors takes the same concept and scales it across multiple repositories. Their agents retrieve PRDs and technical specs from an MCP (Model Context Protocol) server - meaning the domain knowledge doesn't live in any single repo's files, it lives in a purpose-built context delivery system.</p>
+<p>The agents get exactly the documentation they need for the task at hand, regardless of which codebase they're working in. This is a more sophisticated delivery mechanism than local files, but the underlying principle is identical: give agents indexed, on-demand access to the knowledge they need to do their job well, without flooding the context window with everything at once.</p>
+<h3>Indexer: automated PILR generation</h3>
+<p>One of the more interesting tools in this space is <a href="https://github.com/AndyInternet/indexer">Indexer</a> - an AI-powered codebase index generator that uses Tree-sitter AST parsing, code skeleton extraction, and PageRank-based repo mapping to automatically generate structured context from an existing codebase.</p>
+<p>This matters for the cold-start problem. If you're starting from a codebase with no documentation, generating an index manually is a significant investment. Indexer reduces that bootstrapping cost by generating a useful starting point automatically - which you then refine over time as the agent works.</p>
+<hr>
+<h2>Beyond PILRs: Rules, Hooks, and Skills</h2>
+<p>PILRs and CLAUDE.md are the knowledge layer. The enforcement layer is where context engineering becomes a system rather than a collection of documents.</p>
+<p><strong>Rules</strong> are constraints the agent follows automatically - coding standards, naming patterns, things that should always or never happen. The key insight from OpenAI's harness engineering work: encode these as custom linters with error messages written as remediation instructions. When the agent violates a rule, the linter tells it exactly how to fix the violation. Documentation drifts; lint rules don't.</p>
+<p><strong>Hooks</strong> automate responses to agent behavior - running linters after generation, formatting files after edits, triggering tests after changes. The combination of rules and hooks creates continuous mechanical enforcement: constraints that apply everywhere at once, without human attention.</p>
+<p><strong>Skills</strong> are reusable packaged workflows. Complex multi-step processes - implement a feature from a spec, write and execute a test plan, create a PR with documentation - become a single command that any engineer on the team can invoke. Skills are the point where agent usage becomes programmable, where you stop re-explaining your process every session and start encoding it once.</p>
+<p>At RIVET, <code>/review-pr</code>, <code>/implement</code>, and <code>/update-project-docs</code> are the skills we've built so far. The <code>/implement</code> skill in particular has expanded the &quot;safe delegation window&quot; - the range of tasks we can hand to an agent with confidence - from 10–20 minute tasks to multi-hour feature delivery.</p>
+<hr>
+<h2>The System as a Whole</h2>
+<p>Context engineering isn't a single thing you add to your workflow. It's a system:</p>
+<ul>
+<li><strong>CLAUDE.md</strong> gives the agent a reliable starting point in every session</li>
+<li><strong>PILRs</strong> let knowledge accumulate instead of evaporate</li>
+<li><strong>Rules and linters</strong> enforce patterns mechanically, at scale</li>
+<li><strong>Hooks</strong> automate the tedious parts of the workflow</li>
+<li><strong>Skills</strong> make the whole system reusable and programmable</li>
+</ul>
+<p>Each layer makes the others more valuable. CLAUDE.md works better when it can point to PILRs for depth. Rules work better when the agent has PILR context to understand <em>why</em> the rules exist. Skills work better when they can rely on consistent patterns being enforced by rules.</p>
+<p>The goal is an agent that behaves like a senior engineer who knows your codebase - not because you wrote an exhaustive prompt, but because you built an environment where that knowledge accumulates, is enforced, and is accessible on demand.</p>
+<p>That's context engineering. It's slower to set up than writing a good prompt. It pays off at a completely different scale.</p>
+<hr>
+<p><em>We'll be going deep on this at the <a href="/events/2026-04-16-agentic-advanced-practitioners-guide/">April Detroit Developers meetup</a>. Come find me there if you want to dig into any of this.</em></p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+</html>
