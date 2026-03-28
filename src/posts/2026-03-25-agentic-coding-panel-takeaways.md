@@ -13,11 +13,17 @@ permalink: /blog/{{ page.fileSlug }}/
 
 I had the honor of hosting [Dan Farrelly](https://www.linkedin.com/in/djfarrelly/) (CTO, Inngest), [Kunle Oshiyoye](https://www.linkedin.com/in/kunle-oshiyoye-915b22b1/) (GitHub), [Scott Kirschner](https://www.linkedin.com/in/scott-kirschner/) (RIVET Work), and [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/) (Signal Advisors) at our agentic development panel. The conversation ran for over an hour and felt different from most AI discussions I've participated in - less hype, more honesty about what's actually working & what's not.
 
-Here's what stood out.
+Here were the six main themes:
+1. AI is a productivity tool, not a full replacement for development teams
+2. AI accelerates the speed of development, but not necessarily the speed of delivery
+3. Context is the bottleneck - and there are many ways to approach it
+4. Task parallelism is real, but the bottleneck is human cognition
+5. The main constraint isn't budget, it's developer focus
+6. Background agents are promising - but it takes work to get them right
 
 ---
 
-## AI is a productivity tool, not a replacement - and everyone agrees on this
+## AI is a productivity tool, not a full replacement for development teams
 
 Every panelist described AI as a significant accelerator for individual output. None described it as a path to replacing engineers. This wasn't hedging - it was an accurate description of where the technology is and what it's actually useful for.
 
@@ -27,11 +33,11 @@ The framing I keep coming back to: AI compresses the coding portion of developme
 
 ---
 
-## Code review is the hardest problem AI has created, not solved
+## AI accelerates the speed of development, but not necessarily the speed of delivery
 
 This came up across multiple panelists independently, and it's worth sitting with.
 
-AI makes it trivially easy to generate code. It does not make it easier to validate that code. And teams are discovering that the two aren't symmetric - generating is faster, but reviewing is not proportionally faster, and in some cases it's gotten harder.
+AI makes it trivially easy to generate code. It does not make it easier to validate that code. And teams are discovering that the two aren't symmetric - generating is faster, but reviewing & testing are not proportionally faster, and in some cases they've gotten harder.
 
 Why harder? A few reasons:
 
@@ -43,9 +49,13 @@ Why harder? A few reasons:
 
 The practical implication: strong engineering fundamentals and rigorous human review aren't optional in an agentic workflow - they're more important than before. Teams that are skipping review because the code "looks fine" are storing up problems.
 
+At RIVET, we've accepted that we will have to focus more on reviewing more & larger PRs - even though we're focusing on creating small, focused PRs.
+
+Most panelists mentioned using AI tools (Code Rabbit, Codex, Copilot, SonarCloud) to help review code in addition to human review.
+
 ---
 
-## Context is the bottleneck - and different teams are solving it differently
+## Context is the bottleneck - and there are many ways to approach it
 
 This was the most technically interesting part of the conversation, and the one where the panelists had the most divergence in approaches.
 
@@ -59,7 +69,7 @@ This connects to work I've been doing at RIVET on what I call [PILRs - Persisten
 
 ---
 
-## Task parallelism is real, but the bottleneck is your brain
+## Task parallelism is real, but the bottleneck is human cognition
 
 The conversation around multi-agent workflows was notably measured. Everyone on the panel had experimented with running multiple agents in parallel. Nobody was doing it at the scale the breathless coverage suggests.
 
@@ -71,21 +81,25 @@ The human mind is the bottleneck, not the tooling. That's probably partially add
 
 ---
 
-## Budget approval isn't the obstacle anyone
+## The main constraint isn't budget, it's developer focus
 
 This surprised some people in the room. Every panelist reported that management is largely green-lighting AI tooling spend. The objections that slowed adoption in 2023–2024 - cost concerns, security questions, "we should wait and see" conservatism - have mostly dissolved.
 
 The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code, Cursor and GitHub Copilot are discovering that the constraint is now on the engineering side: building the context, the review processes and the harness that makes agents reliably useful. Budget isn't the blocker. Engineering investment is.
 
+The problem for most teams is that time spent developing the harness & context required to make agents reliably useful is time away from building new features. It's a zero-sum game. At RIVET, we believe that we can meaningfully increase velocity by investing in our agentic infrastructure & workflows. In February 2026 (last month as of this writing), our CEO - [Ryan Meitl](https://www.linkedin.com/in/ryan-meitl/) - charged our engineering team with the goal of 3Xing product development velocity by Q1 2027. He wasn't perscriptive on how to acommplish the goal, but he was clear that we can de-prioritize product development goals to make room for the necessary investments required to get to 3X. You can read more about it here: [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/2026-03-19-agentic-coding-advanced-guide/)
+
 ---
 
-## Background agents are promising - but you have to earn them
+## Background agents are promising - but it takes work to get them right
 
 The panel's consensus on autonomous background agents (agents working independently on separate branches, outside the main development loop) was consistent: real potential, not production-ready for most teams, and heavily dependent on work you probably haven't done yet.
 
 Dan described it well: background agents require all of the foundational work - clean architecture, documented context, reliable review processes - to already be in place before they can work reliably. Without that foundation, you get more output, but you can't trust it. And output you can't trust isn't velocity.
 
-This matches what I've observed trying to run multiple Claude Code agents at RIVET. When the harness is solid - when the `CLAUDE.md` is well-written, when patterns are documented, when the architecture is clean & consistent - agents can operate with more *agency*. When those things aren't in place, more agents means more noise to filter, not more throughput.
+This matches what I've observed trying to run hosted agents at RIVET (e.g., Claude & Copilot on GitHub, OpenClaw). When the harness is solid - when the `CLAUDE.md` is well-written, when patterns are documented, when the architecture is clean & consistent - agents can operate with more *agency*. When those things aren't in place, more agents means more noise to filter, not more throughput.
+
+You can absolutely still get value from background agents without a solid foundation, but you're going to spend a lot of time cleaning up after them. I think less experienced developers & non-technical-folks-turned-vibe-coders will reap the most benefit because these agents can *unlock* the ability to contribute to software development in a meaningful way. But for the more experienced developers, the value is in the *harness* - the context, the patterns, the review processes that make agents reliably useful. Otherwise, you're better off just focusing on a few tasks at a time on your local machine.
 
 The j-curve is real. You invest in the foundation before you see the payoff. Teams that try to skip to multi-agent workflows before building the foundation are going to be disappointed.
 
