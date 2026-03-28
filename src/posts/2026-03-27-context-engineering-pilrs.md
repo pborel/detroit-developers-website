@@ -35,17 +35,17 @@ A good `CLAUDE.md` covers:
 - Three to five things you wish every new engineer knew before touching the codebase (this can be in a separate `CLAUDE.md` deeper in the directory structure as it often relates to a given subsystem)
 - Explicit do's and don'ts that aren't obvious from the code itself (this can be in a separate `CLAUDE.md` deeper in the directory structure as it often relates to a given subsystem)
 
-It's a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone's personal settings, it's not doing its job. Though, I do encourage you to keep a personal `CLAUDE.md` for your own preferences & patterns, too.
+It's a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone's personal settings, it's like storing money in the mattress - it won't pay interest. Though, I do encourage you to keep a personal `CLAUDE.md` for your own preferences & patterns, too.
 
-*A note on rules files: At the time of this writing, rules are loaded into the context window with the `CLAUDE.md`. They act as a human-friendly way to segment & organize your context. They are not loaded in for a given task or area of the codebase by default. In other words: rules contribute to your `CLAUDE.md` size, so keep them concise.*
+*A note on rules files with Claude: At the time of this writing, rules are loaded into the context window with the `CLAUDE.md`. They act as a human-friendly way to segment & organize your context. They are not loaded in for a given task or area of the codebase by default. In other words: rules contribute to your `CLAUDE.md` size, so keep them concise.*
 
 ### The cold-start problem
 
-CLAUDE.md solves the immediate context problem. But it doesn't solve the **cold-start problem**: an agent joining a large, established codebase still has to figure out where everything is, what patterns the team follows, how past problems were solved. The first few sessions on a complex project are expensive - in tokens, in wrong turns, in engineers having to re-explain things they've explained before.
+`CLAUDE.md` solves the immediate context problem. But it doesn't solve the **cold-start problem**: an agent joining a large, established codebase still has to figure out where everything is, what patterns the team follows, how past problems were solved. The first few sessions on a complex project are expensive - in tokens, in wrong turns, in engineers having to re-explain things they've explained before.
 
-The cold-start problem is also why CLAUDE.md files tend to either be too sparse to help or too bloated to be effective. Teams try to stuff everything the agent might need into one document, hit the size constraint, and watch performance degrade. You can't document everything upfront. And even if you could, you shouldn't put it all in the same place.
+The cold-start problem is also why `CLAUDE.md` files tend to either be too sparse to help or too bloated to be effective. Teams try to stuff everything the agent might need into one document, hit the size constraint and watch performance degrade. You can't document everything upfront. And even if you could, you shouldn't - the context window will never be big enough to hold everything you might need.
 
-The answer is a layer of structured knowledge that sits below CLAUDE.md - indexed, persistent, and growing over time.
+The answer is a layer of structured knowledge that sits below `CLAUDE.md` - indexed, persistent, and growing over time.
 
 ---
 
@@ -53,12 +53,12 @@ The answer is a layer of structured knowledge that sits below CLAUDE.md - indexe
 
 Each word in the acronym is doing real work:
 
-- **Persistent** — saved somewhere durable: a file, a database record, a separate service. Not a prompt, not a session variable. It survives between agent runs and between engineers.
-- **Indexed** — structured so agents can start small and expand as needed. Rather than loading everything at once, an index lets the agent pull the relevant slice for a given task and drill deeper only when it needs to. This is what keeps context windows from overflowing.
-- **Learning** — it grows over time. As the project develops, the information about it gets better. Every solved problem, every architectural decision, every pattern documented adds to what the agent knows. The value compounds.
-- **Repositories** — it lives somewhere accessible from multiple projects, or within one project by everyone involved: developers, PMs, designers. Not in one engineer's personal settings. Not in a prompt someone wrote six months ago. Shared, versioned (optional), owned by the team.
+- **Persistent** - saved somewhere durable: a file, a database record, a separate service. Not a prompt, not a session variable. It survives between agent runs and between engineers.
+- **Indexed** - structured so agents can start small and expand as needed. Rather than loading everything at once, an index lets the agent pull the relevant slice for a given task and drill deeper only when it needs to. This is what keeps context windows from overflowing.
+- **Learning** - it grows over time. As the project develops, the information about it gets better. Every solved problem, every architectural decision, every pattern documented adds to what the agent knows. The value compounds.
+- **Repositories** - it lives somewhere accessible from multiple projects, or within one project by everyone involved: developers, PMs, designers. Not in one engineer's personal settings. Not in a prompt someone wrote six months ago. Shared, versioned (optional), owned by the team.
 
-A PILR is a structured knowledge base the agent can reference on demand. The key word is *indexed* - a central `index.json` maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.
+A PILR is a structured knowledge base the agent can reference on demand. The key word is *indexed* - in one example, a central `index.json` maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.
 
 PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built.
 
@@ -72,14 +72,14 @@ A minimal PILR looks something like this:
 docs/
   index.json          <- maps topics to files
   architecture.md     <- how the system is designed
-  patterns/
-    api-patterns.md
-    state-patterns.md
-  decisions/
-    2026-02-14-auth-refactor.md
-    2026-03-10-state-migration.md
-  issues/
-    solved-problems.md
+  systems/
+    api.md
+    error-handling.md
+    file-upload.md
+    state-management.md
+  bug-fixes/
+    permissions.md
+    file-upload.md
 ```
 
 The `index.json` is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management.
@@ -90,7 +90,7 @@ The `index.json` is what makes this work at scale. Without it, agents either loa
 
 Here's where most teams go wrong: they treat "write the docs" as one undifferentiated task. But knowledge has very different lifecycles depending on what it is, and conflating them leads to PILRs that are either stale, bloated, or both.
 
-There are three distinct types, and they need to be built and maintained differently.
+There are three distinct types, and they need to be maintained in different ways.
 
 ---
 
@@ -103,19 +103,19 @@ These exist to serve a specific feature or sprint. They're highly specific, high
 - Technical design decisions made during a sprint
 - Test plans for a specific feature
 - Notes on why an approach was chosen or discarded during active development
-- PRDs scoped to a single deliverable
+- Product Specifications scoped to a single deliverable
 
 **Lifecycle:** Create before implementation begins. Reference during implementation. Archive or delete when the feature ships. Do not let these accumulate indefinitely - a planning doc for a feature shipped six months ago is noise, not signal.
 
-**At RIVET**, these live in `temp/projects/` - a deliberate naming choice. "Temp" communicates that this directory is working memory, not permanent record. Each feature gets a subdirectory with a planning doc, a test plan, and any decision notes. When the PR merges, we either archive the relevant decisions into the evergreen layer or discard the docs entirely.
+**At RIVET**, these live in `temp/projects/` - a deliberate naming choice. "Temp" communicates that this directory is working memory, not permanent record. Each feature gets a subdirectory with a planning doc, a test plan, and any decision notes. When the PR merges, we either archive the relevant decisions into the evergreen layer or do nothing & discard the docs entirely (the folder path is in our `.gitignore`).
 
-The key insight: these documents serve two audiences simultaneously. The human who reviews the plan before implementation starts. And the agent who references the plan while implementing. Writing them well - specific, scoped, with clear acceptance criteria - pays dividends on both sides.
+The key insight: these documents serve two audiences simultaneously. The human who reviews the plan before implementation starts. And the agent who references the plan while implementing. Writing them well - specific, scoped, with clear acceptance criteria - pays dividends on both sides. We use a skill to help us write these docs based on the System Architecture docs, Tech Spec for the project & Product Spec for the feature.
 
 ---
 
 ### Type 2: Tech Specs & Product Documentation (Evergreen)
 
-These describe how the system works and why. They change, but they don't expire.
+These describe how the system works and why it works that way. They evolve, but they don't expire.
 
 **What belongs here:**
 - Architectural decision records (ADRs)
@@ -129,38 +129,38 @@ These describe how the system works and why. They change, but they don't expire.
 
 The distinction from Type 1: a Type 1 doc says "here's what we're going to change for this feature." A Type 2 doc says "here's how this part of the system works." One is a plan; the other is a map.
 
-This is also the layer where **Signal Advisors' MCP server** lives. Their agents retrieve PRDs and technical specs from a purpose-built context delivery system, serving the right documentation to the right agent regardless of which codebase it's working in. The delivery mechanism is more sophisticated than local files, but the layer is the same: stable, indexed, domain-specific knowledge that doesn't live in the code itself.
+This is also the layer where **Signal Advisors' MCP server** lives. [Signal Advisors](https://www.signaladvisors.com/) is a Detroit-based B2B SaaS startup that helps wealth management professionals run their business - a domain where the product spans multiple codebases and the documentation that matters most (compliance rules, product specs, API contracts) doesn't belong in any single repo. [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/), a Director of Engineering at Signal Advisors & panelist at our [March agentic coding event](/events/agentic-software-development/), shared how his team solved this: an MCP (Model Context Protocol) server that serves technical docs as context for agents working across their codebase. The agents retrieve exactly the documentation they need for a given task - product requirements, architectural context, API contracts - without any of it living in the repositories themselves. The delivery mechanism is more sophisticated than local files, but the layer is the same: stable, indexed, domain-specific knowledge that doesn't live in the code itself.
+
+At RIVET we utilize "Deep Maps". Deep Maps are markdown files that describe how the system works and why it works that way. They're like architectural decision records (ADRs) but for the entire system. They contain frontmatter with highlights & an index file to help the agent search for what they need. We use a skill to maintain our deep maps which allows us to keep them up to date via a GitHub Action.
 
 ---
 
 ### Type 3: Knowledge Bases (Cumulative)
 
-These grow continuously and never shrink. They're the institutional memory of your engineering team.
+These grow continuously with your systems. They're the institutional memory of your engineering team.
 
 **What belongs here:**
-- Solved problems and how they were resolved
+- Solved problems & how they were resolved
 - Incident post-mortems
 - Product evolution history ("why does this work this way now?")
-- Patterns for common bugs and their fixes
+- Patterns for common bugs & their fixes
 - Cross-cutting technical context that spans multiple systems
 
-**Lifecycle:** Always growing. Never reset. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch.
+**Lifecycle:** Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch.
 
 The RIVET support bot demonstrates this clearly. When a support ticket comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing "we've seen this pattern before."
 
-This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have.
+This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have.
 
 ---
 
 ## Connecting the Three Layers
 
-The three types aren't silos - they interact, and your CLAUDE.md is what orchestrates them.
+The three types aren't silos - they interact, and your `CLAUDE.md` can help orchestrate them. Alternatively, use skills to perform specific tasks with instructions to look at the appropriate layer.
 
-A well-written CLAUDE.md routes the agent to the right layer for the right task:
+A well-written `CLAUDE.md` routes the agent to the right layer for the right task:
 
 ```markdown
-## Documentation
-
 Before starting any task, check:
 - `temp/projects/` for an existing implementation plan for this feature
 - `docs/architecture/` for relevant system design context
@@ -170,9 +170,9 @@ When implementing a new feature, create a planning doc in `temp/projects/` first
 When resolving an issue, check `docs/issues/solved-problems.md` before investigating.
 ```
 
-The CLAUDE.md doesn't contain the knowledge - it tells the agent where to find it. This is the map vs. encyclopedia distinction in practice.
+The `CLAUDE.md` doesn't contain the knowledge - it tells the agent where to find it. This is the map vs. encyclopedia distinction in practice.
 
-**Information flows upward.** Decisions made in a Type 1 doc that turn out to be durable belong in Type 2. Patterns that emerge from multiple solved problems in Type 3 belong documented in Type 2 as well. A healthy PILR system has a regular review process where valuable knowledge migrates from ephemeral to evergreen.
+**Information flows upward.** Decisions made in a Type 1 doc that turn out to be durable belong in Type 2. Patterns that emerge from multiple solved problems in Type 3 belong documented in Type 2 as well. A healthy PILRs system has a regular review process where valuable knowledge migrates from ephemeral to evergreen.
 
 **Different indexing strategies for different layers.** Your Type 1 (project execution) docs should be indexed by feature and date. Type 2 (evergreen) docs should be indexed by system component and topic. Type 3 (knowledge base) docs should be indexed by problem pattern, symptom, or system area. The `index.json` structure in each layer reflects its lifecycle.
 
@@ -182,7 +182,7 @@ The CLAUDE.md doesn't contain the knowledge - it tells the agent where to find i
 
 The common failure mode isn't failing to write documentation - it's writing documentation that agents can't effectively navigate. The index is what makes the difference between a knowledge base and a pile of files.
 
-Research on production agentic systems bears this out starkly. Task completion rates vary dramatically based on indexing sophistication:
+A former colleague and friend of mine, Andy Lawrence, built the Indexer tool (more on that shortly) and published research to go along with it. His [Advanced Codebase Indexing Strategies for AI Agents](https://github.com/AndyInternet/indexer/blob/main/research.md) synthesizes the 2025 AI Agent Index, Claude Code telemetry from 12,000+ users, and field interviews - and the numbers are hard to ignore:
 
 | Indexing approach | Task completion rate |
 |---|---|
@@ -193,7 +193,7 @@ Research on production agentic systems bears this out starkly. Task completion r
 | Dependency graph | 76% |
 | Hybrid (structure + semantic + git + deps) | 83% |
 
-The gap between "just have the files" and "have the files well-indexed" is 40 percentage points. That's not a marginal improvement - it's the difference between an agent you can trust and one you can't.
+The gap between "just have the files" and "have the files well-indexed" is 40 percentage points. That's not a marginal improvement - it's the difference between an agent you can trust and a useless bot.
 
 Token efficiency tells the same story. Agents using hierarchical, just-in-time navigation (load what you need, when you need it) use 60% fewer tokens and complete tasks 54% faster than agents using monolithic context loading. At production scale, that's meaningful economics - the same work at roughly half the API cost.
 
@@ -203,7 +203,7 @@ The underlying reason: **agents don't need the entire codebase context upfront**
 
 If you've watched agents get confused in a codebase, you've probably seen these:
 
-**The Irrelevant Context Trap.** Searching for "authenticate" returns `fake_authenticator.js` - semantically similar, contextually useless. Without metadata distinguishing test fixtures from source files, the agent selects wrong and burns turns recovering. Users with proper file metadata select the right file on the first or second try 76% of the time, versus 43% without it.
+**The Irrelevant Context Trap.** Searching for "authenticate" returns `test_authenticator.js` - semantically similar, contextually useless. Without metadata distinguishing test fixtures from source files, the agent selects wrong and burns turns recovering. Users with proper file metadata select the right file on the first or second try 76% of the time, versus 43% without it.
 
 **Monolith Blindness.** Seven files named `index.ts` in a monorepo with 40+ packages. The agent asks for `index.ts` and gets an ambiguous result. Namespaced indexing (`services/payment/index.ts`) eliminates this class of error entirely.
 
@@ -213,11 +213,11 @@ If you've watched agents get confused in a codebase, you've probably seen these:
 
 ---
 
-## Indexer: What Automated PILR Generation Actually Looks Like
+## Indexer: Advanced Automated PILR Generation
 
 One of the more interesting tools in this space is [Indexer](https://github.com/AndyInternet/indexer) - an open-source codebase index generator that takes the indexing problem seriously as an engineering problem.
 
-Most teams build their PILR index manually: someone writes `index.json`, organizes the docs folder, and updates it periodically. This works at small scale and breaks down as the codebase grows. Indexer approaches this differently: generate the index automatically from the actual code, using structural analysis rather than file listings.
+I started building our team's PILR index manually: writing an `index.json`, organizing the docs folder, and updating it periodically. This works at small scale but breaks down as the codebase grows. Indexer approaches this differently: generate the index automatically from the actual code, using structural analysis rather than file listings.
 
 ### How It Works
 
@@ -252,7 +252,7 @@ class AuthHandler:
     def revoke_token(self, token: str) -> None: ...
 ```
 
-10% of the original token cost, with the structural information preserved. For understanding a file's interface before deciding whether to read it fully, this is exactly what you want.
+10% of the original token cost, with the structural information preserved. Interfaces contain the pertinent information for an agent to decide whether or not to read the full implementation.
 
 **PageRank-ranked repo map.** Indexer builds a directed dependency graph (file A imports from file B = edge A→B) and runs PageRank to identify which files are most architecturally significant. The result is a token-budgeted overview of the codebase, ranked by importance rather than alphabetically:
 
@@ -278,7 +278,7 @@ The practical result is what the research calls "just-in-time navigation." The a
 
 Indexer is primarily a solution to the Type 2 and Type 3 cold-start problem. If you're integrating an agent into an existing codebase without documentation, Indexer gives you a useful structural index immediately - you don't have to document every file before the agent can navigate. The PageRank map and skeleton index are derived directly from the code, so they're always current.
 
-The manual PILR layer - architecture decisions, solved problems, product context - still has to be written by humans. Indexer doesn't replace that. But it solves the navigation layer, which is often the first obstacle teams hit when they try to deploy agents into real codebases.
+The manual PILR layer - architecture decisions, solved problems, product context - still has to be written by humans (with agentic assistance). Indexer doesn't replace that. But it solves the navigation layer, which is often the first obstacle teams hit when they try to deploy agents into real codebases.
 
 ![Indexer GitHub - automated PILR generation via AST parsing and PageRank](/assets/images/PILRs-indexer.png)
 
@@ -288,13 +288,22 @@ The manual PILR layer - architecture decisions, solved problems, product context
 
 ### RIVET: Local PILRs in the repo
 
-At RIVET, all three layers coexist in the same repo. `temp/projects/` for Type 1 (ephemeral planning docs). `docs/architecture/` for Type 2 (evergreen system context). `docs/issues/` for Type 3 (solved problems, indexed for retrieval). The CLAUDE.md routes agents to the right layer at the start of each task.
+At RIVET, the three layers are spread across different homes - and it's not a clean system yet.
 
-The support bot shows the Type 3 layer in practice: persistent solved problems index, CLAUDE.md with routing instructions, and the agent treating past solutions as first-class context rather than reasoning from scratch every time.
+**Type 1** lives in `temp/projects/` inside the monorepo. That part works well. Planning docs, test plans, decision notes, a prepared `pr.md` - all local, `.gitignored`, and accessible to the agent during implementation.
 
+**Type 2** is where things get messy. Our product specs & technical specs live in Notion. We like Notion for this - the collaborative features, inline commenting, and the ability to loop in PMs and designers without asking them to touch a code repository works well for us. But it means our agents can't read Type 2 docs directly. The current workflow is copy-paste: when starting a feature, we pull the relevant spec out of Notion and drop it into `temp/projects/` for that task or utilize Notion's MCP server to gather the correct information. It works, but it's manual. We've talked about migrating to Markdown files in the repo or stored with Obsidian, and we probably will eventually - but we haven't solved the collaboration problem that makes Notion worth using in the first place.
+
+The multi-repo situation makes this harder. We have a monorepo as our main codebase, plus separate repos for private packages & additional services. Type 2 docs that span multiple repos don't naturally belong anywhere, which is part of why Notion still wins - it's repo-agnostic.
+
+**Type 3** lives in its own separate repo - the support agent is a standalone project that sits adjacent to our other codebases on our development machines. It can read files across our other repos locally, which is what makes it useful. But that local dependency is a limitation: the agent has to run in an environment where the relevant codebases are accessible. That works fine on a developer's machine. It breaks down as soon as you try to run it in CI or hand it off to a fully autonomous background agent, because the distributed codebase - monorepo, peripheral services, private npm packages - isn't assembled in one place anywhere except a developer's laptop.
+
+This is the honest state of it. The pattern is right; the infrastructure isn't finished. Ryan Burr's MCP server approach is probably the right long-term answer for the Type 2 layer. Andy Lawrence's Indexer is a sophisticated solution to our problems addressing the Type 3 layer. Both provide a centralized context delivery system that's repo-agnostic and environment-independent. We're not there yet.
+
+Here is a screenshot of my local `/temp` directory. You can see it is organized by feature, and each feature has its own set of PILRs. It is also inconsistent because the Claude Skill we use to generate the docs has evolved over time.
 ![PILRs at RIVET - slide from the Advanced Practitioner's Guide](/assets/images/PILRs-RIVET.png)
 
-### Superpowers: PILRs as a plugin pattern
+### Superpowers: PILRs as a plugin
 
 The [Superpowers plugin for Claude Code](https://github.com/obra/superpowers) formalizes the PILR structure as a reusable pattern. Plans and specs live in `docs/superpowers/plans` and `docs/superpowers/specs`, organized so the agent can reference them without loading the whole knowledge base. The plugin handles the indexing and retrieval mechanics so your team can focus on the content rather than the infrastructure.
 
@@ -306,17 +315,17 @@ Signal Advisors scales the Type 2 layer across multiple repositories via an MCP 
 
 ---
 
-## Beyond PILRs: Rules, Hooks, and Skills
+## Beyond PILRs: Hooks, Skills & Refactors
 
-PILRs and CLAUDE.md are the knowledge layer. The enforcement layer is where context engineering becomes a system rather than a collection of documents.
-
-**Rules** are constraints the agent follows automatically - coding standards, naming patterns, things that should always or never happen. The key insight from OpenAI's harness engineering work: encode these as custom linters with error messages written as remediation instructions. When the agent violates a rule, the linter tells it exactly how to fix the violation. Documentation drifts; lint rules don't.
+PILRs and `CLAUDE.md` are the knowledge layer. The enforcement layer is where context engineering becomes a system rather than a collection of documents.
 
 **Hooks** automate responses to agent behavior - running linters after generation, formatting files after edits, triggering tests after changes. The combination of rules and hooks creates continuous mechanical enforcement: constraints that apply everywhere at once, without human attention.
 
 **Skills** are reusable packaged workflows. Complex multi-step processes - implement a feature from a spec, write and execute a test plan, create a PR with documentation - become a single command that any engineer on the team can invoke. Skills are the point where agent usage becomes programmable, where you stop re-explaining your process every session and start encoding it once.
 
-At RIVET, `/review-pr`, `/implement`, and `/update-project-docs` are the skills we've built so far. The `/implement` skill in particular has expanded the "safe delegation window" - the range of tasks we can hand to an agent with confidence - from 10-20 minute tasks to multi-hour feature delivery.
+At RIVET, `/review-pr`, `/implement`, and `/update-project-docs` are the skills we've built so far. The `/implement` skill in particular has expanded the "safe delegation window" - the range of tasks we can hand to an agent with confidence - from 10-20 minute tasks to hour-long feature delivery.
+
+**Refactors** are necessary to get your code into a consistent state. If you instruct the agent to follow one pattern but your codebase is riddled with several competing examples, the agent will get confused and produce inconsistent results. Refactoring your existing code to follow best practices will improve velocity when producing new features.
 
 ---
 
@@ -329,11 +338,11 @@ Context engineering isn't a single thing you add to your workflow. It's a system
 - **Type 2 PILRs** (evergreen) give the agent durable system knowledge that accumulates across the team
 - **Type 3 PILRs** (cumulative) give the agent institutional memory - patterns from past problems and solutions
 - **Automated indexing** (via tools like Indexer) keeps the navigation layer current without manual maintenance
-- **Rules and linters** enforce patterns mechanically, at scale
-- **Hooks** automate the tedious parts of the workflow
+- **Hooks** make the agent's behavior more consistent and reliable by automating checks like linting
 - **Skills** make the whole system reusable and programmable
+- **Refactors** are necessary to get your code into a consistent state
 
-Each layer makes the others more valuable. CLAUDE.md works better when it points to well-indexed PILRs for depth. Rules work better when the agent has PILR context to understand *why* the rules exist. Skills work better when they can rely on consistent patterns being enforced by rules. And the Type 3 knowledge base becomes more valuable with every problem solved - each solution makes the next agent session smarter.
+Each layer makes the others more valuable. `CLAUDE.md` works better when it points to well-indexed PILRs for depth. Skills work better when they can rely on consistent patterns being enforced by pre-existing patterns. And the Type 3 knowledge base becomes more valuable with every problem solved - each solution makes the next agent session smarter.
 
 The goal is an agent that behaves like a senior engineer who knows your codebase - not because you wrote an exhaustive prompt, but because you built an environment where that knowledge accumulates, is enforced, and is accessible on demand.
 
@@ -341,4 +350,4 @@ That's context engineering. It's slower to set up than writing a good prompt. It
 
 ---
 
-*We'll be going deep on this at the [April Detroit Developers meetup](/events/agentic-advanced-practitioners-guide/). Come find me there if you want to dig into any of this.*
+*We'll be going deep on this at the [April Detroit Developers meetup](/events/agentic-advanced-practitioners-guide/). Come find me there if you want to talk shop.*
