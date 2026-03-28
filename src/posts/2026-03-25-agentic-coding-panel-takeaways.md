@@ -11,7 +11,7 @@ permalink: /blog/{{ page.fileSlug }}/
 
 ---
 
-We had [Dan Farrelly](https://www.linkedin.com/in/djfarrelly/) (CTO, Inngest), [Kunle Oshiyoye](https://www.linkedin.com/in/kunle-oshiyoye-915b22b1/) (GitHub), [Scott Kirschner](https://www.linkedin.com/in/scott-kirschner/) (RIVET Work), and [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/) (Signal Advisors) on stage. Thirty-two people in the room. The conversation ran for over an hour and felt different from most AI panels I've sat through - less hype, more honesty about what's actually hard.
+I had the honor of hosting [Dan Farrelly](https://www.linkedin.com/in/djfarrelly/) (CTO, Inngest), [Kunle Oshiyoye](https://www.linkedin.com/in/kunle-oshiyoye-915b22b1/) (GitHub), [Scott Kirschner](https://www.linkedin.com/in/scott-kirschner/) (RIVET Work), and [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/) (Signal Advisors) at our agentic development panel. The conversation ran for over an hour and felt different from most AI discussions I've participated in - less hype, more honesty about what's actually working & what's not.
 
 Here's what stood out.
 
@@ -39,7 +39,7 @@ Why harder? A few reasons:
 
 **Quality signals are noisier.** AI-generated code tends to look clean. It passes linters, it's syntactically correct, it often includes comments. The bugs hide in the logic - in assumptions the model made that don't match your system, in edge cases it didn't consider, in architectural decisions that technically work but compound your tech debt. These are exactly the bugs that look fine on a skim.
 
-**The reviewer's mental model is being asked to do more work.** When you review code a colleague wrote, you have some signal about how they think, what they're likely to have missed, what shortcuts they take. With AI-generated code, those heuristics don't apply.
+**PRs are getting enormous.** Agentic tools don't just help you write code faster - they encourage you to scope tasks larger. Why open five small PRs when the agent can implement the whole feature in one shot? The result is PRs with thousands of lines of changes that are genuinely difficult to review thoroughly. A reviewer can hold a 200-line PR in their head. A 3,000-line PR with changes across a dozen files is a different cognitive exercise entirely - and most reviewers aren't doing it rigorously.
 
 The practical implication: strong engineering fundamentals and rigorous human review aren't optional in an agentic workflow - they're more important than before. Teams that are skipping review because the code "looks fine" are storing up problems.
 
@@ -47,13 +47,13 @@ The practical implication: strong engineering fundamentals and rigorous human re
 
 ## Context is the bottleneck - and different teams are solving it differently
 
-This was the most technically interesting part of the conversation, and the one where the panelists had the most different approaches.
+This was the most technically interesting part of the conversation, and the one where the panelists had the most divergence in approaches.
 
 Ryan Burr described what Signal Advisors built: an MCP (Model Context Protocol) server that loads PRDs and technical specs as context for agents working across multiple code repositories. The agents retrieve exactly the documentation they need for a given task - product requirements, architectural context, API contracts - without any of it having to live in the repositories themselves.
 
 The insight behind this: agents working across a codebase without domain context are essentially guessing. They can read the code, but they can't read the decisions behind the code - why things are structured the way they are, what constraints were in play, what the product is actually trying to do. An MCP server that serves that context on demand is a meaningful step toward agents that behave like informed collaborators rather than pattern-matching engines.
 
-Dan Farrelly echoed the principle from a different angle: "Context is key for agents, and for humans - document your code and architecture." The tooling is different; the underlying problem is the same.
+Dan Farrelly echoed the principle from a different angle: "Context is key for agents and for humans - document your code and architecture." The tooling is different; the underlying problem is the same.
 
 This connects to work I've been doing at RIVET on what I call [PILRs - Persistent Indexed Learning Repositories](/blog/context-engineering-pilrs/) - a pattern for building up indexed knowledge bases that agents can reference selectively, without flooding the context window. Signal Advisors' MCP server is a more sophisticated delivery mechanism for the same core idea: give agents the right knowledge, at the right time, in a format they can use.
 
@@ -63,11 +63,11 @@ This connects to work I've been doing at RIVET on what I call [PILRs - Persisten
 
 The conversation around multi-agent workflows was notably measured. Everyone on the panel had experimented with running multiple agents in parallel. Nobody was doing it at the scale the breathless coverage suggests.
 
-The practical challenge isn't the tooling - it's cognitive load. Managing two or three concurrent agent tasks requires a fundamentally different way of working than managing one. You're not just doing the same thing faster; you're context-switching between threads that are in different states of completion, each with its own open questions and decisions waiting.
+The practical challenge isn't the tooling - it's cognitive load. Managing two or three concurrent agentic workflows requires a fundamentally different way of working than managing one. You're not just doing the same thing faster; you're context-switching between threads that are in different states of completion, each with its own open questions & decisions waiting.
 
-The one framing that resonated in the room: **task parallelism works best when the tasks are genuinely different in nature.** Running one agent on research while another builds a prototype, then collating the findings and spinning up a third to write an implementation plan - that's more manageable than trying to run two agents both writing features in the same codebase. Different task types mean less cognitive collision.
+The one framing that resonated in the room: **task parallelism works best when the tasks are different in nature.** Running one agent on research while another builds a prototype, then collating the findings and spinning up a third to write an implementation plan - that's more manageable than trying to run two agents both writing features in the same codebase. Different task types mean less cognitive collision.
 
-The human mind is the bottleneck, not the tooling. That's probably fixable with practice and better workflows, but it's where we are.
+The human mind is the bottleneck, not the tooling. That's probably partially addressable with practice & better workflows, but it's where we are today.
 
 ---
 
@@ -75,7 +75,7 @@ The human mind is the bottleneck, not the tooling. That's probably fixable with 
 
 This surprised some people in the room. Every panelist reported that management is largely green-lighting AI tooling spend. The objections that slowed adoption in 2023–2024 - cost concerns, security questions, "we should wait and see" conservatism - have mostly dissolved.
 
-The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code and Cursor and GitHub Copilot Workspace are discovering that the constraint is now on the engineering side: building the context, the review processes, the harness that makes agents reliably useful. Budget isn't the blocker. Engineering investment is.
+The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code, Cursor and GitHub Copilot are discovering that the constraint is now on the engineering side: building the context, the review processes and the harness that makes agents reliably useful. Budget isn't the blocker. Engineering investment is.
 
 ---
 
@@ -85,9 +85,9 @@ The panel's consensus on autonomous background agents (agents working independen
 
 Dan described it well: background agents require all of the foundational work - clean architecture, documented context, reliable review processes - to already be in place before they can work reliably. Without that foundation, you get more output, but you can't trust it. And output you can't trust isn't velocity.
 
-This matches what I've observed trying to run multiple Claude Code agents on RIVET work. When the harness is solid - when CLAUDE.md is well-written, when patterns are documented, when the architecture is clean and consistent - agents can operate more independently. When those things aren't in place, more agents means more noise to filter, not more throughput.
+This matches what I've observed trying to run multiple Claude Code agents at RIVET. When the harness is solid - when the `CLAUDE.md` is well-written, when patterns are documented, when the architecture is clean & consistent - agents can operate with more *agency*. When those things aren't in place, more agents means more noise to filter, not more throughput.
 
-The j-curve is real. You invest in the foundation before you see the payoff. Teams that try to skip to multi-agent workflows before building the foundation are going to have a bad time.
+The j-curve is real. You invest in the foundation before you see the payoff. Teams that try to skip to multi-agent workflows before building the foundation are going to be disappointed.
 
 ---
 
