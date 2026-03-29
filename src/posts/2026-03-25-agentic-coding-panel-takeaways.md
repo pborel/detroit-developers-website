@@ -16,10 +16,10 @@ I had the honor of hosting [Dan Farrelly](https://www.linkedin.com/in/djfarrelly
 Here were the six main themes:
 1. AI is a productivity tool, not a full replacement for development teams
 2. AI accelerates the speed of development, but not necessarily the speed of delivery
-3. Context is the bottleneck - and there are many ways to approach it
+3. Context is key to great outcomes & there are many ways to approach it
 4. Task parallelism is real, but the bottleneck is human cognition
 5. The main constraint isn't budget, it's developer focus
-6. Background agents are promising - but it takes work to get them right
+6. Background agents are promising - but it takes effort to get them right
 
 ---
 
@@ -55,7 +55,7 @@ Most panelists mentioned using AI tools (Code Rabbit, Codex, Copilot, SonarCloud
 
 ---
 
-## Context is the bottleneck - and there are many ways to approach it
+## Context is key to great outcomes & there are many ways to approach it
 
 This was the most technically interesting part of the conversation, and the one where the panelists had the most divergence in approaches.
 
@@ -87,11 +87,11 @@ This surprised some people in the room. Every panelist reported that management 
 
 The new obstacle is making good use of the access you have. Teams that have unlimited runway to experiment with Claude Code, Cursor and GitHub Copilot are discovering that the constraint is now on the engineering side: building the context, the review processes and the harness that makes agents reliably useful. Budget isn't the blocker. Engineering investment is.
 
-The problem for most teams is that time spent developing the harness & context required to make agents reliably useful is time away from building new features. It's a zero-sum game. At RIVET, we believe that we can meaningfully increase velocity by investing in our agentic infrastructure & workflows. In February 2026 (last month as of this writing), our CEO - [Ryan Meitl](https://www.linkedin.com/in/ryan-meitl/) - charged our engineering team with the goal of 3Xing product development velocity by Q1 2027. He wasn't perscriptive on how to acommplish the goal, but he was clear that we can de-prioritize product development goals to make room for the necessary investments required to get to 3X. You can read more about it here: [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/)
+The problem for most teams is that time spent developing the harness & context required to make agents reliably useful is time away from building new features. It's a zero-sum game. At RIVET, we believe that we can meaningfully increase velocity by investing in our agentic infrastructure & workflows. In February 2026 (last month as of this writing), our CEO - [Ryan Meitl](https://www.linkedin.com/in/ryan-meitl/) - charged our engineering team with the goal of 3Xing product development velocity by Q1 2027. He wasn't prescriptive on how to accomplish the goal, but he was clear that we can de-prioritize product development goals to make room for the necessary investments required to get to 3X. You can read more about it here: [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/)
 
 ---
 
-## Background agents are promising - but it takes work to get them right
+## Background agents are promising - but it takes effort to get them right
 
 The panel's consensus on autonomous background agents (agents working independently on separate branches, outside the main development loop) was consistent: real potential, not production-ready for most teams, and heavily dependent on work you probably haven't done yet.
 
