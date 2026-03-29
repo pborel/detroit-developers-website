@@ -51,6 +51,7 @@ title: Post Title
 date: 2026-03-19
 author: Author Name
 permalink: /blog/{{ page.fileSlug }}/
+draft: true    # optional — excludes from index/collections; shows [DRAFT] prefix on post page
 ---
 ```
 
@@ -98,6 +99,8 @@ Key CSS variables (all defined in `style.css`):
 ## Data: Upcoming Events
 
 Templates use `meetup.upcoming or upcoming` — the Meetup.js data file fetches live events from `meetup.com/gql2` and falls back to `src/_data/upcoming.json` on failure.
+
+Each entry in `upcoming.json` supports an optional `internal_url` field pointing to the event's page on this site (e.g. `/events/my-event-slug/`). When set, the upcoming event card links there instead of Meetup; the RSVP button always links to Meetup regardless.
 
 ## Deployment
 
