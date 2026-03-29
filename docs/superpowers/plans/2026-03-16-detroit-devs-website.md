@@ -1732,7 +1732,7 @@ Create `src/events/2025-09-18-pm-talk.md`:
 ```markdown
 ---
 layout: event.njk
-title: "Keep Projects on Track — PMing Software Products"
+title: "Keep Projects on Track - PMing Software Products"
 date: 2025-09-18
 location: "The Madison Loft, Detroit"
 attendees: 10
