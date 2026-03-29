@@ -3,8 +3,9 @@ layout: post.njk
 title: "Agentic Coding: Context Engineering with PILRs"
 date: 2026-03-27
 author: "Phil Borel"
-excerpt: "The context window is your scarcest resource in agentic coding. Here's how to manage it well enough to actually ship."
+excerpt: "Your agent can get better at your product over time — like a human developer — but only if you build the infrastructure to make it possible. Here's how."
 permalink: /blog/{{ page.fileSlug }}/
+draft: true
 ---
 
 *This post expands on the context engineering section of my [Advanced Practitioner's Guide](/blog/2026-03-19-agentic-coding-advanced-guide/) talk. If you haven't read that one, it's worth starting there for the broader picture.*
@@ -13,13 +14,23 @@ permalink: /blog/{{ page.fileSlug }}/
 
 Agentic tools feel like a superpower on greenfield projects & quick prototypes. Then you bring them to a real codebase and the magic starts to fade. Features that should be straightforward become multi-hour debugging sessions. The agent that was finishing tasks in minutes starts losing the thread halfway through.
 
+Here's what's actually at stake. Think about a new developer joining your team. Day one, they're slow — reading docs, asking questions, getting the lay of the land. By day 90, they're up to speed and starting to move. By the end of year one, they deeply understand multiple systems, can anticipate problems before they happen, and are in a position to lead. That trajectory is the whole point of hiring them.
+
+Your agentic developer can follow the same pattern — but the timelines are completely different. Where a human needs months to accumulate that depth, an agent working with well-structured context can become meaningfully more effective after a single session, after a single PR, after a single project. The knowledge doesn't build up slowly through experience; it builds up through deliberate documentation and indexing. Every time something worth knowing gets captured in your PILRs, your agent gets better at your product — immediately, not eventually.
+
+But only if you build the infrastructure to make it possible. Without it, every session is day one. The agent is perpetually new. Nothing compounds.
+
+That's the main problem with agentic coding at scale, and most teams never think about it because they're too busy fighting a more visible symptom: context rot.
+
 You start work on a new feature. The agent needs the relevant files, architectural context and patterns your codebase follows (all 15 of them). Your agent (let's call her Mattilda - Matti for short) dutifully loads it all into the context window. Halfway through the implementation, Matti starts contradicting herself - forgetting constraints she acknowledged earlier, creating the same bugs after every tweak, producing code that doesn't match the patterns she was following ten messages ago. You haven't changed anything. The context window just filled up, and Matti's effectiveness fell off a cliff.
 
-This is the core problem with agentic coding at scale: **the context window is a scarce resource.** Before I understood this, I treated context as infinite - dump everything in at the start, hope the agent keeps track - and then wonder why agent performance degrades on complex, multi-session work.
+The context window is a scarce resource, and context rot is real — and worse than most people realize. [Chroma's research](https://www.trychroma.com/research/context-rot) documents it rigorously across 18 major models: performance degrades as context grows, distractors cause non-uniform interference, and models handle structured context differently than fragmented context. Their core finding cuts to the heart of it: *"Whether relevant information is present in a model's context is not all that matters; what matters more is how that information is presented."* Research on [Recursive Language Models](https://arxiv.org/html/2512.24601v2) puts a sharper number on it: on information-dense long-context tasks, GPT-5 scores below 0.1% F1. The cliff is real. But context rot is the secondary problem. The primary problem is that without deliberate context engineering, your agent can never accumulate the knowledge that makes a developer valuable. You're not just losing performance mid-session — you're losing the compounding returns that make the investment in agentic tooling worth it.
 
-Context engineering is the discipline of managing that scarcity deliberately. Not just what you tell the agent in a given prompt, but how you structure & surface information across sessions, across engineers and across the full lifecycle of a project - so the agent always has what it needs and never has more than it can use.
+A natural response to context rot is to wait for better models — and architectural approaches like Recursive Language Models are genuinely tackling the problem, letting models process inputs two orders of magnitude beyond their context windows. But a model that handles longer contexts still doesn't know your product. It still starts from scratch every session. It still can't anticipate the failure modes your team has already solved. Context rot is a solvable infrastructure problem; the compounding knowledge problem requires deliberate engineering regardless of where model capabilities land.
 
-Here's how to build it.
+Context engineering is the discipline of managing both. Not just what you tell the agent in a given prompt, but how you structure & surface information across sessions, across engineers and across the full lifecycle of a project — so the agent always has what it needs, never has more than it can use, and gets meaningfully better at your product over time.
+
+PILRs is the pattern I use to build that infrastructure. Here's how it works.
 
 ---
 
@@ -32,8 +43,8 @@ The instinct is to make it comprehensive. Resist that. A large instruction file 
 A good `CLAUDE.md` covers:
 - Tech stack and the architectural pattern the codebase follows
 - A pointer to deeper documentation for each major area
-- Three to five things you wish every new engineer knew before touching the codebase (this can be in a separate `CLAUDE.md` deeper in the directory structure as it often relates to a given subsystem)
-- Explicit do's and don'ts that aren't obvious from the code itself (this can be in a separate `CLAUDE.md` deeper in the directory structure as it often relates to a given subsystem)
+- Three to five things you wish every new engineer knew before touching the codebase
+- Explicit do's and don'ts that aren't obvious from the code itself
 
 It's a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone's personal settings, it's like storing money in the mattress - it won't pay interest. Though, I do encourage you to keep a personal `CLAUDE.md` for your own preferences & patterns, too.
 
@@ -45,7 +56,7 @@ It's a team artifact - reviewed in PRs, updated when the architecture changes, o
 
 The cold-start problem is also why `CLAUDE.md` files tend to either be too sparse to help or too bloated to be effective. Teams try to stuff everything the agent might need into one document, hit the size constraint and watch performance degrade. You can't document everything upfront. And even if you could, you shouldn't - the context window will never be big enough to hold everything you might need.
 
-The answer is a layer of structured knowledge that sits below `CLAUDE.md` - indexed, persistent, and growing over time.
+The answer is a layer of structured knowledge that sits below `CLAUDE.md` - indexed, persistent, and growing over time. Not just to solve day one, but to enable the progression — so the agent that struggles through its first sessions with your codebase is genuinely more capable by the hundredth.
 
 ---
 
@@ -55,12 +66,12 @@ Each word in the acronym is doing real work:
 
 - **Persistent** - saved somewhere durable: a file, a database record, a separate service. Not a prompt, not a session variable. It survives between agent runs and between engineers.
 - **Indexed** - structured so agents can start small and expand as needed. Rather than loading everything at once, an index lets the agent pull the relevant slice for a given task and drill deeper only when it needs to. This is what keeps context windows from overflowing.
-- **Learning** - it grows over time. As the project develops, the information about it gets better. Every solved problem, every architectural decision, every pattern documented adds to what the agent knows. The value compounds.
+- **Learning** - it grows over time. As the project develops, the information about it gets better. Every solved problem, every architectural decision, every pattern documented adds to what the agent knows. The value compounds. This is the mechanism that separates an agent that's perpetually on day one from one that has worked through dozens of features on your codebase — and unlike a human developer, that progression can happen over sessions and PRs, not months.
 - **Repositories** - it lives somewhere accessible from multiple projects, or within one project by everyone involved: developers, PMs, designers. Not in one engineer's personal settings. Not in a prompt someone wrote six months ago. Shared, versioned (optional), owned by the team.
 
 A PILR is a structured knowledge base the agent can reference on demand. The key word is *indexed* - in one example, a central `index.json` maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.
 
-PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built.
+PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built. Not after months of ramp-up — after the work itself. Each PR, each solved problem, each documented decision makes the next session more capable than the last.
 
 This is the inverse of the upfront documentation approach. You don't have to document everything before you get value. You document as you go, and the value compounds.
 
@@ -125,7 +136,7 @@ These describe how the system works and why it works that way. They evolve, but 
 - Onboarding guides and "things every engineer should know"
 - Runbooks for operational processes
 
-**Lifecycle:** Created when systems are designed or decisions are made. Updated when the architecture changes. Never deleted without replacing with something better. These are the documents a new engineer reads to understand why the codebase looks the way it does.
+**Lifecycle:** Created when systems are designed or decisions are made. Updated when the architecture changes. Never deleted without replacing with something better. These are the documents a new engineer reads to understand why the codebase looks the way it does — and the documents your agent draws on to hit the ground running on every new feature, rather than re-deriving system context from scratch each time.
 
 The distinction from Type 1: a Type 1 doc says "here's what we're going to change for this feature." A Type 2 doc says "here's how this part of the system works." One is a plan; the other is a map.
 
@@ -146,11 +157,11 @@ These grow continuously with your systems. They're the institutional memory of y
 - Patterns for common bugs & their fixes
 - Cross-cutting technical context that spans multiple systems
 
-**Lifecycle:** Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch.
+**Lifecycle:** Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch. This is the deep expertise layer — the difference between an agent that knows how your system works and one that understands *why it evolved this way*, can anticipate the failure modes, and is ready to take on your most complex features. A human developer builds this depth over years. Your agent can build it over projects.
 
 The RIVET support bot demonstrates this clearly. When a support ticket comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing "we've seen this pattern before."
 
-This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have.
+This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have — the institutional memory of your product, built up not over years of human tenure but over the lifetime of your codebase itself.
 
 ---
 
@@ -172,17 +183,19 @@ When resolving an issue, check `docs/issues/solved-problems.md` before investiga
 
 The `CLAUDE.md` doesn't contain the knowledge - it tells the agent where to find it. This is the map vs. encyclopedia distinction in practice.
 
-**Information flows upward.** Decisions made in a Type 1 doc that turn out to be durable belong in Type 2. Patterns that emerge from multiple solved problems in Type 3 belong documented in Type 2 as well. A healthy PILRs system has a regular review process where valuable knowledge migrates from ephemeral to evergreen.
+**Information flows upward.** Decisions made in a Type 1 doc that turn out to be durable belong in Type 2. Patterns that emerge from multiple solved problems in Type 3 belong documented in Type 2 as well. A healthy PILRs system has a regular review process where valuable knowledge migrates from ephemeral to evergreen. Each time that migration happens, your agent's baseline understanding of your product rises with it — this is what the progression actually looks like in practice.
 
 **Different indexing strategies for different layers.** Your Type 1 (project execution) docs should be indexed by feature and date. Type 2 (evergreen) docs should be indexed by system component and topic. Type 3 (knowledge base) docs should be indexed by problem pattern, symptom, or system area. The `index.json` structure in each layer reflects its lifecycle.
+
+That last point — indexing strategy — is where most implementations quietly fall apart. You can have all three layers in place and still end up with an agent that stumbles. The structure is necessary but not sufficient. The index is what actually makes it navigable.
 
 ---
 
 ## The Indexing Problem: Why the Index Matters More Than You Think
 
-The common failure mode isn't failing to write documentation - it's writing documentation that agents can't effectively navigate. The index is what makes the difference between a knowledge base and a pile of files.
+The common failure mode isn't failing to write documentation - it's writing documentation that agents can't effectively navigate. The index is what makes the difference between a knowledge base and a pile of files. Recall Chroma's finding: what matters isn't whether relevant information is present, but how it's presented. The index is how you control that.
 
-A former colleague and friend of mine, Andy Lawrence, built the Indexer tool (more on that shortly) and published research to go along with it. His [Advanced Codebase Indexing Strategies for AI Agents](https://github.com/AndyInternet/indexer/blob/main/research.md) synthesizes the 2025 AI Agent Index, Claude Code telemetry from 12,000+ users, and field interviews - and the numbers are hard to ignore:
+A former colleague and friend of mine, Andy Lawrence, built the Indexer tool (more on that shortly) and published field research to go along with it. His [Advanced Codebase Indexing Strategies for AI Agents](https://github.com/AndyInternet/indexer/blob/main/research.md) draws on the 2025 AI Agent Index, Claude Code telemetry from 12,000+ users, and direct practitioner interviews — and the numbers are hard to ignore:
 
 | Indexing approach | Task completion rate |
 |---|---|
@@ -278,13 +291,21 @@ The practical result is what the research calls "just-in-time navigation." The a
 
 Indexer is primarily a solution to the Type 2 and Type 3 cold-start problem. If you're integrating an agent into an existing codebase without documentation, Indexer gives you a useful structural index immediately - you don't have to document every file before the agent can navigate. The PageRank map and skeleton index are derived directly from the code, so they're always current.
 
-The manual PILR layer - architecture decisions, solved problems, product context - still has to be written by humans (with agentic assistance). Indexer doesn't replace that. But it solves the navigation layer, which is often the first obstacle teams hit when they try to deploy agents into real codebases.
+The auto-freshness mechanism is worth pausing on in the context of continuous improvement. Because the index regenerates from a git fingerprint on every query, it grows automatically as the codebase grows. New files, new dependencies, new call paths — they're in the index before the next session starts. The structural layer compounds without any additional human effort. That's the same compounding dynamic the manual PILR layers depend on deliberate documentation to achieve, delivered automatically.
+
+The manual PILR layer - architecture decisions, solved problems, product context - still has to be written by humans (with agentic assistance). Indexer doesn't replace that. But it solves the navigation layer automatically, which is often the first obstacle teams hit when they try to deploy agents into real codebases — and it keeps solving it, session after session, as the codebase evolves.
 
 ![Indexer GitHub - automated PILR generation via AST parsing and PageRank](/assets/images/PILRs-indexer.png)
 
 ---
 
 ## Three Implementations
+
+The PILR pattern is consistent across all three — three layers, indexed, persistent, growing over time. What differs is the *delivery mechanism*: how context is stored, surfaced, and made accessible to agents. These three implementations represent three different answers to that problem, and the trade-offs are worth understanding before you choose your approach.
+
+RIVET keeps everything local: docs live in the repo, accessible directly on the filesystem. Superpowers formalizes that same local pattern as an installable plugin with the structure and retrieval mechanics built in. Signal Advisors externalizes the knowledge entirely, serving it over MCP so it's available across repositories and environments without living in any single codebase.
+
+Local files are the simplest starting point. A plugin gives you structure without the setup cost. An MCP server is the right answer when context needs to cross repo boundaries or run in environments where the codebase isn't present. Where you land depends on how your team is organized and how far you've pushed into autonomous, multi-repo, or CI-based agent workflows.
 
 ### RIVET: Local PILRs in the repo
 
@@ -317,15 +338,13 @@ Signal Advisors scales the Type 2 layer across multiple repositories via an MCP 
 
 ## Beyond PILRs: Hooks, Skills & Refactors
 
-PILRs and `CLAUDE.md` are the knowledge layer. The enforcement layer is where context engineering becomes a system rather than a collection of documents.
+PILRs and `CLAUDE.md` are the knowledge layer. Hooks, skills, and refactors are what turn that knowledge layer into a continuously improving system — the mechanisms that make each session feed the next.
 
-**Hooks** automate responses to agent behavior - running linters after generation, formatting files after edits, triggering tests after changes. The combination of rules and hooks creates continuous mechanical enforcement: constraints that apply everywhere at once, without human attention.
+**Hooks** close the feedback loop automatically. Running a linter after generation, formatting files after edits, triggering tests after changes — these aren't just quality gates. They're the signal that the system is working as intended, applied mechanically on every invocation without requiring human attention. Over time, hooks are what keep the gap between "what the agent produces" and "what the codebase expects" from widening as the codebase grows.
 
-**Skills** are reusable packaged workflows. Complex multi-step processes - implement a feature from a spec, write and execute a test plan, create a PR with documentation - become a single command that any engineer on the team can invoke. Skills are the point where agent usage becomes programmable, where you stop re-explaining your process every session and start encoding it once.
+**Skills** encode your process so it compounds. Complex multi-step workflows — implement a feature from a spec, write and execute a test plan, create a PR with documentation — become a single reusable command. Skills are the point where your investment in context engineering becomes programmable: instead of re-explaining your process every session, you encode it once and every subsequent session gets the full benefit. At RIVET, `/review-pr`, `/implement`, and `/update-project-docs` are the skills we've built so far. The `/implement` skill in particular has expanded the "safe delegation window" — the range of tasks we can hand to an agent with confidence — from 10-20 minute tasks to hour-long feature delivery. Each time a skill improves, every future invocation improves with it.
 
-At RIVET, `/review-pr`, `/implement`, and `/update-project-docs` are the skills we've built so far. The `/implement` skill in particular has expanded the "safe delegation window" - the range of tasks we can hand to an agent with confidence - from 10-20 minute tasks to hour-long feature delivery.
-
-**Refactors** are necessary to get your code into a consistent state. If you instruct the agent to follow one pattern but your codebase is riddled with several competing examples, the agent will get confused and produce inconsistent results. Refactoring your existing code to follow best practices will improve velocity when producing new features.
+**Refactors** are what make the knowledge layer trustworthy. If your CLAUDE.md and PILRs document one pattern but the codebase contains several competing examples, the agent will pattern-match against the code it sees rather than the guidance you've written. Refactoring to consistency isn't just a code quality concern — it's what makes your context engineering actually apply. A codebase that matches its documentation is one where the agent's understanding can genuinely accumulate rather than constantly being undercut by contradictory examples.
 
 ---
 
@@ -344,7 +363,7 @@ Context engineering isn't a single thing you add to your workflow. It's a system
 
 Each layer makes the others more valuable. `CLAUDE.md` works better when it points to well-indexed PILRs for depth. Skills work better when they can rely on consistent patterns being enforced by pre-existing patterns. And the Type 3 knowledge base becomes more valuable with every problem solved - each solution makes the next agent session smarter.
 
-The goal is an agent that behaves like a senior engineer who knows your codebase - not because you wrote an exhaustive prompt, but because you built an environment where that knowledge accumulates, is enforced, and is accessible on demand.
+The goal is an agent that continuously improves at your specific product — not because you wrote a better prompt, but because you built an environment where knowledge accumulates, is enforced, and is accessible on demand. A human developer builds that depth over years of tenure. Your agent can build it over sessions and PRs. The pattern is the same; the pace is different. Each session is a little better than the last. The investment compounds.
 
 That's context engineering. It's slower to set up than writing a good prompt. It pays off at a completely different scale.
 
