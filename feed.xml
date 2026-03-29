@@ -547,25 +547,4 @@ class AuthHandler:
 &lt;p&gt;&lt;em&gt;References: &lt;a href=&quot;https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf&quot;&gt;DORA AI Capabilities Model (2025)&lt;/a&gt; · &lt;a href=&quot;https://www.cjroth.com/blog/2026-02-18-building-an-elite-engineering-culture&quot;&gt;Building an Elite AI Engineering Culture (CJ Roth, Feb 2026)&lt;/a&gt; · &lt;a href=&quot;https://openai.com/index/harness-engineering/&quot;&gt;Harness Engineering (OpenAI, Feb 2026)&lt;/a&gt; · &lt;a href=&quot;https://www.thoughtworks.com/radar/techniques/spec-driven-development&quot;&gt;Spec-Driven Development (Thoughtworks)&lt;/a&gt; · &lt;a href=&quot;https://newsletter.pragmaticengineer.com/p/are-ai-agents-actually-slowing-us&quot;&gt;Are AI Agents Actually Slowing Us Down? (Pragmatic Engineer, Mar 2026)&lt;/a&gt; · &lt;a href=&quot;https://arxiv.org/abs/2511.04427&quot;&gt;Speed at the Cost of Quality (Carnegie Mellon, 2026)&lt;/a&gt; · &lt;a href=&quot;https://addyo.substack.com/p/the-70-problem-hard-truths-about&quot;&gt;The 70% Problem (Addy Osmani, Dec 2024)&lt;/a&gt; · &lt;a href=&quot;https://newsletter.pragmaticengineer.com/p/the-future-of-software-engineering-with-ai&quot;&gt;The Future of Software Engineering with AI (Pragmatic Engineer, Feb 2026)&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
 </content>
   </entry>
-  <entry>
-    <title>Getting Started with AI Agents in Production</title>
-    <link href="https://detroitdevelopers.com/blog/getting-started-ai-agents/"/>
-    <updated>2026-03-10T00:00:00Z</updated>
-    <id>https://detroitdevelopers.com/blog/getting-started-ai-agents/</id>
-    <content type="html">&lt;p&gt;AI agents are transforming how we build software. In this post, we&#39;ll explore the fundamentals of deploying AI agents in production environments.&lt;/p&gt;
-&lt;h2&gt;What Are AI Agents?&lt;/h2&gt;
-&lt;p&gt;AI agents are autonomous systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional chatbots, agents can use tools, maintain state across interactions, and handle multi-step workflows.&lt;/p&gt;
-&lt;h2&gt;Key Considerations&lt;/h2&gt;
-&lt;p&gt;When deploying AI agents in production, there are several important factors to keep in mind:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Reliability&lt;/strong&gt; - Agents need fallback strategies when tool calls fail&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt; - You need to see what decisions the agent is making and why&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Cost management&lt;/strong&gt; - Token usage can scale quickly with complex agent workflows&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Safety&lt;/strong&gt; - Guardrails and human-in-the-loop patterns are essential&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;Getting Started&lt;/h2&gt;
-&lt;p&gt;The simplest way to start is with a single-purpose agent that handles one well-defined task. From there, you can expand to multi-agent architectures as your confidence grows.&lt;/p&gt;
-&lt;p&gt;Stay tuned for our upcoming panel discussion on Agentic Software Development on March 23rd!&lt;/p&gt;
-</content>
-  </entry>
 </feed>
