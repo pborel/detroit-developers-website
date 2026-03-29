@@ -17,7 +17,8 @@ permalink: /events/
     {% if upcomingEvents and upcomingEvents.length %}
       <div style="display: flex; flex-direction: column; gap: 16px; max-width: 700px;">
         {% for event in upcomingEvents %}
-          <div class="event-card event-card--upcoming">
+          {% if event.internal_url %}<a href="{{ event.internal_url }}" style="text-decoration: none; color: inherit; display: block;">{% endif %}
+          <div class="event-card event-card--upcoming" style="{% if event.internal_url %}cursor: pointer;{% endif %}">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
               <div style="flex: 1; min-width: 200px;">
                 <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">{{ event.title }}</h2>
@@ -34,6 +35,7 @@ permalink: /events/
             </div>
             <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
           </div>
+          {% if event.internal_url %}</a>{% endif %}
         {% endfor %}
       </div>
     {% else %}
@@ -50,7 +52,7 @@ permalink: /events/
 
     {% if collections.events.length %}
       <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
-        {% for event in collections.events %}
+        {% for event in collections.events %}{% if not (event.date | isUpcoming) %}
           <a href="{{ event.url }}" class="card" style="text-decoration: none;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div>
@@ -71,7 +73,7 @@ permalink: /events/
               <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0;">→</span>
             </div>
           </a>
-        {% endfor %}
+        {% endif %}{% endfor %}
       </div>
     {% else %}
       <p style="color: var(--subtext0);">No past events recorded yet.</p>
