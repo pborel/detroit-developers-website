@@ -53,9 +53,9 @@ export default function (eleventyConfig) {
 
   // Collections (glob-based — do NOT also add tags in frontmatter to avoid duplicates)
   eleventyConfig.addCollection("posts", (collectionApi) => {
-    return collectionApi.getFilteredByGlob("src/posts/*.md").sort((a, b) => {
-      return b.date - a.date;
-    });
+    return collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter((post) => !post.data.draft)
+      .sort((a, b) => b.date - a.date);
   });
 
   eleventyConfig.addCollection("events", (collectionApi) => {
