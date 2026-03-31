@@ -188,11 +188,11 @@
   <div style="margin-top: 1.5rem; background: var(--surface0); padding: 1.5rem; border-radius: 6px; border: 1px solid var(--surface1);">
     <div style="margin-bottom: 1rem;">
       <span style="color: var(--subtext1);">Build Number:</span>
-      <span style="color: var(--teal); font-weight: bold; margin-left: 0.5rem;">30</span>
+      <span style="color: var(--teal); font-weight: bold; margin-left: 0.5rem;">31</span>
     </div>
     <div>
       <span style="color: var(--subtext1);">Deployed At:</span>
-      <span style="color: var(--yellow); margin-left: 0.5rem;">2026-03-29T18:20:35.264Z</span>
+      <span style="color: var(--yellow); margin-left: 0.5rem;">2026-03-31T01:20:54.518Z</span>
     </div>
   </div>
 </div>
@@ -227,5 +227,38 @@
         }
       }
     });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
   </script>
 </html>

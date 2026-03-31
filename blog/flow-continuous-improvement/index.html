@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLOW: A Framework for Agents That Continuously Improve — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FLOW: A Framework for Agents That Continuously Improve — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/flow-continuous-improvement/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+          
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">flow-continuous-improvement.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// [DRAFT] FLOW: A FRAMEWORK FOR AGENTS THAT CONTINUOUSLY IMPROVE</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;"><span style="color: var(--peach);">[DRAFT]</span> FLOW: A Framework for Agents That Continuously Improve</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Mar 29, 2026
+       · Phil Borel
+      · 9 min read
+    </div>
+
+    <div class="prose">
+      <p><em>This post is part of a series on agentic context engineering. It builds on the <a href="/blog/2026-03-27-context-engineering-pilrs/">PILRs post</a> — if you haven't read that one, the fast loop section will make more sense if you do. The fast loop is something I've built and tested at RIVET. The slow loop is where the architecture leads for teams with ML infrastructure — I'm presenting the design, not the implementation.</em></p>
+<hr>
+<p>Most teams optimizing their agents are working on the current session. Better prompts. Better CLAUDE.md files. Better context management. All of that is worth doing, and all of it improves <em>this</em> run.</p>
+<p>None of it compounds.</p>
+<p>Here's the problem: you wouldn't evaluate a new engineer by their first week on the job. You'd evaluate them by how they develop over months of working on your product — by whether their understanding deepens, whether they start anticipating problems, whether they eventually become someone who can lead. The career arc is the point. Agents have no career arc — unless you build one.</p>
+<p>FLOW is the architecture for building it.</p>
+<hr>
+<h2>FLOW: Fast/slow Learning Over Work</h2>
+<p>FLOW is a two-loop system for continuously improving agents through the work they do.</p>
+<p><strong>The fast loop</strong> captures knowledge externally — as the agent works, what it learns gets documented and indexed in a way that improves every subsequent session. This loop operates at the speed of tasks and PRs. It's already well-understood enough to have a name: <a href="/blog/2026-03-27-context-engineering-pilrs/">PILRs</a>.</p>
+<p><strong>The slow loop</strong> encodes that knowledge permanently — as PILRs accumulate and mature, they become training data for a specialist model fine-tuned on your domain. This loop operates at the speed of projects and quarters. The specialist doesn't need to be <em>told</em> about your patterns; it <em>knows</em> them.</p>
+<p>The two loops are not independent. The fast loop feeds the slow loop: knowledge captured externally becomes knowledge encoded in weights. The slow loop feeds the fast loop: a better-trained specialist makes better decisions, which generate better PILRs. Each cycle leaves the system more capable than the last.</p>
+<p>That's the architecture. The rest of this post goes deeper on each loop, how they connect, and where the design decisions aren't resolved yet.</p>
+<hr>
+<h2>The Fast Loop: PILRs</h2>
+<p>The <a href="/blog/2026-03-27-context-engineering-pilrs/">PILRs post</a> covers the implementation in depth. Here's what matters for understanding its role in FLOW.</p>
+<p>PILRs — Persistent Indexed Learning Repositories — are structured knowledge bases the agent can reference on demand. Three types, each with a different lifecycle:</p>
+<ul>
+<li><strong>Type 1 (ephemeral):</strong> Per-task planning docs, test plans, implementation notes. Created before a feature starts, discarded or archived when it ships.</li>
+<li><strong>Type 2 (evergreen):</strong> System architecture docs, API contracts, ADRs. Created when decisions are made, updated when systems change.</li>
+<li><strong>Type 3 (cumulative):</strong> Solved problems, incident post-mortems, bug patterns. Always growing.</li>
+</ul>
+<p>The fast loop is the process by which each completed task adds to this knowledge base — and the knowledge base in turn makes the next task cheaper, faster, and more accurate. Session-to-session, PR-to-PR, the agent that started from scratch on feature one is meaningfully more capable by feature ten.</p>
+<p>PILRs are also the raw material for the slow loop. The knowledge they capture — your architecture, your patterns, your solved problems — is exactly what a specialist model needs to learn your domain. The fast loop is where that knowledge gets generated and curated; the slow loop is where it gets encoded permanently.</p>
+<hr>
+<h2>The Slow Loop: Specialist Model Training</h2>
+<p>This is the part of FLOW that requires ML infrastructure to implement. The fast loop is something any engineering team can build today with file storage and an index. The slow loop requires the capacity to manage training pipelines, curate training data, and evaluate model performance over time — the domain of teams with dedicated data science and ML capability. I'm presenting the architecture and the design decisions, not a field report.</p>
+<h3>What the specialist model is</h3>
+<p>A specialist model is a domain-fine-tuned model trained on your matured PILR data. Where a frontier model like Claude Opus 4.6 brings broad reasoning capability, the specialist brings deep knowledge of your specific product — your system's architecture, the patterns your team follows, the classes of problems you've solved before.</p>
+<p>The critical distinction from PILRs: PILRs inject knowledge into context at runtime. The specialist has that knowledge in its weights. It doesn't need to be told about your auth patterns before working on your auth system — it already knows them. This reduces context window pressure, reduces latency, and reduces cost. More importantly, it changes the quality of the work: the specialist reasons from internalized domain knowledge rather than retrieved text.</p>
+<h3>How the specialist works alongside the frontier model</h3>
+<p>The specialist isn't a replacement for the frontier model. It runs alongside it in three roles:</p>
+<p><strong>Planning and prototyping.</strong> Before the frontier model is invoked, the specialist drafts plans and lightweight prototypes for human review. This is a meaningful token efficiency gain: the specialist can explore the solution space at a fraction of the cost of the frontier model. The frontier model runs once a direction is approved — not to figure out what to build, but to build it well.</p>
+<p><strong>Domain context provision.</strong> Because the specialist's knowledge of your codebase is in its weights, the frontier model needs less context injected to do its job. What previously required loading a full architecture document into context becomes implicit. The specialist doesn't replace the frontier model's reasoning; it reduces the setup cost for every invocation.</p>
+<p><strong>Validation.</strong> The specialist reviews frontier model outputs against your established patterns. Not a generic linter — a model that knows your codebase's conventions and can flag deviations. The closer the specialist gets to your domain, the more useful this validation becomes.</p>
+<h3>How PILRs become training data</h3>
+<p>The &quot;information flows upward&quot; process described in the PILRs post — where decisions from ephemeral Type 1 docs get archived into evergreen Type 2 docs, and patterns from Type 3 get promoted to Type 2 — is what curates and matures the training data for the slow loop.</p>
+<p>Each document type contributes differently:</p>
+<ul>
+<li><strong>Type 1 docs</strong> provide task-scoped training examples: here's the problem, here's the plan, here's the implementation, here's the outcome.</li>
+<li><strong>Type 2 docs</strong> provide architectural ground truth: here's how this system is designed and why.</li>
+<li><strong>Type 3 docs</strong> provide pattern recognition training: here's how this class of problem presents, and here's how we solve it.</li>
+</ul>
+<p>The matured, promoted knowledge — the content that survived the &quot;is this durable enough for Type 2?&quot; filter — is the highest-quality training signal. It's been validated through real use, reviewed by humans, and deemed worth keeping. That's a meaningful quality advantage over raw model outputs.</p>
+<h3>Open design decisions</h3>
+<p>I don't have resolved answers for these yet. Here's how I'm thinking about the options:</p>
+<p><strong>Training infrastructure.</strong> The right choice depends on your stack and ops capacity:</p>
+<ul>
+<li><em>Anthropic fine-tuning API</em> — fine-tune Haiku 4.5 on your PILR data within the same provider stack. Simplest if you're already Claude-native.</li>
+<li><em>OpenAI fine-tuning</em> — battle-tested pipeline; works if the specialist doesn't need to be a Claude model.</li>
+<li><em>Self-hosted open weights</em> — fine-tune a Llama or Mistral model locally for maximum control; more ops overhead.</li>
+<li><em>RAG as a bridge</em> — before committing to fine-tuning, vector search over PILR data gets you most of the fast loop benefit with lower infrastructure investment. Lower ceiling, but a valid starting point.</li>
+</ul>
+<p>The FLOW architecture is independent of which training infrastructure you choose. That's a separable decision.</p>
+<p><strong>The data pipeline.</strong> How do PILRs become training examples?</p>
+<ul>
+<li><em>Manual curation</em> — a human periodically reviews matured Type 2/3 docs and prepares prompt/completion pairs. Highest quality, lowest automation. Right starting point.</li>
+<li><em>Agentic curation</em> — an agent processes matured PILRs into training format. Higher automation; requires prompt engineering the curation step carefully.</li>
+<li><em>Automated pipeline</em> — a script triggers when docs are updated, formats them, queues a fine-tuning run. Highest automation; requires upfront investment in the pipeline.</li>
+</ul>
+<p>My working assumption: start manual, automate as volume increases. The first fine-tuning run probably shouldn't be fully automated — you want a human eye on what's entering the training set.</p>
+<p><strong>The specialist's starting model.</strong> Start with the smallest model that can plausibly handle planning and validation. The specialist doesn't need frontier reasoning — it needs domain knowledge. A fine-tuned Haiku-class model with strong domain coverage will outperform a large general model with none.</p>
+<p><strong>Minimum viable dataset.</strong> My current thinking: ~50–100 high-quality Type 2/3 PILR documents covering your core architecture and common problem patterns. Quality matters more than quantity — PILR data is inherently curated, which is a signal advantage over synthetic training data. The first fine-tuning run establishes a baseline, not peak performance. The compounding effect becomes visible at 200, 500, 1000+ documents. Don't wait for the right dataset size. Start, measure, iterate.</p>
+<hr>
+<h2>How the Loops Reinforce Each Other</h2>
+<p>The fast loop feeds the slow loop. That much is straightforward: PILRs accumulate, they mature, they become training data.</p>
+<p>The more interesting dynamic is the reverse: as the specialist improves, it makes better decisions during planning and prototyping — which produce better Type 1 docs — which migrate into better Type 2/3 docs — which produce richer training data — which improve the specialist further. The loops are not just sequential; they're mutually reinforcing.</p>
+<p>The practical implication: a team that invests consistently in FLOW compounds their agent's effectiveness over time in a way that pure session-level optimization never achieves. A team without FLOW runs the same cold-start cost on every feature. A team with FLOW progressively eliminates that cost. The gap grows with every cycle.</p>
+<p>This is not a linear improvement. Like any compounding system, the early cycles feel slow. The later ones feel disproportionate.</p>
+<hr>
+<h2>What a Mature FLOW System Looks Like</h2>
+<p>After six months of consistent FLOW operation — fast loop running on every feature, slow loop fine-tuning running quarterly — the picture should look something like this:</p>
+<p>The specialist handles planning and scoping routinely. The frontier model gets invoked for the hard problems: novel architecture, complex multi-system changes, work that requires reasoning the specialist hasn't seen before. Token costs trend down as the specialist takes on more.</p>
+<p>The fast loop has eliminated most cold-start friction. The agent that joins a new feature already understands your system's architecture, knows the patterns your team follows, and has access to a growing index of solved problems. The first session on a new feature looks like the tenth session did six months ago.</p>
+<p>The slow loop has encoded your team's knowledge into weights. The specialist doesn't reference your auth patterns — it knows them. It doesn't load your error handling conventions — it's been trained on them. New agents, new engineers, and new contributors onboard faster because the system's knowledge is explicit, accessible, and embedded.</p>
+<p>The fast loop is where most engineering teams should focus first — it's buildable today, delivers compounding returns quickly, and generates the knowledge base the slow loop depends on. The slow loop is the natural next step for organizations with ML infrastructure: AI-native companies, teams with dedicated data science capacity, or organizations far enough into their agentic journey that the fast loop alone is no longer the constraint.</p>
+<hr>
+<h2>This Series</h2>
+<p>Each component of FLOW gets its own deep-dive:</p>
+<ul>
+<li><strong><a href="/blog/2026-03-27-context-engineering-pilrs/">PILRs: the fast loop</a></strong> — already published</li>
+<li><strong>The PILR data pipeline</strong> — how matured knowledge moves from Type 2/3 docs into specialist training data</li>
+<li><strong>The specialist model</strong> — architecture, starting model selection, fine-tuning process</li>
+<li><strong>The two-model inference pattern</strong> — how the specialist and frontier model work together in practice</li>
+</ul>
+<p>The PILRs post is where to start if you're building this today. The slow loop components are next on the roadmap.</p>
+<hr>
+<p><em>Come find me at the <a href="/events/agentic-advanced-practitioners-guide/">Detroit Developers meetup</a> if you want to think through this together.</em></p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+</html>

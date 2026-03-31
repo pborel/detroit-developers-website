@@ -259,4 +259,37 @@
       }
     });
   </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
 </html>

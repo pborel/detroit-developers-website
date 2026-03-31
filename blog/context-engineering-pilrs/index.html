@@ -192,11 +192,11 @@
     <div class="card-meta" style="margin-bottom: 32px;">
       Mar 27, 2026
        · Phil Borel
-      · 25 min read
+      · 27 min read
     </div>
 
     <div class="prose">
-      <p><em>This post expands on the context engineering section of my <a href="/blog/2026-03-19-agentic-coding-advanced-guide/">Advanced Practitioner's Guide</a> talk. If you haven't read that one, it's worth starting there for the broader picture.</em></p>
+      <p><em>This post expands on the context engineering section of my <a href="/blog/agentic-coding-advanced-guide/">Advanced Practitioner's Guide</a> talk. If you haven't read that one, it's worth starting there for the broader picture.</em></p>
 <hr>
 <p>Agentic tools feel like a superpower on greenfield projects &amp; quick prototypes. Then you bring them to a real codebase and the magic starts to fade. Features that should be straightforward become multi-hour debugging sessions. The agent that was finishing tasks in minutes starts losing the thread halfway through.</p>
 <p>Here's what's actually at stake. Think about a new developer joining your team. Day one, they're slow — reading docs, asking questions, getting the lay of the land. By day 90, they're up to speed and starting to move. By the end of year one, they deeply understand multiple systems, can anticipate problems before they happen, and are in a position to lead. That trajectory is the whole point of hiring them.</p>
@@ -237,6 +237,9 @@
 <p>A PILR is a structured knowledge base the agent can reference on demand. The key word is <em>indexed</em> - in one example, a central <code>index.json</code> maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.</p>
 <p>PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built. Not after months of ramp-up — after the work itself. Each PR, each solved problem, each documented decision makes the next session more capable than the last.</p>
 <p>This is the inverse of the upfront documentation approach. You don't have to document everything before you get value. You document as you go, and the value compounds.</p>
+<p>The pattern isn't specific to software development. PILRs are a general framework for any agent that completes tasks in cycles — the same structure applies to a customer support agent that accumulates resolved issue patterns, a sales agent that builds product knowledge over calls, or a personal assistant that learns preferences over time. The core is always the same: persistent storage, optimized retrieval, and a knowledge base that grows with every completed cycle.</p>
+<p><a href="https://docs.openclaw.ai/concepts/memory">OpenClaw's memory system</a> — built for personal assistant agents — independently arrives at the same architecture: two layers with different lifecycles (append-only daily logs for ephemeral working context, analogous to Type 1; a curated <code>MEMORY.md</code> for durable facts and preferences, analogous to Type 2/3), plus an automated mechanism it calls a <em>silent agentic turn</em> that flushes important context to disk before compaction. That last part is worth pausing on: it's an automated version of the &quot;information flows upward&quot; process that PILRs treat as a deliberate team habit — when the session approaches its context limit, the agent is prompted to decide what's worth keeping before it's lost. The foundational principle is the same: <em>&quot;The files are the source of truth; the model only 'remembers' what gets written to disk.&quot;</em></p>
+<p>The key difference is scope. OpenClaw's long-term memory is private — it only loads in individual sessions, never shared contexts. PILRs are team artifacts; the whole point is that every engineer and every agent session draws from the same accumulated knowledge. Different scope, same mechanism. This post applies PILRs to software development because that's where I've built and tested them — but the compounding dynamic works wherever an agent repeats a cycle and produces something worth remembering.</p>
 <h3>Structure</h3>
 <p>A minimal PILR looks something like this:</p>
 <pre><code>docs/
@@ -251,7 +254,7 @@
     permissions.md
     file-upload.md
 </code></pre>
-<p>The <code>index.json</code> is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management.</p>
+<p>The <code>index.json</code> is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management. This is the simplest form of a PILR index — a static file you maintain manually. More sophisticated implementations use vector embeddings, BM25 hybrid search, or AST-derived structural maps (covered later). The mechanism differs; the goal is the same: selective retrieval over full context loading.</p>
 <hr>
 <h2>Not All PILRs Are the Same</h2>
 <p>Here's where most teams go wrong: they treat &quot;write the docs&quot; as one undifferentiated task. But knowledge has very different lifecycles depending on what it is, and conflating them leads to PILRs that are either stale, bloated, or both.</p>
@@ -298,7 +301,7 @@
 <li>Cross-cutting technical context that spans multiple systems</li>
 </ul>
 <p><strong>Lifecycle:</strong> Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch. This is the deep expertise layer — the difference between an agent that knows how your system works and one that understands <em>why it evolved this way</em>, can anticipate the failure modes, and is ready to take on your most complex features. A human developer builds this depth over years. Your agent can build it over projects.</p>
-<p>The RIVET support bot demonstrates this clearly. When a support ticket comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing &quot;we've seen this pattern before.&quot;</p>
+<p>The RIVET support bot demonstrates this clearly. When a customer-reported bug comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past issues, reproduce them, and propose fixes - not by reasoning from scratch, but by recognizing &quot;we've seen this pattern before.&quot; The PILRs layer is what makes that recognition possible; without it, every ticket is a fresh problem.</p>
 <p>This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have — the institutional memory of your product, built up not over years of human tenure but over the lifetime of your codebase itself.</p>
 <hr>
 <h2>Connecting the Three Layers</h2>
@@ -423,8 +426,8 @@ class AuthHandler:
 <p>The multi-repo situation makes this harder. We have a monorepo as our main codebase, plus separate repos for private packages &amp; additional services. Type 2 docs that span multiple repos don't naturally belong anywhere, which is part of why Notion still wins - it's repo-agnostic.</p>
 <p><strong>Type 3</strong> lives in its own separate repo - the support agent is a standalone project that sits adjacent to our other codebases on our development machines. It can read files across our other repos locally, which is what makes it useful. But that local dependency is a limitation: the agent has to run in an environment where the relevant codebases are accessible. That works fine on a developer's machine. It breaks down as soon as you try to run it in CI or hand it off to a fully autonomous background agent, because the distributed codebase - monorepo, peripheral services, private npm packages - isn't assembled in one place anywhere except a developer's laptop.</p>
 <p>This is the honest state of it. The pattern is right; the infrastructure isn't finished. Ryan Burr's MCP server approach is probably the right long-term answer for the Type 2 layer. Andy Lawrence's Indexer is a sophisticated solution to our problems addressing the Type 3 layer. Both provide a centralized context delivery system that's repo-agnostic and environment-independent. We're not there yet.</p>
-<p>Here is a screenshot of my local <code>/temp</code> directory. You can see it is organized by feature, and each feature has its own set of PILRs. It is also inconsistent because the Claude Skill we use to generate the docs has evolved over time.
-<img src="/assets/images/PILRs-RIVET.png" alt="PILRs at RIVET - slide from the Advanced Practitioner's Guide"></p>
+<p>The screenshot below shows our actual <code>temp/projects/</code> directory. Each subdirectory is a feature or ticket — named by ticket number and slug. Smaller features get a flat set of three files: <code>pr.md</code> (the PR description, drafted before implementation), <code>project_plan.md</code> (implementation plan scoped to that PR), and <code>test_plan.md</code>. Larger features that span multiple PRs get a top-level planning doc alongside the per-PR subdirectories — one project, several PRs, each with their own plan. The inconsistency across older vs. newer entries is visible: earlier features have simpler docs, later ones are more structured. That drift reflects how the skill we use to generate these docs has evolved over time — earlier features were created before we standardized the format.
+<img src="/assets/images/PILRs-RIVET.png" alt="PILRs at RIVET - temp/projects directory showing feature subdirectories with pr.md, project_plan.md, and test_plan.md files"></p>
 <h3>Superpowers: PILRs as a plugin</h3>
 <p>The <a href="https://github.com/obra/superpowers">Superpowers plugin for Claude Code</a> formalizes the PILR structure as a reusable pattern. Plans and specs live in <code>docs/superpowers/plans</code> and <code>docs/superpowers/specs</code>, organized so the agent can reference them without loading the whole knowledge base. The plugin handles the indexing and retrieval mechanics so your team can focus on the content rather than the infrastructure.</p>
 <p><img src="/assets/images/PILRs-superpowers.png" alt="PILRs in Superpowers - slide from the Advanced Practitioner's Guide"></p>
@@ -445,9 +448,9 @@ class AuthHandler:
 <li><strong>Type 2 PILRs</strong> (evergreen) give the agent durable system knowledge that accumulates across the team</li>
 <li><strong>Type 3 PILRs</strong> (cumulative) give the agent institutional memory - patterns from past problems and solutions</li>
 <li><strong>Automated indexing</strong> (via tools like Indexer) keeps the navigation layer current without manual maintenance</li>
-<li><strong>Hooks</strong> make the agent's behavior more consistent and reliable by automating checks like linting</li>
-<li><strong>Skills</strong> make the whole system reusable and programmable</li>
-<li><strong>Refactors</strong> are necessary to get your code into a consistent state</li>
+<li><strong>Hooks</strong> close the feedback loop automatically — keeping the gap between what the agent produces and what the codebase expects from widening with every session</li>
+<li><strong>Skills</strong> encode your process so it compounds — every improvement to a skill benefits every future invocation</li>
+<li><strong>Refactors</strong> align the codebase with its documentation, making the knowledge layer trustworthy rather than constantly undercut by contradictory examples</li>
 </ul>
 <p>Each layer makes the others more valuable. <code>CLAUDE.md</code> works better when it points to well-indexed PILRs for depth. Skills work better when they can rely on consistent patterns being enforced by pre-existing patterns. And the Type 3 knowledge base becomes more valuable with every problem solved - each solution makes the next agent session smarter.</p>
 <p>The goal is an agent that continuously improves at your specific product — not because you wrote a better prompt, but because you built an environment where knowledge accumulates, is enforced, and is accessible on demand. A human developer builds that depth over years of tenure. Your agent can build it over sessions and PRs. The pattern is the same; the pace is different. Each session is a little better than the last. The investment compounds.</p>
@@ -489,5 +492,38 @@ class AuthHandler:
         }
       }
     });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
   </script>
 </html>
