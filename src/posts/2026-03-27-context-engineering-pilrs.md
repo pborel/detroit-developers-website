@@ -8,7 +8,7 @@ permalink: /blog/{{ page.fileSlug }}/
 draft: true
 ---
 
-*This post expands on the context engineering section of my [Advanced Practitioner's Guide](/blog/2026-03-19-agentic-coding-advanced-guide/) talk. If you haven't read that one, it's worth starting there for the broader picture.*
+*This post expands on the context engineering section of my [Advanced Practitioner's Guide](/blog/agentic-coding-advanced-guide/) talk. If you haven't read that one, it's worth starting there for the broader picture.*
 
 ---
 
@@ -75,6 +75,12 @@ PILRs grow as the agent works. When an engineer solves a novel problem, document
 
 This is the inverse of the upfront documentation approach. You don't have to document everything before you get value. You document as you go, and the value compounds.
 
+The pattern isn't specific to software development. PILRs are a general framework for any agent that completes tasks in cycles — the same structure applies to a customer support agent that accumulates resolved issue patterns, a sales agent that builds product knowledge over calls, or a personal assistant that learns preferences over time. The core is always the same: persistent storage, optimized retrieval, and a knowledge base that grows with every completed cycle.
+
+[OpenClaw's memory system](https://docs.openclaw.ai/concepts/memory) — built for personal assistant agents — independently arrives at the same architecture: two layers with different lifecycles (append-only daily logs for ephemeral working context, analogous to Type 1; a curated `MEMORY.md` for durable facts and preferences, analogous to Type 2/3), plus an automated mechanism it calls a *silent agentic turn* that flushes important context to disk before compaction. That last part is worth pausing on: it's an automated version of the "information flows upward" process that PILRs treat as a deliberate team habit — when the session approaches its context limit, the agent is prompted to decide what's worth keeping before it's lost. The foundational principle is the same: *"The files are the source of truth; the model only 'remembers' what gets written to disk."*
+
+The key difference is scope. OpenClaw's long-term memory is private — it only loads in individual sessions, never shared contexts. PILRs are team artifacts; the whole point is that every engineer and every agent session draws from the same accumulated knowledge. Different scope, same mechanism. This post applies PILRs to software development because that's where I've built and tested them — but the compounding dynamic works wherever an agent repeats a cycle and produces something worth remembering.
+
 ### Structure
 
 A minimal PILR looks something like this:
@@ -93,7 +99,7 @@ docs/
     file-upload.md
 ```
 
-The `index.json` is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management.
+The `index.json` is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management. This is the simplest form of a PILR index — a static file you maintain manually. More sophisticated implementations use vector embeddings, BM25 hybrid search, or AST-derived structural maps (covered later). The mechanism differs; the goal is the same: selective retrieval over full context loading.
 
 ---
 
@@ -159,7 +165,7 @@ These grow continuously with your systems. They're the institutional memory of y
 
 **Lifecycle:** Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch. This is the deep expertise layer — the difference between an agent that knows how your system works and one that understands *why it evolved this way*, can anticipate the failure modes, and is ready to take on your most complex features. A human developer builds this depth over years. Your agent can build it over projects.
 
-The RIVET support bot demonstrates this clearly. When a support ticket comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past tickets, reproduce issues, and propose fixes - not by reasoning from scratch, but by recognizing "we've seen this pattern before."
+The RIVET support bot demonstrates this clearly. When a customer-reported bug comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past issues, reproduce them, and propose fixes - not by reasoning from scratch, but by recognizing "we've seen this pattern before." The PILRs layer is what makes that recognition possible; without it, every ticket is a fresh problem.
 
 This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have — the institutional memory of your product, built up not over years of human tenure but over the lifetime of your codebase itself.
 
@@ -321,8 +327,8 @@ The multi-repo situation makes this harder. We have a monorepo as our main codeb
 
 This is the honest state of it. The pattern is right; the infrastructure isn't finished. Ryan Burr's MCP server approach is probably the right long-term answer for the Type 2 layer. Andy Lawrence's Indexer is a sophisticated solution to our problems addressing the Type 3 layer. Both provide a centralized context delivery system that's repo-agnostic and environment-independent. We're not there yet.
 
-Here is a screenshot of my local `/temp` directory. You can see it is organized by feature, and each feature has its own set of PILRs. It is also inconsistent because the Claude Skill we use to generate the docs has evolved over time.
-![PILRs at RIVET - slide from the Advanced Practitioner's Guide](/assets/images/PILRs-RIVET.png)
+The screenshot below shows our actual `temp/projects/` directory. Each subdirectory is a feature or ticket — named by ticket number and slug. Smaller features get a flat set of three files: `pr.md` (the PR description, drafted before implementation), `project_plan.md` (implementation plan scoped to that PR), and `test_plan.md`. Larger features that span multiple PRs get a top-level planning doc alongside the per-PR subdirectories — one project, several PRs, each with their own plan. The inconsistency across older vs. newer entries is visible: earlier features have simpler docs, later ones are more structured. That drift reflects how the skill we use to generate these docs has evolved over time — earlier features were created before we standardized the format.
+![PILRs at RIVET - temp/projects directory showing feature subdirectories with pr.md, project_plan.md, and test_plan.md files](/assets/images/PILRs-RIVET.png)
 
 ### Superpowers: PILRs as a plugin
 
@@ -357,9 +363,9 @@ Context engineering isn't a single thing you add to your workflow. It's a system
 - **Type 2 PILRs** (evergreen) give the agent durable system knowledge that accumulates across the team
 - **Type 3 PILRs** (cumulative) give the agent institutional memory - patterns from past problems and solutions
 - **Automated indexing** (via tools like Indexer) keeps the navigation layer current without manual maintenance
-- **Hooks** make the agent's behavior more consistent and reliable by automating checks like linting
-- **Skills** make the whole system reusable and programmable
-- **Refactors** are necessary to get your code into a consistent state
+- **Hooks** close the feedback loop automatically — keeping the gap between what the agent produces and what the codebase expects from widening with every session
+- **Skills** encode your process so it compounds — every improvement to a skill benefits every future invocation
+- **Refactors** align the codebase with its documentation, making the knowledge layer trustworthy rather than constantly undercut by contradictory examples
 
 Each layer makes the others more valuable. `CLAUDE.md` works better when it points to well-indexed PILRs for depth. Skills work better when they can rely on consistent patterns being enforced by pre-existing patterns. And the Type 3 knowledge base becomes more valuable with every problem solved - each solution makes the next agent session smarter.
 
