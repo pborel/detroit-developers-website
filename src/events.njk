@@ -33,7 +33,12 @@ permalink: /events/
                 <span>👥 {{ event.attendeeCount }} attending</span>
               {% endif %}
             </div>
-            <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
+              {% if event.luma_url %}
+                <a href="{{ event.luma_url }}" class="btn-secondary" target="_blank" rel="noopener">RSVP on Luma →</a>
+              {% endif %}
+            </div>
           </div>
           {% if event.internal_url %}</a>{% endif %}
         {% endfor %}
@@ -41,6 +46,24 @@ permalink: /events/
     {% else %}
       <p style="color: var(--subtext0);">No upcoming events. <a href="{{ site.meetup_url }}" target="_blank" rel="noopener">Check our Meetup page</a> for updates.</p>
     {% endif %}
+  </div>
+</div>
+
+{# --- LUMA CALENDAR --- #}
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">5</div>
+  <div class="section-content">
+    <div class="section-comment">// LUMA CALENDAR</div>
+    <iframe
+      src="https://luma.com/embed/calendar/cal-HATDpAe35iY2MkO/events?lt=dark"
+      width="600"
+      height="450"
+      frameborder="0"
+      style="border: 1px solid #bfcbda88; border-radius: 4px;"
+      allowfullscreen=""
+      aria-hidden="false"
+      tabindex="0"
+    ></iframe>
   </div>
 </div>
 

@@ -22,7 +22,12 @@ breadcrumb: index.html
         <span><span class="key">time</span>=<span class="value">"{{ event.date | timeFormat }}"</span></span>
         <span><span class="key">loc</span>=<span class="value">"{{ event.location }}"</span></span>
       </div>
-      <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="{{ event.url }}" class="btn-primary" target="_blank" rel="noopener">RSVP on Meetup →</a>
+        {% if event.luma_url %}
+          <a href="{{ event.luma_url }}" class="btn-secondary" target="_blank" rel="noopener">RSVP on Luma →</a>
+        {% endif %}
+      </div>
     {% else %}
       <p style="color: var(--subtext0);">No upcoming events scheduled. <a href="{{ site.meetup_url }}" target="_blank" rel="noopener">Check our Meetup page</a> for updates.</p>
     {% endif %}
@@ -37,7 +42,7 @@ breadcrumb: index.html
     <a href="/about/" style="text-decoration: none; color: inherit; display: block;">
     <div class="readme-card" style="cursor: pointer;">
       <h3>Detroit Software Developers</h3>
-      <p>Get "hooked" into the Detroit Software Developer community! Whether you're a curious beginner or a seasoned developer, designer or product manager — this community is welcome to all who are interested in Software Development &amp; Software Startups in Detroit.</p>
+      <p>We are a community of professional software developers in Detroit. We meet monthly to share our knowledge, experiences &amp; good vibes. Whether you're a curious beginner or a seasoned developer, designer or product manager - this community is welcome to all who are interested in Software Development &amp; Software Startups in Detroit.</p>
       <div class="readme-stats">
         <span style="color: var(--green);">● >800 members</span>
         <span style="color: var(--blue);">● monthly meetups</span>
