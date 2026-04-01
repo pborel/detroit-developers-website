@@ -393,6 +393,25 @@ a:hover {
   text-decoration: none;
 }
 
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 24px;
+  background: transparent;
+  color: var(--blue);
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
 /* --- About Card (README style) --- */
 .readme-card {
   background: var(--mantle);
@@ -400,6 +419,12 @@ a:hover {
   border-radius: 6px;
   padding: 24px;
   max-width: 700px;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.readme-card:hover {
+  border-color: var(--blue);
+  background: var(--surface0);
 }
 
 .readme-card h3 {
