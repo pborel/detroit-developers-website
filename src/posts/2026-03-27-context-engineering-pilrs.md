@@ -36,7 +36,7 @@ But context rot is the secondary problem. The primary problem is that without de
 
 A natural response to context rot is to wait for better models — and architectural approaches like Recursive Language Models are genuinely tackling the problem, letting models process inputs two orders of magnitude beyond their context windows. But a model that handles longer contexts still doesn't know your product. It still starts from scratch every session. It still can't anticipate the failure modes your team has already solved. Context rot is a solvable infrastructure problem; the compounding knowledge problem requires deliberate engineering regardless of where model capabilities land.
 
-Context engineering is the discipline of managing both. Anthropic's applied AI team [defines the core principle](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) as: *"find the smallest set of high-signal tokens that maximize the likelihood of your desired outcome."* In practice, that means managing not just what you tell the agent in a given prompt, but how you structure & surface information across sessions, across engineers and across the full lifecycle of a project — so the agent always has what it needs, never has more than it can use, and gets meaningfully better at your product over time.
+Context engineering is the discipline of managing both. Anthropic's applied AI team [defines the core principle](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) as: *"find the smallest set of high-signal tokens that maximize the likelihood of your desired outcome."* In practice, that means managing not just what you tell the agent in a given prompt, but how you structure & surface information across sessions, across engineers and across the full lifecycle of a project — so the agent always has what it needs, never has more than it can use, and gets meaningfully better at your product over time. Tools like [claude-mem](https://github.com/thedotmack/claude-mem) take this principle seriously at the retrieval layer — its 3-layer progressive disclosure pattern (`search` → `timeline` → `get_observations`) achieves roughly 10x token efficiency compared to dumping full records into context, treating the attention budget as a first-class engineering constraint rather than an afterthought.
 
 PILRs is the pattern I use to build that infrastructure. Here's how it works.
 
@@ -87,7 +87,9 @@ The pattern isn't specific to software development. PILRs are a general framewor
 
 [OpenClaw's memory system](https://docs.openclaw.ai/concepts/memory) — built for personal assistant agents — independently arrives at the same architecture: two layers with different lifecycles (append-only daily logs for ephemeral working context, analogous to Type 1; a curated `MEMORY.md` for durable facts and preferences, analogous to Type 2/3), plus an automated mechanism it calls a *silent agentic turn* that flushes important context to disk before compaction. That last part is worth pausing on: it's an automated version of the "information flows upward" process that PILRs treat as a deliberate team habit — when the session approaches its context limit, the agent is prompted to decide what's worth keeping before it's lost. The foundational principle is the same: *"The files are the source of truth; the model only 'remembers' what gets written to disk."*
 
-The key difference is scope. OpenClaw's long-term memory is private — it only loads in individual sessions, never shared contexts. PILRs are team artifacts; the whole point is that every engineer and every agent session draws from the same accumulated knowledge. Different scope, same mechanism. This post applies PILRs to software development because that's where I've built and tested them — but the compounding dynamic works wherever an agent repeats a cycle and produces something worth remembering.
+[claude-mem](https://github.com/thedotmack/claude-mem) — built as a persistent memory plugin for Claude Code — is a third independent convergence on the same architecture, but with a more sophisticated retrieval layer. It hooks into Claude Code's lifecycle events (SessionStart, PostToolUse, SessionEnd) to automatically capture what the agent does during sessions, AI-compresses those observations before storage, and persists them in a dual-storage system: SQLite with FTS5 for structured search and ChromaDB for vector embeddings, enabling both keyword and semantic retrieval. Where OpenClaw uses flat files, claude-mem uses hybrid search across two storage engines — a different implementation of the same "persist what matters, retrieve selectively" principle.
+
+The key difference across all three is scope. Both OpenClaw's and claude-mem's memory systems are private — they capture and serve individual developer sessions, never shared contexts. PILRs are team artifacts; the whole point is that every engineer and every agent session draws from the same accumulated knowledge. Different scope, same mechanism. Automated capture tools like claude-mem are excellent at building individual memory with zero manual effort, but the team-artifact requirement is still a gap that needs deliberate bridging — periodically promoting findings from individual agent memory into shared documentation. This post applies PILRs to software development because that's where I've built and tested them — but the compounding dynamic works wherever an agent repeats a cycle and produces something worth remembering.
 
 ### Structure
 
@@ -107,7 +109,7 @@ docs/
     file-upload.md
 ```
 
-The `index.json` is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management. This is the simplest form of a PILR index — a static file you maintain manually. More sophisticated implementations use vector embeddings, BM25 hybrid search, or AST-derived structural maps (covered later). The mechanism differs; the goal is the same: selective retrieval over full context loading.
+The `index.json` is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management. This is the simplest form of a PILR index — a static file you maintain manually. More sophisticated implementations use vector embeddings, BM25 hybrid search, or AST-derived structural maps (covered later). claude-mem takes a different approach entirely: rather than indexing by topic or structure, it uses a temporal/semantic index — a 3-layer progressive disclosure pattern where `search()` returns compact ID-based results (50-100 tokens), `timeline()` provides chronological context around matches, and `get_observations()` fetches full details only for filtered IDs (500-1000 tokens). This is structural indexing for *what the code is* versus temporal indexing for *what the agent did with it* — complementary approaches to the same selective retrieval problem. The mechanism differs; the goal is the same: selective retrieval over full context loading.
 
 ---
 
@@ -178,6 +180,8 @@ These grow continuously with your systems. They're the institutional memory of y
 The RIVET support bot demonstrates this clearly. When a customer-reported bug comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past issues, reproduce them, and propose fixes - not by reasoning from scratch, but by recognizing "we've seen this pattern before." The PILRs layer is what makes that recognition possible; without it, every ticket is a fresh problem.
 
 This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have — the institutional memory of your product, built up not over years of human tenure but over the lifetime of your codebase itself.
+
+claude-mem offers a different approach to this problem: fully automated capture. Rather than relying on engineers to document solutions after the fact, it hooks into Claude Code's lifecycle events — every tool use, every file read, every edit — and automatically compresses those observations using AI before storing them. The knowledge base grows without any manual documentation effort. It includes a circuit breaker that halts after 3 consecutive failures to prevent infinite loops, and `<private>` tags that get stripped at the hook layer before data reaches storage. The trade-off is clear: manual documentation produces higher-signal, team-shared knowledge; automated capture produces comprehensive individual memory with zero friction. Both approaches grow the cumulative layer — they just optimize for different constraints.
 
 ---
 
@@ -317,6 +321,8 @@ The auto-freshness mechanism is worth pausing on in the context of continuous im
 
 The manual PILR layer - architecture decisions, solved problems, product context - still has to be written by humans (with agentic assistance). Indexer doesn't replace that. But it solves the navigation layer automatically, which is often the first obstacle teams hit when they try to deploy agents into real codebases — and it keeps solving it, session after session, as the codebase evolves.
 
+It's worth noting that Indexer and claude-mem are complementary forms of automated PILR generation, covering two different dimensions. Indexer auto-generates *structural* knowledge from code — what exists, how it's connected, which files matter most. claude-mem auto-generates *operational* knowledge from agent behavior — what the agent did, what it learned, what worked. Together they address both sides of the cold-start problem: Indexer gives a new session an immediate map of the codebase; claude-mem gives it memory of what previous sessions discovered while navigating that map. Neither replaces hand-written architectural docs or solved-problem records, but both reduce the manual effort required to keep the knowledge layer growing.
+
 ![Indexer GitHub - automated PILR generation via AST parsing and PageRank](/assets/images/PILRs-indexer.png)
 
 ---
@@ -420,3 +426,22 @@ The investment compounds. But only if you keep the scaffolding honest.
 ---
 
 *We'll be going deep on this at the [April Detroit Developers meetup](/events/agentic-advanced-practitioners-guide/). Come find me there if you want to talk shop.*
+
+---
+
+## References
+
+- [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/) — the broader guide this post expands on
+- [Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic's applied AI team on attention budgets, just-in-time retrieval, and tool design
+- [Building Effective Agents for Long-Running Apps](https://www.anthropic.com/engineering/harness-design-long-running-apps) — Anthropic's harness design research on context anxiety, sprint contracts, and multi-agent evaluation
+- [Context Rot Research](https://www.trychroma.com/research/context-rot) — Chroma's empirical analysis of performance degradation across 18 models
+- [Recursive Language Models](https://arxiv.org/html/2512.24601v2) — research on processing inputs beyond context window limits
+- [OpenClaw Memory System](https://docs.openclaw.ai/concepts/memory) — personal assistant agent memory architecture with append-only logs and curated long-term memory
+- [Advanced Codebase Indexing Strategies for AI Agents](https://github.com/AndyInternet/indexer/blob/main/research.md) — Andy Lawrence's field research on indexing approaches and task completion rates
+- [Indexer](https://github.com/AndyInternet/indexer) — open-source codebase index generator using AST parsing and PageRank
+- [Superpowers Plugin for Claude Code](https://github.com/obra/superpowers) — PILRs formalized as a reusable plugin with built-in indexing and retrieval
+- [Signal Advisors](https://www.signaladvisors.com/) — Detroit-based B2B SaaS startup serving PILRs via MCP server across multiple repositories
+- [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/) — Director of Engineering at Signal Advisors
+- [claude-mem](https://github.com/thedotmack/claude-mem) — persistent memory plugin for Claude Code with dual-storage (SQLite FTS5 + ChromaDB) and progressive disclosure retrieval
+- [Agentic Software Development — March Detroit Developers Meetup](/events/agentic-software-development/) — panel event referenced in the Signal Advisors section
+- [Agentic Software Development: Advanced Practitioner's Guide — April Detroit Developers Meetup](/events/agentic-advanced-practitioners-guide/) — upcoming deep-dive on these topics
