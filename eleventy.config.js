@@ -58,6 +58,12 @@ export default function (eleventyConfig) {
       .sort((a, b) => b.date - a.date);
   });
 
+  eleventyConfig.addCollection("drafts", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter((post) => post.data.draft)
+      .sort((a, b) => b.date - a.date);
+  });
+
   eleventyConfig.addCollection("events", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/events/*.md").sort((a, b) => {
       return b.date - a.date;
