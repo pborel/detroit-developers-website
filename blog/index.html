@@ -183,6 +183,79 @@
       <!-- Page Content -->
       <div class="content-area">
         
+
+<div id="drafts-section" class="content-section" style="display: none;">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3</div>
+  <div class="section-content">
+    <div class="section-comment">// DRAFTS</div>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+      
+        <a href="/blog/flow-pattern/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">The FLOW Pattern: A Framework for Agents That Continuously Improve</div>
+            <div class="card-meta">
+              Mar 29, 2026
+               · Phil Borel
+              · 34 min read
+            </div>
+            
+              <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Most teams optimizing their agents are only improving the current session. FLOW is the architecture for the other problem — making every cycle leave the agent meaningfully better than the last.</p>
+            
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+        <a href="/blog/context-engineering-pilrs-part-1/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">Context Engineering with PILRs, Part 1: Building Knowledge That Compounds</div>
+            <div class="card-meta">
+              Mar 27, 2026
+               · Phil Borel
+              · 20 min read
+            </div>
+            
+              <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Your agent can get better at your product over time — like a human developer — but only if you build the infrastructure to make it possible. Here&#39;s what to capture and why it matters.</p>
+            
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+        <a href="/blog/context-engineering-pilrs-part-2/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">Context Engineering with PILRs, Part 2: Indexing, Retrieval &amp; the Full System</div>
+            <div class="card-meta">
+              Mar 27, 2026
+               · Phil Borel
+              · 20 min read
+            </div>
+            
+              <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Good documentation that agents can&#39;t navigate is just a pile of files. Here&#39;s how indexing, tooling, and system design turn knowledge into capability.</p>
+            
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+        <a href="/blog/context-engineering-pilrs/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">Agentic Coding: Context Engineering with PILRs</div>
+            <div class="card-meta">
+              Mar 27, 2026
+               · Phil Borel
+              · 38 min read
+            </div>
+            
+              <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Your agent can get better at your product over time — like a human developer — but only if you build the infrastructure to make it possible. Here&#39;s how.</p>
+            
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+
 <div class="content-section">
   <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
   <div class="section-content">
@@ -225,6 +298,13 @@
     
   </div>
 </div>
+
+<script>
+  if (new URLSearchParams(window.location.search).get('drafts') === 'true') {
+    const el = document.getElementById('drafts-section');
+    if (el) el.style.display = '';
+  }
+</script>
 
       </div>
 
