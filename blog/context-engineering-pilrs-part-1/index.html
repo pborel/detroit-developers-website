@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Engineering with PILRs, Part 1: Building Knowledge That Compounds — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Context Engineering with PILRs, Part 1: Building Knowledge That Compounds — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/context-engineering-pilrs-part-1/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+          
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">context-engineering-pilrs-part-1.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// [DRAFT] CONTEXT ENGINEERING WITH PILRS, PART 1: BUILDING KNOWLEDGE THAT COMPOUNDS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;"><span style="color: var(--peach);">[DRAFT]</span> Context Engineering with PILRs, Part 1: Building Knowledge That Compounds</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Mar 27, 2026
+       · Phil Borel
+      · 20 min read
+    </div>
+
+    <div class="prose">
+      <p><em>This is Part 1 of a two-part series on context engineering with PILRs. This post covers the problem, the foundation, and the three types of knowledge your agent needs. <a href="/blog/context-engineering-pilrs-part-2/">Part 2</a> covers indexing, tooling, implementations, and the full system.</em></p>
+<p><em>This series expands on the context engineering section of my <a href="/blog/agentic-coding-advanced-guide/">Advanced Practitioner's Guide</a> post. If you haven't read that one yet, it's worth checking out for the broader picture.</em></p>
+<hr>
+<p>Agentic tools feel like a superpower on greenfield projects &amp; quick prototypes. Then you bring them to a real codebase and the magic starts to fade. Features that should be straightforward become multi-hour debugging sessions. The agent that was finishing tasks in minutes starts losing the thread halfway through.</p>
+<p>Here's what's actually at stake. Think about a new developer joining your team. Day one, they're slow — reading docs, asking questions, getting the lay of the land. By day 90, they're up to speed and starting to move. By the end of year one, they deeply understand multiple systems, can anticipate problems before they happen, and are in a position to lead. That trajectory is the whole point of hiring them.</p>
+<p>Your agentic developer can follow the same pattern — but the timelines are completely different. Where a human needs months to accumulate that depth, an agent working with well-structured context can become meaningfully more effective after a single session, after a single PR, after a single project. The knowledge doesn't build up slowly through experience; it builds up through deliberate documentation and indexing. Every time something worth knowing gets captured in your PILRs, your agent gets better at your product — immediately, not eventually.</p>
+<p>But only if you build the infrastructure to make it possible. Without it, every session is day one. The agent is perpetually new. Nothing compounds.</p>
+<p>That's the main problem with agentic coding at scale, and most teams never think about it because they're too busy fighting a more visible symptom: context rot.</p>
+<p>You start work on a new feature. The agent needs the relevant files, architectural context and patterns your codebase follows (all 15 of them). Your agent (let's call her Mattilda - Matti for short) dutifully loads it all into the context window. Halfway through the implementation, Matti starts contradicting herself - forgetting constraints she acknowledged earlier, creating the same bugs after every tweak, producing code that doesn't match the patterns she was following ten messages ago. You haven't changed anything. The context window just filled up, and Matti's effectiveness fell off a cliff.</p>
+<p>The context window is a scarce resource, and context rot is real — and worse than most people realize. <a href="https://www.trychroma.com/research/context-rot">Chroma's research</a> documents it rigorously across 18 major models: performance degrades as context grows, distractors cause non-uniform interference, and models handle structured context differently than fragmented context. Their core finding cuts to the heart of it: <em>&quot;Whether relevant information is present in a model's context is not all that matters; what matters more is how that information is presented.&quot;</em> Research on <a href="https://arxiv.org/html/2512.24601v2">Recursive Language Models</a> puts a sharper number on it: on information-dense long-context tasks, GPT-5 scores below 0.1% F1.</p>
+<p>The architectural reason is straightforward. Transformer-based models let every token attend to every other token, creating n² pairwise relationships. Longer sequences stretch this attention capacity thin — <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Anthropic's applied AI team</a> describes it as an &quot;attention budget&quot; that gets depleted by each additional token, much like human working memory. Technically, this produces a performance <em>gradient</em> rather than a hard cliff. But in practice, the gradient is steep enough that the distinction doesn't change your engineering approach — when your agent starts contradicting instructions it acknowledged 20 messages ago, the cause is the same whether you call it a cliff or a steep slope.</p>
+<p>This matches what we've observed building Odradek, RIVET's customer-reported bug fixing agent. The agent runs a multi-phase workflow — investigate, fix, verify, ship — and we've found that models perform best when each invocation stays in the ~20-40K token range where attention is concentrated. Push past 100K tokens and the symptoms are predictable: the model starts skipping instructions, conflating step outputs, and hallucinating connections between unrelated context. We call this the &quot;performance window&quot; — the context size where the model reliably follows instructions and produces high-quality output. Beyond it, attention dilutes across irrelevant tokens, and every additional tool result makes the next one slightly less likely to be processed correctly. Context rot isn't gradual — it's a cliff, and the cliff is closer than most people think.</p>
+<p>Context rot has a sibling failure mode worth naming: <strong>context anxiety</strong>. Anthropic's engineering team <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">observed this</a> while building long-running agent harnesses — some models start wrapping up work prematurely as they approach perceived context limits. This is distinct from context rot. With rot, the model's performance degrades — it loses track of instructions and makes worse decisions. With anxiety, the model's performance is fine but it <em>chooses to do less</em> — producing terse, incomplete implementations or rushing to finish rather than doing the work thoroughly. If you've ever watched an agent suddenly start cutting corners mid-task, producing shallow implementations where it was previously thorough, you've likely seen context anxiety rather than context rot. The remediation is different: context rot requires smaller context windows and better retrieval; context anxiety requires architectural changes like phase boundaries or fresh context windows at natural breakpoints.</p>
+<p>But context rot is the secondary problem. The primary problem is that without deliberate context engineering, your agent can never accumulate the knowledge that makes a developer valuable. You're not just losing performance mid-session — you're losing the compounding returns that make the investment in agentic tooling worth it.</p>
+<p>A natural response to context rot is to wait for better models — and architectural approaches like Recursive Language Models are genuinely tackling the problem, letting models process inputs two orders of magnitude beyond their context windows. But a model that handles longer contexts still doesn't know your product. It still starts from scratch every session. It still can't anticipate the failure modes your team has already solved. Context rot is a solvable infrastructure problem; the compounding knowledge problem requires deliberate engineering regardless of where model capabilities land.</p>
+<p>Context engineering is the discipline of managing both. Anthropic's applied AI team <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">defines the core principle</a> as: <em>&quot;find the smallest set of high-signal tokens that maximize the likelihood of your desired outcome.&quot;</em> In practice, that means managing not just what you tell the agent in a given prompt, but how you structure &amp; surface information across sessions, across engineers and across the full lifecycle of a project — so the agent always has what it needs, never has more than it can use, and gets meaningfully better at your product over time. Tools like <a href="https://github.com/thedotmack/claude-mem">claude-mem</a> take this principle seriously at the retrieval layer — its 3-layer progressive disclosure pattern (<code>search</code> → <code>timeline</code> → <code>get_observations</code>) achieves roughly 10x token efficiency compared to dumping full records into context, treating the attention budget as a first-class engineering constraint rather than an afterthought.</p>
+<p>PILRs is the pattern I use to build that infrastructure. Here's how it works.</p>
+<hr>
+<h2>The Foundation: CLAUDE.md</h2>
+<p>Every repository your team works in needs a <code>CLAUDE.md</code> (or <code>AGENT.md</code>) - a project-level context document checked into the repo &amp; treated similar to other infrastructure configurations. Note: this file isn't like a helm chart, but it does impact your developer experience &amp; effectiveness when developing with agents.</p>
+<p>The instinct is to make it comprehensive. Resist that. A large instruction file actively degrades agent performance: it crowds out the actual task, and when everything is marked &quot;important,&quot; agents fall back to local pattern-matching rather than applying your instructions. Anthropic's applied AI team calls this calibration finding the <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">&quot;right altitude&quot;</a> — balancing two failure modes. Over-specification gives you a brittle, bloated file that increases maintenance complexity and burns context on edge cases that rarely apply. Under-specification gives you vague guidance that fails to provide concrete signals, assuming a shared context the agent doesn't have. The sweet spot is roughly 100 lines. Think of it as a <strong>map, not an encyclopedia</strong> — it tells the agent where to look, not everything the agent needs to know.</p>
+<p>A good <code>CLAUDE.md</code> covers:</p>
+<ul>
+<li>Tech stack and the architectural pattern the codebase follows</li>
+<li>A pointer to deeper documentation for each major area</li>
+<li>Three to five things you wish every new engineer knew before touching the codebase</li>
+<li>Explicit do's and don'ts that aren't obvious from the code itself</li>
+</ul>
+<p>It's a team artifact - reviewed in PRs, updated when the architecture changes, owned by the team, not any individual. If it lives in someone's personal settings, it's like storing money in the mattress - it won't pay interest. Though, I do encourage you to keep a personal <code>CLAUDE.md</code> for your own preferences &amp; patterns, too.</p>
+<p><em>A note on rules files with Claude: At the time of this writing, rules are loaded into the context window with the <code>CLAUDE.md</code>. They act as a human-friendly way to segment &amp; organize your context. They are not loaded in for a given task or area of the codebase by default. In other words: rules contribute to your <code>CLAUDE.md</code> size, so keep them concise.</em></p>
+<h3>The cold-start problem</h3>
+<p><code>CLAUDE.md</code> solves the immediate context problem. But it doesn't solve the <strong>cold-start problem</strong>: an agent joining a large, established codebase still has to figure out where everything is, what patterns the team follows, how past problems were solved. The first few sessions on a complex project are expensive - in tokens, in wrong turns, in engineers having to re-explain things they've explained before.</p>
+<p>The cold-start problem is also why <code>CLAUDE.md</code> files tend to either be too sparse to help or too bloated to be effective. Teams try to stuff everything the agent might need into one document, hit the size constraint and watch performance degrade. You can't document everything upfront. And even if you could, you shouldn't - the context window will never be big enough to hold everything you might need.</p>
+<p>The answer is a layer of structured knowledge that sits below <code>CLAUDE.md</code> - indexed, persistent, and growing over time. Not just to solve day one, but to enable the progression — so the agent that struggles through its first sessions with your codebase is genuinely more capable by the hundredth.</p>
+<hr>
+<h2>PILRs: Persistent Indexed Learning Repositories</h2>
+<p>Each word in the acronym is doing real work:</p>
+<ul>
+<li><strong>Persistent</strong> - saved somewhere durable: a file, a database record, a separate service. Not a prompt, not a session variable. It survives between agent runs and between engineers.</li>
+<li><strong>Indexed</strong> - structured so agents can start small and expand as needed. Rather than loading everything at once, an index lets the agent pull the relevant slice for a given task and drill deeper only when it needs to. This is what keeps context windows from overflowing.</li>
+<li><strong>Learning</strong> - it grows over time. As the project develops, the information about it gets better. Every solved problem, every architectural decision, every pattern documented adds to what the agent knows. The value compounds. This is the mechanism that separates an agent that's perpetually on day one from one that has worked through dozens of features on your codebase — and unlike a human developer, that progression can happen over sessions and PRs, not months.</li>
+<li><strong>Repositories</strong> - it lives somewhere accessible from multiple projects, or within one project by everyone involved: developers, PMs, designers. Not in one engineer's personal settings. Not in a prompt someone wrote six months ago. Shared, versioned (optional), owned by the team.</li>
+</ul>
+<p>A PILR is a structured knowledge base the agent can reference on demand. The key word is <em>indexed</em> - in one example, a central <code>index.json</code> maps topics to documentation files, so the agent loads what it needs for a given task rather than loading everything every time.</p>
+<p>PILRs grow as the agent works. When an engineer solves a novel problem, documents a pattern decision, or writes a per-PR plan, that knowledge accumulates in the PILR. The next agent session - or the next engineer - has access to it. Over time, the agent stops behaving like a generic coding assistant and starts behaving like a specialist who knows how your platform is built. Not after months of ramp-up — after the work itself. Each PR, each solved problem, each documented decision makes the next session more capable than the last.</p>
+<p>This is the inverse of the upfront documentation approach. You don't have to document everything before you get value. You document as you go, and the value compounds.</p>
+<p>The pattern isn't specific to software development. PILRs are a general framework for any agent that completes tasks in cycles — the same structure applies to a customer support agent that accumulates resolved issue patterns, a sales agent that builds product knowledge over calls, or a personal assistant that learns preferences over time. The core is always the same: persistent storage, optimized retrieval, and a knowledge base that grows with every completed cycle.</p>
+<p><a href="https://docs.openclaw.ai/concepts/memory">OpenClaw's memory system</a> — built for personal assistant agents — independently arrives at the same architecture: two layers with different lifecycles (append-only daily logs for ephemeral working context, analogous to Type 1; a curated <code>MEMORY.md</code> for durable facts and preferences, analogous to Type 2/3), plus an automated mechanism it calls a <em>silent agentic turn</em> that flushes important context to disk before compaction. That last part is worth pausing on: it's an automated version of the &quot;information flows upward&quot; process that PILRs treat as a deliberate team habit — when the session approaches its context limit, the agent is prompted to decide what's worth keeping before it's lost. The foundational principle is the same: <em>&quot;The files are the source of truth; the model only 'remembers' what gets written to disk.&quot;</em></p>
+<p><a href="https://github.com/thedotmack/claude-mem">claude-mem</a> — built as a persistent memory plugin for Claude Code — is a third independent convergence on the same architecture, but with a more sophisticated retrieval layer. It hooks into Claude Code's lifecycle events (SessionStart, PostToolUse, SessionEnd) to automatically capture what the agent does during sessions, AI-compresses those observations before storage, and persists them in a dual-storage system: SQLite with FTS5 for structured search and ChromaDB for vector embeddings, enabling both keyword and semantic retrieval. Where OpenClaw uses flat files, claude-mem uses hybrid search across two storage engines — a different implementation of the same &quot;persist what matters, retrieve selectively&quot; principle.</p>
+<p>The key difference across all three is scope. Both OpenClaw's and claude-mem's memory systems are private — they capture and serve individual developer sessions, never shared contexts. PILRs are team artifacts; the whole point is that every engineer and every agent session draws from the same accumulated knowledge. Different scope, same mechanism. Automated capture tools like claude-mem are excellent at building individual memory with zero manual effort, but the team-artifact requirement is still a gap that needs deliberate bridging — periodically promoting findings from individual agent memory into shared documentation. This post applies PILRs to software development because that's where I've built and tested them — but the compounding dynamic works wherever an agent repeats a cycle and produces something worth remembering.</p>
+<h3>Structure</h3>
+<p>A minimal PILR looks something like this:</p>
+<pre><code>docs/
+  index.json          &lt;- maps topics to files
+  architecture.md     &lt;- how the system is designed
+  systems/
+    api.md
+    error-handling.md
+    file-upload.md
+    state-management.md
+  bug-fixes/
+    permissions.md
+    file-upload.md
+</code></pre>
+<p>The <code>index.json</code> is what makes this work at scale. Without it, agents either load too much (context overflow) or too little (missing what they need). The index lets the agent navigate selectively - pulling the auth patterns when working on auth, the state patterns when touching state management. This is the simplest form of a PILR index — a static file you maintain manually. More sophisticated implementations use vector embeddings, BM25 hybrid search, or AST-derived structural maps (covered in Part 2). claude-mem takes a different approach entirely: rather than indexing by topic or structure, it uses a temporal/semantic index — a 3-layer progressive disclosure pattern where <code>search()</code> returns compact ID-based results (50-100 tokens), <code>timeline()</code> provides chronological context around matches, and <code>get_observations()</code> fetches full details only for filtered IDs (500-1000 tokens). This is structural indexing for <em>what the code is</em> versus temporal indexing for <em>what the agent did with it</em> — complementary approaches to the same selective retrieval problem. The mechanism differs; the goal is the same: selective retrieval over full context loading.</p>
+<hr>
+<h2>Not All PILRs Are the Same</h2>
+<p>Here's where most teams go wrong: they treat &quot;write the docs&quot; as one undifferentiated task. But knowledge has very different lifecycles depending on what it is, and conflating them leads to PILRs that are either stale, bloated, or both.</p>
+<p>There are three distinct types, and they need to be maintained in different ways.</p>
+<hr>
+<h3>Type 1: Project Execution Docs (Ephemeral)</h3>
+<p>These exist to serve a specific feature or sprint. They're highly specific, high-signal during implementation, and low-signal afterward.</p>
+<p><strong>What belongs here:</strong></p>
+<ul>
+<li>Per-PR implementation plans (what needs to change and why)</li>
+<li>Technical design decisions made during a sprint</li>
+<li>Test plans for a specific feature</li>
+<li>Notes on why an approach was chosen or discarded during active development</li>
+<li>Product Specifications scoped to a single deliverable</li>
+</ul>
+<p><strong>Lifecycle:</strong> Create before implementation begins. Reference during implementation. Archive or delete when the feature ships. Do not let these accumulate indefinitely - a planning doc for a feature shipped six months ago is noise, not signal.</p>
+<p><strong>At RIVET</strong>, these live in <code>temp/projects/</code> - a deliberate naming choice. &quot;Temp&quot; communicates that this directory is working memory, not permanent record. Each feature gets a subdirectory with a planning doc, a test plan, and any decision notes. When the PR merges, we either archive the relevant decisions into the evergreen layer or do nothing &amp; discard the docs entirely (the folder path is in our <code>.gitignore</code>).</p>
+<p>The key insight: these documents serve two audiences simultaneously. The human who reviews the plan before implementation starts. And the agent who references the plan while implementing. Writing them well - specific, scoped, with clear acceptance criteria - pays dividends on both sides. We use a skill to help us write these docs based on the System Architecture docs, Tech Spec for the project &amp; Product Spec for the feature.</p>
+<p>Anthropic's <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">harness design research</a> takes this a step further with what they call <strong>sprint contracts</strong> — explicit agreements between a generator agent and an evaluator agent on deliverables and testable success criteria, negotiated before each sprint and written to files. The contract turns the plan from a guide the agent can drift from into a commitment it can be evaluated against. This is an evolution we haven't yet incorporated into our own workflow. Our <code>project_plan.md</code> currently focuses on <em>how to get the work done</em> — implementation approach, sequencing, dependencies — and our <code>pr.md</code> focuses on <em>what changed and how a human reviewer can manually test it</em>. Neither currently functions as a contract with explicit acceptance criteria. Adding a &quot;contractual commitments&quot; section to <code>project_plan.md</code> — an explicit scope of work and acceptance criteria definition — would make the plan evaluable: the agent (or a separate evaluator) can check deliverables against stated criteria rather than subjectively assessing &quot;is this done?&quot; That's the next iteration of our planning skill.</p>
+<hr>
+<h3>Type 2: Tech Specs &amp; Product Documentation (Evergreen)</h3>
+<p>These describe how the system works and why it works that way. They evolve, but they don't expire.</p>
+<p><strong>What belongs here:</strong></p>
+<ul>
+<li>Architectural decision records (ADRs)</li>
+<li>System design documents</li>
+<li>API contracts and data schemas</li>
+<li>Product specifications that describe stable features</li>
+<li>Onboarding guides and &quot;things every engineer should know&quot;</li>
+<li>Runbooks for operational processes</li>
+</ul>
+<p><strong>Lifecycle:</strong> Created when systems are designed or decisions are made. Updated when the architecture changes. Never deleted without replacing with something better. These are the documents a new engineer reads to understand why the codebase looks the way it does — and the documents your agent draws on to hit the ground running on every new feature, rather than re-deriving system context from scratch each time.</p>
+<p>The distinction from Type 1: a Type 1 doc says &quot;here's what we're going to change for this feature.&quot; A Type 2 doc says &quot;here's how this part of the system works.&quot; One is a plan; the other is a map.</p>
+<p>This is also the layer where <strong>Signal Advisors' MCP server</strong> lives. <a href="https://www.signaladvisors.com/">Signal Advisors</a> is a Detroit-based B2B SaaS startup that helps wealth management professionals run their business - a domain where the product spans multiple codebases and the documentation that matters most (compliance rules, product specs, API contracts) doesn't belong in any single repo. <a href="https://www.linkedin.com/in/ryan-burr2/">Ryan Burr</a>, a Director of Engineering at Signal Advisors &amp; panelist at our <a href="/events/agentic-software-development/">March agentic coding event</a>, shared how his team solved this: an MCP (Model Context Protocol) server that serves technical docs as context for agents working across their codebase. The agents retrieve exactly the documentation they need for a given task - product requirements, architectural context, API contracts - without any of it living in the repositories themselves. The delivery mechanism is more sophisticated than local files, but the layer is the same: stable, indexed, domain-specific knowledge that doesn't live in the code itself.</p>
+<p>At RIVET we utilize &quot;Deep Maps&quot;. Deep Maps are markdown files that describe how the system works and why it works that way. They're like architectural decision records (ADRs) but for the entire system. They contain frontmatter with highlights &amp; an index file to help the agent search for what they need. We use a skill to maintain our deep maps which allows us to keep them up to date via a GitHub Action.</p>
+<hr>
+<h3>Type 3: Knowledge Bases (Cumulative)</h3>
+<p>These grow continuously with your systems. They're the institutional memory of your engineering team.</p>
+<p><strong>What belongs here:</strong></p>
+<ul>
+<li>Solved problems &amp; how they were resolved</li>
+<li>Incident post-mortems</li>
+<li>Product evolution history (&quot;why does this work this way now?&quot;)</li>
+<li>Patterns for common bugs &amp; their fixes</li>
+<li>Cross-cutting technical context that spans multiple systems</li>
+</ul>
+<p><strong>Lifecycle:</strong> Always growing. Indexed so agents can retrieve selectively rather than loading the whole history. The value compounds: the larger and better-indexed this layer is, the more an agent can recognize patterns from past work instead of reasoning from scratch. This is the deep expertise layer — the difference between an agent that knows how your system works and one that understands <em>why it evolved this way</em>, can anticipate the failure modes, and is ready to take on your most complex features. A human developer builds this depth over years. Your agent can build it over projects.</p>
+<p>The RIVET support bot demonstrates this clearly. When a customer-reported bug comes in, the agent has access to a persistent directory of previously solved problems with an index. It can identify patterns from past issues, reproduce them, and propose fixes - not by reasoning from scratch, but by recognizing &quot;we've seen this pattern before.&quot; The PILRs layer is what makes that recognition possible; without it, every ticket is a fresh problem.</p>
+<p>This layer is also the hardest to build upfront - which is exactly why you shouldn't try. Seed it with a handful of known patterns (or don't) and let it grow organically. Every time an agent solves a novel problem, the solution gets documented here. Every post-mortem is indexed and added. Over time, the cumulative layer becomes the most valuable layer you have — the institutional memory of your product, built up not over years of human tenure but over the lifetime of your codebase itself.</p>
+<p>claude-mem offers a different approach to this problem: fully automated capture. Rather than relying on engineers to document solutions after the fact, it hooks into Claude Code's lifecycle events — every tool use, every file read, every edit — and automatically compresses those observations using AI before storing them. The knowledge base grows without any manual documentation effort. It includes a circuit breaker that halts after 3 consecutive failures to prevent infinite loops, and <code>&lt;private&gt;</code> tags that get stripped at the hook layer before data reaches storage. The trade-off is clear: manual documentation produces higher-signal, team-shared knowledge; automated capture produces comprehensive individual memory with zero friction. Both approaches grow the cumulative layer — they just optimize for different constraints.</p>
+<hr>
+<h2>Connecting the Three Layers</h2>
+<p>The three types aren't silos - they interact, and your <code>CLAUDE.md</code> can help orchestrate them. Alternatively, use skills to perform specific tasks with instructions to look at the appropriate layer.</p>
+<p>A well-written <code>CLAUDE.md</code> routes the agent to the right layer for the right task:</p>
+<pre><code class="language-markdown">Before starting any task, check:
+- `temp/projects/` for an existing implementation plan for this feature
+- `docs/architecture/` for relevant system design context
+- `docs/issues/` if this looks like a known problem pattern
+
+When implementing a new feature, create a planning doc in `temp/projects/` first.
+When resolving an issue, check `docs/issues/solved-problems.md` before investigating.
+</code></pre>
+<p>The <code>CLAUDE.md</code> doesn't contain the knowledge - it tells the agent where to find it. This is the map vs. encyclopedia distinction in practice.</p>
+<p><strong>Information flows upward.</strong> Decisions made in a Type 1 doc that turn out to be durable belong in Type 2. Patterns that emerge from multiple solved problems in Type 3 belong documented in Type 2 as well. A healthy PILRs system has a regular review process where valuable knowledge migrates from ephemeral to evergreen. Each time that migration happens, your agent's baseline understanding of your product rises with it — this is what the progression actually looks like in practice.</p>
+<p><strong>Different indexing strategies for different layers.</strong> Your Type 1 (project execution) docs should be indexed by feature and date. Type 2 (evergreen) docs should be indexed by system component and topic. Type 3 (knowledge base) docs should be indexed by problem pattern, symptom, or system area. The <code>index.json</code> structure in each layer reflects its lifecycle.</p>
+<p>That last point — indexing strategy — is where most implementations quietly fall apart. You can have all three layers in place and still end up with an agent that stumbles. The structure is necessary but not sufficient. The index is what actually makes it navigable.</p>
+<p>In <a href="/blog/context-engineering-pilrs-part-2/">Part 2</a>, we'll dig into why the index matters more than you think, explore tooling that automates it, and look at three real implementations of the full PILRs stack.</p>
+<hr>
+<p><em>We'll be going deep on this at the <a href="/events/agentic-advanced-practitioners-guide/">April Detroit Developers meetup</a>. Come find me there if you want to talk shop.</em></p>
+<hr>
+<h2>References</h2>
+<ul>
+<li><a href="/blog/agentic-coding-advanced-guide/">Advanced Agentic Coding &amp; The Journey Towards 3x Product Development Velocity</a> — the broader guide this post expands on</li>
+<li><a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Effective Context Engineering for AI Agents</a> — Anthropic's applied AI team on attention budgets, just-in-time retrieval, and tool design</li>
+<li><a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">Building Effective Agents for Long-Running Apps</a> — Anthropic's harness design research on context anxiety, sprint contracts, and multi-agent evaluation</li>
+<li><a href="https://www.trychroma.com/research/context-rot">Context Rot Research</a> — Chroma's empirical analysis of performance degradation across 18 models</li>
+<li><a href="https://arxiv.org/html/2512.24601v2">Recursive Language Models</a> — research on processing inputs beyond context window limits</li>
+<li><a href="https://docs.openclaw.ai/concepts/memory">OpenClaw Memory System</a> — personal assistant agent memory architecture with append-only logs and curated long-term memory</li>
+<li><a href="https://github.com/thedotmack/claude-mem">claude-mem</a> — persistent memory plugin for Claude Code with dual-storage (SQLite FTS5 + ChromaDB) and progressive disclosure retrieval</li>
+<li><a href="https://www.signaladvisors.com/">Signal Advisors</a> — Detroit-based B2B SaaS startup serving PILRs via MCP server across multiple repositories</li>
+<li><a href="https://www.linkedin.com/in/ryan-burr2/">Ryan Burr</a> — Director of Engineering at Signal Advisors</li>
+<li><a href="/events/agentic-software-development/">Agentic Software Development — March Detroit Developers Meetup</a> — panel event referenced in the Signal Advisors section</li>
+<li><a href="/events/agentic-advanced-practitioners-guide/">Agentic Software Development: Advanced Practitioner's Guide — April Detroit Developers Meetup</a> — upcoming deep-dive on these topics</li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>
