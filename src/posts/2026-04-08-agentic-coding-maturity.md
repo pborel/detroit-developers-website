@@ -8,6 +8,11 @@ permalink: /blog/agentic-coding-maturity/
 draft: true
 ---
 
+<div style="background: #181825; border: 1px solid #313244; border-radius: 8px; padding: 12px 20px; max-width: 700px; margin-bottom: 16px; display: flex; align-items: center; gap: 12px;">
+  <span style="color: #fab387; font-size: 18px;">&#9654;</span>
+  <span><a href="/slides/agentic-coding-maturity/#1" style="color: #89b4fa; font-weight: 600;">View the slides</a> <span style="color: #a6adc8;">that accompany this post</span></span>
+</div>
+
 *This is a follow-up on our journey developing agentic software engineering practices at RIVET. It builds on the story started in [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/).*
 
 ---
@@ -16,9 +21,9 @@ When engineers talk about "using AI," they're often conflating three distinct en
 
 At RIVET, we've been bumping into this conflation repeatedly as we invest deeper into agentic development. The language "prompt engineering" gets used to describe everything from a single sentence in a chat window to a full multi-agent harness running in production. That conflation makes it hard to think clearly about where to invest next and why.
 
-So here's the frame we've settled on internally: **prompt engineering, context engineering, and harness engineering**. Three nested disciplines within what we'd call **agentic software engineering** — the practice of building *with* agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: **AI engineering**, the discipline of building agentic systems as products and infrastructure, not just using them as tools.
+So here's the framing we've settled on internally: **prompt engineering, context engineering, and harness engineering**. Three nested disciplines within what we call **agentic software engineering** — the practice of building *with* agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: **AI engineering**, the discipline of building agentic systems as products and infrastructure, not just using them as tools.
 
-That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming *around* the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.
+That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. (Chip Huyen's [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/) is a fantastic & comprehensive reference on the field.) It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming *around* the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.
 
 <svg viewBox="0 0 600 340" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
   <!-- AI Engineering (outermost) -->
@@ -70,9 +75,9 @@ A better-prompted agent with bad context will still fail. It'll make decisions t
 
 At RIVET, we do this through [PILRs — Persistent Indexed Learning Repositories](https://detroitdevelopers.com/blog/context-engineering-pilrs/). Three types, each with a different lifecycle:
 
-- **Type 1 (Ephemeral):** Per-feature planning docs, test plans, decision notes. They live in `temp/projects/`, scoped to a single PR or sprint. They're working memory, not permanent record.
-- **Type 2 (Evergreen):** Architecture docs, system design docs ("Deep Maps"), API contracts. They describe how the system works and why it works that way. These are the map the agent navigates with.
-- **Type 3 (Cumulative):** Solved problems, incident patterns, cross-system context. Institutional memory. The layer that makes the agent behave less like a generic assistant and more like someone who's worked on your specific product for a year.
+- <strong style="color: #cba6f7;">Type 1 (Ephemeral):</strong> Per-feature planning docs, test plans, decision notes. They live in `temp/projects/`, scoped to a single PR or sprint. They're working memory, not permanent record.
+- <strong style="color: #a6e3a1;">Type 2 (Evergreen):</strong> Architecture docs, system design docs ("Deep Maps"), API contracts. They describe how the system works and why it works that way. These are the map the agent navigates with.
+- <strong style="color: #f38ba8;">Type 3 (Cumulative):</strong> Solved problems, incident patterns, cross-system context. Institutional memory. The layer that makes the agent behave less like a generic assistant and more like someone who's worked on your specific product for a year.
 
 We're early-to-mid here. The pattern is right; the infrastructure isn't finished. Our Type 1 docs are solid. Our Type 2 Deep Maps are in progress. Our Type 3 knowledge base is nascent — it's growing, but it's not yet the compound-interest machine it could be. We're also starting to host shared repositories for these learnings to make them team artifacts rather than personal ones.
 
@@ -103,9 +108,9 @@ Odradek is built on the [Claude Code SDK](https://docs.anthropic.com/en/docs/age
 
 One-shot resolution rate: **60%**. The other 40% are harder issues — often involving config changes outside our codebase (think: fixing permissions on a GCP API token, or changing an environment variable in an external system). Those still require human judgment. But even at 60%, the impact on our bug backlog has been concrete:
 
-- **P1s (ship-within-a-week bugs):** We used to sacrifice an engineer every sprint on a round-robin rotation dedicated solely to these. Odradek bought us back roughly half an engineer — the on-rotation dev stays on top of P1s more efficiently and has time left over for sprint work.
-- **P2s (fix-within-a-quarter bugs):** These used to stack up for months before anyone could get to them. Now they get addressed as they come in.
-- **P3s (nice-to-fix bugs):** These were effectively permanent backlog residents. Some of them are actually getting fixed now — work that would never have happened at our team size.
+- <strong style="color: #f38ba8;">P1s (ship-within-a-week bugs):</strong> We used to sacrifice an engineer every sprint on a round-robin rotation dedicated solely to these. Odradek bought us back roughly half an engineer — the on-rotation dev stays on top of P1s more efficiently and has time left over for sprint work.
+- <strong style="color: #fab387;">P2s (fix-within-a-quarter bugs):</strong> These used to stack up for months before anyone could get to them. Now they get addressed as they come in.
+- <strong style="color: #a6e3a1;">P3s (nice-to-fix bugs):</strong> These were effectively permanent backlog residents. Some of them are actually getting fixed now — work that would never have happened at our team size.
 
 And Odradek today is still a manually-triggered, engineer-operated tool. We're treating it as the seed of something much more autonomous. Here's where we're taking it:
 
@@ -229,14 +234,14 @@ Here's the intuition made visual. Prompt and context engineering follow logarith
   <text x="580" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">40</text>
   <!-- X-axis title -->
   <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment in Tooling</text>
-  <!-- Shaded area up to RIVET (10% = x=4) -->
-  <path d="M70,260 L121,256.6 L121,260 Z" fill="#fab387" opacity="0.2"/>
+  <!-- Shaded area up to RIVET (20% = x=8) -->
+  <path d="M70,260 L121,256.6 L172,248.75 L172,260 Z" fill="#fab387" opacity="0.2"/>
   <!-- Full curve (S-curve) -->
   <polyline points="70,260 121,256.6 172,248.75 223,233 274,208.25 325,174.5 376,138.5 427,104.75 478,77.75 529,55.25 580,35" fill="none" stroke="#fab387" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- RIVET marker -->
-  <line x1="121" y1="35" x2="121" y2="260" stroke="#fab387" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
-  <circle cx="121" cy="256.6" r="4" fill="#fab387"/>
-  <text x="131" y="249" text-anchor="start" fill="#fab387" font-size="11" font-weight="bold">RIVET</text>
+  <line x1="172" y1="35" x2="172" y2="260" stroke="#fab387" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <circle cx="172" cy="248.75" r="4" fill="#fab387"/>
+  <text x="182" y="242" text-anchor="start" fill="#fab387" font-size="11" font-weight="bold">RIVET</text>
 </svg>
 
 <svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
@@ -249,7 +254,7 @@ Here's the intuition made visual. Prompt and context engineering follow logarith
   <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
   <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
   <!-- Title -->
-  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Combined: The Three Ceilings</text>
+  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">The Three Ceilings</text>
   <!-- Y-axis labels (0 to 10) -->
   <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
   <text x="62" y="219" text-anchor="end" fill="#a6adc8" font-size="10">+2x</text>
@@ -293,7 +298,7 @@ Crucially, the harness ceiling is higher because it measures something different
 
 ---
 
-## What This Means for Investment
+## Where to invest your tokens
 
 If you're early in your agentic journey, prompt engineering is the right starting point. The feedback loop is short, the skills are transferable, and you need a foundation before context or harness work pays off.
 
@@ -307,4 +312,21 @@ The goal is a system where all three layers reinforce each other. And then — l
 
 ---
 
-*Follow along at the [Detroit Developers blog](https://detroitdevelopers.com/blog/) or come find us at a meetup. We talk shop.*
+<div style="background: #181825; border: 1px solid #313244; border-radius: 8px; padding: 20px 24px; max-width: 700px;">
+  <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
+    <span style="color: #a6e3a1;">&#9670;</span> Detroit Software Developers
+  </div>
+  <p style="margin: 0 0 12px; color: #a6adc8;">We're a community of professional developers in Detroit. We meet monthly to share knowledge, experiences &amp; good vibes.</p>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <a href="/events/" style="color: #89b4fa;">Upcoming events →</a>
+  </div>
+</div>
+
+---
+
+## References
+
+- Chip Huyen, [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/) (O'Reilly, 2025) — comprehensive reference on the broader AI engineering discipline
+- [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/) — my first post on agentic development practices at RIVET
+- [Context Engineering with PILRs](https://detroitdevelopers.com/blog/context-engineering-pilrs/) — deep dive on how I've built and used Persistent Indexed Learning Repositories @ RIVET
+- [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk) — the SDK we use to power Odradek
