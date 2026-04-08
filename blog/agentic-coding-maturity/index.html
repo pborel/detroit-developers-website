@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Three Layers of Agentic Engineering Maturity — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Three Layers of Agentic Engineering Maturity — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/agentic-coding-maturity/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+          
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">agentic-coding-maturity.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// [DRAFT] THE THREE LAYERS OF AGENTIC ENGINEERING MATURITY</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;"><span style="color: var(--peach);">[DRAFT]</span> The Three Layers of Agentic Engineering Maturity</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Apr 8, 2026
+       · Phil Borel
+      · 11 min read
+    </div>
+
+    <div class="prose">
+      <p><em>This is a follow-up on our journey developing agentic software engineering practices at RIVET. It builds on the story started in <a href="https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/">Advanced Agentic Coding &amp; The Journey Towards 3x Product Development Velocity</a>.</em></p>
+<hr>
+<p>When engineers talk about &quot;using AI,&quot; they're often conflating three distinct engineering disciplines — each with its own investment curve, its own ceiling, and its own compounding dynamics.</p>
+<p>At RIVET, we've been bumping into this conflation repeatedly as we invest deeper into agentic development. The language &quot;prompt engineering&quot; gets used to describe everything from a single sentence in a chat window to a full multi-agent harness running in production. That conflation makes it hard to think clearly about where to invest next and why.</p>
+<p>So here's the frame we've settled on internally: <strong>prompt engineering, context engineering, and harness engineering</strong>. Three nested disciplines within what we'd call <strong>agentic software engineering</strong> — the practice of building <em>with</em> agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: <strong>AI engineering</strong>, the discipline of building agentic systems as products and infrastructure, not just using them as tools.</p>
+<p>That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming <em>around</em> the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.</p>
+<svg viewBox="0 0 600 340" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
+  <!-- AI Engineering (outermost) -->
+  <rect x="10" y="10" width="580" height="320" rx="12" fill="#b4befe" fill-opacity="0.06" stroke="#b4befe" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="300" y="33" text-anchor="middle" fill="#b4befe" font-size="11">AI Engineering</text>
+  <!-- Agentic Software Engineering -->
+  <rect x="55" y="45" width="490" height="250" rx="10" fill="#cba6f7" fill-opacity="0.06" stroke="#cba6f7" stroke-width="1.5"/>
+  <text x="300" y="68" text-anchor="middle" fill="#cba6f7" font-size="11">Agentic Software Engineering</text>
+  <!-- Harness Engineering -->
+  <rect x="100" y="80" width="400" height="180" rx="8" fill="#fab387" fill-opacity="0.08" stroke="#fab387" stroke-width="2"/>
+  <text x="300" y="103" text-anchor="middle" fill="#fab387" font-size="12">Harness Engineering</text>
+  <!-- Context Engineering -->
+  <rect x="155" y="115" width="290" height="110" rx="6" fill="#89b4fa" fill-opacity="0.1" stroke="#89b4fa" stroke-width="2"/>
+  <text x="300" y="138" text-anchor="middle" fill="#89b4fa" font-size="12">Context Engineering</text>
+  <!-- Prompt Engineering (innermost) -->
+  <rect x="210" y="150" width="180" height="40" rx="4" fill="#a6e3a1" fill-opacity="0.15" stroke="#a6e3a1" stroke-width="2"/>
+  <text x="300" y="175" text-anchor="middle" fill="#a6e3a1" font-size="12" font-weight="bold">Prompt Engineering</text>
+</svg>
+<p>The three layers are a Russian doll. Prompt engineering lives inside context engineering, which lives inside harness engineering. You can't do context engineering well without solid prompting fundamentals. You can't build a harness that works without the context layer feeding it the right knowledge. Each outer layer <em>contains and depends on</em> the inner ones.</p>
+<p>This means investment compounds in one direction. Getting better at prompt engineering makes your context engineering more effective, which makes your harness engineering more powerful. But it also means skipping layers doesn't work. A team that jumps straight to building agent harnesses without investing in prompt craft and knowledge infrastructure is building on sand.</p>
+<hr>
+<h2>Prompt Engineering</h2>
+<p>Prompt engineering is the craft of telling an agent what to do — and doing it precisely enough that it actually does it.</p>
+<p>This means writing clear, unambiguous instructions. It means defining rules that encode your team's expectations (what patterns to follow, what to avoid, what &quot;done&quot; looks like). It means building a <code>CLAUDE.md</code> that gives the agent reliable orientation at the start of every session. It means building skills that encode your process as reusable commands — <code>/implement</code>, <code>/review-pr</code>, <code>/update-project-docs</code> — so you stop re-explaining your workflow every time.</p>
+<p>The feedback loop here is tight and human-scaled. You write a better rule, you see better output in the next session. It compounds, but it compounds within a session or across a few days.</p>
+<p>RIVET is deep in this layer. We've invested heavily in our <code>CLAUDE.md</code>, our rules files, our skills. We're thoughtful about the balance between over-specification (bloated instructions that crowd out the actual task) and under-specification (vague guidance that the agent ignores). We're continuously iterating.</p>
+<p>What we haven't extracted much value from yet: hooks. Hooks — automated triggers that fire on agent events like post-edit or post-tool-use — are technically a prompt engineering feature in most frameworks. But in practice, they start to feel like harness engineering: you're programming <em>around</em> the agent rather than <em>to</em> it.</p>
+<p><strong>The ceiling on prompt engineering is real.</strong> You can write perfect instructions and still lose the thread on a complex feature if the agent doesn't have the right knowledge to act on them. That's where context engineering picks up.</p>
+<hr>
+<h2>Context Engineering</h2>
+<p>Context engineering is the discipline of managing what knowledge the agent has access to — and when.</p>
+<p>A better-prompted agent with bad context will still fail. It'll make decisions that contradict architectural choices made three sprints ago. It'll re-derive patterns your team has already solved. It'll treat every session as day one, perpetually new, never compounding. Context engineering is the infrastructure that prevents that. It's the discipline that makes the agent's knowledge <em>accumulate</em> rather than reset.</p>
+<p>At RIVET, we do this through <a href="https://detroitdevelopers.com/blog/context-engineering-pilrs/">PILRs — Persistent Indexed Learning Repositories</a>. Three types, each with a different lifecycle:</p>
+<ul>
+<li><strong>Type 1 (Ephemeral):</strong> Per-feature planning docs, test plans, decision notes. They live in <code>temp/projects/</code>, scoped to a single PR or sprint. They're working memory, not permanent record.</li>
+<li><strong>Type 2 (Evergreen):</strong> Architecture docs, system design docs (&quot;Deep Maps&quot;), API contracts. They describe how the system works and why it works that way. These are the map the agent navigates with.</li>
+<li><strong>Type 3 (Cumulative):</strong> Solved problems, incident patterns, cross-system context. Institutional memory. The layer that makes the agent behave less like a generic assistant and more like someone who's worked on your specific product for a year.</li>
+</ul>
+<p>We're early-to-mid here. The pattern is right; the infrastructure isn't finished. Our Type 1 docs are solid. Our Type 2 Deep Maps are in progress. Our Type 3 knowledge base is nascent — it's growing, but it's not yet the compound-interest machine it could be. We're also starting to host shared repositories for these learnings to make them team artifacts rather than personal ones.</p>
+<p><strong>The ceiling on context engineering is higher than prompt engineering</strong> — a well-informed agent is dramatically more capable than a well-instructed one with gaps in its knowledge. But even a perfectly informed agent operating inside a single session, returning results to a human, has a ceiling. That ceiling is where harness engineering lives.</p>
+<hr>
+<h2>Harness Engineering</h2>
+<p>Harness engineering is what happens when you stop running the agent interactively and start building systems that run agents <em>for you</em>.</p>
+<p>This is programming <em>around</em> the model. It's designing workflows where agents execute multi-step tasks autonomously, hand off outputs between phases, check their own work, and ship results — with humans reviewing outcomes rather than supervising every step.</p>
+<p>The returns here are categorically different from prompt or context engineering — and not just in magnitude. Prompt and context engineering make <em>your</em> work faster. Harness engineering expands what work gets done <em>at all</em>.</p>
+<p>Every engineering team has a long tail of valuable work — bug fixes, small features, UI polish, minor tweaks — that never makes it to the top of the sprint because higher-priority things keep landing. That work isn't unimportant; it's just unscheduled. A harness can collapse a full ticket — research, implementation, PR — into a flow that runs while you're in meetings, turning that backlog into throughput. The ceiling isn't +1x or even +3x. It's much larger.</p>
+<p>RIVET is early in this layer, but we have one real case study: <strong>Odradek</strong>, our customer-reported bug resolution agent.</p>
+<p>Odradek is a Mac desktop app with a cloud-hosted database for multiplayer support — multiple engineers can see the queue, claim tickets, and review outputs. When a customer-reported bug comes in, Odradek:</p>
+<ol>
+<li><strong>Investigates</strong> the issue — reading relevant source files, checking git history for related changes, consulting our PILR knowledge base for matching past patterns</li>
+<li><strong>Fixes</strong> the issue — scoped, surgical edits to the relevant files</li>
+<li><strong>Verifies</strong> its own work — regression checks, test runs</li>
+<li><strong>Puts up a PR</strong> — with a human-readable description, ready for review</li>
+</ol>
+<p>One-shot resolution rate: <strong>60%</strong>. The other 40% are harder issues — often involving config changes outside our codebase (think: fixing permissions on a GCP API token, or changing an environment variable in an external system). Those still require human judgment. But even at 60%, the impact on our bug backlog has been concrete:</p>
+<ul>
+<li><strong>P1s (ship-within-a-week bugs):</strong> We used to sacrifice an engineer every sprint on a round-robin rotation dedicated solely to these. Odradek bought us back roughly half an engineer — the on-rotation dev stays on top of P1s more efficiently and has time left over for sprint work.</li>
+<li><strong>P2s (fix-within-a-quarter bugs):</strong> These used to stack up for months before anyone could get to them. Now they get addressed as they come in.</li>
+<li><strong>P3s (nice-to-fix bugs):</strong> These were effectively permanent backlog residents. Some of them are actually getting fixed now — work that would never have happened at our team size.</li>
+</ul>
+<p>And Odradek today is still a manually-triggered, engineer-operated tool. We're treating it as the seed of something much more autonomous. Here's where we're taking it:</p>
+<ul>
+<li><strong>Event-driven triggers</strong> — fire automatically when a bug is opened in HubSpot or GitHub Issues, not manually launched by an engineer</li>
+<li><strong>Cloud-hosted dashboard</strong> — non-engineers (CS, product) can log in and see fix statuses without pinging a dev</li>
+<li><strong>MS Teams integration</strong> — ask about a bug status, kick off an investigation, or request a fix directly from chat</li>
+<li><strong>Ephemeral test environments</strong> — instead of just putting up a PR, Odradek spins up a temporary environment via k8s so CS and product can verify the fix themselves, without a developer deploying to a dev server</li>
+</ul>
+<p>Each of those steps removes an engineer from the loop on work that doesn't require engineering judgment. The same harness pattern extends to small features, tweaks, and polish items — exactly the long tail we described above. Longer-term, we're starting to explore whether a harness can move beyond fixes and into new feature development — prototyping and building, not just repairing. That's a harder problem with a different workflow, and we're very early, but it's the natural next frontier once bug resolution is reliable.</p>
+<p>This doesn't mean engineers have less to do. Complex features, architectural decisions, and novel problem-solving still require human engineers — and always will. What changes is the <em>mix</em> of engineering work. Some of the time that used to go to routine feature dev shifts toward building and improving the harness itself. You're still engineering; you're just engineering at a higher leverage point. The goal isn't a faster engineer. It's a larger team.</p>
+<hr>
+<h2>The Velocity Curves</h2>
+<p>Here's the intuition made visual. Prompt and context engineering follow logarithmic curves — fast early returns that taper as you approach the ceiling. Harness engineering is different: it follows an S-curve, slow at first but accelerating dramatically in the mid-range before tapering at the top. The ceilings are different, our position on each curve is different, and the shape of the harness curve is why it rewards sustained investment differently than the other two.</p>
+<svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
+  <!-- Grid -->
+  <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+  <line x1="70" y1="203.75" x2="580" y2="203.75" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="147.5" x2="580" y2="147.5" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="91.25" x2="580" y2="91.25" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+  <!-- Title -->
+  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Prompt Engineering</text>
+  <!-- Y-axis labels -->
+  <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+  <text x="62" y="207.75" text-anchor="end" fill="#a6adc8" font-size="10">+0.25x</text>
+  <text x="62" y="151.5" text-anchor="end" fill="#a6adc8" font-size="10">+0.50x</text>
+  <text x="62" y="95.25" text-anchor="end" fill="#a6adc8" font-size="10">+0.75x</text>
+  <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+1.0x</text>
+  <!-- Y-axis title -->
+  <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+  <!-- X-axis labels -->
+  <text x="70" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">0</text>
+  <text x="172" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">2</text>
+  <text x="274" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">4</text>
+  <text x="376" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">6</text>
+  <text x="478" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">8</text>
+  <text x="580" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">10</text>
+  <!-- X-axis title -->
+  <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment in Tooling</text>
+  <!-- Shaded area up to RIVET (x=8) -->
+  <path d="M70,260 L121,170 L172,125 L223,98 L274,80 L325,66.5 L376,57.5 L427,50.75 L478,44 L478,260 Z" fill="#a6e3a1" opacity="0.2"/>
+  <!-- Full curve -->
+  <polyline points="70,260 121,170 172,125 223,98 274,80 325,66.5 376,57.5 427,50.75 478,44 529,39.5 580,35" fill="none" stroke="#a6e3a1" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- RIVET marker -->
+  <line x1="478" y1="35" x2="478" y2="260" stroke="#a6e3a1" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <circle cx="478" cy="44" r="4" fill="#a6e3a1"/>
+  <text x="478" y="30" text-anchor="middle" fill="#a6e3a1" font-size="11" font-weight="bold">RIVET</text>
+</svg>
+<svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
+  <!-- Grid -->
+  <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+  <line x1="70" y1="203.75" x2="580" y2="203.75" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="147.5" x2="580" y2="147.5" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="91.25" x2="580" y2="91.25" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+  <!-- Title -->
+  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Context Engineering</text>
+  <!-- Y-axis labels (0 to 3) -->
+  <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+  <text x="62" y="207.75" text-anchor="end" fill="#a6adc8" font-size="10">+0.75x</text>
+  <text x="62" y="151.5" text-anchor="end" fill="#a6adc8" font-size="10">+1.5x</text>
+  <text x="62" y="95.25" text-anchor="end" fill="#a6adc8" font-size="10">+2.25x</text>
+  <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+3.0x</text>
+  <!-- Y-axis title -->
+  <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+  <!-- X-axis labels (0 to 20) -->
+  <text x="70" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">0</text>
+  <text x="172" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">4</text>
+  <text x="274" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">8</text>
+  <text x="376" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">12</text>
+  <text x="478" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">16</text>
+  <text x="580" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">20</text>
+  <!-- X-axis title -->
+  <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment in Tooling</text>
+  <!-- Shaded area up to RIVET (30% = x=6) -->
+  <path d="M70,260 L121,196.25 L172,153.5 L223,123.5 L223,260 Z" fill="#89b4fa" opacity="0.2"/>
+  <!-- Full curve -->
+  <polyline points="70,260 121,196.25 172,153.5 223,123.5 274,101 325,82.25 376,68.75 427,57.5 478,48.5 529,41 580,35" fill="none" stroke="#89b4fa" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- RIVET marker -->
+  <line x1="223" y1="35" x2="223" y2="260" stroke="#89b4fa" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <circle cx="223" cy="123.5" r="4" fill="#89b4fa"/>
+  <text x="223" y="116" text-anchor="middle" fill="#89b4fa" font-size="11" font-weight="bold">RIVET</text>
+</svg>
+<svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
+  <!-- Grid -->
+  <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+  <line x1="70" y1="215" x2="580" y2="215" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="170" x2="580" y2="170" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="125" x2="580" y2="125" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="80" x2="580" y2="80" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+  <!-- Title -->
+  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Harness Engineering</text>
+  <!-- Y-axis labels (0 to 10) -->
+  <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+  <text x="62" y="219" text-anchor="end" fill="#a6adc8" font-size="10">+2x</text>
+  <text x="62" y="174" text-anchor="end" fill="#a6adc8" font-size="10">+4x</text>
+  <text x="62" y="129" text-anchor="end" fill="#a6adc8" font-size="10">+6x</text>
+  <text x="62" y="84" text-anchor="end" fill="#a6adc8" font-size="10">+8x</text>
+  <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+10x</text>
+  <!-- Y-axis title -->
+  <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+  <!-- X-axis labels (0 to 40) -->
+  <text x="70" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">0</text>
+  <text x="172" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">8</text>
+  <text x="274" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">16</text>
+  <text x="376" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">24</text>
+  <text x="478" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">32</text>
+  <text x="580" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">40</text>
+  <!-- X-axis title -->
+  <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment in Tooling</text>
+  <!-- Shaded area up to RIVET (10% = x=4) -->
+  <path d="M70,260 L121,256.6 L121,260 Z" fill="#fab387" opacity="0.2"/>
+  <!-- Full curve (S-curve) -->
+  <polyline points="70,260 121,256.6 172,248.75 223,233 274,208.25 325,174.5 376,138.5 427,104.75 478,77.75 529,55.25 580,35" fill="none" stroke="#fab387" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- RIVET marker -->
+  <line x1="121" y1="35" x2="121" y2="260" stroke="#fab387" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <circle cx="121" cy="256.6" r="4" fill="#fab387"/>
+  <text x="131" y="249" text-anchor="start" fill="#fab387" font-size="11" font-weight="bold">RIVET</text>
+</svg>
+<svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
+  <!-- Grid -->
+  <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+  <line x1="70" y1="215" x2="580" y2="215" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="170" x2="580" y2="170" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="125" x2="580" y2="125" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="80" x2="580" y2="80" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+  <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+  <!-- Title -->
+  <text x="325" y="20" text-anchor="middle" fill="#cdd6f4" font-size="14" font-weight="bold">Combined: The Three Ceilings</text>
+  <!-- Y-axis labels (0 to 10) -->
+  <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+  <text x="62" y="219" text-anchor="end" fill="#a6adc8" font-size="10">+2x</text>
+  <text x="62" y="174" text-anchor="end" fill="#a6adc8" font-size="10">+4x</text>
+  <text x="62" y="129" text-anchor="end" fill="#a6adc8" font-size="10">+6x</text>
+  <text x="62" y="84" text-anchor="end" fill="#a6adc8" font-size="10">+8x</text>
+  <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+10x</text>
+  <!-- Y-axis title -->
+  <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+  <!-- X-axis labels (0 to 40) -->
+  <text x="70" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">0</text>
+  <text x="172" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">8</text>
+  <text x="274" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">16</text>
+  <text x="376" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">24</text>
+  <text x="478" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">32</text>
+  <text x="580" y="278" text-anchor="middle" fill="#a6adc8" font-size="10">40</text>
+  <!-- X-axis title -->
+  <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment in Tooling</text>
+  <!-- Prompt curve (green) — plateaus at 1.0 -->
+  <polyline points="70,260 121,248.75 172,242.5 223,239.75 274,238.4 325,238 376,237.7 427,237.5 478,237.5 529,237.5 580,237.5" fill="none" stroke="#a6e3a1" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Context curve (blue) — plateaus at 3.0 -->
+  <polyline points="70,260 121,240.9 172,228 223,219 274,212.3 325,206.7 376,202.6 427,199.25 478,196.5 529,194.3 580,192.5" fill="none" stroke="#89b4fa" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Harness curve (peach) — reaches 10.0 -->
+  <polyline points="70,260 121,256.6 172,248.75 223,233 274,208.25 325,174.5 376,138.5 427,104.75 478,77.75 529,55.25 580,35" fill="none" stroke="#fab387" stroke-width="2.5" stroke-linejoin="round"/>
+  <!-- Legend -->
+  <line x1="400" y1="48" x2="420" y2="48" stroke="#a6e3a1" stroke-width="2.5"/>
+  <text x="425" y="52" fill="#a6e3a1" font-size="10">Prompt (+1x)</text>
+  <line x1="400" y1="63" x2="420" y2="63" stroke="#89b4fa" stroke-width="2.5"/>
+  <text x="425" y="67" fill="#89b4fa" font-size="10">Context (+3x)</text>
+  <line x1="400" y1="78" x2="420" y2="78" stroke="#fab387" stroke-width="2.5"/>
+  <text x="425" y="82" fill="#fab387" font-size="10">Harness (+10x)</text>
+</svg>
+<p>A few things worth pointing out in these charts:</p>
+<p><strong>The ceilings are the point.</strong> Prompt engineering is real and valuable — we've captured most of what it has to give us, and it's made us meaningfully more effective. But it tops out around +1x additional velocity. Context engineering takes more sustained investment but tops out around +3x. Harness engineering requires the most investment — and the longest runway — but tops out around +10x. These aren't firm numbers; they're directional. The message is that the disciplines aren't interchangeable, and each outer layer demands more work but delivers categorically larger returns.</p>
+<p>Crucially, the harness ceiling is higher because it measures something different: not just how fast your team works, but how much of your backlog actually gets addressed.</p>
+<p><strong>We're far along the prompt curve, early-mid on context, and very early on harness.</strong> Even Odradek in its current form — a first-generation agent harness that one-shots 60% of customer bugs — represents early returns from a curve that hasn't yet hit its steepest section. The S-curve shape means the most asymmetric returns are just ahead of us. That's where we're investing.</p>
+<hr>
+<h2>What This Means for Investment</h2>
+<p>If you're early in your agentic journey, prompt engineering is the right starting point. The feedback loop is short, the skills are transferable, and you need a foundation before context or harness work pays off.</p>
+<p>If you're mid-stage — comfortable with prompting, starting to feel the limits — context engineering is where the next returns are. Build the knowledge layer. Start with PILRs in the places where your agents are most confused or most repetitive. Index them so the agent can navigate selectively rather than loading everything at once. We wrote a <a href="https://detroitdevelopers.com/blog/context-engineering-pilrs/">deep dive on how we build and use PILRs</a> if you want a practical starting point.</p>
+<p>If you're operating at a scale where prompt and context engineering are solid, and you're watching valuable work pile up in backlogs because your team is at capacity — that's the signal to start engineering a harness. Pick a narrow, repetitive workflow — bug triage, small fixes, polish items. Build around it. Measure the one-shot rate. The question isn't &quot;did it make us faster?&quot; It's &quot;did work get done that wouldn't have happened otherwise?&quot;</p>
+<p>We're doing all three simultaneously, which means we're spreading investment across disciplines at different maturities. That's intentional — the layers are interdependent. A harness without good context engineering is just an autonomous agent that makes confident, uninformed decisions. Context without harness is a knowledge base that still requires a human to unlock every time.</p>
+<p>The goal is a system where all three layers reinforce each other. And then — like any good compounding investment — you keep building.</p>
+<hr>
+<p><em>Follow along at the <a href="https://detroitdevelopers.com/blog/">Detroit Developers blog</a> or come find us at a meetup. We talk shop.</em></p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>
