@@ -150,6 +150,7 @@
         
       
       
+
     </nav>
 
     <!-- Editor Area -->
@@ -200,8 +201,8 @@
 <hr>
 <p>When engineers talk about &quot;using AI,&quot; they're often conflating three distinct engineering disciplines — each with its own investment curve, its own ceiling, and its own compounding dynamics.</p>
 <p>At RIVET, we've been bumping into this conflation repeatedly as we invest deeper into agentic development. The language &quot;prompt engineering&quot; gets used to describe everything from a single sentence in a chat window to a full multi-agent harness running in production. That conflation makes it hard to think clearly about where to invest next and why.</p>
-<p>So here's the frame we've settled on internally: <strong>prompt engineering, context engineering, and harness engineering</strong>. Three nested disciplines within what we'd call <strong>agentic software engineering</strong> — the practice of building <em>with</em> agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: <strong>AI engineering</strong>, the discipline of building agentic systems as products and infrastructure, not just using them as tools.</p>
-<p>That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming <em>around</em> the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.</p>
+<p>So here's the framing we've settled on internally: <strong>prompt engineering, context engineering, and harness engineering</strong>. Three nested disciplines within what we call <strong>agentic software engineering</strong> — the practice of building <em>with</em> agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: <strong>AI engineering</strong>, the discipline of building agentic systems as products and infrastructure, not just using them as tools.</p>
+<p>That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. (Chip Huyen's <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/"><em>AI Engineering</em></a> is the best comprehensive reference on the field.) It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming <em>around</em> the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.</p>
 <svg viewBox="0 0 600 340" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
   <!-- AI Engineering (outermost) -->
   <rect x="10" y="10" width="580" height="320" rx="12" fill="#b4befe" fill-opacity="0.06" stroke="#b4befe" stroke-width="1.5" stroke-dasharray="6,4"/>
@@ -443,6 +444,14 @@
 <p>The goal is a system where all three layers reinforce each other. And then — like any good compounding investment — you keep building.</p>
 <hr>
 <p><em>Follow along at the <a href="https://detroitdevelopers.com/blog/">Detroit Developers blog</a> or come find us at a meetup. We talk shop.</em></p>
+<hr>
+<h2>References</h2>
+<ul>
+<li>Chip Huyen, <a href="https://www.oreilly.com/library/view/ai-engineering/9781098166298/"><em>AI Engineering</em></a> (O'Reilly, 2025) — comprehensive reference on the broader AI engineering discipline</li>
+<li><a href="https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/">Advanced Agentic Coding &amp; The Journey Towards 3x Product Development Velocity</a> — our first post on agentic development practices at RIVET</li>
+<li><a href="https://detroitdevelopers.com/blog/context-engineering-pilrs/">Context Engineering with PILRs</a> — deep dive on how we build and use Persistent Indexed Learning Repositories</li>
+<li><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk">Claude Code SDK</a> — the SDK we use to build Odradek</li>
+</ul>
 
     </div>
   </div>
