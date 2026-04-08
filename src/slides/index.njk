@@ -1,49 +1,61 @@
 ---
-layout: slides-layout.njk
-title: Slides
+layout: base.njk
+title: Presentations
+breadcrumb: presentations.html
 permalink: /slides/
 ---
 
-{% set slideTotal = 3 %}
+{% if collections.draftPresentations.length %}
+<div id="drafts-section" class="content-section" style="display: none;">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3</div>
+  <div class="section-content">
+    <div class="section-comment">// DRAFTS</div>
 
-<div class="slideshow" id="slideshow">
-  {% include "slides-default.njk" %}
+    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+      {% for pres in collections.draftPresentations %}
+        <a href="{{ pres.url }}" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">{{ pres.data.title }}</div>
+            <div class="card-meta">
+              {% if pres.data.slideTotal %}{{ pres.data.slideTotal }} slides{% endif %}
+            </div>
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
+  <div class="section-content">
+    <div class="section-comment">// ALL PRESENTATIONS</div>
+
+    {% if collections.presentations.length %}
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        {% for pres in collections.presentations %}
+          <a href="{{ pres.url }}" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+            <div>
+              <div class="card-title">{{ pres.data.title }}</div>
+              <div class="card-meta">
+                {% if pres.data.slideTotal %}{{ pres.data.slideTotal }} slides{% endif %}
+              </div>
+            </div>
+            <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No presentations yet. Check back soon!</p>
+    {% endif %}
+  </div>
 </div>
 
 <script>
-(function () {
-  const slides = Array.from(document.querySelectorAll('.slide'));
-  const total = slides.length;
-  let current = 0;
-
-  function getHashIndex() {
-    const n = parseInt(window.location.hash.replace('#', ''), 10);
-    return (!isNaN(n) && n >= 1 && n <= total) ? n - 1 : 0;
+  if (new URLSearchParams(window.location.search).get('draft') === 'true') {
+    const el = document.getElementById('drafts-section');
+    if (el) el.style.display = '';
   }
-
-  function showSlide(index) {
-    slides[current].classList.remove('active');
-    current = Math.max(0, Math.min(total - 1, index));
-    slides[current].classList.add('active');
-    history.replaceState(null, '', '#' + (current + 1));
-  }
-
-  // Init from URL hash (supports direct links like /slides/#2)
-  showSlide(getHashIndex());
-
-  // Keyboard: right/down = next, left/up = prev
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      if (current < total - 1) showSlide(current + 1);
-    }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      if (current > 0) showSlide(current - 1);
-    }
-  });
-
-  // Click anywhere to advance
-  document.getElementById('slideshow').addEventListener('click', function () {
-    if (current < total - 1) showSlide(current + 1);
-  });
-})();
 </script>

@@ -70,6 +70,18 @@ export default function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("presentations", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/slides/*.njk")
+      .filter((p) => p.data.permalink !== "/slides/" && !p.data.draft)
+      .sort((a, b) => (a.data.title || "").localeCompare(b.data.title || ""));
+  });
+
+  eleventyConfig.addCollection("draftPresentations", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/slides/*.njk")
+      .filter((p) => p.data.permalink !== "/slides/" && p.data.draft)
+      .sort((a, b) => (a.data.title || "").localeCompare(b.data.title || ""));
+  });
+
   return {
     pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/",
     dir: {
