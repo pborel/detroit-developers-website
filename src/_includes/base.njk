@@ -121,9 +121,27 @@
 
       <!-- Breadcrumb -->
       <div class="breadcrumb">
+        {% set breadcrumbSegments = breadcrumbSegments or [] %}
+        {% if not breadcrumbSegments.length %}
+          {% if breadcrumbFolder %}
+            {% set breadcrumbSegments = [breadcrumbFolder] %}
+          {% elif page.url == '/' or page.url == '/events/' or page.url == '/blog/' or page.url == '/about/' %}
+            {% set breadcrumbSegments = [] %}
+          {% elif page.url and page.url.startsWith('/events/') and page.url != '/events/' %}
+            {% if date | isUpcoming %}
+              {% set breadcrumbSegments = ['events', 'upcoming'] %}
+            {% else %}
+              {% set breadcrumbSegments = ['events', 'past'] %}
+            {% endif %}
+          {% else %}
+            {% set breadcrumbSegments = ['src'] %}
+          {% endif %}
+        {% endif %}
         detroit-devs
-        <span class="breadcrumb-separator">/</span>
-        src
+        {% for segment in breadcrumbSegments %}
+          <span class="breadcrumb-separator">/</span>
+          {{ segment }}
+        {% endfor %}
         <span class="breadcrumb-separator">/</span>
         <span class="breadcrumb-current">{% if breadcrumb %}{{ breadcrumb }}{% elif page.fileSlug %}{{ page.fileSlug }}.html{% else %}index.html{% endif %}</span>
       </div>
