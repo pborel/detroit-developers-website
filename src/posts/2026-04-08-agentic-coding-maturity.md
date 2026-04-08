@@ -56,6 +56,8 @@ RIVET is deep in this layer. We've invested heavily in our `CLAUDE.md`, our rule
 
 What we haven't extracted much value from yet: hooks. Hooks — automated triggers that fire on agent events like post-edit or post-tool-use — are technically a prompt engineering feature in most frameworks. But in practice, they start to feel like harness engineering: you're programming *around* the agent rather than *to* it.
 
+In practice, at RIVET, prompt engineering is almost entirely markdown optimization — writing and refining the `CLAUDE.md`, rules files, and skill definitions that shape agent behavior. The medium is text; the feedback loop is "edit a file, run a session, see what changed."
+
 **The ceiling on prompt engineering is real.** You can write perfect instructions and still lose the thread on a complex feature if the agent doesn't have the right knowledge to act on them. That's where context engineering picks up.
 
 ---
@@ -74,6 +76,8 @@ At RIVET, we do this through [PILRs — Persistent Indexed Learning Repositories
 
 We're early-to-mid here. The pattern is right; the infrastructure isn't finished. Our Type 1 docs are solid. Our Type 2 Deep Maps are in progress. Our Type 3 knowledge base is nascent — it's growing, but it's not yet the compound-interest machine it could be. We're also starting to host shared repositories for these learnings to make them team artifacts rather than personal ones.
 
+In practice, context engineering at RIVET is still heavily markdown-based — writing and organizing the PILR documents themselves — but the work extends beyond text. It includes workflow optimization (how and when context gets surfaced to the agent), and we're starting to invest in data infrastructure: databases, indexing systems, and shared hosting that make the knowledge layer a team resource rather than a collection of files on one developer's machine.
+
 **The ceiling on context engineering is higher than prompt engineering** — a well-informed agent is dramatically more capable than a well-instructed one with gaps in its knowledge. But even a perfectly informed agent operating inside a single session, returning results to a human, has a ceiling. That ceiling is where harness engineering lives.
 
 ---
@@ -82,7 +86,7 @@ We're early-to-mid here. The pattern is right; the infrastructure isn't finished
 
 Harness engineering is what happens when you stop running the agent interactively and start building systems that run agents *for you*.
 
-This is programming *around* the model. It's designing workflows where agents execute multi-step tasks autonomously, hand off outputs between phases, check their own work, and ship results — with humans reviewing outcomes rather than supervising every step.
+This is programming *around* the model. It's designing workflows where agents execute multi-step tasks autonomously, hand off outputs between phases, check their own work, and ship results — with humans reviewing outcomes rather than supervising every step. In practice, harness engineering includes everything from the inner two layers — the markdown, the knowledge infrastructure — plus writing code: building an agentic application using model provider SDKs, adding guardrails and deterministic steps where reasoning isn't needed (running a script is better than asking a model to re-derive the answer every time), and wiring the whole thing into your team's existing systems.
 
 The returns here are categorically different from prompt or context engineering — and not just in magnitude. Prompt and context engineering make *your* work faster. Harness engineering expands what work gets done *at all*.
 
@@ -90,7 +94,7 @@ Every engineering team has a long tail of valuable work — bug fixes, small fea
 
 RIVET is early in this layer, but we have one real case study: **Odradek**, our customer-reported bug resolution agent.
 
-Odradek is a Mac desktop app with a cloud-hosted database for multiplayer support — multiple engineers can see the queue, claim tickets, and review outputs. When a customer-reported bug comes in, Odradek:
+Odradek is built on the [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk) — a Mac desktop app with a cloud-hosted database for multiplayer support, where multiple engineers can see the queue, claim tickets, and review outputs. When a customer-reported bug comes in, Odradek:
 
 1. **Investigates** the issue — reading relevant source files, checking git history for related changes, consulting our PILR knowledge base for matching past patterns
 2. **Fixes** the issue — scoped, surgical edits to the relevant files
@@ -108,7 +112,9 @@ And Odradek today is still a manually-triggered, engineer-operated tool. We're t
 - **Event-driven triggers** — fire automatically when a bug is opened in HubSpot or GitHub Issues, not manually launched by an engineer
 - **Cloud-hosted dashboard** — non-engineers (CS, product) can log in and see fix statuses without pinging a dev
 - **MS Teams integration** — ask about a bug status, kick off an investigation, or request a fix directly from chat
+- **Parallel issue processing** — right now Odradek works on one issue at a time against a single local copy of the codebase. Git worktrees (or isolated clones) would let it spin up multiple working copies and process several bugs concurrently, collapsing a queue into parallel throughput
 - **Ephemeral test environments** — instead of just putting up a PR, Odradek spins up a temporary environment via k8s so CS and product can verify the fix themselves, without a developer deploying to a dev server
+- **Model routing** — not every task needs the most capable (and most expensive) model. Investigation and triage might run on a smaller model or an open-source option like Qwen Coder, while the actual fix uses a frontier model. Routing tasks to the right model tier is how you keep API costs sustainable as the harness scales
 
 Each of those steps removes an engineer from the loop on work that doesn't require engineering judgment. The same harness pattern extends to small features, tweaks, and polish items — exactly the long tail we described above. Longer-term, we're starting to explore whether a harness can move beyond fixes and into new feature development — prototyping and building, not just repairing. That's a harder problem with a different workflow, and we're very early, but it's the natural next frontier once bug resolution is reliable.
 
