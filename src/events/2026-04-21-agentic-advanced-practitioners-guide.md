@@ -11,4 +11,6 @@ permalink: /events/{{ page.fileSlug }}/
 
 A presentation by Phil Borel on advanced agentic software development - real-world techniques and case studies for maximizing AI coding productivity.
 
-Related reading: [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/)
+Related reading:
+- [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/)
+- [The Three Layers of Agentic Engineering Maturity](/blog/agentic-coding-maturity/)
