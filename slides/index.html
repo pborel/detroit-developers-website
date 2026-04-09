@@ -3,322 +3,182 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presentations — Detroit Software Developers</title>
-  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Presentations — Detroit Software Developers">
-  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://detroitdevelopers.com/slides/">
-  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <title>Slides — Detroit Developers</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Y6T55QEPGZ');
-  </script>
+  <link rel="stylesheet" href="/assets/css/slides.css">
 </head>
 <body>
+  
 
-  <!-- Mobile Nav (visible < 769px) -->
-  <div class="mobile-nav">
-    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
-    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
-  </div>
 
-  <div class="ide-layout">
-
-    <!-- Sidebar -->
-    <nav class="sidebar" role="navigation" aria-label="Site navigation">
-      <div class="sidebar-header">Explorer</div>
-      <div class="sidebar-section">▾ detroit-devs</div>
-
-      <a href="/" class="sidebar-item">
-        <span class="icon" style="color: var(--peach);">⬡</span> index.html
-      </a>
-      <a href="/events/" class="sidebar-item">
-        <span class="icon" style="color: var(--green);">⬡</span> events.html
-      </a>
-      <a href="/blog/" class="sidebar-item">
-        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
-      </a>
-      <a href="/about/" class="sidebar-item">
-        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
-      </a>
-
-      
-      <div class="sidebar-divider"></div>
-      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
-      
-      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
-        <span class="icon" style="color: var(--teal);">◇</span>
-        <span style="font-size: 12px;">Agentic Coding:...</span>
-      </a>
-      
-      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
-        <span class="icon" style="color: var(--teal);">◇</span>
-        <span style="font-size: 12px;">Advanced Agentic...</span>
-      </a>
-      
-      
-
-      
-      <div class="sidebar-divider"></div>
-      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
-      <div class="sidebar-subsection">▾ upcoming/</div>
-      
-      
-        
-          
-          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Agentic Software...</span>
-          </a>
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-      
-      <div class="sidebar-subsection">▾ past/</div>
-      
-        
-      
-        
-          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Agentic Software...</span>
-          </a>
-        
-      
-        
-          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">SBOMs for Frontend...</span>
-          </a>
-        
-      
-        
-          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Keep Projects on...</span>
-          </a>
-        
-      
-        
-          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">AI Agents for...</span>
-          </a>
-        
-      
-        
-          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Feature Flag System...</span>
-          </a>
-        
-      
-        
-          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
-            <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Workshop: Data...</span>
-          </a>
-        
-      
-      
-
-    </nav>
-
-    <!-- Editor Area -->
-    <div class="editor-area">
-
-      <!-- Editor Tabs -->
-      <div class="editor-tabs">
-        <a href="/" class="editor-tab">
-          <span class="icon" style="color: var(--peach);">⬡</span> index.html
-        </a>
-        <a href="/events/" class="editor-tab">
-          <span class="icon" style="color: var(--green);">⬡</span> events.html
-        </a>
-        <a href="/blog/" class="editor-tab">
-          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
-        </a>
-        <a href="/about/" class="editor-tab">
-          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
-        </a>
+<div class="slideshow" id="slideshow">
+    
+  <div class="slide active" id="slide-1">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// welcome</div>
+      <div>
+        <div class="opener-title">Detroit<br><span class="accent">Developers</span></div>
+        <div class="opener-subtitle">monthly meetup&nbsp;<span class="cursor"></span></div>
       </div>
-
-      <!-- Breadcrumb -->
-      <div class="breadcrumb">
-        detroit-devs
-        <span class="breadcrumb-separator">/</span>
-        src
-        <span class="breadcrumb-separator">/</span>
-        <span class="breadcrumb-current">presentations.html</span>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com"
+          alt="detroitdevelopers.com QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com</div>
       </div>
-
-      <!-- Page Content -->
-      <div class="content-area">
-        
-
-<div id="drafts-section" class="content-section" style="display: none;">
-  <div class="line-gutter" aria-hidden="true">1<br>2<br>3</div>
-  <div class="section-content">
-    <div class="section-comment">// DRAFTS</div>
-
-    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
-      
-        <a href="/slides/agentic-advanced-practitioners-guide-20min/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
-          <div>
-            <div class="card-title" style="color: var(--peach);">Agentic Software Development: Advanced Practitioner&#39;s Guide — 20-Minute Edition</div>
-            <div class="card-meta">
-              27 slides
-            </div>
-          </div>
-          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-        </a>
-      
-        <a href="/slides/agentic-advanced-practitioners-guide/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
-          <div>
-            <div class="card-title" style="color: var(--peach);">Agentic Software Development: Advanced Practitioner&#39;s Guide — Slides</div>
-            <div class="card-meta">
-              42 slides
-            </div>
-          </div>
-          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-        </a>
-      
-        <a href="/slides/agentic-coding-maturity/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
-          <div>
-            <div class="card-title" style="color: var(--peach);">The Three Layers of Agentic Engineering Maturity — Slides</div>
-            <div class="card-meta">
-              19 slides
-            </div>
-          </div>
-          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-        </a>
-      
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● welcome.md</span>
+      <div class="slide-status-right">
+        <span>1 / 3</span>
+        <span>Detroit, MI</span>
+      </div>
     </div>
   </div>
-</div>
 
-
-<div class="content-section">
-  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
-  <div class="section-content">
-    <div class="section-comment">// ALL PRESENTATIONS</div>
-
-    
-      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
-        
-          <a href="/slides/agentic-coding-panel/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-            <div>
-              <div class="card-title">Agentic Coding: Panel — Slides</div>
-              <div class="card-meta">
-                9 slides
-              </div>
-            </div>
-            <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-          </a>
-        
+  
+  <div class="slide" id="slide-2">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// thank you to our sponsor</div>
+      <div class="sponsor-center">
+        <img
+          class="sponsor-logo"
+          src="https://www.rivet.work/wp-content/uploads/2022/07/Rivet_Logo_UnionBlue_NoTagline.png"
+          alt="RIVET"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"
+        >
+        <div class="sponsor-logo-fallback">RIVET</div>
+        <div class="sponsor-divider"></div>
+        <div class="sponsor-tagline">Construction Labor Planning for increased <span style="color: var(--blue);">Productivity</span></div>
       </div>
-    
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://www.rivet.work/careers/"
+          alt="RIVET Careers QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">We're hiring →<br>rivet.work/careers</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● sponsors.md</span>
+      <div class="slide-status-right">
+        <span>2 / 3</span>
+        <span>rivet.work</span>
+      </div>
+    </div>
   </div>
+
+  
+  <div class="slide" id="slide-3">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// your organizers</div>
+      <div class="team-grid">
+        <div class="person">
+          <img class="person-photo" src="/assets/images/phil_headshot.jpeg" alt="Phil Borel">
+          <div class="person-name">Phil Borel</div>
+          <div class="person-role">Organizer</div>
+          <div class="person-qr">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://philborel.com"
+              alt="Phil Borel QR code"
+              loading="lazy"
+            >
+          </div>
+          <div class="person-qr-label">philborel.com</div>
+        </div>
+        <div class="meetup-qr-center">
+          <img class="meetup-logo" src="/assets/images/logo_small.png" alt="Detroit Developers">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com"
+            alt="detroitdevelopers.com QR code"
+            loading="lazy"
+          >
+          <div class="meetup-qr-label">detroitdevelopers.com</div>
+        </div>
+        <div class="person">
+          <img class="person-photo" src="/assets/images/louis_headshot.jpeg" alt="Louis Gelinas">
+          <div class="person-name">Louis Gelinas</div>
+          <div class="person-role">Organizer</div>
+          <div class="person-qr">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=192x192&data=https://www.linkedin.com/in/louis-gelinas/"
+              alt="Louis Gelinas QR code"
+              loading="lazy"
+            >
+          </div>
+          <div class="person-qr-label">linkedin.com/in/louis-gelinas</div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● organizers.md</span>
+      <div class="slide-status-right">
+        <span>3 / 3</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <script>
-  if (new URLSearchParams(window.location.search).get('draft') === 'true') {
-    const el = document.getElementById('drafts-section');
-    if (el) el.style.display = '';
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  function getHashIndex() {
+    const n = parseInt(window.location.hash.replace('#', ''), 10);
+    return (!isNaN(n) && n >= 1 && n <= total) ? n - 1 : 0;
   }
+
+  function showSlide(index) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, index));
+    slides[current].classList.add('active');
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  // Init from URL hash (supports direct links like /slides/#2)
+  showSlide(getHashIndex());
+
+  // Keyboard: right/down = next, left/up = prev
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      if (current < total - 1) showSlide(current + 1);
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (current > 0) showSlide(current - 1);
+    }
+  });
+
+  // Click anywhere to advance
+  document.getElementById('slideshow').addEventListener('click', function () {
+    if (current < total - 1) showSlide(current + 1);
+  });
+})();
 </script>
 
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Status Bar -->
-  <div class="status-bar" aria-hidden="true">
-    <div class="status-bar-group">
-      <span>⑂ main</span>
-      <span>✓ 0 problems</span>
-    </div>
-    <div class="status-bar-group">
-      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
-      <span>detroit-devs</span>
-      <span>UTF-8</span>
-      <span>Nunjucks</span>
-    </div>
-  </div>
-
 </body>
-  <script>
-    document.addEventListener('click', function(event) {
-      const sidebar = document.querySelector('.sidebar');
-      const toggle = document.querySelector('.mobile-nav-toggle');
-      if (sidebar && toggle && sidebar.classList.contains('open')) {
-        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
-          sidebar.classList.remove('open');
-        }
-      }
-    });
-  </script>
-
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-
-    mermaid.initialize({
-      startOnLoad: false,
-      theme: 'dark',
-      themeVariables: {
-        darkMode: true,
-        background: '#1e1e2e',
-        mainBkg: '#313244',
-        nodeBorder: '#89b4fa',
-        clusterBkg: '#181825',
-        clusterBorder: '#45475a',
-        titleColor: '#cdd6f4',
-        nodeTextColor: '#cdd6f4',
-        edgeLabelBackground: '#1e1e2e',
-        lineColor: '#6c7086',
-      }
-    });
-
-    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
-    // Mermaid needs <pre class="mermaid"> — convert before running
-    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
-      const pre = el.parentElement;
-      const mermaidPre = document.createElement('pre');
-      mermaidPre.className = 'mermaid';
-      mermaidPre.textContent = el.textContent;
-      pre.replaceWith(mermaidPre);
-    });
-
-    await mermaid.run();
-  </script>
 </html>

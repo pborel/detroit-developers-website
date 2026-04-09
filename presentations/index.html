@@ -184,43 +184,79 @@
       <!-- Page Content -->
       <div class="content-area">
         
-<div class="content-section">
-  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5<br>6<br>7</div>
+
+<div id="drafts-section" class="content-section" style="display: none;">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3</div>
   <div class="section-content">
-    <div class="section-comment">// PRESENTATIONS</div>
+    <div class="section-comment">// DRAFTS</div>
 
     <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
-
-      <a href="/slides/agentic-advanced-practitioners-guide/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-        <div>
-          <div class="card-title">Agentic Software Development: Advanced Practitioner's Guide</div>
-          <div class="card-meta">April 2026 · Phil Borel · 42 slides</div>
-          <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Case study from RIVET: harness engineering, context engineering, PILRs, skills, multi-agent reality check.</p>
-        </div>
-        <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-      </a>
-
-      <a href="/slides/agentic-advanced-practitioners-guide-20min/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-        <div>
-          <div class="card-title">Agentic Software Development: Advanced Practitioner's Guide <span style="color: var(--subtext0); font-weight: 400;">(20-min edition)</span></div>
-          <div class="card-meta">April 2026 · Phil Borel · 27 slides</div>
-          <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Condensed version focused on the RIVET case study. Research compressed to one slide; case study and context engineering expanded.</p>
-        </div>
-        <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-      </a>
-
-      <a href="/slides/agentic-coding-panel/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
-        <div>
-          <div class="card-title">Agentic Coding: Panel</div>
-          <div class="card-meta">Phil Borel · 9 slides</div>
-          <p style="color: var(--subtext0); font-size: 14px; margin-top: 8px;">Earlier introductory talk on agentic coding practices and team structure.</p>
-        </div>
-        <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
-      </a>
-
+      
+        <a href="/slides/agentic-advanced-practitioners-guide-20min/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">Agentic Software Development: Advanced Practitioner&#39;s Guide — 20-Minute Edition</div>
+            <div class="card-meta">
+              27 slides
+            </div>
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+        <a href="/slides/agentic-advanced-practitioners-guide/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">Agentic Software Development: Advanced Practitioner&#39;s Guide — Slides</div>
+            <div class="card-meta">
+              42 slides
+            </div>
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
+        <a href="/slides/agentic-coding-maturity/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; border-left: 3px solid var(--peach);">
+          <div>
+            <div class="card-title" style="color: var(--peach);">The Three Layers of Agentic Engineering Maturity — Slides</div>
+            <div class="card-meta">
+              19 slides
+            </div>
+          </div>
+          <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+        </a>
+      
     </div>
   </div>
 </div>
+
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
+  <div class="section-content">
+    <div class="section-comment">// ALL PRESENTATIONS</div>
+
+    
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        
+          <a href="/slides/agentic-coding-panel/" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none;">
+            <div>
+              <div class="card-title">Agentic Coding: Panel — Slides</div>
+              <div class="card-meta">
+                9 slides
+              </div>
+            </div>
+            <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0; margin-left: 16px;">→</span>
+          </a>
+        
+      </div>
+    
+  </div>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('draft') === 'true' || params.get('drafts') === 'true') {
+    const el = document.getElementById('drafts-section');
+    if (el) el.style.display = '';
+  }
+</script>
 
       </div>
 
