@@ -54,7 +54,8 @@ permalink: /presentations/
 </div>
 
 <script>
-  if (new URLSearchParams(window.location.search).get('draft') === 'true') {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('draft') === 'true' || params.get('drafts') === 'true') {
     const el = document.getElementById('drafts-section');
     if (el) el.style.display = '';
   }
