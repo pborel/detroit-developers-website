@@ -1,0 +1,46 @@
+---
+layout: base.njk
+---
+
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4<br>5</div>
+  <div class="section-content">
+    <div class="section-comment">// TALK DETAILS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">{{ title }}</h1>
+    <div class="event-meta" style="margin-bottom: 24px;">
+      <span>🎤 {{ conference }}</span>
+      <span>📅 {{ date | dateFormat }}</span>
+      <span>📍 {{ location }}</span>
+    </div>
+
+    {% if video %}
+      <div class="video-embed">
+        <iframe
+          src="{{ video | replace('watch?v=', 'embed/') | replace('youtu.be/', 'youtube.com/embed/') }}"
+          title="{{ title }} — Video Recording"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    {% endif %}
+
+    {% if content | trim %}
+      <div class="prose" style="margin-top: 24px;">
+        {{ content | safe }}
+      </div>
+    {% endif %}
+
+    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;">
+      {% if session_url %}
+        <a href="{{ session_url }}" class="btn-primary" target="_blank" rel="noopener">Session Details →</a>
+      {% endif %}
+      {% if ticket_url %}
+        <a href="{{ ticket_url }}" class="btn-secondary" target="_blank" rel="noopener">Get Tickets →</a>
+      {% endif %}
+      {% if slides_url %}
+        <a href="{{ slides_url }}" class="btn-secondary">View Slides →</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

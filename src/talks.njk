@@ -1,0 +1,95 @@
+---
+layout: base.njk
+title: Talks
+breadcrumb: talks.html
+permalink: /talks/
+---
+
+{# --- UPCOMING TALKS --- #}
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// UPCOMING TALKS</div>
+
+    {% set hasUpcoming = false %}
+    {% for talk in collections.talks %}
+      {% if talk.date | isUpcoming %}
+        {% set hasUpcoming = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if hasUpcoming %}
+      <div style="display: flex; flex-direction: column; gap: 16px; max-width: 700px;">
+        {% for talk in collections.talks %}{% if talk.date | isUpcoming %}
+          <a href="{{ talk.url }}" style="text-decoration: none; color: inherit; display: block;">
+            <div class="event-card event-card--upcoming" style="cursor: pointer;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                <div style="flex: 1; min-width: 200px;">
+                  <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">{{ talk.data.title }}</h2>
+                  <p style="color: var(--subtext0); font-size: 14px; margin-bottom: 12px;">{{ talk.data.conference }}</p>
+                </div>
+                <span class="event-badge">UPCOMING</span>
+              </div>
+              <div class="event-meta" style="margin-bottom: 16px;">
+                <span>📅 {{ talk.date | dateFormat }}</span>
+                <span>📍 {{ talk.data.location }}</span>
+              </div>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                {% if talk.data.session_url %}
+                  <a href="{{ talk.data.session_url }}" class="btn-primary" target="_blank" rel="noopener">Session Details →</a>
+                {% endif %}
+                {% if talk.data.ticket_url %}
+                  <a href="{{ talk.data.ticket_url }}" class="btn-secondary" target="_blank" rel="noopener">Get Tickets →</a>
+                {% endif %}
+              </div>
+            </div>
+          </a>
+        {% endif %}{% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No upcoming talks scheduled.</p>
+    {% endif %}
+  </div>
+</div>
+
+{# --- PAST TALKS --- #}
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">5<br>6<br>7<br>8<br>9<br>10</div>
+  <div class="section-content">
+    <div class="section-comment">// PAST TALKS</div>
+
+    {% set hasPast = false %}
+    {% for talk in collections.talks %}
+      {% if not (talk.date | isUpcoming) %}
+        {% set hasPast = true %}
+      {% endif %}
+    {% endfor %}
+
+    {% if hasPast %}
+      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 700px;">
+        {% for talk in collections.talks %}{% if not (talk.date | isUpcoming) %}
+          <a href="{{ talk.url }}" class="card" style="text-decoration: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="card-title" style="color: var(--text); font-weight: 500;">{{ talk.data.title }}</div>
+                <div class="card-meta" style="display: flex; gap: 16px; flex-wrap: wrap;">
+                  <span>{{ talk.data.conference }}</span>
+                  <span>{{ talk.date | dateFormat }}</span>
+                  {% if talk.data.video %}
+                    <span style="color: var(--blue);">🎥 video</span>
+                  {% endif %}
+                  {% if talk.data.slides_url %}
+                    <span style="color: var(--pink);">📊 slides</span>
+                  {% endif %}
+                </div>
+              </div>
+              <span style="color: var(--subtext0); font-size: 18px; flex-shrink: 0;">→</span>
+            </div>
+          </a>
+        {% endif %}{% endfor %}
+      </div>
+    {% else %}
+      <p style="color: var(--subtext0);">No past talks recorded yet.</p>
+    {% endif %}
+  </div>
+</div>

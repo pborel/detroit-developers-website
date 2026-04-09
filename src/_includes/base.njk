@@ -53,6 +53,9 @@
       <a href="/events/" class="sidebar-item{% if page.url.startsWith('/events') %} active{% endif %}">
         <span class="icon" style="color: var(--green);">⬡</span> events.html
       </a>
+      <a href="/talks/" class="sidebar-item{% if page.url.startsWith('/talks') %} active{% endif %}">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
       <a href="/blog/" class="sidebar-item{% if page.url.startsWith('/blog') %} active{% endif %}">
         <span class="icon" style="color: var(--blue);">⬡</span> blog.html
       </a>
@@ -99,6 +102,34 @@
       {% endfor %}
       {% endif %}
 
+      {% if collections.talks.length %}
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      {% set hasUpcomingTalk = false %}
+      {% for talk in collections.talks %}
+        {% if talk.date | isUpcoming %}
+          {% set hasUpcomingTalk = true %}
+          <a href="{{ talk.url }}" class="sidebar-item sidebar-item--sub{% if page.url == talk.url %} active{% endif %}">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">{{ talk.data.title | truncate(20) }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% if not hasUpcomingTalk %}
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      {% endif %}
+      <div class="sidebar-subsection">▾ past/</div>
+      {% for talk in collections.talks %}
+        {% if not (talk.date | isUpcoming) %}
+          <a href="{{ talk.url }}" class="sidebar-item sidebar-item--sub{% if page.url == talk.url %} active{% endif %}">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">{{ talk.data.title | truncate(20) }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+
     </nav>
 
     <!-- Editor Area -->
@@ -111,6 +142,9 @@
         </a>
         <a href="/events/" class="editor-tab{% if page.url.startsWith('/events') %} active{% endif %}">
           <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab{% if page.url.startsWith('/talks') %} active{% endif %}">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
         </a>
         <a href="/blog/" class="editor-tab{% if page.url.startsWith('/blog') %} active{% endif %}">
           <span class="icon" style="color: var(--blue);">⬡</span> blog.html

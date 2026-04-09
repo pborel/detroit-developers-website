@@ -70,6 +70,11 @@ export default function (eleventyConfig) {
     });
   });
 
+  eleventyConfig.addCollection("talks", (collectionApi) => {
+    return collectionApi.getFilteredByGlob("src/talks/*.md")
+      .sort((a, b) => b.date - a.date);
+  });
+
   eleventyConfig.addCollection("presentations", (collectionApi) => {
     return collectionApi.getFilteredByGlob("src/slides/*.njk")
       .filter((p) => p.data.permalink !== "/slides/" && !p.data.draft)
