@@ -7,7 +7,9 @@ excerpt: "What engineers from GitHub, Inngest, Signal Advisors, and RIVET Work a
 permalink: /blog/{{ page.fileSlug }}/
 ---
 
-*On March 23rd, Detroit Developers hosted a panel in downtown Detroit with engineers and leaders from four software organizations at different stages of their agentic development journey. This is a write-up of what we talked about.*
+*On March 23rd, Detroit Developers hosted a panel in downtown Detroit with engineers and leaders from four software organizations at different stages of their agentic development journey. This post is about my main takeaways.*
+
+*See the [event page](/events/agentic-software-development/) for details.*
 
 ---
 
@@ -115,4 +117,12 @@ Simple. Accurate. Worth keeping close.
 
 ---
 
-*We'll be going deeper on the RIVET side of this story - harness engineering, context engineering, spec-driven development - at the [April Detroit Developers meetup](/events/agentic-advanced-practitioners-guide/). If this is territory you're navigating, come find us.*
+<div style="background: #181825; border: 1px solid #313244; border-radius: 8px; padding: 20px 24px; max-width: 700px;">
+  <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
+    <span style="color: #a6e3a1;">&#9670;</span> Detroit Software Developers
+  </div>
+  <p style="margin: 0 0 12px; color: #a6adc8;">We're a community of professional developers in Detroit. We meet monthly to share knowledge, experiences &amp; good vibes.</p>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <a href="/events/" style="color: #89b4fa;">Upcoming events →</a>
+  </div>
+</div>

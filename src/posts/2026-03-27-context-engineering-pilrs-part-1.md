@@ -232,3 +232,13 @@ In [Part 2](/blog/context-engineering-pilrs-part-2/), we'll dig into why the ind
 - [Ryan Burr](https://www.linkedin.com/in/ryan-burr2/) — Director of Engineering at Signal Advisors
 - [Agentic Software Development — March Detroit Developers Meetup](/events/agentic-software-development/) — panel event referenced in the Signal Advisors section
 - [Agentic Software Development: Advanced Practitioner's Guide — April Detroit Developers Meetup](/events/agentic-advanced-practitioners-guide/) — upcoming deep-dive on these topics
+
+<div style="background: #181825; border: 1px solid #313244; border-radius: 8px; padding: 20px 24px; max-width: 700px;">
+  <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
+    <span style="color: #a6e3a1;">&#9670;</span> Detroit Software Developers
+  </div>
+  <p style="margin: 0 0 12px; color: #a6adc8;">We're a community of professional developers in Detroit. We meet monthly to share knowledge, experiences &amp; good vibes.</p>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <a href="/events/" style="color: #89b4fa;">Upcoming events →</a>
+  </div>
+</div>

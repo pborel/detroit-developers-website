@@ -521,4 +521,12 @@ The fast loop is where to start. It's buildable today, it delivers compounding r
 
 ---
 
-*Come find me at the [Detroit Developers meetup](/events/agentic-advanced-practitioners-guide/) if you want to think through this together.*
+<div style="background: #181825; border: 1px solid #313244; border-radius: 8px; padding: 20px 24px; max-width: 700px;">
+  <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">
+    <span style="color: #a6e3a1;">&#9670;</span> Detroit Software Developers
+  </div>
+  <p style="margin: 0 0 12px; color: #a6adc8;">We're a community of professional developers in Detroit. We meet monthly to share knowledge, experiences &amp; good vibes.</p>
+  <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+    <a href="/events/" style="color: #89b4fa;">Upcoming events →</a>
+  </div>
+</div>
