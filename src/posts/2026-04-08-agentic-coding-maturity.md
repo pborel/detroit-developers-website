@@ -3,7 +3,7 @@ layout: post.njk
 title: "The Three Layers of Agentic Engineering Maturity"
 date: 2026-04-08
 author: "Phil Borel"
-excerpt: "Prompt engineering, context engineering, and harness engineering are three distinct disciplines with different ceilings — here's how we think about investing across them."
+excerpt: "Prompt engineering, context engineering, and harness engineering are three distinct disciplines with different ceilings. Here's how I think about investing across them."
 permalink: /blog/agentic-coding-maturity/
 draft: true
 ---
@@ -13,17 +13,17 @@ draft: true
   <span><a href="/slides/agentic-coding-maturity/#1" style="color: #89b4fa; font-weight: 600;">View the slides</a> <span style="color: #a6adc8;">that accompany this post</span></span>
 </div>
 
-*This is a follow-up on our journey developing agentic software engineering practices at RIVET. It builds on the story started in [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/).*
+*This is a follow-up on my journey developing agentic software engineering practices at RIVET. It builds on the story started in [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/).*
 
 ---
 
-When engineers talk about "using AI," they're often conflating three distinct engineering disciplines — each with its own investment curve, its own ceiling, and its own compounding dynamics.
+When engineers talk about "using AI," they're often referring to three distinct disciplines, each with its own investment curve, ceiling, and compounding dynamics.
 
-At RIVET, we've been bumping into this conflation repeatedly as we invest deeper into agentic development. The language "prompt engineering" gets used to describe everything from a single sentence in a chat window to a full multi-agent harness running in production. That conflation makes it hard to think clearly about where to invest next and why.
+At RIVET, I've been trying to get more precise about these disciplines as I invest deeper into agentic development. Most engineers have a reasonable sense of what prompt engineering is. Context engineering is gaining traction as a term. But harness engineering, building systems around the agent, is the layer where I see the most confusion. And it's the one with the largest potential ROI.
 
-So here's the framing we've settled on internally: **prompt engineering, context engineering, and harness engineering**. Three nested disciplines within what we call **agentic software engineering** — the practice of building *with* agents as a core part of your development workflow. And agentic software engineering is itself a subset of something broader: **AI engineering**, the discipline of building agentic systems as products and infrastructure, not just using them as tools.
+Here's the framing I use: **prompt engineering, context engineering, and harness engineering**. Three nested disciplines within **agentic software engineering** - the practice of building *with* agents as a core part of your development workflow. Agentic software engineering is itself a subset of something broader: **AI engineering**, the discipline of building agentic systems as products & infrastructure, not just using them as tools.
 
-That distinction matters. AI engineering is the broader discipline — it includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. (Chip Huyen's [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/) is a fantastic & comprehensive reference on the field.) It's what MLOps became when foundation models arrived. Agentic software engineering is one slice of that: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice — prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line. When you're programming *around* the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're doing AI engineering.
+AI engineering is the broader discipline. It includes building LLM-powered products, designing retrieval systems, fine-tuning models, building evaluation pipelines, and shipping agent infrastructure at scale. Agentic software engineering is one slice of AI engineering: the practice of using agents as collaborators in your own development workflow. Most of this post is about that inner slice: prompt, context, and harness engineering as they apply to writing better software faster. But the outermost layer, harness engineering, starts to blur the line & dip into AI engineering. When you're programming *around* the model, designing autonomous workflows, and shipping agent outputs to production, you're not just using AI to code. You're coding the ~~system~~ harness around the agent. For more on AI engineering, see Chip Huyen's excellent book on the topic: [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/).
 
 <svg viewBox="0 0 600 340" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
   <!-- AI Engineering (outermost) -->
@@ -51,17 +51,17 @@ This means investment compounds in one direction. Getting better at prompt engin
 
 ## Prompt Engineering
 
-Prompt engineering is the craft of telling an agent what to do — and doing it precisely enough that it actually does it.
+Prompt engineering is the craft of telling an agent what to do, and doing it precisely enough that it actually does it.
 
-This means writing clear, unambiguous instructions. It means defining rules that encode your team's expectations (what patterns to follow, what to avoid, what "done" looks like). It means building a `CLAUDE.md` that gives the agent reliable orientation at the start of every session. It means building skills that encode your process as reusable commands — `/implement`, `/review-pr`, `/update-project-docs` — so you stop re-explaining your workflow every time.
+This means writing clear, unambiguous instructions. It means defining rules that encode your team's expectations (what patterns to follow, what to avoid, what "done" looks like). It means building a `CLAUDE.md` that gives the agent reliable orientation at the start of every session. It means building skills that encode your process as reusable commands like `/implement`, `/review-pr`, and `/update-project-docs` so you stop re-explaining your workflow every time.
 
 The feedback loop here is tight and human-scaled. You write a better rule, you see better output in the next session. It compounds, but it compounds within a session or across a few days.
 
-RIVET is deep in this layer. We've invested heavily in our `CLAUDE.md`, our rules files, our skills. We're thoughtful about the balance between over-specification (bloated instructions that crowd out the actual task) and under-specification (vague guidance that the agent ignores). We're continuously iterating.
+RIVET is deep in this layer. I've invested heavily in my `CLAUDE.md`, my rules files, my skills. I'm thoughtful about the balance between over-specification (bloated instructions that crowd out the actual task) and under-specification (vague guidance that the agent ignores). I'm continuously iterating.
 
-What we haven't extracted much value from yet: hooks. Hooks — automated triggers that fire on agent events like post-edit or post-tool-use — are technically a prompt engineering feature in most frameworks. But in practice, they start to feel like harness engineering: you're programming *around* the agent rather than *to* it.
+What I haven't extracted much value from yet: hooks. Hooks (automated triggers that fire on agent events like post-edit or post-tool-use) are technically a prompt engineering feature in most frameworks. But in practice, they start to feel like harness engineering: you're programming *around* the agent rather than *to* it.
 
-In practice, at RIVET, prompt engineering is almost entirely markdown optimization — writing and refining the `CLAUDE.md`, rules files, and skill definitions that shape agent behavior. The medium is text; the feedback loop is "edit a file, run a session, see what changed."
+In practice, at RIVET, prompt engineering is almost entirely markdown optimization: writing and refining the `CLAUDE.md`, rules files, and skill definitions that shape agent behavior. The medium is text; the feedback loop is "edit a file, run a session, see what changed."
 
 **The ceiling on prompt engineering is real.** You can write perfect instructions and still lose the thread on a complex feature if the agent doesn't have the right knowledge to act on them. That's where context engineering picks up.
 
@@ -69,21 +69,21 @@ In practice, at RIVET, prompt engineering is almost entirely markdown optimizati
 
 ## Context Engineering
 
-Context engineering is the discipline of managing what knowledge the agent has access to — and when.
+Context engineering is the discipline of managing what knowledge the agent has access to, and when.
 
-A better-prompted agent with bad context will still fail. It'll make decisions that contradict architectural choices made three sprints ago. It'll re-derive patterns your team has already solved. It'll treat every session as day one, perpetually new, never compounding. Context engineering is the infrastructure that prevents that. It's the discipline that makes the agent's knowledge *accumulate* rather than reset.
+A better-prompted agent with bad context will still fail. It'll make decisions that contradict architectural choices made three sprints ago. It'll re-derive patterns your team has already solved. It'll treat every session as day one, perpetually new, never compounding. Context engineering is the infrastructure that prevents that. It's the discipline that makes the agent's knowledge *accumulate* across sessions.
 
-At RIVET, we do this through [PILRs — Persistent Indexed Learning Repositories](https://detroitdevelopers.com/blog/context-engineering-pilrs/). Three types, each with a different lifecycle:
+At RIVET, I do this through [PILRs (Persistent Indexed Learning Repositories)](https://detroitdevelopers.com/blog/context-engineering-pilrs/). Three types, each with a different lifecycle:
 
 - <strong style="color: #cba6f7;">Type 1 (Ephemeral):</strong> Per-feature planning docs, test plans, decision notes. They live in `temp/projects/`, scoped to a single PR or sprint. They're working memory, not permanent record.
 - <strong style="color: #a6e3a1;">Type 2 (Evergreen):</strong> Architecture docs, system design docs ("Deep Maps"), API contracts. They describe how the system works and why it works that way. These are the map the agent navigates with.
 - <strong style="color: #f38ba8;">Type 3 (Cumulative):</strong> Solved problems, incident patterns, cross-system context. Institutional memory. The layer that makes the agent behave less like a generic assistant and more like someone who's worked on your specific product for a year.
 
-We're early-to-mid here. The pattern is right; the infrastructure isn't finished. Our Type 1 docs are solid. Our Type 2 Deep Maps are in progress. Our Type 3 knowledge base is nascent — it's growing, but it's not yet the compound-interest machine it could be. We're also starting to host shared repositories for these learnings to make them team artifacts rather than personal ones.
+I'm early-to-mid here. The pattern is right; the infrastructure isn't finished. My Type 1 docs are solid. My Type 2 Deep Maps are in progress. My Type 3 knowledge base is nascent. It's growing, but it's not yet the compound-interest machine it could be. I'm also starting to host shared repositories for these learnings to make them shared team artifacts.
 
-In practice, context engineering at RIVET is still heavily markdown-based — writing and organizing the PILR documents themselves — but the work extends beyond text. It includes workflow optimization (how and when context gets surfaced to the agent), and we're starting to invest in data infrastructure: databases, indexing systems, and shared hosting that make the knowledge layer a team resource rather than a collection of files on one developer's machine.
+In practice, context engineering at RIVET is still heavily markdown-based (writing and organizing the PILR documents themselves), but the work extends beyond text. It includes workflow optimization (how and when context gets surfaced to the agent), and I'm starting to invest in data infrastructure: databases, indexing systems, and shared hosting that make the knowledge layer a shared team resource.
 
-**The ceiling on context engineering is higher than prompt engineering** — a well-informed agent is dramatically more capable than a well-instructed one with gaps in its knowledge. But even a perfectly informed agent operating inside a single session, returning results to a human, has a ceiling. That ceiling is where harness engineering lives.
+**The ceiling on context engineering is higher than prompt engineering.** A well-informed agent is far more capable than a well-instructed one with gaps in its knowledge. But even a perfectly informed agent operating inside a single session, returning results to a human, has a ceiling. That ceiling is where harness engineering lives.
 
 ---
 
@@ -91,45 +91,45 @@ In practice, context engineering at RIVET is still heavily markdown-based — wr
 
 Harness engineering is what happens when you stop running the agent interactively and start building systems that run agents *for you*.
 
-This is programming *around* the model. It's designing workflows where agents execute multi-step tasks autonomously, hand off outputs between phases, check their own work, and ship results — with humans reviewing outcomes rather than supervising every step. In practice, harness engineering includes everything from the inner two layers — the markdown, the knowledge infrastructure — plus writing code: building an agentic application using model provider SDKs, adding guardrails and deterministic steps where reasoning isn't needed (running a script is better than asking a model to re-derive the answer every time), and wiring the whole thing into your team's existing systems.
+This is programming *around* the model. It's designing workflows where agents execute multi-step tasks autonomously, hand off outputs between phases, check their own work, and ship results, with humans reviewing outcomes instead of supervising every step. In practice, harness engineering includes everything from the inner two layers (the markdown, the knowledge infrastructure) plus writing code: building an agentic application using model provider SDKs, adding guardrails and deterministic steps where reasoning isn't needed (running a script is better than asking a model to re-derive the answer every time), and wiring the whole thing into your team's existing systems.
 
-The returns here are categorically different from prompt or context engineering — and not just in magnitude. Prompt and context engineering make *your* work faster. Harness engineering expands what work gets done *at all*.
+The returns here are different in kind from prompt or context engineering. Prompt and context engineering make *your* work faster. Harness engineering expands what work gets done *at all*.
 
-Every engineering team has a long tail of valuable work — bug fixes, small features, UI polish, minor tweaks — that never makes it to the top of the sprint because higher-priority things keep landing. That work isn't unimportant; it's just unscheduled. A harness can collapse a full ticket — research, implementation, PR — into a flow that runs while you're in meetings, turning that backlog into throughput. The ceiling isn't +1x or even +3x. It's much larger.
+Every engineering team has a long tail of valuable work (bug fixes, small features, UI polish, minor tweaks) that never makes it to the top of the sprint because higher-priority things keep landing. That work isn't unimportant; it's just unscheduled. A harness can collapse a full ticket (research, implementation, PR) into a flow that runs while you're in meetings, turning that backlog into throughput. The ceiling isn't +1x or even +3x. It's much larger.
 
-RIVET is early in this layer, but we have one real case study: **Odradek**, our customer-reported bug resolution agent.
+RIVET is early in this layer, but I have one real case study: **Odradek**, a customer-reported bug resolution agent.
 
-Odradek is built on the [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk) — a Mac desktop app with a cloud-hosted database for multiplayer support, where multiple engineers can see the queue, claim tickets, and review outputs. When a customer-reported bug comes in, Odradek:
+Odradek is built on the [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk). It's a Mac desktop app with a cloud-hosted database for multiplayer support, where multiple engineers can see the queue, claim tickets, and review outputs. When a customer-reported bug comes in, Odradek:
 
-1. **Investigates** the issue — reading relevant source files, checking git history for related changes, consulting our PILR knowledge base for matching past patterns
-2. **Fixes** the issue — scoped, surgical edits to the relevant files
-3. **Verifies** its own work — regression checks, test runs
-4. **Puts up a PR** — with a human-readable description, ready for review
+1. **Investigates** the issue: reading relevant source files, checking git history for related changes, consulting the PILR knowledge base for matching past patterns
+2. **Fixes** the issue: scoped, surgical edits to the relevant files
+3. **Verifies** its own work: regression checks, test runs
+4. **Puts up a PR** with a human-readable description, ready for review
 
-One-shot resolution rate: **60%**. The other 40% are harder issues — often involving config changes outside our codebase (think: fixing permissions on a GCP API token, or changing an environment variable in an external system). Those still require human judgment. But even at 60%, the impact on our bug backlog has been concrete:
+One-shot resolution rate: **60%**. The other 40% are harder issues, often involving config changes outside the codebase (think: fixing permissions on a GCP API token, or changing an environment variable in an external system). Those still require human judgment. But even at 60%, the impact on the bug backlog has been concrete:
 
-- <strong style="color: #f38ba8;">P1s (ship-within-a-week bugs):</strong> We used to sacrifice an engineer every sprint on a round-robin rotation dedicated solely to these. Odradek bought us back roughly half an engineer — the on-rotation dev stays on top of P1s more efficiently and has time left over for sprint work.
+- <strong style="color: #f38ba8;">P1s (ship-within-a-week bugs):</strong> The team used to sacrifice an engineer every sprint on a round-robin rotation dedicated solely to these. Odradek bought back roughly half an engineer. The on-rotation dev stays on top of P1s more efficiently and has time left over for sprint work.
 - <strong style="color: #fab387;">P2s (fix-within-a-quarter bugs):</strong> These used to stack up for months before anyone could get to them. Now they get addressed as they come in.
-- <strong style="color: #a6e3a1;">P3s (nice-to-fix bugs):</strong> These were effectively permanent backlog residents. Some of them are actually getting fixed now — work that would never have happened at our team size.
+- <strong style="color: #a6e3a1;">P3s (nice-to-fix bugs):</strong> These were effectively permanent backlog residents. Some of them are actually getting fixed now. Work that would never have happened at the current team size.
 
-And Odradek today is still a manually-triggered, engineer-operated tool. We're treating it as the seed of something much more autonomous. Here's where we're taking it:
+And Odradek today is still a manually-triggered, engineer-operated tool. I'm treating it as the seed of something much more autonomous. Here's where I'm taking it:
 
-- **Event-driven triggers** — fire automatically when a bug is opened in HubSpot or GitHub Issues, not manually launched by an engineer
-- **Cloud-hosted dashboard** — non-engineers (CS, product) can log in and see fix statuses without pinging a dev
-- **MS Teams integration** — ask about a bug status, kick off an investigation, or request a fix directly from chat
-- **Parallel issue processing** — right now Odradek works on one issue at a time against a single local copy of the codebase. Git worktrees (or isolated clones) would let it spin up multiple working copies and process several bugs concurrently, collapsing a queue into parallel throughput
-- **Ephemeral test environments** — instead of just putting up a PR, Odradek spins up a temporary environment via k8s so CS and product can verify the fix themselves, without a developer deploying to a dev server
-- **Model routing** — not every task needs the most capable (and most expensive) model. Investigation and triage might run on a smaller model or an open-source option like Qwen Coder, while the actual fix uses a frontier model. Routing tasks to the right model tier is how you keep API costs sustainable as the harness scales
+- **Event-driven triggers:** Fire automatically when a bug is opened in HubSpot or GitHub Issues, not manually launched by an engineer
+- **Cloud-hosted dashboard:** Non-engineers (CS, product) can log in and see fix statuses without pinging a dev
+- **MS Teams integration:** Ask about a bug status, kick off an investigation, or request a fix directly from chat
+- **Parallel issue processing:** Right now Odradek works on one issue at a time against a single local copy of the codebase. Git worktrees (or isolated clones) would let it spin up multiple working copies and process several bugs concurrently, collapsing a queue into parallel throughput
+- **Ephemeral test environments:** Instead of just putting up a PR, Odradek spins up a temporary environment via k8s so CS and product can verify the fix themselves, without a developer deploying to a dev server
+- **Model routing:** Not every task needs the most capable (and most expensive) model. Investigation and triage might run on a smaller model or an open-source option like Qwen Coder, while the actual fix uses a frontier model. Routing tasks to the right model tier is how you keep API costs sustainable as the harness scales
 
-Each of those steps removes an engineer from the loop on work that doesn't require engineering judgment. The same harness pattern extends to small features, tweaks, and polish items — exactly the long tail we described above. Longer-term, we're starting to explore whether a harness can move beyond fixes and into new feature development — prototyping and building, not just repairing. That's a harder problem with a different workflow, and we're very early, but it's the natural next frontier once bug resolution is reliable.
+Each of those steps removes an engineer from the loop on work that doesn't require engineering judgment. The same harness pattern extends to small features, tweaks, and polish items, exactly the long tail I described above. Longer-term, I'm starting to explore whether a harness can move beyond fixes and into new feature development: prototyping and building, not just repairing. That's a harder problem with a different workflow, and I'm very early, but it's the natural next frontier once bug resolution is reliable.
 
-This doesn't mean engineers have less to do. Complex features, architectural decisions, and novel problem-solving still require human engineers — and always will. What changes is the *mix* of engineering work. Some of the time that used to go to routine feature dev shifts toward building and improving the harness itself. You're still engineering; you're just engineering at a higher leverage point. The goal isn't a faster engineer. It's a larger team.
+This doesn't mean engineers have less to do. Complex features, architectural decisions, and novel problem-solving still require human engineers, and always will. What changes is the *mix* of engineering work. Some of the time that used to go to routine feature dev shifts toward building and improving the harness itself. You're still engineering; you're just engineering at a higher leverage point. The goal isn't a faster engineer. It's a larger team.
 
 ---
 
 ## The Velocity Curves
 
-Here's the intuition made visual. Prompt and context engineering follow logarithmic curves — fast early returns that taper as you approach the ceiling. Harness engineering is different: it follows an S-curve, slow at first but accelerating dramatically in the mid-range before tapering at the top. The ceilings are different, our position on each curve is different, and the shape of the harness curve is why it rewards sustained investment differently than the other two.
+Here's the intuition made visual. Prompt and context engineering follow logarithmic curves, with fast early returns that taper as you approach the ceiling. Harness engineering is different: it follows an S-curve, slow at first but accelerating sharply in the mid-range before tapering at the top. The ceilings are different, my position on each curve is different, and the shape of the harness curve is why it rewards sustained investment differently than the other two.
 
 <svg viewBox="0 0 600 300" style="max-width:600px;width:100%;display:block;margin:1.5em auto;" font-family="'JetBrains Mono',monospace">
   <!-- Grid -->
@@ -280,21 +280,22 @@ Here's the intuition made visual. Prompt and context engineering follow logarith
   <!-- Harness curve (peach) — reaches 10.0 -->
   <polyline points="70,260 121,256.6 172,248.75 223,233 274,208.25 325,174.5 376,138.5 427,104.75 478,77.75 529,55.25 580,35" fill="none" stroke="#fab387" stroke-width="2.5" stroke-linejoin="round"/>
   <!-- Legend -->
-  <line x1="400" y1="48" x2="420" y2="48" stroke="#a6e3a1" stroke-width="2.5"/>
-  <text x="425" y="52" fill="#a6e3a1" font-size="10">Prompt (+1x)</text>
-  <line x1="400" y1="63" x2="420" y2="63" stroke="#89b4fa" stroke-width="2.5"/>
-  <text x="425" y="67" fill="#89b4fa" font-size="10">Context (+3x)</text>
-  <line x1="400" y1="78" x2="420" y2="78" stroke="#fab387" stroke-width="2.5"/>
-  <text x="425" y="82" fill="#fab387" font-size="10">Harness (+10x)</text>
+  <rect x="78" y="38" width="130" height="52" rx="4" fill="#1e1e2e" fill-opacity="0.85" stroke="#313244" stroke-width="0.5"/>
+  <line x1="86" y1="52" x2="106" y2="52" stroke="#a6e3a1" stroke-width="2.5"/>
+  <text x="111" y="56" fill="#a6e3a1" font-size="10">Prompt (+1x)</text>
+  <line x1="86" y1="67" x2="106" y2="67" stroke="#89b4fa" stroke-width="2.5"/>
+  <text x="111" y="71" fill="#89b4fa" font-size="10">Context (+3x)</text>
+  <line x1="86" y1="82" x2="106" y2="82" stroke="#fab387" stroke-width="2.5"/>
+  <text x="111" y="86" fill="#fab387" font-size="10">Harness (+10x)</text>
 </svg>
 
 A few things worth pointing out in these charts:
 
-**The ceilings are the point.** Prompt engineering is real and valuable — we've captured most of what it has to give us, and it's made us meaningfully more effective. But it tops out around +1x additional velocity. Context engineering takes more sustained investment but tops out around +3x. Harness engineering requires the most investment — and the longest runway — but tops out around +10x. These aren't firm numbers; they're directional. The message is that the disciplines aren't interchangeable, and each outer layer demands more work but delivers categorically larger returns.
+**The ceilings are the point.** Prompt engineering is real and valuable. I've captured most of what it has to give, and it's made me meaningfully more effective. But it tops out around +1x additional velocity. Context engineering takes more sustained investment but tops out around +3x. Harness engineering requires the most investment and the longest runway, but tops out around +10x. These aren't firm numbers; they're directional. The message is that the disciplines aren't interchangeable, and each outer layer demands more work but delivers much larger returns.
 
-Crucially, the harness ceiling is higher because it measures something different: not just how fast your team works, but how much of your backlog actually gets addressed.
+The harness ceiling is higher because it measures something different: how much of your backlog actually gets addressed.
 
-**We're far along the prompt curve, early-mid on context, and very early on harness.** Even Odradek in its current form — a first-generation agent harness that one-shots 60% of customer bugs — represents early returns from a curve that hasn't yet hit its steepest section. The S-curve shape means the most asymmetric returns are just ahead of us. That's where we're investing.
+**I'm far along the prompt curve, early-mid on context, and very early on harness.** Even Odradek in its current form (a first-generation agent harness that one-shots 60% of customer bugs) represents early returns from a curve that hasn't yet hit its steepest section. The S-curve shape means the most asymmetric returns are just ahead of me. That's where I'm investing.
 
 ---
 
@@ -302,13 +303,13 @@ Crucially, the harness ceiling is higher because it measures something different
 
 If you're early in your agentic journey, prompt engineering is the right starting point. The feedback loop is short, the skills are transferable, and you need a foundation before context or harness work pays off.
 
-If you're mid-stage — comfortable with prompting, starting to feel the limits — context engineering is where the next returns are. Build the knowledge layer. Start with PILRs in the places where your agents are most confused or most repetitive. Index them so the agent can navigate selectively rather than loading everything at once. We wrote a [deep dive on how we build and use PILRs](https://detroitdevelopers.com/blog/context-engineering-pilrs/) if you want a practical starting point.
+If you're mid-stage, comfortable with prompting, starting to feel the limits, context engineering is where the next returns are. Build the knowledge layer. Start with PILRs in the places where your agents are most confused or most repetitive. Index them so the agent can navigate selectively rather than loading everything at once. I wrote a [deep dive on how I build and use PILRs](https://detroitdevelopers.com/blog/context-engineering-pilrs/) if you want a practical starting point.
 
-If you're operating at a scale where prompt and context engineering are solid, and you're watching valuable work pile up in backlogs because your team is at capacity — that's the signal to start engineering a harness. Pick a narrow, repetitive workflow — bug triage, small fixes, polish items. Build around it. Measure the one-shot rate. The question isn't "did it make us faster?" It's "did work get done that wouldn't have happened otherwise?"
+If you're operating at a scale where prompt and context engineering are solid, and you're watching valuable work pile up in backlogs because your team is at capacity, that's the signal to start engineering a harness. Pick a narrow, repetitive workflow (bug triage, small fixes, polish items). Build around it. Measure the one-shot rate. The question isn't "did it make me faster?" It's "did work get done that wouldn't have happened otherwise?"
 
-We're doing all three simultaneously, which means we're spreading investment across disciplines at different maturities. That's intentional — the layers are interdependent. A harness without good context engineering is just an autonomous agent that makes confident, uninformed decisions. Context without harness is a knowledge base that still requires a human to unlock every time.
+I'm doing all three simultaneously because the largest gains are achieved by treating the layers as interdependent. A harness without good context engineering is just an autonomous agent that makes confident, uninformed decisions. Context without harness is a knowledge base that still requires a human to unlock every time.
 
-The goal is a system where all three layers reinforce each other. And then — like any good compounding investment — you keep building.
+My goal is to increase velocity without sacrificing quality. I'm not there yet, but I'm closer every sprint.
 
 ---
 
@@ -326,7 +327,7 @@ The goal is a system where all three layers reinforce each other. And then — l
 
 ## References
 
-- Chip Huyen, [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/) (O'Reilly, 2025) — comprehensive reference on the broader AI engineering discipline
-- [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/) — my first post on agentic development practices at RIVET
-- [Context Engineering with PILRs](https://detroitdevelopers.com/blog/context-engineering-pilrs/) — deep dive on how I've built and used Persistent Indexed Learning Repositories @ RIVET
-- [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk) — the SDK we use to power Odradek
+- Chip Huyen, [*AI Engineering*](https://www.oreilly.com/library/view/ai-engineering/9781098166298/) (O'Reilly, 2025). Comprehensive reference on the broader AI engineering discipline
+- [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/). My first post on agentic development practices at RIVET
+- [Context Engineering with PILRs](https://detroitdevelopers.com/blog/context-engineering-pilrs/). Deep dive on how I build and use Persistent Indexed Learning Repositories at RIVET
+- [Claude Code SDK](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/sdk). The SDK I use to power Odradek
