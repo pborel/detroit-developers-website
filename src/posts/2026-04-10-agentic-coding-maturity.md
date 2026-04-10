@@ -16,7 +16,7 @@ permalink: /blog/agentic-coding-maturity/
 
 ---
 
-When developers mention "using AI," they're often referring to three distinct disciplines, each with its own investment curve, ceiling and compounding dynamics.
+Most developers "using AI" are actually navigating three distinct disciplines without a map. Knowing where you are on the journey from prompt to context to harness engineering tells you exactly where your next hour of investment will compound the most.
 
 At RIVET, I've been trying to get more precise about these disciplines as my team has dug deeper into agentic development. Most engineers have a reasonable sense of what prompt engineering is. Context engineering is gaining traction as a term. But harness engineering - building systems around the agent - is the layer where I see the most confusion. And it's the one with the largest potential ROI.
 
