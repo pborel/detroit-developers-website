@@ -1,0 +1,1129 @@
+---
+layout: slides-layout.njk
+title: "Agentic Software Development: Advanced Practitioner's Guide - 30-Minute Edition"
+permalink: /slides/agentic-advanced-practitioners-guide-30min/
+slideTotal: 34
+draft: true
+---
+
+{% set slideTotal = slideTotal %}
+
+<div class="slideshow" id="slideshow">
+  {% include "slides-default.njk" %}
+
+  {# ── Intro ── #}
+
+  {# ── Slide 4: Title ── #}
+  <div class="slide" id="slide-4">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div>
+        <div class="opener-title" style="font-size: clamp(32px, 5vw, 72px);">Agentic Software<br><span class="accent">Development</span></div>
+        <div class="opener-subtitle">Advanced Practitioner's Guide&nbsp;<span class="cursor"></span></div>
+        <div class="opener-subtitle" style="margin-top: 8px; font-size: clamp(11px, 1.2vw, 16px);">Phil Borel · RIVET · Detroit Developers · April 2026</div>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com/slides/agentic-advanced-practitioners-guide-30min/"
+          alt="Slides QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com/slides/agentic-advanced-practitioners-guide-30min</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● title.md</span>
+      <div class="slide-status-right">
+        <span>4 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 5: The BHAG ── #}
+  <div class="slide" id="slide-5">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// the goal that kicked it all off</div>
+      <div>
+        <div class="opener-subtitle" style="font-size: clamp(11px, 1.2vw, 16px); margin-bottom: 12px; color: var(--subtext0);">February 2026 · All-Hands</div>
+        <div class="opener-title" style="font-size: clamp(32px, 5vw, 72px);"><span style="color: var(--peach);">3x</span> Product<br>Development <span class="accent">Velocity</span></div>
+        <div class="opener-subtitle" style="margin-top: 16px;">BHAG - Big Hairy Audacious Goal&nbsp;<span class="cursor"></span></div>
+        <div class="opener-subtitle" style="margin-top: 12px; font-size: clamp(12px, 1.2vw, 16px); color: var(--subtext0);">by Q1 2027</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● bhag.md</span>
+      <div class="slide-status-right">
+        <span>5 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 6: Taking the BHAG Seriously ── #}
+  <div class="slide" id="slide-6">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// how we got started</div>
+      <div class="question-slide">
+        <div class="question-text">We took the BHAG seriously</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--blue);">Learned</strong> - devoured papers, talks &amp; blog posts on agentic development</li>
+          <li><strong style="color: var(--green);">Convened</strong> - started a weekly <em>AI Roundtable</em> where devs share what's working &amp; what's not</li>
+          <li><strong style="color: var(--pink);">Experimented</strong> - every engineer picked up Claude Code; open-door policy on tools &amp; workflows</li>
+          <li class="sub-note">High-volume learning environment, not a slow-roll adoption process</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● bhag-response.md</span>
+      <div class="slide-status-right">
+        <span>6 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 7: Honest Framing ── #}
+  <div class="slide" id="slide-7">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div class="question-slide">
+        <div class="question-text question-text--large">A working case study.<br>Not a success story.<br><span style="color: var(--subtext0);">Yet.</span></div>
+        <div style="margin-top: 32px; color: var(--subtext0); font-size: clamp(14px, 1.4vw, 20px); text-align: left;">Progress from Feb -> Apr:</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--green);">~2x velocity increase</strong></li>
+          <li><strong style="color: var(--blue);">Zero P0 incidents</strong> - down from ~one per sprint</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● framing.md</span>
+      <div class="slide-status-right">
+        <span>7 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 8: What Does 3x Mean? ── #}
+  <div class="slide" id="slide-8">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div class="question-slide">
+        <div class="question-text">What does 3x even mean?</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--blue);">Vibes</strong> - execs feel like we shipped 3x the value</li>
+          <li data-step="outline"><strong style="color: var(--green);">Metrics</strong> - DORA numbers, PR throughput, features shipped</li>
+          <li><strong style="color: var(--pink);">Outcomes</strong> - users get more value more quickly</li>
+          <li class="sub-note">All three matter. None is sufficient alone.</li>
+          <li class="sub-note">Risk: 10x some metrics while seeing modest gains on outcomes</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● what-is-3x.md</span>
+      <div class="slide-status-right">
+        <span>8 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 9: AI Is an Amplifier (DORA + CMU) ── #}
+  <div class="slide" id="slide-9">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div class="question-slide">
+        <div class="question-text">AI is an amplifier.</div>
+        <ul class="question-bullets">
+          <li><a href="https://services.google.com/fh/files/misc/2025_dora_ai_capabilities_model.pdf" style="color: var(--blue); text-decoration: none;"><strong>DORA 2025</strong></a> (5,000 professionals): high-performing orgs see 50% fewer customer incidents. Struggling orgs: 2× more.</li>
+          <li><strong style="color: var(--green);">CMU 2026</strong> (807 open source repos): 281% increase in lines added month one. Month two: velocity gone, back to baseline. Complexity +41% permanently.</li>
+          <li><strong style="color: var(--pink);">In the wild</strong> (Amazon retail): spike in outages → senior sign-off mandate.</li>
+          <li class="sub-note">"AI is moving organizations in different directions." - Laura Tacho, DX</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● amplifier.md</span>
+      <div class="slide-status-right">
+        <span>9 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 10: What It Amplifies ── #}
+  <div class="slide" id="slide-10">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div class="question-slide">
+        <div class="question-text">What does AI amplify?</div>
+        <ul class="question-bullets">
+          <li><span style="color: var(--green);">Good architecture</span> → great architecture</li>
+          <li><span style="color: var(--pink);">Bad architecture</span> → messy, sprawling code generated at scale</li>
+          <li><span style="color: var(--green);">Good specs</span> → accurate, testable implementations</li>
+          <li><span style="color: var(--pink);">Vague specs</span> → confidently wrong code that passes tests you didn't write</li>
+          <li><span style="color: var(--green);">Consistent patterns</span> → idiomatic output on the first try</li>
+          <li><span style="color: var(--pink);">Three divergent patterns</span> → agent picks whichever it saw last, tech debt at speed</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● what-it-amplifies.md</span>
+      <div class="slide-status-right">
+        <span>10 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 11: The Implication ── #}
+  <div class="slide" id="slide-11">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// intro</div>
+      <div class="question-slide">
+        <div class="question-text question-text--large">Best practices matter <em>more</em> with AI, not less.</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● implication.md</span>
+      <div class="slide-status-right">
+        <span>11 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Three Layers ── #}
+
+  {# ── Slide 12: Act Intro - Three Layers ── #}
+  <div class="slide" id="slide-12">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// three layers of agentic maturity</div>
+      <div>
+        <div class="opener-subtitle" style="font-size: clamp(11px, 1.2vw, 16px); margin-bottom: 12px; color: var(--subtext0);">The framework</div>
+        <div class="opener-title" style="font-size: clamp(28px, 4vw, 60px);">Three Layers of<br><span class="accent">Agentic Maturity</span></div>
+        <div class="opener-subtitle" style="margin-top: 16px; font-size: clamp(13px, 1.4vw, 18px); color: var(--subtext0);">Prompt · Context · Harness&nbsp;<span class="cursor"></span></div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● three-layers.md</span>
+      <div class="slide-status-right">
+        <span>12 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 13: The Russian Doll ── #}
+  <div class="slide" id="slide-13">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// the three layers</div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 12px;">
+        <svg viewBox="0 0 700 520" style="width:100%;max-height:75vh;display:block;" font-family="'JetBrains Mono',monospace">
+          <!-- AI Engineering (outermost) -->
+          <rect x="10" y="10" width="680" height="500" rx="14" fill="#b4befe" fill-opacity="0.06" stroke="#b4befe" stroke-width="2" stroke-dasharray="8,5"/>
+          <text x="350" y="38" text-anchor="middle" fill="#b4befe" font-size="16">AI Engineering</text>
+          <!-- Agentic Software Engineering -->
+          <rect x="50" y="55" width="600" height="420" rx="12" fill="#cba6f7" fill-opacity="0.06" stroke="#cba6f7" stroke-width="2"/>
+          <text x="350" y="83" text-anchor="middle" fill="#cba6f7" font-size="16">Agentic Software Engineering</text>
+          <!-- Harness Engineering -->
+          <rect x="95" y="100" width="510" height="340" rx="10" fill="#fab387" fill-opacity="0.08" stroke="#fab387" stroke-width="2.5"/>
+          <text x="350" y="130" text-anchor="middle" fill="#fab387" font-size="17">Harness Engineering</text>
+          <!-- Context Engineering -->
+          <rect x="150" y="150" width="400" height="245" rx="8" fill="#89b4fa" fill-opacity="0.1" stroke="#89b4fa" stroke-width="2.5"/>
+          <text x="350" y="182" text-anchor="middle" fill="#89b4fa" font-size="17">Context Engineering</text>
+          <!-- Prompt Engineering (innermost) -->
+          <rect x="215" y="210" width="270" height="140" rx="6" fill="#a6e3a1" fill-opacity="0.15" stroke="#a6e3a1" stroke-width="2.5"/>
+          <text x="350" y="290" text-anchor="middle" fill="#a6e3a1" font-size="20" font-weight="bold">Prompt Engineering</text>
+        </svg>
+        <div style="color: var(--subtext0); font-size: clamp(14px, 1.6vw, 20px); text-align: center;">Each outer layer <em>contains and depends on</em> the inner ones</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● layers.md</span>
+      <div class="slide-status-right">
+        <span>13 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 14: Prompt Engineering ── #}
+  <div class="slide" id="slide-14">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// layer 1: prompt engineering</div>
+      <div class="question-slide">
+        <div class="question-text" style="color: var(--green);">Prompt Engineering</div>
+        <ul class="question-bullets">
+          <li>Telling an agent what to do effectively</li>
+          <li>Written prompts, CLAUDE.md, rules, skills</li>
+          <li>In practice: <strong>almost entirely markdown optimization</strong></li>
+          <li>Tight feedback loop - edit a file, run a session, see what changed</li>
+          <li style="color: var(--peach)">Ceiling: ~+1x velocity</li>
+          <li class="sub-note">systems to measure &amp; optimize prompt effectiveness (Chip Huyen)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● prompt-engineering.md</span>
+      <div class="slide-status-right">
+        <span>14 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 15: Context Engineering ── #}
+  <div class="slide" id="slide-15">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// layer 2: context engineering</div>
+      <div class="question-slide">
+        <div class="question-text" style="color: var(--blue);">Context Engineering</div>
+        <ul class="question-bullets">
+          <li>Managing what knowledge the agent has access to - and when</li>
+          <li>PILRs - Persistent Indexed Learning Repositories</li>
+          <li><strong style="color: #cba6f7;">Type 1</strong> (Ephemeral): per-feature planning docs, test plans</li>
+          <li><strong style="color: var(--green);">Type 2</strong> (Evergreen): architecture docs, system design, API contracts</li>
+          <li><strong style="color: #f38ba8;">Type 3</strong> (Cumulative): solved problems, incident patterns, institutional memory</li>
+          <li style="color: var(--peach)">Ceiling: ~+3x velocity</li>
+        </ul>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com/blog/context-engineering-pilrs/"
+          alt="PILRs blog post QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com/blog/context-engineering-pilrs</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● context-engineering.md</span>
+      <div class="slide-status-right">
+        <span>15 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 16: CLAUDE.md Map ── #}
+  <div class="slide" id="slide-16">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// context engineering: claude.md</div>
+      <div class="question-slide">
+        <div class="question-text">CLAUDE.md: <span style="color: var(--blue);">map</span>, not encyclopedia</div>
+        <ul class="question-bullets">
+          <li>A large instruction file actively degrades agent performance - crowds out the task</li>
+          <li>When everything is "important," agents fall back to local pattern-matching</li>
+          <li>~100 lines max - structured as a map with pointers to deeper sources of truth</li>
+          <li>Checked into the repo. Reviewed in PRs. Evolved alongside the codebase.</li>
+          <li class="sub-note">Team artifact, not personal config</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● claude-md.md</span>
+      <div class="slide-status-right">
+        <span>16 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 17: PILRs - Knowledge Bases That Learn ── #}
+  <div class="slide" id="slide-17">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// context engineering: pilrs</div>
+      <div class="question-slide">
+        <div class="question-text">PILRs: knowledge bases that <span style="color: var(--blue);">learn</span></div>
+        <ul class="question-bullets">
+          <li>Structured markdown files + an <code>index.json</code> that tells the agent where to look</li>
+          <li>The agent loads only what it needs - reducing context window bloat</li>
+          <li>Note: PILRs <em>continue to evolve</em> as the agent does the work</li>
+          <li>Every fix, every new pattern, every bit of domain knowledge the agent picks up → feed back to the PILR</li>
+          <li class="sub-note">Unlike a wiki that goes stale, a PILR is maintained by the thing that reads it</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● pilrs-intro.md</span>
+      <div class="slide-status-right">
+        <span>17 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 18: PILRs in Practice ── #}
+  <div class="slide" id="slide-18">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// context engineering: pilrs in practice</div>
+      <div class="slide-images">
+        <figure>
+          <img src="/assets/images/PILRs-RIVET.png" alt="PILRs at RIVET - temp/projects directory structure with high-level planning docs, per-PR plans, and test plans" style="max-height: 38vh;">
+          <figcaption>PILRs at RIVET</figcaption>
+        </figure>
+        <figure>
+          <img src="/assets/images/PILRs-superpowers.png" alt="PILRs in the Superpowers plugin - docs/superpowers/plans and specs directories" style="max-height: 38vh;">
+          <figcaption>PILRs in Superpowers</figcaption>
+          <div class="qr-block" style="position: static; margin-top: 8px;">
+            <img
+              src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://github.com/obra/superpowers"
+              alt="github.com/obra/superpowers QR code"
+              loading="lazy"
+              style="border: none; border-radius: 4px;"
+            >
+            <div class="qr-label">github.com/obra/superpowers</div>
+          </div>
+        </figure>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● pilrs-examples.md</span>
+      <div class="slide-status-right">
+        <span>18 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 19: PILRs in Practice (cont.) ── #}
+  <div class="slide" id="slide-19">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// context engineering: pilrs in practice (cont.)</div>
+      <div class="slide-images">
+        <figure style="flex: 1;">
+          <img src="/assets/images/PILRs-odradek.png" alt="Odradek resolutions database - ticket_id, title, category, feature, and root_cause columns for resolved bugs" style="max-height: 55vh;">
+          <figcaption>PILRs in Odradek - resolved-bug database feeding the bug resolution agent</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● pilrs-examples-2.md</span>
+      <div class="slide-status-right">
+        <span>19 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 20: Harness Engineering ── #}
+  <div class="slide" id="slide-20">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// layer 3: harness engineering</div>
+      <div class="question-slide">
+        <div class="question-text" style="color: var(--peach);">Harness Engineering</div>
+        <ul class="question-bullets">
+          <li>Programming <em>around</em> the model - systems that run agents <em>for you</em></li>
+          <li>Multi-step autonomous workflows with human review of outcomes</li>
+          <li>Deterministic steps where reasoning isn't needed</li>
+          <li>Expands what work gets done <em>at all</em> - not just speed</li>
+          <li style="color: var(--peach)">Ceiling: ~+10x velocity (S-curve)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● harness-engineering.md</span>
+      <div class="slide-status-right">
+        <span>20 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 21: Harness Expands What Work Gets Done ── #}
+  <div class="slide" id="slide-21">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// harness engineering: what changes</div>
+      <div class="question-slide">
+        <div class="question-text question-text--large">Prompt &amp; context make <em>your</em> work faster.<br><span style="color: var(--peach);">Harness expands what work gets done <em>at all.</em></span></div>
+        <ul class="question-bullets" style="margin-top: 24px;">
+          <li>Every team has a long tail of valuable work that never makes the top of the backlog</li>
+          <li>A harness collapses a full ticket - research, implementation, PR - into a flow that runs while you're in meetings</li>
+          <li class="sub-note">The ceiling isn't +1x or +3x. It's much larger.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● harness-impact.md</span>
+      <div class="slide-status-right">
+        <span>21 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 22: Odradek ── #}
+  <div class="slide" id="slide-22">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// case study: odradek</div>
+      <div class="question-slide">
+        <div class="question-text" style="color: #f9e2af;">Odradek - Bug Resolution Agent</div>
+        <ul class="question-bullets">
+          <li>Built on the Claude Code SDK - Mac desktop app with cloud-hosted database for multiplayer support</li>
+          <li><strong style="color: var(--blue);">Investigates</strong> - reads source, checks git, consults PILR knowledge base, pulls context from Notion (MCP) &amp; GitHub (CLI)</li>
+          <li><strong style="color: var(--green);">Fixes</strong> - scoped, surgical edits to the relevant files</li>
+          <li><strong style="color: var(--peach);">Verifies</strong> - regression checks, test additions &amp; runs</li>
+          <li><strong style="color: #f38ba8;">Opens a PR</strong> - agentic-review phase + human-review phase</li>
+          <li style="color: var(--peach)">One-shot resolution rate: <strong>80%</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● odradek.md</span>
+      <div class="slide-status-right">
+        <span>22 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 23: Odradek Impact ── #}
+  <div class="slide" id="slide-23">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// odradek: impact on the backlog</div>
+      <div class="question-slide">
+        <div class="question-text">Odradek impact on the backlog</div>
+        <ul class="question-bullets">
+          <li><strong style="color: #f38ba8;">P1s</strong> (ship-within-a-week): used to sacrifice one engineer per sprint on rotation. Odradek bought back ~half an engineer.</li>
+          <li><strong style="color: var(--peach);">P2s</strong> (fix-within-a-quarter): used to stack for months. Now addressed as they come in.</li>
+          <li><strong style="color: var(--green);">P3s</strong> (nice-to-fix): were permanent backlog residents. Some are actually getting fixed now.</li>
+          <li class="sub-note">Work that would never have happened at the current team size</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● odradek-impact.md</span>
+      <div class="slide-status-right">
+        <span>23 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 24: Odradek Roadmap ── #}
+  <div class="slide" id="slide-24">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// odradek: what's next</div>
+      <div class="question-slide">
+        <div class="question-text" style="color: #f9e2af;">Odradek Roadmap</div>
+        <ul class="question-bullets">
+          <li>Event-driven triggers - auto-fire on bug ticket creation</li>
+          <li>Cloud-hosted dashboard - non-engineers see work in progress &amp; resolution status</li>
+          <li>MS Teams integration - ask about bugs &amp; initiate workflows from chat</li>
+          <li>Parallel issue processing - git worktrees for concurrent work</li>
+          <li>Ephemeral test environments - CS/product verify fixes themselves</li>
+          <li>Model routing - right model tier for each task; balances cost &amp; effectiveness</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● odradek-roadmap.md</span>
+      <div class="slide-status-right">
+        <span>24 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 25: 4-Layer Review (quality in check) ── #}
+  <div class="slide" id="slide-25">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// keeping quality in check</div>
+      <div class="question-slide">
+        <div class="question-text">More PRs, same (or better) quality</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--blue);">1. Architectural review</strong> - human, before code is written</li>
+          <li><strong style="color: var(--green);">2. Automated review</strong> - /review-pr skill, SonarCloud, Copilot review, linting, tests (all in CI)</li>
+          <li><strong style="color: var(--peach);">3. Human code review + manual QA</strong> - focused on the feature, based on test steps in the PR</li>
+          <li><strong style="color: var(--pink);">4. Full-app UAT/regression</strong> - end of every sprint (working toward replacing with Playwright)</li>
+          <li class="sub-note">Result: zero P0s this year despite ~2x PR throughput</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● review.md</span>
+      <div class="slide-status-right">
+        <span>25 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 26: The Three Ceilings ── #}
+  <div class="slide" id="slide-26">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// the three ceilings</div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+        <svg viewBox="0 0 600 450" style="height:80vh;max-width:100%;display:block;" font-family="'JetBrains Mono',monospace">
+          <!-- Grid -->
+          <line x1="90" y1="400" x2="560" y2="400" stroke="#313244" stroke-width="1"/>
+          <line x1="90" y1="327" x2="560" y2="327" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="90" y1="254" x2="560" y2="254" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="90" y1="181" x2="560" y2="181" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="90" y1="108" x2="560" y2="108" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="90" y1="35" x2="560" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="90" y1="35" x2="90" y2="400" stroke="#313244" stroke-width="1"/>
+          <!-- Title -->
+          <text x="325" y="22" text-anchor="middle" fill="#cdd6f4" font-size="16" font-weight="bold">The Three Ceilings</text>
+          <!-- Y-axis labels -->
+          <text x="80" y="404" text-anchor="end" fill="#a6adc8" font-size="12">0</text>
+          <text x="80" y="331" text-anchor="end" fill="#a6adc8" font-size="12">+2x</text>
+          <text x="80" y="258" text-anchor="end" fill="#a6adc8" font-size="12">+4x</text>
+          <text x="80" y="185" text-anchor="end" fill="#a6adc8" font-size="12">+6x</text>
+          <text x="80" y="112" text-anchor="end" fill="#a6adc8" font-size="12">+8x</text>
+          <text x="80" y="39" text-anchor="end" fill="#a6adc8" font-size="12">+10x</text>
+          <!-- Y-axis title -->
+          <text x="20" y="217" text-anchor="middle" fill="#a6adc8" font-size="12" transform="rotate(-90,20,217)">Velocity Gain</text>
+          <!-- X-axis title -->
+          <text x="325" y="438" text-anchor="middle" fill="#a6adc8" font-size="12">Investment in Tooling</text>
+          <!-- Prompt curve (green) - plateaus at 1.0 -->
+          <polyline points="90,400 137,383 184,376 231,374 278,373 325,372.5 372,372.3 419,372 466,372 513,372 560,372" fill="none" stroke="#a6e3a1" stroke-width="3" stroke-linejoin="round"/>
+          <!-- Context curve (blue) - plateaus at 3.0 -->
+          <polyline points="90,400 137,371 184,352 231,338 278,328 325,320 372,314 419,309 466,305 513,302 560,300" fill="none" stroke="#89b4fa" stroke-width="3" stroke-linejoin="round"/>
+          <!-- Harness curve (peach) - reaches 10.0 -->
+          <polyline points="90,400 137,395 184,383 231,360 278,326 325,278 372,224 419,172 466,128 513,82 560,35" fill="none" stroke="#fab387" stroke-width="3" stroke-linejoin="round"/>
+          <!-- Legend -->
+          <line x1="400" y1="56" x2="424" y2="56" stroke="#a6e3a1" stroke-width="3"/>
+          <text x="430" y="61" fill="#a6e3a1" font-size="13">Prompt (+1x)</text>
+          <line x1="400" y1="76" x2="424" y2="76" stroke="#89b4fa" stroke-width="3"/>
+          <text x="430" y="81" fill="#89b4fa" font-size="13">Context (+3x)</text>
+          <line x1="400" y1="96" x2="424" y2="96" stroke="#fab387" stroke-width="3"/>
+          <text x="430" y="101" fill="#fab387" font-size="13">Harness (+10x)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● velocity-curves.md</span>
+      <div class="slide-status-right">
+        <span>26 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 27: RIVET - Prompt Engineering ── #}
+  <div class="slide" id="slide-27">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// RIVET - prompt engineering</div>
+      <div style="display: flex; gap: 32px; align-items: center; height: 100%;">
+        <div style="flex: 1.2;">
+          <svg viewBox="0 0 600 300" style="height:65vh;max-width:100%;display:block;" font-family="'JetBrains Mono',monospace">
+            <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+            <line x1="70" y1="203.75" x2="580" y2="203.75" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="147.5" x2="580" y2="147.5" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="91.25" x2="580" y2="91.25" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+            <text x="325" y="20" text-anchor="middle" fill="#a6e3a1" font-size="14" font-weight="bold">Prompt Engineering</text>
+            <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+            <text x="62" y="207.75" text-anchor="end" fill="#a6adc8" font-size="10">+0.25x</text>
+            <text x="62" y="151.5" text-anchor="end" fill="#a6adc8" font-size="10">+0.50x</text>
+            <text x="62" y="95.25" text-anchor="end" fill="#a6adc8" font-size="10">+0.75x</text>
+            <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+1.0x</text>
+            <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+            <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment</text>
+            <path d="M70,260 L121,170 L172,125 L223,98 L274,80 L325,66.5 L376,57.5 L427,50.75 L478,44 L529,39.5 L529,260 Z" fill="#a6e3a1" opacity="0.2"/>
+            <polyline points="70,260 121,170 172,125 223,98 274,80 325,66.5 376,57.5 427,50.75 478,44 529,39.5 580,35" fill="none" stroke="#a6e3a1" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="529" y1="35" x2="529" y2="260" stroke="#a6e3a1" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+            <circle cx="529" cy="39.5" r="5" fill="#a6e3a1"/>
+            <text x="529" y="30" text-anchor="middle" fill="#a6e3a1" font-size="11" font-weight="bold">RIVET</text>
+          </svg>
+        </div>
+        <div style="flex: 0.8;">
+          <div style="color: var(--green); font-size: clamp(16px, 1.8vw, 24px); font-weight: bold; margin-bottom: 16px;">Far along, near the ceiling</div>
+          <ul class="question-bullets" style="font-size: clamp(12px, 1.2vw, 16px);">
+            <li>Deep investment in CLAUDE.md, rules, skills</li>
+            <li>Almost entirely markdown optimization</li>
+            <li>Tight feedback loop - edit, run, observe</li>
+            <li style="color: var(--subtext0); margin-top: 12px;">Most of the returns are already captured</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● rivet-prompt.md</span>
+      <div class="slide-status-right">
+        <span>27 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 28: RIVET - Context Engineering ── #}
+  <div class="slide" id="slide-28">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// RIVET - context engineering</div>
+      <div style="display: flex; gap: 32px; align-items: center; height: 100%;">
+        <div style="flex: 1.2;">
+          <svg viewBox="0 0 600 300" style="height:65vh;max-width:100%;display:block;" font-family="'JetBrains Mono',monospace">
+            <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+            <line x1="70" y1="203.75" x2="580" y2="203.75" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="147.5" x2="580" y2="147.5" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="91.25" x2="580" y2="91.25" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+            <text x="325" y="20" text-anchor="middle" fill="#89b4fa" font-size="14" font-weight="bold">Context Engineering</text>
+            <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+            <text x="62" y="207.75" text-anchor="end" fill="#a6adc8" font-size="10">+0.75x</text>
+            <text x="62" y="151.5" text-anchor="end" fill="#a6adc8" font-size="10">+1.5x</text>
+            <text x="62" y="95.25" text-anchor="end" fill="#a6adc8" font-size="10">+2.25x</text>
+            <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+3.0x</text>
+            <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+            <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment</text>
+            <path d="M70,260 L121,196.25 L172,153.5 L223,123.5 L274,101 L325,82.25 L325,260 Z" fill="#89b4fa" opacity="0.2"/>
+            <polyline points="70,260 121,196.25 172,153.5 223,123.5 274,101 325,82.25 376,68.75 427,57.5 478,48.5 529,41 580,35" fill="none" stroke="#89b4fa" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="325" y1="35" x2="325" y2="260" stroke="#89b4fa" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+            <circle cx="325" cy="82.25" r="5" fill="#89b4fa"/>
+            <text x="325" y="74" text-anchor="middle" fill="#89b4fa" font-size="11" font-weight="bold">RIVET</text>
+          </svg>
+        </div>
+        <div style="flex: 0.8;">
+          <div style="color: var(--blue); font-size: clamp(16px, 1.8vw, 24px); font-weight: bold; margin-bottom: 16px;">Early-mid, significant upside</div>
+          <ul class="question-bullets" style="font-size: clamp(12px, 1.2vw, 16px);">
+            <li>PILRs pattern is right; infrastructure isn't finished</li>
+            <li><strong style="color: #cba6f7;">Type 1 (Ephemeral)</strong> solid, <strong style="color: var(--green);">Type 2 (Evergreen)</strong> in progress, <strong style="color: #f38ba8;">Type 3 (Cumulative)</strong> nascent</li>
+            <li>Starting to invest in shared hosting &amp; data infra</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● rivet-context.md</span>
+      <div class="slide-status-right">
+        <span>28 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 29: RIVET - Harness Engineering ── #}
+  <div class="slide" id="slide-29">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// RIVET - harness engineering</div>
+      <div style="display: flex; gap: 32px; align-items: center; height: 100%;">
+        <div style="flex: 1.2;">
+          <svg viewBox="0 0 600 300" style="height:65vh;max-width:100%;display:block;" font-family="'JetBrains Mono',monospace">
+            <line x1="70" y1="260" x2="580" y2="260" stroke="#313244" stroke-width="1"/>
+            <line x1="70" y1="215" x2="580" y2="215" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="170" x2="580" y2="170" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="125" x2="580" y2="125" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="80" x2="580" y2="80" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="580" y2="35" stroke="#313244" stroke-width="0.5" stroke-dasharray="4"/>
+            <line x1="70" y1="35" x2="70" y2="260" stroke="#313244" stroke-width="1"/>
+            <text x="325" y="20" text-anchor="middle" fill="#fab387" font-size="14" font-weight="bold">Harness Engineering</text>
+            <text x="62" y="264" text-anchor="end" fill="#a6adc8" font-size="10">0</text>
+            <text x="62" y="219" text-anchor="end" fill="#a6adc8" font-size="10">+2x</text>
+            <text x="62" y="174" text-anchor="end" fill="#a6adc8" font-size="10">+4x</text>
+            <text x="62" y="129" text-anchor="end" fill="#a6adc8" font-size="10">+6x</text>
+            <text x="62" y="84" text-anchor="end" fill="#a6adc8" font-size="10">+8x</text>
+            <text x="62" y="39" text-anchor="end" fill="#a6adc8" font-size="10">+10x</text>
+            <text x="16" y="147.5" text-anchor="middle" fill="#a6adc8" font-size="10" transform="rotate(-90,16,147.5)">Velocity Gain</text>
+            <text x="325" y="296" text-anchor="middle" fill="#a6adc8" font-size="10">Investment</text>
+            <path d="M70,260 L121,256.6 L172,248.75 L223,233 L223,260 Z" fill="#fab387" opacity="0.2"/>
+            <polyline points="70,260 121,256.6 172,248.75 223,233 274,208.25 325,174.5 376,138.5 427,104.75 478,77.75 529,55.25 580,35" fill="none" stroke="#fab387" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="223" y1="35" x2="223" y2="260" stroke="#fab387" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.7"/>
+            <circle cx="223" cy="233" r="5" fill="#fab387"/>
+            <text x="233" y="227" text-anchor="start" fill="#fab387" font-size="11" font-weight="bold">RIVET</text>
+          </svg>
+        </div>
+        <div style="flex: 0.8;">
+          <div style="color: var(--peach); font-size: clamp(16px, 1.8vw, 24px); font-weight: bold; margin-bottom: 16px;">Very early - asymmetric upside</div>
+          <ul class="question-bullets" style="font-size: clamp(12px, 1.2vw, 16px);">
+            <li>Odradek is our first real harness - 80% one-shot rate</li>
+            <li>S-curve: slow start, steepest returns ahead</li>
+            <li style="color: var(--subtext0); margin-top: 12px;">This is where we're investing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● rivet-harness.md</span>
+      <div class="slide-status-right">
+        <span>29 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 30: Where to Invest ── #}
+  <div class="slide" id="slide-30">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// where to invest</div>
+      <div class="question-slide">
+        <div class="question-text">Where to invest your tokens</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--green);">Early:</strong> Start with prompt engineering. Short feedback loop, transferable skills, necessary foundation</li>
+          <li><strong style="color: var(--blue);">Mid-stage:</strong> Context engineering. Build the knowledge layer. Start with PILRs where agents are most confused</li>
+          <li><strong style="color: var(--peach);">Advanced:</strong> Harness engineering. Pick a narrow, repetitive workflow. Measure the one-shot rate</li>
+          <li style="color: var(--subtext0); margin-top: 12px;">The balance: increasing velocity - maintaining quality</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● investment.md</span>
+      <div class="slide-status-right">
+        <span>30 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 31: Takeaway ── #}
+  <div class="slide" id="slide-31">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// the takeaway</div>
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; gap: 32px;">
+        <div class="opener-title" style="font-size: clamp(24px, 3.5vw, 48px); text-align: center;">Unlock <span style="color: var(--blue);">Capacity (Eng)</span><br><span style="font-size: 0.6em; color: var(--subtext0);">+</span><br>Unlock <span style="color: var(--peach);">Capability (Product)</span></div>
+        <div style="display: flex; gap: clamp(24px, 4vw, 64px); text-align: center; flex-wrap: wrap; justify-content: center;">
+          <div style="flex: 1; min-width: 320px;">
+            <div style="color: var(--blue); font-size: clamp(14px, 1.4vw, 20px); font-weight: bold; margin-bottom: 8px;">Capacity</div>
+            <div style="color: var(--subtext0); font-size: clamp(12px, 1.2vw, 16px);">Better prompt &amp; context engineering<br>makes agentic tools more effective</div>
+          </div>
+          <div style="flex: 1; min-width: 320px;">
+            <div style="color: var(--peach); font-size: clamp(14px, 1.4vw, 20px); font-weight: bold; margin-bottom: 8px;">Capability</div>
+            <div style="color: var(--subtext0); font-size: clamp(12px, 1.2vw, 16px);">Designers &amp; PMs prototype,<br>validate &amp; shape features directly</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● takeaway.md</span>
+      <div class="slide-status-right">
+        <span>31 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 32: Next Week ── #}
+  <div class="slide" id="slide-32">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// close</div>
+      <div class="question-slide">
+        <div class="question-text">Next week</div>
+        <ul class="question-bullets">
+          <li><strong style="color: var(--blue);">Write a CLAUDE.md</strong> for one repo: tech stack, architecture in two paragraphs, three things you wish every new engineer knew</li>
+          <li><strong style="color: var(--green);">Try one skill</strong> - start simple: /review-pr or /commit, not /implement</li>
+          <li><strong style="color: var(--pink);">Identify one refactor</strong> that would make your codebase more agent-navigable - put it on the roadmap</li>
+          <li><strong style="color: var(--peach);">Try Superpowers</strong> - <a href="https://github.com/obra/superpowers" style="color: var(--peach);">github.com/obra/superpowers</a> - a Claude Code plugin with skills for brainstorming, planning, TDD, debugging &amp; more</li>
+          <li class="sub-note">None of this requires a BHAG or an executive mandate</li>
+        </ul>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● next-week.md</span>
+      <div class="slide-status-right">
+        <span>32 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 33: Further Reading ── #}
+  <div class="slide" id="slide-33">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// close</div>
+      <div class="question-slide">
+        <div class="question-text">Further reading</div>
+        <ul class="question-bullets">
+          <li><a href="https://detroitdevelopers.com/blog/agentic-coding-advanced-guide/" style="color: var(--blue);">Advanced Agentic Coding &amp; The Journey Towards 3x</a></li>
+          <li><a href="https://detroitdevelopers.com/blog/agentic-coding-maturity/" style="color: var(--blue);">The Three Layers of Agentic Engineering Maturity</a></li>
+          <li><a href="https://detroitdevelopers.com/blog/context-engineering-pilrs/" style="color: var(--blue);">Context Engineering with PILRs</a></li>
+          <li class="sub-note">DORA AI Capabilities Model (2025) · Harness Engineering - OpenAI (Feb 2026)</li>
+          <li class="sub-note">CMU Speed at the Cost of Quality (2026) · Are AI Agents Actually Slowing Us Down? - Pragmatic Engineer</li>
+          <li class="sub-note">Superpowers plugin for Claude Code: github.com/obra/superpowers</li>
+        </ul>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com/blog/agentic-coding-maturity/"
+          alt="Blog post QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com/blog/agentic-coding-maturity</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● resources.md</span>
+      <div class="slide-status-right">
+        <span>33 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+  {# ── Slide 34: Questions ── #}
+  <div class="slide" id="slide-34">
+    <div class="slide-gutter" aria-hidden="true">
+      <span>1</span><span>2</span><span>3</span><span>4</span>
+      <span>5</span><span>6</span><span>7</span><span>8</span>
+    </div>
+    <div class="slide-content">
+      <div class="ide-comment">// close</div>
+      <div>
+        <div class="opener-title" style="font-size: clamp(32px, 5vw, 72px);">Questions<span class="cursor"></span></div>
+      </div>
+      <div class="qr-block">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://detroitdevelopers.com"
+          alt="detroitdevelopers.com QR code"
+          loading="lazy"
+        >
+        <div class="qr-label">detroitdevelopers.com</div>
+      </div>
+    </div>
+    <div class="slide-status" aria-hidden="true">
+      <span>⑂ main</span>
+      <span>● questions.md</span>
+      <div class="slide-status-right">
+        <span>34 / {{ slideTotal }}</span>
+        <span>Detroit, MI</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let current = 0;
+
+  function getHashIndex() {
+    const n = parseInt(window.location.hash.replace('#', ''), 10);
+    return (!isNaN(n) && n >= 1 && n <= total) ? n - 1 : 0;
+  }
+
+  function showSlide(index) {
+    slides[current].classList.remove('active');
+    current = Math.max(0, Math.min(total - 1, index));
+    slides[current].classList.add('active');
+    history.replaceState(null, '', '#' + (current + 1));
+  }
+
+  function applyStep(el) {
+    var mode = el.getAttribute('data-step');
+    if (mode === 'outline') {
+      el.style.outline = '2px solid #fab387';
+      el.style.outlineOffset = '4px';
+      el.style.borderRadius = '4px';
+      el.style.width = 'fit-content';
+      el.style.maxWidth = '100%';
+    } else {
+      el.style.textDecoration = 'line-through';
+      el.style.opacity = '0.4';
+    }
+  }
+
+  function clearStep(el) {
+    var mode = el.getAttribute('data-step');
+    if (mode === 'outline') {
+      el.style.outline = '';
+      el.style.outlineOffset = '';
+      el.style.borderRadius = '';
+      el.style.width = '';
+      el.style.maxWidth = '';
+    } else {
+      el.style.textDecoration = '';
+      el.style.opacity = '';
+    }
+  }
+
+  function advance() {
+    var slide = slides[current];
+    var pendingStep = slide.querySelector('[data-step]:not(.step-done)');
+    if (pendingStep) {
+      pendingStep.classList.add('step-done');
+      applyStep(pendingStep);
+      return;
+    }
+    if (current < total - 1) showSlide(current + 1);
+  }
+
+  function retreat() {
+    var slide = slides[current];
+    var doneSteps = Array.from(slide.querySelectorAll('[data-step].step-done'));
+    if (doneSteps.length > 0) {
+      var last = doneSteps[doneSteps.length - 1];
+      last.classList.remove('step-done');
+      clearStep(last);
+      return;
+    }
+    if (current > 0) showSlide(current - 1);
+  }
+
+  showSlide(getHashIndex());
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault();
+      advance();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      retreat();
+    }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('a') || e.target.closest('button')) return;
+    advance();
+  });
+
+  window.addEventListener('hashchange', function () {
+    showSlide(getHashIndex());
+  });
+})();
+</script>
