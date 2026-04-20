@@ -5,7 +5,7 @@ date: 2026-04-21
 location: "The Madison 2nd Floor, 1555 Broadway St, Detroit"
 meetup_url: "https://www.meetup.com/detroit-developers/events/313941115/"
 luma_url: "https://luma.com/tsgvg66b"
-slides: /slides/agentic-advanced-practitioners-guide/
+slides: /slides/agentic-advanced-practitioners-guide-30min/
 permalink: /events/{{ page.fileSlug }}/
 ---
 
