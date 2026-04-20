@@ -110,7 +110,7 @@ draft: true
         <div class="question-text question-text--large">A working case study.<br>Not a success story.<br><span style="color: var(--subtext0);">Yet.</span></div>
         <div style="margin-top: 32px; color: var(--subtext0); font-size: clamp(14px, 1.4vw, 20px); text-align: left;">Progress from Feb -> Apr:</div>
         <ul class="question-bullets">
-          <li><strong style="color: var(--green);">~2x velocity increase</strong></li>
+          <li data-step="outline"><strong style="color: var(--green);">~2x velocity increase</strong><div class="step-body" style="display: none; margin-top: 6px; font-size: 0.8em; color: var(--subtext0); font-style: italic;">much of the acceleration came from process changes, code refactors &amp; quality initiatives</div></li>
           <li><strong style="color: var(--blue);">Zero P0 incidents</strong> - down from ~one per sprint</li>
         </ul>
       </div>
@@ -1062,6 +1062,8 @@ draft: true
       el.style.borderRadius = '4px';
       el.style.width = 'fit-content';
       el.style.maxWidth = '100%';
+      var body = el.querySelector('.step-body');
+      if (body) body.style.display = '';
     } else {
       el.style.textDecoration = 'line-through';
       el.style.opacity = '0.4';
@@ -1076,6 +1078,8 @@ draft: true
       el.style.borderRadius = '';
       el.style.width = '';
       el.style.maxWidth = '';
+      var body = el.querySelector('.step-body');
+      if (body) body.style.display = 'none';
     } else {
       el.style.textDecoration = '';
       el.style.opacity = '';
