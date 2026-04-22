@@ -44,7 +44,15 @@ permalink: /events/
         {% endfor %}
       </div>
     {% else %}
-      <p style="color: var(--subtext0);">No upcoming events. <a href="{{ site.meetup_url }}" target="_blank" rel="noopener">Check our Meetup page</a> for updates.</p>
+      <div class="event-card event-card--upcoming" style="max-width: 700px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+          <div style="flex: 1; min-width: 200px;">
+            <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">TBA</h2>
+            <p style="color: var(--subtext0); font-size: 14px;">Our next meetup hasn't been announced yet. <a href="{{ site.meetup_url }}" target="_blank" rel="noopener">Follow us on Meetup</a> to be the first to know.</p>
+          </div>
+          <span class="event-badge">NEXT UP</span>
+        </div>
+      </div>
     {% endif %}
   </div>
 </div>
