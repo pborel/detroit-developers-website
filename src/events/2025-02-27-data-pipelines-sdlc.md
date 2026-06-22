@@ -2,7 +2,7 @@
 layout: event.njk
 title: "Workshop: Data Pipelines for Fun & Profit AND SDLC for Cross-Functional Teams"
 date: 2025-02-27
-location: "The Madison Loft, 1555 Broadway St, Detroit"
+location: "The Madison Loft, Detroit"
 attendees: 24
 meetup_url: "https://www.meetup.com/detroit-developers/events/305937428/"
 permalink: /events/{{ page.fileSlug }}/

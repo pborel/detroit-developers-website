@@ -3,7 +3,7 @@ attendees: 30
 layout: event.njk
 title: "Agentic Software Development: Advanced Practitioner's Guide"
 date: 2026-04-21
-location: "The Madison 2nd Floor, 1555 Broadway St, Detroit"
+location: "The Madison Loft, Detroit"
 meetup_url: "https://www.meetup.com/detroit-developers/events/313941115/"
 luma_url: "https://luma.com/tsgvg66b"
 slides: /slides/agentic-advanced-practitioners-guide-60min/
@@ -15,5 +15,3 @@ A presentation by Phil Borel on advanced agentic software development - real-wor
 Related reading:
 - [Advanced Agentic Coding & The Journey Towards 3x Product Development Velocity](/blog/agentic-coding-advanced-guide/)
 - [The Three Layers of Agentic Engineering Maturity](/blog/agentic-coding-maturity/)
-
-Checkout the slides here: [Agentic Software Development: Advanced Practitioner's Guide (60 min)](/slides/agentic-advanced-practitioners-guide-60min/)
