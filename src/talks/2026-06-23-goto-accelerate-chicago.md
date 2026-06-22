@@ -6,6 +6,7 @@ conference: GOTO Accelerate Chicago 2026
 location: Chicago, IL
 session_url: https://gotochgo.com/accelerate-chicago-2026/sessions/4046/ai-is-an-amplifier-harness-engineering-for-3x-velocity
 ticket_url: https://gotochgo.com/accelerate-chicago-2026/cart
+slides: /slides/goto-accelerate-chicago/
 permalink: /talks/{{ page.fileSlug }}/
 ---
 
