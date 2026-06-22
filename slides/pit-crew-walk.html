@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pit Crew — the walk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* === TOKENS === */
+:root{
+  --cream:#FAF9F5; --ink:#1F1E1B; --muted:#6B6960; --accent:#C2410C;
+  --soft:#FFEDD5; --line:#E4E2DA; --dim:#AEACA2; --dim2:#C9C7BE;
+  --stage-bg:#1A1916;
+  --serif:'DM Serif Display',Georgia,serif;
+  --mono:'Roboto Mono',ui-monospace,monospace;
+  --sans:'Inter',system-ui,sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+}
+
+/* === VIEWPORT BASE (required) === */
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg);}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg);}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--cream);}
+.slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1;}
+img,video,canvas,svg{max-width:100%;max-height:100%;}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms;transition-duration:0.2s;}}
+
+/* === RESET === */
+*{margin:0;padding:0;box-sizing:border-box;}
+h1,h2,h3,p,span,div{font-weight:inherit;}
+
+/* === REVEAL SYSTEM (Act 1 traditional slides) === */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s var(--ease),transform .55s var(--ease);}
+.slide.visible .reveal{opacity:1;transform:translateY(0);}
+.slide.visible .r1{transition-delay:.08s;}
+.slide.visible .r2{transition-delay:.18s;}
+.slide.visible .r3{transition-delay:.28s;}
+.slide.visible .r4{transition-delay:.38s;}
+.slide.visible .r5{transition-delay:.48s;}
+.slide.visible .r6{transition-delay:.58s;}
+.reveal-rule{opacity:0;transform:scaleX(0);transform-origin:left center;transition:opacity .4s var(--ease),transform .4s var(--ease);transition-delay:.12s;}
+.slide.visible .reveal-rule{opacity:1;transform:scaleX(1);}
+
+/* === SLIDE LAYOUT === */
+.slide-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 180px;}
+
+/* === TYPOGRAPHY (Act 1) === */
+.kicker{font-family:var(--mono);font-size:24px;font-weight:500;color:var(--accent);letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;}
+.accent-rule{width:72px;height:3px;background:var(--accent);margin-bottom:48px;}
+.headline{font-family:var(--serif);font-size:100px;font-weight:400;line-height:1.06;letter-spacing:-.025em;color:var(--ink);}
+.headline-lg{font-size:118px;}
+.headline-sm{font-size:80px;}
+.sub{font-family:var(--sans);font-size:34px;font-weight:400;color:var(--muted);margin-top:44px;line-height:1.5;}
+.slide-num{position:absolute;bottom:56px;right:120px;font-family:var(--mono);font-size:18px;color:var(--line);letter-spacing:.1em;}
+
+/* --- Slide 1: Title --- */
+.slide-title .byline{position:absolute;bottom:80px;left:180px;font-family:var(--mono);font-size:22px;color:var(--muted);letter-spacing:.07em;}
+.slide-title .corner-mark{position:absolute;top:72px;right:120px;display:flex;align-items:center;gap:14px;}
+.slide-title .corner-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);}
+.slide-title .corner-text{font-family:var(--mono);font-size:18px;color:var(--line);letter-spacing:.14em;}
+
+/* --- Slide 2: Scattered boxes --- */
+.slide-s2 .scatter-box{position:absolute;background:white;border:1.5px solid var(--line);border-radius:6px;padding:36px 48px;}
+.slide-s2 .scatter-box strong{font-family:var(--sans);font-size:30px;font-weight:500;color:var(--ink);display:block;}
+.slide-s2 .scatter-box em{font-family:var(--sans);font-size:22px;font-weight:400;color:var(--muted);font-style:normal;display:block;margin-top:8px;}
+
+/* --- Slide 3: Loop cycle --- */
+.slide-s3 .loop-row{display:flex;align-items:center;gap:0;margin-top:16px;}
+.slide-s3 .loop-box{flex:1;background:white;border:1.5px solid var(--line);border-radius:6px;padding:32px 20px;text-align:center;font-family:var(--sans);font-size:28px;font-weight:500;color:var(--ink);}
+.slide-s3 .loop-box.accent{background:var(--soft);border:2px solid var(--accent);color:var(--accent);}
+.slide-s3 .loop-arrow{padding:0 8px;font-size:28px;color:var(--line);flex-shrink:0;}
+
+/* --- Slide 4: Open vs Closed --- */
+.slide-s4 .cols{display:flex;gap:48px;margin-top:24px;align-items:flex-start;}
+.slide-s4 .col{flex:1;display:flex;flex-direction:column;gap:16px;}
+.slide-s4 .col-header{font-family:var(--mono);font-size:22px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px;}
+.slide-s4 .col-header.open{color:var(--muted);}
+.slide-s4 .col-header.closed{color:var(--accent);}
+.slide-s4 .col-item{background:white;border:1.5px solid var(--line);border-radius:6px;padding:22px 32px;font-family:var(--sans);font-size:26px;font-weight:400;color:var(--ink);}
+.slide-s4 .col.right .col-item{background:var(--soft);border-color:var(--accent);}
+
+/* === LIVE INTERSTITIALS (dark cutaway cards) === */
+.slide-live{background:#141414;}
+.live-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:28px;}
+.live-dot{width:32px;height:32px;border-radius:50%;background:var(--accent);animation:livePulse 1.8s var(--ease) infinite;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.live-label{font-family:var(--mono);font-size:52px;font-weight:500;color:#FAF9F5;letter-spacing:.08em;}
+.live-cap{position:absolute;bottom:96px;left:0;right:0;text-align:center;font-family:var(--mono);font-size:22px;color:#8A8880;letter-spacing:.06em;}
+
+/* === ACT 3 · STEAL THIS (close) === */
+.slide-s14 .steal-wrap{display:flex;gap:80px;align-items:flex-start;margin-top:32px;flex:1;}
+.slide-s14 .checklist{flex:1;display:flex;flex-direction:column;gap:20px;}
+.slide-s14 .check-item{display:flex;align-items:flex-start;gap:20px;}
+.slide-s14 .check-box{width:28px;height:28px;border:2px solid var(--line);border-radius:3px;flex-shrink:0;margin-top:3px;}
+.slide-s14 .check-text{font-family:var(--mono);font-size:26px;color:var(--ink);line-height:1.5;}
+.slide-s14 .check-text em{color:var(--muted);font-style:normal;font-size:21px;display:block;}
+.slide-s14 .qr-zone{flex:0 0 340px;display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:8px;}
+.slide-s14 .qr-placeholder{width:300px;height:300px;border:2px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;background:white;}
+.slide-s14 .qr-placeholder em{font-family:var(--mono);font-size:18px;color:var(--muted);font-style:normal;text-align:center;padding:20px;line-height:1.5;}
+.slide-s14 .qr-caption{font-family:var(--mono);font-size:20px;color:var(--muted);text-align:center;}
+
+/* ============================================================
+   THE WALK — persistent two-tree rail + content panel
+   ============================================================ */
+.walk{display:flex;width:1920px;height:1080px;background:var(--cream);}
+
+/* --- left: the file-tree rail --- */
+.rail{flex:0 0 690px;height:1080px;box-sizing:border-box;padding:34px 34px 30px;border-right:1px solid var(--line);font-family:var(--mono);overflow:hidden;}
+.rail-kicker{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin:0 0 12px 8px;}
+.tree-head{display:flex;align-items:baseline;gap:14px;padding:10px 0 2px 8px;}
+.tree-head .name{font-family:var(--serif);font-size:26px;color:var(--ink);line-height:1;}
+.tree-head .role{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+.tree-div{height:1px;background:var(--line);margin:10px 8px;}
+.row{display:none;align-items:center;font-size:18px;line-height:1.2;padding:3px 0;}
+.row.shown{display:flex;animation:rowIn .34s cubic-bezier(.2,.7,.3,1) both;}
+@keyframes rowIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.gut{flex:0 0 30px;display:flex;justify-content:center;align-items:center;}
+.body{display:flex;align-items:center;gap:9px;min-width:0;}
+.fn{color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fold>.body{color:var(--muted);font-weight:500;}
+.fold .tw{color:var(--dim2);margin-right:2px;}
+.gloss .body{color:var(--dim);}
+.gloss .fn{color:var(--dim);}
+.bdg{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;background:var(--dim2);color:var(--cream);transition:.3s;}
+.bdg.ret{background:transparent;border:1.5px solid var(--accent);color:var(--accent);}
+.row.hero .body{cursor:pointer;transition:.25s;}
+.row.hero .fn{color:var(--accent);font-weight:500;}
+.row.hero.visited .bdg{background:var(--ink);}
+.row.hero.active{background:var(--soft);border-radius:8px;margin:0 -8px;padding-left:8px;padding-right:8px;}
+.row.hero.active .bdg{background:var(--accent);box-shadow:0 0 0 5px rgba(194,65,12,.14);}
+.row .role{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--dim);margin-left:10px;white-space:nowrap;}
+.row.hero.active .role{color:var(--accent);}
+
+/* --- right: the content panel --- */
+.panel{flex:1;height:1080px;box-sizing:border-box;padding:96px 112px 64px;display:flex;flex-direction:column;}
+.panel-top{flex:1;min-height:0;}
+.swap{animation:swapIn .42s cubic-bezier(.2,.7,.3,1) both;}
+@keyframes swapIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.p-kicker{font-family:var(--mono);font-size:20px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);margin:0;}
+.p-file{font-family:var(--serif);font-size:74px;line-height:1.04;color:var(--ink);margin:12px 0 0;}
+.p-code{font-family:var(--mono);font-size:27px;line-height:1.72;color:var(--ink);white-space:pre-wrap;background:#F3F1EA;border-left:4px solid var(--accent);padding:26px 30px;margin:38px 0 0;border-radius:0;}
+.p-note{font-family:var(--sans);font-size:32px;line-height:1.5;color:#46443f;margin:38px 0 0;max-width:980px;}
+
+/* --- footer: progress + spine dots --- */
+.panel-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:26px;}
+.spine{display:flex;gap:14px;align-items:center;}
+.sdot{width:13px;height:13px;border-radius:50%;border:1.6px solid var(--dim2);background:transparent;transition:.3s;}
+.sdot.done{background:var(--ink);border-color:var(--ink);}
+.sdot.now{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 5px rgba(194,65,12,.14);}
+.prog{font-family:var(--mono);font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+
+/* hint chip (only during the walk) */
+.hint{position:fixed;left:26px;bottom:22px;z-index:1000;font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.6);border:1px solid var(--line);border-radius:999px;padding:8px 16px;opacity:0;transition:opacity .3s;}
+.hint.on{opacity:1;}
+</style>
+</head>
+<body>
+<div class="deck-viewport">
+<main class="deck-stage" id="deckStage">
+
+<!-- ==================== ACT 1 · SLIDE 1: Title ==================== -->
+<section class="slide slide-title active" aria-label="Title slide">
+  <div class="slide-inner">
+    <div class="kicker reveal r1">Pit Crew</div>
+    <div class="accent-rule reveal-rule"></div>
+    <h1 class="headline headline-lg reveal r2">Building an automated<br>coding pipeline<br>with Claude Code</h1>
+    <p class="sub reveal r3">backlog → pull request, hands-free</p>
+  </div>
+  <div class="byline reveal r4">Brianna Workman</div>
+  <div class="corner-mark reveal r4">
+    <div class="corner-dot"></div>
+    <div class="corner-text">2026</div>
+  </div>
+  <!--
+  NOTES [0:00]: Open with the hook, verbatim: "By the end of this talk, a pull
+  request will exist that no human wrote." Beat. "It's for a real app, with a
+  database migration, an API change, UI work, and tests. Let me show you the
+  machine that builds it."
+  -->
+</section>
+
+<!-- ==================== ACT 1 · SLIDE 2: The problem ==================== -->
+<section class="slide slide-s2" aria-label="A prompt here, a skill there">
+  <div class="slide-inner">
+    <div class="kicker reveal r1">The Problem</div>
+    <div class="accent-rule reveal-rule"></div>
+    <h1 class="headline reveal r2">We use powerful tools<br>one at a time</h1>
+  </div>
+  <div class="scatter-box reveal r3" style="top:280px;left:260px;">
+    <strong>a prompt</strong>
+  </div>
+  <div class="scatter-box reveal r4" style="top:420px;right:320px;">
+    <strong>a skill</strong>
+  </div>
+  <div class="scatter-box reveal r5" style="bottom:220px;left:680px;">
+    <strong>hooks?</strong>
+    <em>(what even are hooks?)</em>
+  </div>
+  <div class="slide-num reveal r6">02</div>
+  <!--
+  NOTES [0:45]: Everyone in this room has the pieces. A prompt that works, a
+  skill someone shared, settings they copied once. Used in isolation. Wiring
+  them together is the work — and that's what this talk is about.
+  -->
+</section>
+
+<!-- ==================== ACT 1 · SLIDE 3: Run loops ==================== -->
+<section class="slide slide-s3" aria-label="Agent looping">
+  <div class="slide-inner">
+    <div class="kicker reveal r1">The Idea</div>
+    <div class="accent-rule reveal-rule"></div>
+    <h1 class="headline reveal r2">Stop prompting steps.<br>Run loops.</h1>
+    <div class="loop-row reveal r3">
+      <div class="loop-box">discover</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box">plan</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box">execute</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box accent">verify</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-box">iterate</div>
+    </div>
+  </div>
+  <div class="slide-num">03</div>
+  <!--
+  NOTES [1:45]: For two years we prompted agents one task at a time. A loop runs
+  this cycle without you driving each step. One agent looping is a person redoing
+  a draft until it clears the bar. A fleet looping is a team running a project.
+  A well-designed loop runs without you. The design is the work.
+  -->
+</section>
+
+<!-- ==================== ACT 1 · SLIDE 4: Closed loops ==================== -->
+<section class="slide slide-s4" aria-label="Open vs closed loops">
+  <div class="slide-inner">
+    <div class="kicker reveal r1">The Thesis</div>
+    <div class="accent-rule reveal-rule"></div>
+    <h1 class="headline headline-sm reveal r2">Closed loops: you design the path</h1>
+    <div class="cols reveal r3">
+      <div class="col left">
+        <div class="col-header open">Open</div>
+        <div class="col-item">wide space, exploratory</div>
+        <div class="col-item">the agent roams</div>
+        <div class="col-item">burns tokens</div>
+        <div class="col-item">loose standard = slop machine</div>
+      </div>
+      <div class="col right">
+        <div class="col-header closed">Closed</div>
+        <div class="col-item">a path you designed</div>
+        <div class="col-item">an eval at every step</div>
+        <div class="col-item">bounded budgets</div>
+        <div class="col-item">the standard keeps it honest</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">04</div>
+  <!--
+  NOTES [2:45]: Open loops are exciting and expensive. Closed loops run on a
+  normal budget because a human designed the path. Everything you're about to
+  watch runs inside a closed loop. [Live A goes here once built: kick off the
+  pipeline, then → into the walk.]
+  -->
+</section>
+
+<!-- ==================== LIVE A · kick off the pipeline ==================== -->
+<section class="slide slide-live" aria-label="LIVE interstitial — kick off the pipeline">
+  <div class="live-inner">
+    <div class="live-dot reveal r1"></div>
+    <div class="live-label reveal r2">LIVE · issue #12</div>
+  </div>
+  <div class="live-cap reveal r3">kick off the pipeline</div>
+  <!--
+  NOTES [4:00–6:00]: CUTAWAY 1. Browser tab 1: show issue #12 for ten seconds —
+  title, requirements, the Figma link. Add the pitcrew-ready label ON CAMERA.
+  Terminal: /pitcrew:orchestrate. Watch it find the issue, dispatch the session.
+  Refresh the board tab: card slides to In Progress. Exit line, verbatim:
+  "That's the last keystroke this feature gets from a human until code review."
+  If the brief comment has appeared, point at it; never wait for it. → into the walk.
+  -->
+</section>
+
+<!-- ==================== ACT 2 · THE WALK ==================== -->
+<section class="slide" id="walkSlide" aria-label="The walk — navigate the repo">
+  <div class="walk">
+
+    <!-- LEFT RAIL: THE TREE -->
+    <aside class="rail">
+      <p class="rail-kicker">navigate the repo</p>
+
+      <!-- Sorted: what the crew reads -->
+      <div class="tree-head row" data-at="1" style="padding:10px 0 2px 8px"><span class="name">Sorted</span><span class="role">what the crew reads</span></div>
+      <div class="row hero" data-at="1" data-stop="1"><span class="gut"><span class="bdg">1</span></span><span class="body"><span class="fn">CLAUDE.md</span><span class="role">teach</span></span></div>
+      <div class="row gloss" data-at="1"><span class="gut"></span><span class="body"><span class="fn">AGENTS.md</span></span></div>
+      <div class="row gloss" data-at="3"><span class="gut"></span><span class="body"><span class="fn">.mcp.json</span><span class="role">figma server</span></span></div>
+      <div class="row fold" data-at="2"><span class="gut"></span><span class="body"><span class="tw">▾</span>.claude/</span></div>
+      <div class="row fold" data-at="2"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="tw">▾</span>rules/</span></div>
+      <div class="row hero" data-at="2" data-stop="2"><span class="gut"><span class="bdg">2</span></span><span class="body" style="padding-left:52px"><span class="fn">database.md</span><span class="role">scope · paths</span></span></div>
+      <div class="row gloss" data-at="2"><span class="gut"></span><span class="body" style="padding-left:52px"><span class="fn">api · design · testing</span></span></div>
+      <div class="row hero" data-at="3" data-stop="3"><span class="gut"><span class="bdg">3</span></span><span class="body" style="padding-left:26px"><span class="fn">settings.json</span><span class="role">may / reach</span></span></div>
+      <div class="row gloss" data-at="3"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="fn">pipeline-config.json</span></span></div>
+      <div class="row fold" data-at="9"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="tw">▾</span>memory/</span></div>
+      <div class="row hero" data-at="9" data-stop="9"><span class="gut"><span class="bdg ret">9</span></span><span class="body" style="padding-left:52px"><span class="fn">pipeline-lessons.md</span><span class="role">across runs ↩</span></span></div>
+      <div class="row hero" data-at="4" data-stop="4"><span class="gut"><span class="bdg">4</span></span><span class="body"><span class="fn">package.json</span><span class="role">done</span></span></div>
+      <div class="row gloss" data-at="4"><span class="gut"></span><span class="body"><span class="fn">app · lib/db · components · tests</span></span></div>
+
+      <div class="tree-div row" data-at="5"></div>
+
+      <!-- Pit Crew: the crew that reads them -->
+      <div class="tree-head row" data-at="5" style="padding:14px 0 2px 8px"><span class="name">Pit Crew</span><span class="role">the crew</span></div>
+      <div class="row fold" data-at="5"><span class="gut"></span><span class="body"><span class="tw">▾</span>commands/</span></div>
+      <div class="row hero" data-at="5" data-stop="5"><span class="gut"><span class="bdg">5</span></span><span class="body" style="padding-left:26px"><span class="fn">orchestrate.md</span><span class="role">the engine</span></span></div>
+      <div class="row gloss" data-at="5"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="fn">run-issue.md</span><span class="role">7 stages</span></span></div>
+      <div class="row gloss" data-at="5"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="fn">setup · plan · test · review · finalize</span></span></div>
+      <div class="row fold" data-at="6"><span class="gut"></span><span class="body"><span class="tw">▾</span>agents/</span></div>
+      <div class="row hero" data-at="6" data-stop="6"><span class="gut"><span class="bdg">6</span></span><span class="body" style="padding-left:26px"><span class="fn">frontend-dev.md</span><span class="role">the fleet</span></span></div>
+      <div class="row gloss" data-at="6"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="fn">database · backend · playwright · verifier</span></span></div>
+      <div class="row fold" data-at="7"><span class="gut"></span><span class="body"><span class="tw">▾</span>hooks/</span></div>
+      <div class="row hero" data-at="7" data-stop="7"><span class="gut"><span class="bdg">7</span></span><span class="body" style="padding-left:26px"><span class="fn">done-gate.sh</span><span class="role">guarantee</span></span></div>
+      <div class="row gloss" data-at="7"><span class="gut"></span><span class="body" style="padding-left:26px"><span class="fn">guardrails · format · progress</span></span></div>
+      <div class="row fold" data-at="8"><span class="gut"></span><span class="body"><span class="tw">▾</span>workflows/</span></div>
+      <div class="row hero" data-at="8" data-stop="8"><span class="gut"><span class="bdg">8</span></span><span class="body" style="padding-left:26px"><span class="fn">verify-criteria.js</span><span class="role">decide</span></span></div>
+    </aside>
+
+    <!-- RIGHT PANEL: STOP CONTENT -->
+    <div class="panel">
+      <div class="panel-top">
+        <div class="swap" id="pwrap">
+          <p class="p-kicker" id="pk"></p>
+          <p class="p-file" id="pf"></p>
+          <pre class="p-code" id="pe"></pre>
+          <p class="p-note" id="pn"></p>
+        </div>
+      </div>
+      <div class="panel-foot">
+        <div class="spine" id="spine"></div>
+        <div class="prog" id="prog"></div>
+      </div>
+    </div>
+
+  </div>
+  <!--
+  NOTES [Act 2 · the walk]: "The session is running. While it does, let me show
+  you what it's reading." Walk Sorted (teach → scope → may/reach → done), cross
+  to Pit Crew (engine → fleet → guarantee → decide), then the hop back to memory.
+  By the last stop the whole tree is open — that's the "whole machine" moment.
+  -->
+</section>
+
+<!-- ==================== LIVE B · the return ==================== -->
+<section class="slide slide-live" aria-label="LIVE interstitial — return to the PR">
+  <div class="live-inner">
+    <div class="live-dot reveal r1"></div>
+    <div class="live-label reveal r2">LIVE · the return</div>
+  </div>
+  <div class="live-cap reveal r3">return to the PR</div>
+  <!--
+  NOTES [22:00–24:30]: CUTAWAY 2. Issue tab: scroll the timeline top to bottom —
+  it mirrors the walk's Pit Crew stops in order: brief, fleet roster, verify
+  rounds, tests, review. Board: In Review. PR tab: conventional title, criteria
+  checkboxes, agent roster, the 🏁 Shipped by Pit Crew footer; scroll the diff —
+  migration, route, component, tests. DO NOT merge on stage.
+  FAILURE PIVOT: if the run died, walk the pitcrew-failed trail (stop 7/the
+  hooks + the error comment taught it), then one flip to the backup rehearsal
+  PR: "same issue, yesterday's run." → into the close.
+  -->
+</section>
+
+<!-- ==================== ACT 3 · STEAL THIS (close) ==================== -->
+<section class="slide slide-s14" aria-label="Steal this — your turn">
+  <div class="slide-inner">
+    <div class="kicker reveal r1">Your Turn</div>
+    <div class="accent-rule reveal-rule"></div>
+    <h1 class="headline headline-sm reveal r2">The talk is in the repo</h1>
+    <div class="steal-wrap reveal r3">
+      <div class="checklist">
+        <div class="check-item"><div class="check-box"></div><div class="check-text">a verify script <em>— define done</em></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">a permission allowlist <em>— define may</em></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">hooks <em>— define never</em></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">rules + CLAUDE.md <em>— teach the repo</em></div></div>
+        <div class="check-item"><div class="check-box"></div><div class="check-text">bounded loops <em>— design the path</em></div></div>
+      </div>
+      <div class="qr-zone">
+        <div class="qr-placeholder">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbwAAAG8AQAAAACNyy1yAAADHElEQVR4nO2cbWrDMAyGJdH/7g12/2P1BvEJNOTvpMwNYV5n930pJU38kBqEIkuKWemSvFzjiAB2BLAjgB0B/FcgqTae1enzgWk7DtNtojkKwCXAm325Lf5gIs3fag/6u3omt3E03WbYVHMUgOvYKgXzy6ZYjdaZiarnaLH7YRPNUQCuZKtFwWeaQXKwUnLKTqPpTjtHAbgm6Cw6jQdkYYAZbzoz6I5nJadHHgRwKb+q+7PxJ0eP6lnzUkunnKMAXAf0HBVP8ZfyPV93Gn/amd2w2eZ4RXKJIoDj/KoezoXnPnlOAUA5+J07CsCfBbAnS5yGJOoxp6ohCbCFT0ix7sYjv9oTwLE5K/WccqptNsDFFZadjFdzTmCiOQrAxdZWbOkpS1VxUwjQtoaVR77prwrAzwYpPe5Dqqp+8pkaBsRIoA6eaI4CcClbpeo/d6FpkUsBbbJX2GpPAIetraiusKpT1Sdn23pX2GpPAAfnAShlAI55AE0WGwck1wpb7QngsPyqT60pdhCUWq28rfpDv0rqs2oaAyaaowBcAqQalIaItLhQLYusEqy61tNONEcBuFS8utXlfzFLUxuy5ooAbPWVAI4CdUuek5n1kQqsmp1q7Q3Y9VxNNsdLkmsYARxZCyBvFmkBqtNok5wbreP1/GqATjhHAbgESO2TvbjNXeaKmqbW7IQRA3QFcJRf5XBU1vilH0CjU3WbhQTB65a3saaaowBcqSeQzSAtQ7V7Q9BZh0B9seXNf1UAfjZIuQ6Vl/xNuYqakCCp1rMmmqMAXAKkXTNAuz+Ay7XXw3YBiFdfC+BIv5rVFgUo51qTfeZ+bDuCrfYE8K/3XVHUrS5KAI4CXXWqyRQfVgtIrwS2USvyq6ck54Y9C2BP9U2rpxhV20vNePjVVwL4F6BqqlsRkZVcYyfAwzZgGXTH05LzQ/cCuCjozSyD5yTrELjbdgH1ajjzy3c8Kzk98iCAK++7wqFcFd8NjPuucOlxfdtfFYCfDd7sKz/0S4kqvMfKaaegdnvAWGa144nmKACXABl7sP8sgB0B7AhgR58AfgM/I0hTLcQtzwAAAABJRU5ErkJggg==" alt="github.com/briannaworkman/sorted QR code" style="width:100%;height:100%;object-fit:contain;">
+        </div>
+        <div class="qr-caption">github.com/briannaworkman/sorted</div>
+      </div>
+    </div>
+  </div>
+  <!--
+  NOTES [24:30]: Everything — the pipeline plugin, the app, the spec and plans
+  that built it, this deck's content file — is in the repo. Closing, verbatim:
+  "The PR exists. No human wrote it. One human will review it — and that part
+  still matters. That's the closed loop: the machine does the laps, you design
+  the track." → Q&A.
+  Talk-day: confirm the Figma MCP responds before going live (desktop app open,
+  authenticated) — the one beat that needs a live session, not just the repo.
+  -->
+</section>
+
+</main>
+</div>
+<div class="hint" id="hint">← → to walk · click a numbered file</div>
+
+<script>
+/* =========================================================
+   THE WALK DATA — 9 stops.
+   Stops 1-5 are real files in the repo today; stops 6-9 are
+   filled from the v2 spec until the parallel build lands them.
+   ========================================================= */
+const STOPS=[
+ {k:'the playbook · read by every agent', f:'CLAUDE.md',
+  c:['## Commands','- npm run verify — typecheck + lint + tests.','  The definition of done.','','## House rules','Path-scoped rules live in .claude/rules/'],
+  n:'Every convention in this codebase lives in one file. A new hire reads it. So does every agent. The rules never sit in someone’s head.'},
+ {k:'house rules · scoped to a path', f:'rules/database.md',
+  c:['---','paths:','  - "lib/db/**"','  - "drizzle/**"','---','- New columns need a default (or be nullable)','  so existing rows survive the migration.'],
+  n:'This rule only wakes when an agent touches lib/db. The glob at the top scopes the lesson to exactly where it applies — four files, one per surface of the app.'},
+ {k:'permissions · what it may do, and may reach', f:'settings.json',
+  c:['"allow": [ "Bash(npm run:*)", "Bash(gh:*)" ],','"deny":  [ "Bash(git push --force:*)" ],','','"enableAllProjectMcpServers": true'],
+  n:'allow is its reach, deny is the line it never crosses. And .mcp.json next door declares the Figma server, pre-approved here so a headless run never stalls on a trust prompt. The repo states what an agent may do and may reach, both in git.'},
+ {k:'the contract · the definition of done', f:'package.json',
+  c:['"scripts": {','  "verify": "npm run typecheck','    && npm run lint','    && npm run test:unit"','}'],
+  n:'One word — done — defined in code. Every loop in the pipeline runs this exact script. The repo decides what green means; nobody hardcodes it.'},
+ {k:'the trigger · one label starts the fleet', f:'orchestrate.md',
+  c:['discover issues labelled "pitcrew-ready"','check "blocked by:" / "depends on:"','→ launch one headless session per issue'],
+  n:'Add a label, run one command. Each clear issue gets its own headless session — real OS-level parallelism, not one agent juggling twelve tickets. Every session runs the seven-stage graph on its own.'},
+ {k:'the fleet · tools scoped to the role', f:'frontend-dev.md',
+  c:['tools: [ Edit, Bash, mcp__figma__* ]','---','Pull the component spec via the Figma MCP.','No link, or MCP down → design-system rules.'],
+  n:'The implement stage isn’t one agent. Database engineer first, then backend and frontend in parallel. Only the frontend dev’s frontmatter carries the Figma tools — the database engineer never sees them. Tool scoping mirrors role scoping.'},
+ {k:'the done-gate · instructions suggest, hooks guarantee', f:'done-gate.sh',
+  c:['# SubagentStop','npm run verify || {','  block the stop, return the failures','}','# bounce ≤ 3, then fail the stage'],
+  n:'A specialist says it’s done. The hook runs verify before anyone believes it. Red bounces the work back with the log, up to three times. The repo defines done; the harness enforces it.'},
+ {k:'the verify gate · one verifier per criterion', f:'verify-criteria.js',
+  c:['fan out one fresh-eyes verifier per criterion','→ parallel pass / fail verdicts','→ aggregate in code, re-dispatch the misses','   (max 2 rounds)'],
+  n:'A deterministic workflow, written by a person. Each acceptance criterion gets its own verifier that didn’t write the code. Instructions suggest, hooks guarantee, workflows decide.'},
+ {k:'memory · the loop that spans runs', f:'pipeline-lessons.md',
+  c:['## 2026-06-12 · #R3 due dates','backend assumed ISO strings; criteria now','name the date format explicitly.'],
+  n:'Written at finalize, on the PR branch — so a lesson ships with the PR that taught it and reaches main on merge. Read by the plan stage at the start of every run. Today’s pipeline is better than last week’s because of a note it wrote itself.'}
+];
+const WALK_MAX=STOPS.length;
+
+/* build spine dots */
+const spine=document.getElementById('spine');
+for(let i=1;i<=WALK_MAX;i++){const d=document.createElement('span');d.className='sdot';d.dataset.i=i;spine.appendChild(d);}
+const dots=[...spine.children];
+const pk=document.getElementById('pk'),pf=document.getElementById('pf'),pe=document.getElementById('pe'),
+      pn=document.getElementById('pn'),pwrap=document.getElementById('pwrap'),prog=document.getElementById('prog');
+const walkSlide=document.getElementById('walkSlide');
+
+function renderWalk(step){
+  walkSlide.querySelectorAll('[data-at]').forEach(el=>{el.classList.toggle('shown',(+el.dataset.at)<=step && step>0);});
+  walkSlide.querySelectorAll('.row.hero').forEach(h=>{const s=+h.dataset.stop;h.classList.toggle('active',s===step);h.classList.toggle('visited',s<step);});
+  if(step===0){
+    pk.textContent='navigate the repo';
+    pf.textContent='The repo is the machine';
+    pe.style.display='none';
+    pn.textContent='Every stop is a real file you open. Press → to walk it.';
+    prog.textContent='press →';
+    dots.forEach(d=>{d.className='sdot';});
+  }else{
+    const s=STOPS[step-1];
+    pk.textContent=s.k; pf.textContent=s.f;
+    pe.style.display='block'; pe.textContent=s.c.join('\n');
+    pn.textContent=s.n; prog.textContent=`stop ${step} / ${WALK_MAX}`;
+    dots.forEach((d,i)=>{const k=i+1;d.className=`sdot${k<step?' done':k===step?' now':''}`;});
+  }
+  pwrap.style.animation='none'; void pwrap.offsetWidth; pwrap.style.animation='';
+}
+
+/* =========================================================
+   DECK CONTROLLER — Act 1 slides, then the walk's steps.
+   ========================================================= */
+class Deck{
+  constructor(){
+    this.slides=Array.from(document.querySelectorAll('.slide'));
+    this.walkIndex=this.slides.findIndex(s=>s.id==='walkSlide');
+    this.current=0; this.walkStep=0;
+    this.stage=document.getElementById('deckStage');
+    this.hint=document.getElementById('hint');
+    this.scale(); addEventListener('resize',()=>this.scale());
+    this.keys(); this.touch();
+    this.show(0);
+    /* click a numbered file to jump to its stop */
+    walkSlide.querySelectorAll('.row.hero').forEach(h=>{
+      h.querySelector('.body').addEventListener('click',()=>{
+        if(this.current===this.walkIndex){this.walkStep=+h.dataset.stop;renderWalk(this.walkStep);}
+      });
+    });
+  }
+  scale(){
+    const f=Math.min(innerWidth/1920,innerHeight/1080);
+    this.stage.style.transform=`translate(${(innerWidth-1920*f)/2}px,${(innerHeight-1080*f)/2}px) scale(${f})`;
+  }
+  show(n){
+    this.current=Math.max(0,Math.min(n,this.slides.length-1));
+    this.slides.forEach((s,i)=>{
+      const on=i===this.current;
+      s.classList.toggle('active',on);
+      if(on) requestAnimationFrame(()=>requestAnimationFrame(()=>s.classList.add('visible')));
+      else s.classList.remove('visible');
+    });
+    const inWalk=this.current===this.walkIndex;
+    this.hint.classList.toggle('on',inWalk);
+    if(inWalk) renderWalk(this.walkStep);
+  }
+  next(){
+    if(this.current===this.walkIndex){
+      if(this.walkStep<WALK_MAX){this.walkStep++;renderWalk(this.walkStep);}
+      else this.show(this.current+1);
+      return;
+    }
+    if(this.current+1===this.walkIndex) this.walkStep=0;      /* enter walk forward → cover */
+    this.show(this.current+1);
+  }
+  prev(){
+    if(this.current===this.walkIndex){
+      if(this.walkStep>0){this.walkStep--;renderWalk(this.walkStep);}
+      else this.show(this.current-1);
+      return;
+    }
+    if(this.current-1===this.walkIndex) this.walkStep=WALK_MAX; /* enter walk backward → full */
+    this.show(this.current-1);
+  }
+  keys(){
+    addEventListener('keydown',e=>{
+      if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();this.next();}
+      else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();this.prev();}
+      else if(e.key==='Home'){e.preventDefault();this.walkStep=0;this.show(0);}
+      else if(e.key==='End'){e.preventDefault();this.walkStep=WALK_MAX;this.show(this.slides.length-1);}
+    });
+  }
+  touch(){
+    let sx=0,sy=0;
+    addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+    addEventListener('touchend',e=>{
+      const dx=e.changedTouches[0].clientX-sx, dy=e.changedTouches[0].clientY-sy;
+      if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){dx<0?this.next():this.prev();}
+    },{passive:true});
+  }
+}
+new Deck();
+</script>
+</body>
+</html>
