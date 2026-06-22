@@ -9,6 +9,11 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/CNAME");
 
+  // Externally-authored talk slide decks: self-contained HTML served verbatim
+  // (copied to /slides/, not run through the template engine)
+  eleventyConfig.addPassthroughCopy({ "src/talk-slides": "slides" });
+  eleventyConfig.ignores.add("src/talk-slides");
+
   // Custom filters
   eleventyConfig.addFilter("readingTime", (content) => {
     if (!content) return "1 min read";
