@@ -53,6 +53,9 @@
       <a href="/events/" class="sidebar-item">
         <span class="icon" style="color: var(--green);">⬡</span> events.html
       </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
       <a href="/blog/" class="sidebar-item active">
         <span class="icon" style="color: var(--blue);">⬡</span> blog.html
       </a>
@@ -64,9 +67,9 @@
       <div class="sidebar-divider"></div>
       <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
       
-      <a href="/blog/context-engineering-pilrs/" class="sidebar-item">
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
         <span class="icon" style="color: var(--teal);">◇</span>
-        <span style="font-size: 12px;">Agentic Coding:...</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
       </a>
       
       <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
@@ -84,6 +87,41 @@
         <span style="font-size: 12px;">Getting Started with...</span>
       </a>
       
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
       
 
       
@@ -93,28 +131,38 @@
       
       
         
-          
-          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
             <span class="icon" style="color: var(--teal);">◇</span>
-            <span style="font-size: 12px;">Agentic Software...</span>
+            <span style="font-size: 12px;">Building an...</span>
           </a>
         
       
         
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-      
-      <div class="sidebar-subsection">▾ past/</div>
-      
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
         
       
         
@@ -160,6 +208,29 @@
         
       
       
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
     </nav>
 
     <!-- Editor Area -->
@@ -172,6 +243,9 @@
         </a>
         <a href="/events/" class="editor-tab">
           <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
         </a>
         <a href="/blog/" class="editor-tab active">
           <span class="icon" style="color: var(--blue);">⬡</span> blog.html
@@ -255,5 +329,38 @@
         }
       }
     });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
   </script>
 </html>

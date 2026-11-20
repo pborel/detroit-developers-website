@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RosieBot: MCP in action at RIVET — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="RosieBot: MCP in action at RIVET — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/rosiebot-mcp-at-rivet/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">rosiebot-mcp-at-rivet.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// ROSIEBOT: MCP IN ACTION AT RIVET</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">RosieBot: MCP in action at RIVET</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Jul 16, 2025
+       · Phil Borel
+      · 6 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on July 16, 2025. MCP &amp; the tooling around it have moved a long way since, so treat the specifics as a snapshot. It's the hands-on follow-up to <a href="/blog/ai-features-framework-for-saas/">A Framework for Building AI Features in SaaS Applications</a>.</em></p>
+<hr>
+<h2>Thesis: AI fills product gaps &amp; AI features are product-feedback mechanisms built into your product</h2>
+<blockquote>
+<p>SaaS companies (e.g., RIVET) will start to use AI (chatbot interfaces) to…</p>
+<ol>
+<li>Fill gaps with easy-to-implement (low-quality) product development experiences powered by a chatbot interface</li>
+<li>Plan high-quality product development experiences informed by customer usage of the chatbot interface</li>
+<li>Expose chatbot interfaces powered by data integrated from other products to provide customer value enabled by that data</li>
+</ol>
+</blockquote>
+<p><strong>Strengths:</strong></p>
+<ol>
+<li>💬 Flexible interface (NLP) - fills gaps</li>
+<li>📊 Usage patterns - feedback over millions of possible product outcomes</li>
+</ol>
+<p><strong>Weaknesses:</strong></p>
+<ol>
+<li>❌ &quot;Good enough&quot; is often not enough:
+<ul>
+<li>Accuracy</li>
+<li>Consistency</li>
+<li>Convention vs Configuration</li>
+</ul>
+</li>
+<li>❌ Distribution (MCP is filling a gap, but there's a lack of easy setup for AI features)</li>
+<li>❌ Advanced use cases need a sophisticated user (not everyone is a prompt engineer)</li>
+</ol>
+<blockquote>
+<p><strong>The chatbot has a place, but it is limited:</strong> Users want to achieve <code>outcomes</code>. They crave focused solutions to their problems - they don't want to ask the bot to design the dashboard every time, they just want the best dashboard for their problem. Once the AI novelty wears off (it already has for many), users will grow impatient with the &quot;Chatbot UI for Everything&quot; model.</p>
+</blockquote>
+<hr>
+<h2>Data Types: Peripheral vs Contextual</h2>
+<h3>Peripheral Data</h3>
+<p><strong>Peripheral:</strong> Generally available data (I can scrape this data off of a website without logging in)</p>
+<ul>
+<li>public API docs</li>
+<li>public marketing materials</li>
+<li>product training resources</li>
+<li>sales collateral</li>
+</ul>
+<h3>Contextual Data</h3>
+<p><strong>Contextual:</strong> Data with context on the specific user &amp; use case (the user must be authenticated)</p>
+<ul>
+<li><em>the user's own usage data</em> (what did the user do right before querying the bot, which features does this user use most/least often, what is the user's persona)</li>
+<li><em>the user's data in the app</em> (e.g., the user's org's workers, jobs, assignments)</li>
+</ul>
+<hr>
+<h2>MCP: What is it &amp; how does it work?</h2>
+<blockquote>
+<p>Model Context Protocol (MCP) is a pre-agreed upon standard for structuring communications between <code>models</code> (LLMs) and <code>tools</code> (operations over datasets). MCP can be used to help AI devs create <code>Agents</code>.</p>
+<p>💡 <em>MCP unlocks contextual data</em> 💡</p>
+<p>Think &quot;REST for AI&quot;</p>
+</blockquote>
+<h3>Data access for AI apps</h3>
+<p>An AI app like Claude can't see your customers' data in your product. An MCP server gives it a set of tools it can call to go get that data on the user's behalf. Here's Claude calling a RIVET <code>get_all_job_reports</code> tool to answer a question about my jobs (and the tool failing, which will be a theme):</p>
+<p><img src="/assets/images/rosiebot/claude-tool-call.png" alt="Claude calling a get_all_job_reports MCP tool to answer &quot;How many jobs do I have this week that are active?&quot; &amp; getting &quot;Failed to retrieve job reports data&quot; back"></p>
+<h3>Client-server design</h3>
+<pre><code>User → MCP Client → LLM
+                  → MCP Server → Tools (e.g., external APIs)
+</code></pre>
+<p>The MCP client sits in the middle. It tells the LLM which tools exist, the LLM decides which tool (if any) would help answer the query, &amp; the client asks the MCP server to actually run it.</p>
+<h3>Ecosystem alternatives</h3>
+<ul>
+<li>Function Calling</li>
+<li>Vectorized DB access</li>
+<li>A2A</li>
+</ul>
+<h3>How to get started?</h3>
+<ul>
+<li>Assuming you have public APIs</li>
+<li>Set up an MCP client &amp; server</li>
+<li>Implement inter-service auth</li>
+<li>Tune your settings</li>
+<li>Figure out that your public APIs are not suited for this type of data access</li>
+<li>Create purpose-built APIs for MCP</li>
+<li>End up using vectorized data pipelines instead (haha jk)</li>
+</ul>
+<hr>
+<h2>RosieBot: MCP Deep Dive</h2>
+<p>RosieBot is a chatbot I built into RIVET (a labor planning &amp; scheduling platform for construction contractors) as a prototype. You ask it questions about your jobs &amp; workers; it uses MCP tools backed by RIVET's public API to answer.</p>
+<h3>Example usage</h3>
+<p>When it works, it's great. Against seeded data:</p>
+<p><img src="/assets/images/rosiebot/rosiebot-success.png" alt="RosieBot answering &quot;Which workers are scheduled on jobs in the Detroit area today and tomorrow?&quot; with a list of workers, jobs &amp; shift times pulled via two tool calls"></p>
+<p><em>Seeded data - success case (tool arguments redacted). Look closely &amp; you'll see the dates don't agree between the first half of the answer &amp; the second.</em></p>
+<p>When it doesn't, it politely tells you to go use the product:</p>
+<p><img src="/assets/images/rosiebot/rosiebot-failure.png" alt="RosieBot answering &quot;how many jobs do I have with active workers in June 2025?&quot; by apologizing &amp; recommending the user log in &amp; check the Jobs dashboard"></p>
+<p><em>Failure case</em></p>
+<h3>System architecture</h3>
+<p>There are four moving parts:</p>
+<ul>
+<li><strong>RIVET Web Application (RWA):</strong> the UI the user types into</li>
+<li><strong>RIVET Web Service (RWS):</strong> RIVET's API, which also hosts the public API</li>
+<li><strong>RIVET MCP Client (MCP-client):</strong> talks to the LLM &amp; the MCP server</li>
+<li><strong>RIVET MCP Server (MCP-server):</strong> exposes tools that call RIVET's public API</li>
+</ul>
+<h3>Request cycle</h3>
+<ol>
+<li>The user enters a query into the RIVET Web Application UI (RWA)</li>
+<li>RWA sends the query to the RIVET Web Service (RWS)</li>
+<li>RWS authenticates the request, checks permissions &amp; scopes the request to the current user's org</li>
+<li>RWS sends the query to the RIVET MCP Client (MCP-client)</li>
+<li>MCP-client adds some &quot;magic sauce&quot; (prompt context &amp; the tools list) to the query &amp; sends it to the LLM to see if the LLM thinks any of the tools will help it process the request
+<ul>
+<li>MCP-client gets the tools list from a prior registration handshake with the MCP-server</li>
+</ul>
+</li>
+<li>The LLM uses NLP to understand the query &amp; selects a tool to help it answer the query. It then responds to the MCP-client with a tool use request</li>
+<li>The MCP-client authenticates the tool use request (in this case, with the requesting user's token) &amp; forwards the tool use request to the RIVET MCP Server (MCP-server)</li>
+<li>The MCP-server processes the request by calling on external data sources (in this case, the RIVET public API hosted on RWS) &amp; returns data back to the MCP-client</li>
+<li>The MCP-client sends this data to the LLM</li>
+<li>The LLM determines if it has sufficient context to answer the question
+<ul>
+<li>If no, the LLM makes an additional tool use request to the MCP-client (this ends up being several responses)</li>
+<li>If yes, the LLM processes the query &amp; returns a response to the MCP-client</li>
+</ul>
+</li>
+<li>The MCP-client stitches the responses together from the LLM &amp; returns them to RWS</li>
+<li>RWS returns the response to RWA</li>
+<li>RWA formats the response &amp; displays it to the user</li>
+</ol>
+<hr>
+<h2>Lessons Learned</h2>
+<p><strong>Good surprises</strong></p>
+<ol>
+<li>Setup was not very difficult - if you already have APIs to get started with</li>
+<li>I spent &lt;$5 on credits testing this over a week, &amp; the API key comes with $5 of free credits</li>
+</ol>
+<p><strong>Bad surprises</strong></p>
+<p>Getting a good (accurate &amp; consistent) result was very difficult:</p>
+<ol>
+<li>Tool calls often exceeded the model's context window limit - I needed to make the data lean &amp; specific</li>
+<li>I needed to create MCP-specific API endpoints to get data the LLM could use optimally</li>
+<li>Prompt engineering matters - a lot</li>
+<li>Fixing issues with maths or other specific domains requires additional tool calls (call the calculator tool instead of having the LLM guess the maths)</li>
+</ol>
+<hr>
+<h2>The Future - Where is this going?</h2>
+<h3>RosieBot primary use cases</h3>
+<p><strong>1. PM in my pocket</strong></p>
+<p>A request we've heard: <em>&quot;I want a PM in my pocket&quot;</em> via a phone app. One path there: AI apps like Claude let users plug in their own integrations, so RIVET's tools could show up in an app that's already on their phone:</p>
+<p><img src="/assets/images/rosiebot/claude-add-integration.png" alt="Claude's &quot;Add integration&quot; dialog asking for an integration name &amp; URL"></p>
+<p><strong>2. Product-development feedback based on customer usage of the NLP input UX</strong></p>
+<p>Every question a customer asks the bot is a feature request in disguise. The log of what people ask for (&amp; where the bot fails them) tells the product team where a focused, high-quality experience is worth building.</p>
+<p><strong>3. AI application integrations</strong></p>
+<p>Meet customers in the AI apps they already use by exposing RIVET's data to those apps through an MCP server.</p>
+<h3>Other use cases?</h3>
+<p><em>RIVET has job labor planning, worker scheduling &amp; job performance data.</em></p>
+<ul>
+<li>PM in a pocket
+<ul>
+<li>&quot;Who has worked with JANE DOE over the last 30 days?&quot;</li>
+<li>&quot;How can I get capacity for OPPORTUNITY X? Who could I move around to make them available for OPPORTUNITY X?&quot;</li>
+<li>&quot;Who is scheduled to work on JOB Y at the end of this week?&quot;</li>
+</ul>
+</li>
+<li>Product usage &amp; job performance analysis on the best performing contractors in RIVET (for internal use, publishing marketing materials &amp; sharing with contractors in app)
+<ul>
+<li>Requires significant investment in a &quot;Construction Model&quot; that knows what &quot;good&quot; is for job performance, planning &amp; scheduling</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>

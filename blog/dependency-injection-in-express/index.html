@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save Time &amp; Money With This One Weird Trick! Dependency Injection in Express — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Save Time &amp; Money With This One Weird Trick! Dependency Injection in Express — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/dependency-injection-in-express/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">dependency-injection-in-express.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// SAVE TIME &amp; MONEY WITH THIS ONE WEIRD TRICK! DEPENDENCY INJECTION IN EXPRESS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Save Time &amp; Money With This One Weird Trick! Dependency Injection in Express</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Jun 27, 2023
+       · Phil Borel
+      · 7 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on June 27, 2023, so some of the details (library choices, code structure) are dated.</em></p>
+<hr>
+<h2>What is Dependency Injection?</h2>
+<h3>Dependency Injection</h3>
+<blockquote>
+<p>Dependency injection is a solution to implement Inversion of Control, which is one of the <a href="https://en.wikipedia.org/wiki/SOLID">SOLID principles</a> (D: Dependency Inversion). Very roughly, the Dependency inversion principle states that functions or classes shouldn't be concerned with building / instantiating their dependencies. Instead, they should receive their dependencies as arguments and let other code deal with setting up the dependency.</p>
+<p><strong>Dependency injection is the group of techniques used to enable a class or function to specify which dependencies they need without needing to worry about the details on how to get or create each dependency.</strong></p>
+<p><em>Source: <a href="https://peteranderson.me/articles/dependency-injection-with-nodejs-expressjs-and-typescript">Dependency injection with Node.js, Express.js and TypeScript</a></em></p>
+</blockquote>
+<h3>Inversion of Control</h3>
+<blockquote>
+<p>In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled software modules. When following this principle, the conventional dependency relationships established from high-level, policy-setting modules to low-level, dependency modules are reversed, thus <strong>rendering high-level modules independent of the low-level module implementation details</strong>. The principle states:</p>
+<ol>
+<li>High-level modules <strong>should not import</strong> anything from low-level modules. Both should depend on abstractions (e.g., interfaces).</li>
+<li>Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.</li>
+</ol>
+<p><em>Source: <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Wikipedia: Dependency inversion principle</a></em></p>
+</blockquote>
+<hr>
+<h2>Why should you care?</h2>
+<h3>Cost efficiency of software maintenance</h3>
+<p>If you want to switch from:</p>
+<p><code>Mailgun &lt;&gt; Sendgrid</code> || <code>Ajv &lt;&gt; Zod</code> || <code>Sequelize &lt;&gt; Prisma</code> || <code>Moment &lt;&gt; Luxon</code></p>
+<p>you may have to do a significant rewrite in areas of your codebase that shouldn't care about the dependency you are changing. <strong>You will do more work</strong> than is necessary each time you swap one dependency for another.</p>
+<p><strong>A note about Dependency Injection &amp; the Single-responsibility Principle (SRP)</strong></p>
+<p>Building dependencies within your business logic code violates the SRP. The SRP is intended to make your code easier to comprehend &amp; more resilient to change. In general, code costs more to maintain (extend &amp; fix) than it did to develop initially. This is because requirements evolve during initial development (via scope creep or prototype feedback) &amp; after initial release (via new features, changes to existing features &amp; bug fixes). SRP is a time saving (&amp; therefore cost saving) technique.</p>
+<h3>Easier-to-write, quicker-to-run automated tests</h3>
+<blockquote>
+<p>If tests are easy to write, your dev team will write more tests.</p>
+</blockquote>
+<p><strong>The problem:</strong> Writing flexible code &amp; performant automated tests is a difficult problem with a juicy reward. Business logic changes as requirements evolve. Business logic is the most likely part of your code to change over time. If your business logic is concerned with dependency implementation details, then you have a larger blast radius for each change you make &amp; you likely have unnecessary amounts of code duplication to set up these dependencies. The problem is evident when trying to create a robust automated testing suite.</p>
+<p>Unit tests are tests that act on a singular &quot;unit&quot; of your code. Each unit test will ideally test as little code as possible. This makes it easier to ensure your tests are easy to read, easy to write &amp; easy to change when the code they test changes.</p>
+<p>When working with 3rd party dependencies (e.g. your DB, the Twilio API, Plaid API, USPS API, PayPal API, etc), you have to mock these dependencies, otherwise you are testing them. This is bad for 3 reasons:</p>
+<ol>
+<li>Waste of CI minutes <code>($)</code></li>
+<li>Waste of developer time - waiting for a 3rd party call to return every time you run a test <code>($$)</code></li>
+<li>Sometimes it's just not easy to write test code to work with 3rd party dependencies because these dependencies are not built for this purpose <code>($$$)</code>
+<ul>
+<li>E.g. mocking calls to Twilio to send SMS, but not actually paying for SMS</li>
+</ul>
+</li>
+</ol>
+<p>Without DI, each unit test in your system will be responsible for stubbing calls to the tested code's dependencies (e.g. sending Twilio SMS or charging PayPal are things you don't want to actually do in a test).</p>
+<p>With DI, you can write mocks for your dependency types/classes &amp; stubs for your dependency methods once &amp; re-use them throughout your tests. This makes it easier for your team to test a full user signup flow (including sending an SMS message via Twilio &amp; charging their PayPal account) without actually calling any external dependencies.</p>
+<hr>
+<h2>How can you use it?</h2>
+<h3>Example: RIVET's ETL pipeline</h3>
+<p><strong>Why is this a good candidate for Dependency Injection?</strong></p>
+<ol>
+<li>Ever-growing feature set
+<ul>
+<li>We want to reduce the impact of expensive &amp; manual UAT every time new features &amp; changes to old features are rolled out</li>
+</ul>
+</li>
+<li>Arduous to test
+<ul>
+<li>Many separate systems → can't easily isolate testing to one system manually without building tooling → so if <code>Dev A</code> wants to test <code>System C</code>, but <code>Dev B</code> is working on fixing upstream <code>System B</code>, then <code>Dev A</code> has difficulties in testing <code>System C</code> because <code>System B</code> has to be working or simulated</li>
+</ul>
+</li>
+</ol>
+<h3>Exhibit A: Health check endpoints that test DB connections</h3>
+<p>This is the smallest useful example I could find in our codebase: a <code>/ping</code> endpoint that checks whether the API can reach the database. It started life inline in <code>app.ts</code>:</p>
+<pre><code class="language-ts">// server/src/app.ts
+
+// health check endpoint
+app.get('/ping', async (_req, res) =&gt; {
+  try {
+    await sequelize.query(`SELECT 1`, { type: QueryTypes.SELECT });
+    return res.status(200).json({ message: 'service running' });
+  } catch (error) {
+    return res.status(500).json({ message: 'service error' });
+  }
+});
+</code></pre>
+<p>The handler reaches out &amp; grabs the global <code>sequelize</code> instance itself. To test it, you either need a real database or you need to mock a module import.</p>
+<h4>1. Separate the ping endpoint from the main application constructor logic</h4>
+<p><strong>1.a. Create <code>healthController.ts</code> &amp; move the ping logic to it</strong></p>
+<pre><code class="language-ts">// server/src/feature/api/controllers/healthController.ts
+import { QueryTypes } from 'sequelize';
+import { RivetApiResponse as Response, RivetRequest as Request, sequelize } from '../../../rivet-foundation';
+
+export const ping = async (_req: Request, res: Response) =&gt; {
+  try {
+    // test DB connection
+    await sequelize.query(`SELECT 1`, { type: QueryTypes.SELECT });
+
+    return res.status(200).json({ message: 'service running' });
+  } catch (error) {
+    return res.status(500).json({ message: 'service error' });
+  }
+};
+
+export * as HealthController from './healthController';
+</code></pre>
+<p><strong>1.b. Pass the <code>HealthController.ping</code> method into Express's <code>.get()</code></strong></p>
+<pre><code class="language-ts">// server/src/app.ts
+
+// health check endpoint
+app.get('/ping', HealthController.ping);
+</code></pre>
+<p>Nothing about the behavior has changed yet. The logic just has a home of its own, which makes the next step possible.</p>
+<h4>2. Rework <code>.ping()</code> to accept dependencies (this is the Dependency Injection part)</h4>
+<p>Instead of being a route handler, <code>ping</code> becomes a function that <em>takes its dependencies as arguments &amp; returns</em> a route handler. The real <code>sequelize</code> instance is the default, so production code doesn't have to care:</p>
+<pre><code class="language-ts">// server/src/feature/api/controllers/healthController.ts
+import { Sequelize } from 'sequelize-typescript';
+import { QueryTypes } from 'sequelize';
+import { NextFunction } from 'express';
+import {
+  RivetApiResponse as Response,
+  RivetRequest as Request,
+  ExpressRouteFunc,
+  sequelize,
+} from '../../../rivet-foundation';
+
+export function ping(db: Sequelize = sequelize): ExpressRouteFunc {
+  return async function (_req: Request, res: Response, _next?: NextFunction) {
+    try {
+      // test DB connection
+      await db.query(`SELECT 1`, { type: QueryTypes.SELECT });
+
+      res.status(200);
+      return res.json({ message: 'service running' });
+    } catch (error) {
+      res.status(500);
+      return res.json({ message: 'service error' });
+    }
+  };
+}
+
+export * as HealthController from './healthController';
+</code></pre>
+<p>The route registration calls the function to get the handler:</p>
+<pre><code class="language-ts">// server/src/app.ts
+
+// health check endpoint
+app.get('/ping', HealthController.ping());
+</code></pre>
+<h4>3. Write tests that inject a mocked ORM dependency</h4>
+<p>Now the test can hand <code>ping</code> a fake database. No real DB, no module mocking, no network:</p>
+<pre><code class="language-ts">// server/src/tests/api/healthController.unit.test.ts
+import { RivetApiResponse as Response, RivetRequest as Request } from '../../rivet-foundation';
+import { HealthController } from '../../feature/api/controllers/healthController';
+import MockRequest from '../mocks/request.mock';
+import MockResponse from '../mocks/response.mock';
+import { NextFunction } from 'express';
+import { Sequelize } from 'sequelize-typescript';
+import { SequelizeMock } from '../mocks/sequelize.mock';
+
+describe('HealthController', () =&gt; {
+  let mockRequest: MockRequest;
+  let mockResponse: MockResponse;
+  let nextFunction: NextFunction;
+
+  beforeEach(() =&gt; {
+    mockRequest = {};
+    mockResponse = {
+      json: jest.fn(),
+      status: jest.fn(),
+    };
+    nextFunction = jest.fn();
+  });
+
+  describe('/ping', () =&gt; {
+    test('Application can connect to the database', async () =&gt; {
+      const db: SequelizeMock = {
+        query: jest.fn().mockReturnValue(true),
+      };
+      const expectedResponse = { status: 200, json: { message: 'service running' } } as unknown as Response;
+
+      await HealthController.ping(db as unknown as Sequelize)(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.json).toBeCalledWith(expectedResponse.json);
+      expect(mockResponse.status).toBeCalledWith(expectedResponse.status);
+      expect(nextFunction).toBeCalledTimes(0);
+    });
+
+    test('Application cannot connect to the database', async () =&gt; {
+      const db: SequelizeMock = {
+        query: jest.fn().mockImplementation(() =&gt; {
+          throw new Error();
+        }),
+      };
+      const expectedResponse = { status: 500, json: { message: 'service error' } } as unknown as Response;
+
+      await HealthController.ping(db as unknown as Sequelize)(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.json).toBeCalledWith(expectedResponse.json);
+      expect(mockResponse.status).toBeCalledWith(expectedResponse.status);
+      expect(nextFunction).toBeCalledTimes(0);
+    });
+  });
+});
+</code></pre>
+<p>Both the happy path &amp; the &quot;database is down&quot; path are covered in a few milliseconds, &amp; the &quot;down&quot; case is something you could never reliably reproduce against a real database in CI.</p>
+<h3>Exhibit B: More complicated API endpoints &amp; the repository pattern</h3>
+<p>The health check is a toy. The same move works on real endpoints: we reworked an <code>upsertWorkers</code> endpoint on our public API to accept its dependencies (via a repository that wraps the ORM) instead of importing them, then added tests against a mocked repository. This was still a work in progress when I gave the talk, so I don't have a tidy before/after to show, but the steps are identical:</p>
+<ol>
+<li>Rework the handler to accept its dependencies</li>
+<li>Add tests that inject mocks</li>
+</ol>
+<hr>
+<h2>Additional Reading</h2>
+<ul>
+<li>A practical guide to DI with great examples: <a href="https://peteranderson.me/articles/dependency-injection-with-nodejs-expressjs-and-typescript">Dependency injection with Node.js, Express.js and TypeScript</a></li>
+<li>Read everything Martin Fowler writes: <a href="https://martinfowler.com/articles/injection.html">Inversion of Control Containers and the Dependency Injection pattern</a></li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>

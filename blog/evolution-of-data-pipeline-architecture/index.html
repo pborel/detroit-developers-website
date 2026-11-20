@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evolution of Data Pipeline Software Architecture at RIVET (2020 - 2025) — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Evolution of Data Pipeline Software Architecture at RIVET (2020 - 2025) — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/evolution-of-data-pipeline-architecture/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">evolution-of-data-pipeline-architecture.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// EVOLUTION OF DATA PIPELINE SOFTWARE ARCHITECTURE AT RIVET (2020 - 2025)</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Evolution of Data Pipeline Software Architecture at RIVET (2020 - 2025)</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Feb 27, 2025
+       · Phil Borel
+      · 11 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave at the <a href="/events/data-pipelines-sdlc/">Detroit Software Developers meetup on February 27, 2025</a>. The company numbers, team sizes &amp; &quot;future&quot; plans are all a snapshot of that moment.</em></p>
+<hr>
+<blockquote>
+<p><strong>Intent:</strong> A software architecture journey via a real-world case study on how a software startup grew &amp; how the software architecture evolved to support the business' growth.</p>
+<p><strong>Method:</strong></p>
+<ol>
+<li>What a data pipeline is &amp; how it works at a high level</li>
+<li>What RIVET is &amp; how a data pipeline helps solve problems at RIVET</li>
+<li>Evolutionary history of software architecture at RIVET</li>
+<li>A vision of what the future holds for RIVET's business &amp; how the software architecture will evolve to meet the business' needs</li>
+</ol>
+</blockquote>
+<hr>
+<h2>Introduction</h2>
+<h3>What is a data pipeline?</h3>
+<blockquote>
+<p><strong>According to AI:</strong> A &quot;data pipeline&quot; is a series of automated processes that move data from its source to a destination, often involving transformation and cleaning steps along the way, to prepare it for analysis and further use, essentially acting like a conveyor belt for data within a system; it allows organizations to collect, process, and deliver data from various sources in a structured manner for insights and decision-making.</p>
+</blockquote>
+<blockquote>
+<p><strong>According to Phil:</strong> A &quot;data pipeline&quot; is a tool used to move data from one place to another place.</p>
+</blockquote>
+<p>For a good visual overview of both the low-res (ETL) &amp; high-res versions of a data pipeline, watch ByteByteGo's <a href="https://www.youtube.com/watch?v=kGT4PcTEPP8">What is a Data Pipeline? | Why is it so popular?</a> (there's also a <a href="https://www.youtube.com/shorts/Yj9qOWnipTQ">60-second version</a>).</p>
+<h3>Why should I care?</h3>
+<p>Data pipelines allow you to achieve:</p>
+<ol>
+<li><strong>Business-scale, high-speed decision making across multiple datasets.</strong></li>
+<li>Functionality you just can't do without the data from multiple datasets.
+<ul>
+<li>Venmo can't work without data from the sender &amp; receiver's banks.</li>
+<li>RIVET can't work without data from your bidding system, project management system, employee system, employee certification system &amp; accounting system.</li>
+</ul>
+</li>
+</ol>
+<p>If you have several systems that your business relies on (e.g., HubSpot, Salesforce, Jira, Notion, GitHub, QuickBooks, etc) &amp; want to take action informed by data in more than one of these systems at a time, then you will probably benefit from a data pipeline.</p>
+<blockquote>
+<p>This isn't just about having data on a screen that helps the [human | AI] operator make a choice somewhere else. <strong>The best case is the data is in the system where the decisions are being made.</strong></p>
+</blockquote>
+<hr>
+<h2>RIVET's business model &amp; why data pipelines are important</h2>
+<h3>What is RIVET?</h3>
+<p>RIVET is a seed-stage, B2B SaaS startup in the construction tech industry, HQ'd in Detroit. Started in 2020. At the time of this talk we were at 42 employees with 15 in Product &amp; Engineering:</p>
+<ul>
+<li>Engineers: 8</li>
+<li>Engineering Managers: 2</li>
+<li>CTO: 1</li>
+<li>PMs: 1</li>
+<li>Director of Product: 1</li>
+<li>Product Designers: 2</li>
+</ul>
+<p>Our stack: TypeScript, Node, React, Azure, K8s, Docker, Terraform, BullMQ, Redis &amp; Postgres.</p>
+<blockquote>
+<p><strong>Customer:</strong> Construction subcontractors involved in skilled trades (e.g., Electrical, Plumbing, Mechanical, etc). Specifically the &quot;Labor Coordinator&quot; &amp; &quot;Project Manager&quot;.</p>
+</blockquote>
+<p><strong>Customer problems</strong></p>
+<ol>
+<li><strong>Labor Coordinator:</strong> As a Labor Coordinator at a skilled-trade Subcontractor, you have to manage the daily-shifting schedules of 100s-1000s of workers across 100s of job sites. If (when) you make mistakes, the wrong people show up to the wrong job sites. This hurts the company's profitability (because the people are still paid) &amp; turns the job site managers (Foremen) into your enemies. You currently use Excel, a whiteboard &amp; your phone to do this job.</li>
+<li><strong>Project Manager:</strong> As a Project Manager at a skilled-trade Subcontractor, you are responsible for the profitability of the jobs under your management. You ensure your jobs are profitable by planning how the job is executed &amp; then reviewing performance against your plan (usually by looking at % complete vs total cost to date). You must review &amp; revise your plan <em>every week for every job</em> (someone shows up to the wrong job site, someone is sick, someone quits or is fired, someone takes time off, the entire job schedule is pushed because of a delay with another subcontractor, etc). You use Excel, an ERP/Accounting report &amp; some project management software to do this job.</li>
+</ol>
+<blockquote>
+<p><strong>Solution:</strong> A software tool that allows you to match the optimal worker to the job &amp; communicate this match across your company.</p>
+</blockquote>
+<h3>Why does RIVET need a data pipeline?</h3>
+<p>Why use a data pipeline for anything?</p>
+<ol>
+<li>You need to get data from multiple systems into 1 system to help you make decisions</li>
+<li>You own the 1 system where decisions are made &amp; you need to get your customers' data from multiple systems into your 1 system</li>
+</ol>
+<blockquote>
+<p>RIVET is the platform where construction Labor Coordinators &amp; PMs are making <em>people &amp; project scheduling decisions</em>. In order to make these decisions, they need data on people &amp; projects. This data usually lives in 3-5 separate places, half of which they may not have access to without RIVET.</p>
+</blockquote>
+<p>In order to help our customers achieve the solution above, RIVET needs to provide information about the:</p>
+<ol>
+<li><strong>Jobs:</strong> address, customer, financials, type of project</li>
+<li><strong>Workers:</strong> address, emergency contact info, pay rate / cost to company (~2x pay rate), experience, trade, classification</li>
+<li><strong>Worker Certifications:</strong> title, date attained, experience date, description, image/artifact</li>
+<li><strong>Job Schedules:</strong> start &amp; end dates, what type of work is needed on the job &amp; when</li>
+<li><strong>Worker Schedules:</strong> specifically who joins the job to fulfill the required work &amp; when</li>
+</ol>
+<p>🤯 Each type of data lives in a separate system:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Source Systems</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Jobs</strong></td>
+<td>ERP, Accounting, Bidding Software</td>
+</tr>
+<tr>
+<td><strong>Workers</strong></td>
+<td>HRIS</td>
+</tr>
+<tr>
+<td><strong>Worker Certifications</strong></td>
+<td>Excel, Google Drive</td>
+</tr>
+<tr>
+<td><strong>Job Schedules</strong></td>
+<td>Excel, P6</td>
+</tr>
+<tr>
+<td><strong>Worker Schedules</strong></td>
+<td>RIVET</td>
+</tr>
+</tbody>
+</table>
+<p>Because all of the data that RIVET needs to work is maintained in other systems, RIVET needs a way to ingest this data. Options:</p>
+<ol>
+<li><strong>Manual data entry:</strong> Some customers will do this; most won't</li>
+<li><strong>One-time import (&amp; then manual data entry to maintain):</strong> Some customers will do this; most won't</li>
+<li><strong>Automatic data updates:</strong> 💰💰💰</li>
+</ol>
+<hr>
+<h2>Past: Prologue</h2>
+<h3>1. The Prototype: SFTP</h3>
+<blockquote>
+<p><strong>Snapshot: Q2 2022</strong></p>
+<p><strong>Company:</strong> Pre-seed · ~$2.6m raised · ~6 employees<br>
+<strong>Data:</strong> 100s of records going through the data pipeline · 1 integration<br>
+<strong>Data team:</strong> CTO: 1</p>
+</blockquote>
+<p><a href="https://www.linkedin.com/in/andrewmlawrence/">Andy Lawrence</a>, Co-founder &amp; CTO, created the original data pipeline for our first &quot;big&quot; customer. We call this the <strong>&quot;ETL Service&quot;</strong> because it:</p>
+<ol>
+<li><em><strong>Extracts</strong></em> files from our (or their) SFTP site</li>
+<li><em><strong>Transforms</strong></em> the data based on customer business logic per customer</li>
+<li><em><strong>Loads</strong></em> the data into our public API</li>
+</ol>
+<h4>System topology</h4>
+<p><img src="/assets/images/data-pipeline/topology-2022-q2.png" alt="RIVET platform topology in Q2 2022: customer-generated CSV files land on an SFTP server, flow through the ETL Service into the Integrations API &amp; the multi-tenant database"></p>
+<h4>Coded transformation configs</h4>
+<p><img src="/assets/images/data-pipeline/etl-config.png" alt="An example coded ETL config in TypeScript, mapping certification fields with keys &amp; formatters"></p>
+<p><em>Example coded ETL config</em></p>
+<p><strong>How do RIVET transformation configs work?</strong> TS configuration files control how a series of functions processes data.</p>
+<ul>
+<li><em><strong>Fetch Logic:</strong></em> How to get the data (SFTP server info, API endpoint auth info, fetch/poll frequency)</li>
+<li><em><strong>Skip Logic:</strong></em> Callback with rules run for each record in the incoming data set. If the return value is <code>true</code>, that record will be skipped from further processing</li>
+<li><em><strong>Field Ignore:</strong></em> Source of truth / create vs update</li>
+<li><em><strong>Key Mapping:</strong></em> <code>hireDate, re_hire_date</code> → <code>hiredate</code></li>
+<li><em><strong>Formatters:</strong></em> Callback transforms the given field</li>
+</ul>
+<h3>2. The First Iteration: ODBC</h3>
+<blockquote>
+<p><strong>Snapshot: Q4 2022</strong></p>
+<p><strong>Company:</strong> Pre-seed · ~$2.6m raised · ~10 employees<br>
+<strong>Data:</strong> 1,000s of records going through the data pipeline · &lt;5 integrations<br>
+<strong>Data team:</strong> CTO: 1</p>
+</blockquote>
+<p>Another customer needs ODBC extraction, so Andy extends the SFTP prototype with three more components: the <strong>&quot;Data Agent Client&quot;</strong>, <strong>&quot;Data Agent Service&quot;</strong> &amp; <strong>&quot;Data Agent Admin&quot;</strong>.</p>
+<p>The <strong>Data Agent Client</strong> is a .NET application that can be installed on customer servers (for security or cost-saving purposes) or RIVET-hosted (for ease of use &amp; lower customer maintenance burden) that runs SQL queries against customer databases on a configurable frequency.</p>
+<p>The <strong>Data Agent Service</strong> is a Node application for managing Data Agent Clients installed on RIVET VMs &amp; customer servers. The data available to be managed includes: SQL queries to be run, the SQL query frequency, the source database connection credentials, the destination URL &amp; API token, and various other options relevant to the system.</p>
+<p>The <strong>Data Agent Admin</strong> is an internal React application used to manage Data Agent Clients via the Data Agent Service.</p>
+<h4>System topology</h4>
+<p><img src="/assets/images/data-pipeline/topology-2022-q4.png" alt="RIVET platform topology in Q4 2022: a Data Agent Service joins the SFTP server as a second source feeding the ETL Service, fed by Data Agent Clients running next to customer SQL/ODBC data sources"></p>
+<h4>ODBC connector: Data Agent Admin UI</h4>
+<p><img src="/assets/images/data-pipeline/data-agent-admin.png" alt="Data Agent Admin UI showing a SQL query against an ERP's jobs tables, with connection, data type, frequency &amp; timeout settings"></p>
+<p><em>Data Agent Admin UI</em></p>
+<h3>3. The Data Pipeline Team begins to form &amp; tooling gets an upgrade</h3>
+<blockquote>
+<p><strong>Snapshot: Q1 2023</strong></p>
+<p><strong>Company:</strong> Pre-seed · ~$2.6m raised · ~12 employees<br>
+<strong>Data:</strong> 1,000s of records going through the data pipeline per day · ~10 integrations<br>
+<strong>Data team:</strong> CTO: 1 · Engineers: 1</p>
+</blockquote>
+<p>I'm hired &amp; promptly put in charge of onboarding new customers' data into RIVET as well as extending the data pipeline's capabilities. Over the next 24 months, a team of several engineers, a designer &amp; a PM is built to help support this function (and other responsibilities).</p>
+<ul>
+<li>Creating &amp; maintaining customer integrations mostly happens via <code>SQL queries</code> in the Data Agent Service &amp; <code>coded configs</code> in the ETL Service</li>
+<li>We deploy a <code>Data Agent Client</code> on a RIVET VM so we can connect to customer cloud-based databases without installing the Data Agent Client on their machines (which was often a time suck)</li>
+<li>We start to invest in internal tooling to help us better monitor &amp; manage customer integrations &amp; our data pipeline
+<ul>
+<li><code>RIVET CLI</code> for ergonomic access to relevant data about a single &quot;transaction&quot; through the data pipeline</li>
+<li><code>Metabase</code> for dashboards &amp; metric aggregation</li>
+</ul>
+</li>
+</ul>
+<h4>System topology</h4>
+<p><img src="/assets/images/data-pipeline/topology-2023-q1.png" alt="RIVET platform topology in Q1 2023: adds a RIVET-hosted Data Agent Client for customer cloud databases, a web Data Agent Admin, &amp; a Metabase service reading from a database replica"></p>
+<h4>Internal tooling</h4>
+<p>We found that building new integrations was simple, but debugging running integrations was difficult. We tried many approaches to this, such as making it easier to deploy them in a sandbox environment where customers could review them before promoting to production, &amp; making local development easier. One solution we landed on was creating an internal CLI tool for viewing the data flow between the different system components (Data Agent Service → ETL → Public API), which helped us debug issues (see where data fell off / had an issue). <strong>In order to do this, we used a <code>tracerId</code> (uuid) that tied all of the data around the end-to-end transaction together.</strong></p>
+<p>Here's roughly what a trace looks like (anonymized &amp; trimmed):</p>
+<pre><code>% rivet trace -u &lt;tracerId&gt;
+PRODUCTION: Data Agent
+---
+Found: &lt;tracerId&gt;
+[
+  {
+    &quot;name&quot;: &quot;rivet-hosted-agent&quot;,
+    &quot;hasRequest&quot;: true,
+    &quot;hasResponse&quot;: true,
+    &quot;hasSent&quot;: true,
+    &quot;status&quot;: 17
+  }
+]
+PRODUCTION: ETL Service
+---
+Found: &lt;tracerId&gt;
+[
+  {
+    &quot;name&quot;: &quot;agent_customerName_StateCode&quot;,
+    &quot;transactionStatus&quot;: 7,
+    &quot;streamStatus&quot;: 5,
+    &quot;recordsParsed&quot;: 250,
+    &quot;recordsSent&quot;: 250,
+    &quot;recordsSucceeded&quot;: 250
+  }
+]
+PRODUCTION: Integration API
+---
+Found: &lt;tracerId&gt;
+[
+  {
+    &quot;name&quot;: &quot;Customer Name [PRODUCTION]&quot;,
+    &quot;endpoint&quot;: &quot;/v1/jobs&quot;,
+    &quot;resStatusCode&quot;: 200,
+    &quot;resTime&quot;: 30662,
+    &quot;resDataSize&quot;: &quot;393757&quot;
+  }
+]
+</code></pre>
+<p>We also built dashboards to help us visualize the health of the entire system &amp; get more visibility into specific issues.</p>
+<p><img src="/assets/images/data-pipeline/metabase-integration-pipeline.png" alt="Metabase &quot;Integration Pipeline&quot; dashboard: 427 active ETL configs, records parsed/sent/succeeded/failed today, &amp; a daily summary chart"></p>
+<p><em>Metabase (customer config names redacted)</em></p>
+<h3>4. The Second Iteration: HTTP</h3>
+<blockquote>
+<p><strong>Snapshot: Q3 2023</strong></p>
+<p><strong>Company:</strong> Pre-seed · ~$2.6m raised · ~12 employees<br>
+<strong>Data:</strong> 10s of thousands of records going through the data pipeline per day · ~100 integrations<br>
+<strong>Data team:</strong> CTO: 1 · Engineers: 1 · PM / Engineer: 1</p>
+</blockquote>
+<p><a href="https://www.linkedin.com/in/louis-gelinas/">Louis Gelinas</a>, Co-founder, First Developer &amp; Director of Product @ RIVET, builds the first HTTP extraction using the <strong>&quot;Not HTTP Service&quot;</strong>, aka the &quot;HTTP Connector&quot;.</p>
+<p>The <strong>HTTP Connector</strong> periodically polls external APIs to extract JSON data using a customer-provided API key. The first one was a coded, per-integration fetcher: authenticate with the 3rd party API, page through the results, transform them &amp; hand them to the ETL Service.</p>
+<h4>System topology</h4>
+<p><img src="/assets/images/data-pipeline/topology-2023-q3.png" alt="RIVET platform topology in Q3 2023: an HTTP Connector Service joins the SFTP server &amp; Data Agent Service as a third source feeding the ETL Service, polling external system APIs"></p>
+<h3>5. GUI Tooling: CSSI</h3>
+<blockquote>
+<p><strong>Snapshot: many iterations throughout 2024</strong></p>
+<p><strong>Company:</strong> Seed · ~$9m raised · ~30 employees<br>
+<strong>Data:</strong> 100-300k records going through the data pipeline per day · 100 integrations at the start, 427 as of this talk<br>
+<strong>Data team:</strong> Engineering Manager: 1 · Engineers: 1 - 3 · PM: 1 · Designer: 1</p>
+</blockquote>
+<p>We started to build a GUI tool for configuring integrations in Q1 2024. This tool is called &quot;Customer Success Configured Integrations&quot; (CSSI).</p>
+<ul>
+<li><code>DB-based integration configurations</code>: CSSI moves the transformation logic from code to the database, which unlocks a UI to customize transforms per customer.</li>
+<li><code>Manual file upload</code>: CSSI also supports manual file upload, which allows for easier testing of data payloads &amp; replaces our &quot;bulk uploader&quot; functionality.
+<ul>
+<li>We start to use manual file uploads for integrations that were SFTP, but were not automated exports &amp; uploads to our SFTP server (so a customer had to upload using an SFTP client like FileZilla).</li>
+</ul>
+</li>
+<li><code>Dry Runs</code>: The data pipeline now supports &quot;dry runs&quot;, which allow testing an integration in production &amp; getting a snapshot of changes without committing the changes.</li>
+</ul>
+<h4>CSSI UI</h4>
+<p><img src="/assets/images/data-pipeline/cssi-integrations.png" alt="CSSI integrations screen: an SFTP data source with a list of job, certification &amp; worker transformations"></p>
+<p><em>List of integrations in the CSSI UI</em></p>
+<p><img src="/assets/images/data-pipeline/cssi-transformation.png" alt="CSSI transformation screen: a linked command running daily, recent run history &amp; field mapping from data columns to RIVET fields"></p>
+<p><em>Configuring an integration in the CSSI UI</em></p>
+<h4>System topology</h4>
+<p><img src="/assets/images/data-pipeline/topology-2024-q1.png" alt="RIVET platform topology in Q1 2024: Public API, Web API &amp; Jobs Service backed by Redis/BullMQ, with the ETL Service fed by the Data Agent Service, HTTP Connector Service &amp; SFTP server"></p>
+<hr>
+<h2>Present: Where we are today</h2>
+<h3>6. RIVET Data Services</h3>
+<blockquote>
+<p><strong>Snapshot: Q1 2025</strong></p>
+<p><strong>Company:</strong> Seed + Bridge (mini A) · ~$15m raised · 42 employees<br>
+<strong>Data:</strong> 100s of thousands of records going through the data pipeline per day · 427 integrations<br>
+<strong>Data team:</strong> Engineering Manager: 1 · Engineers: 3 · PM: 1 · Designer: 1 · Director of Data Services: 1 · Integration Developers: 1</p>
+</blockquote>
+<p><code>Data Services Team</code>: CSSI enables integration specialization apart from engineering. Data technicians can now create &amp; maintain integrations without needing to write &amp; deploy code.</p>
+<h4>RIVET context</h4>
+<p><img src="/assets/images/data-pipeline/weekly-scheduled-workers.png" alt="Chart of weekly scheduled workers in RIVET growing steadily from 2021 through 2024"></p>
+<h4>System topology</h4>
+<p>The topology is the same as the Q1 2024 diagram in the CSSI section above.</p>
+<h4>Infra hosting &amp; setup</h4>
+<ul>
+<li>Azure VMs, Application Gateway</li>
+<li>PM2</li>
+<li>Nginx</li>
+<li>Async jobs for messaging (SMS, email, in-app notifications) via BullMQ (Redis + TS)</li>
+</ul>
+<hr>
+<h2>Future: The RIVET data pipeline of the future™️</h2>
+<h3>Problems: Reliability, Performance &amp; Operations</h3>
+<ol>
+<li><strong>Acute Problem - Throughput (a performance issue leading to a reliability issue):</strong> The data pipeline would not process jobs (batches of data) as quickly as it was receiving jobs. This led to a theoretical processing time of infinity. Most customers had 1-hour SLAs, some had 5-minute SLAs. The data pipeline was <em>slow</em>, but for our customers it appeared <em>down</em>.</li>
+<li><strong>Operations:</strong> As we migrate from &quot;Engineers write integrations&quot; to &quot;Data Services Integration Developers write integrations&quot;, we need more robust tooling for debugging issues with integrations. Put another way: Engineers can dive into our prod SQL databases &amp; ssh into VMs to discover issues; Integration Developers must use the tools provided by our Data Pipeline Engineering team.</li>
+<li><strong>Long-tail Performance:</strong> With new customers &amp; new data types, we plan to increase load on our data pipeline infra by 50-100x (quantity of records, not quantity of data) over the next 36 months.</li>
+<li><strong>Tenant Isolation:</strong> Noisy tenants shouldn't affect their neighbors by clogging up the queue for everyone.</li>
+<li>etc, etc, etc - the list goes on</li>
+</ol>
+<h3>Solutions: Strategy Documents, BullMQ &amp; Record-level Metrics - Oh My!</h3>
+<ul>
+<li>✅ <strong>Better Visibility:</strong> More clarity on service health &amp; bottlenecks</li>
+<li>✅ <strong>Horizontal Scaling:</strong> More workers to process data</li>
+<li>✅ <strong>Strategy Docs:</strong> We wrote a Data Pipeline Technical Strategy for Q1 2025.
+<ul>
+<li><strong>Benefits:</strong> Helps us know what to do &amp; in what order, builds trust with other teams &amp; parts of the business, and gives us a framework for adjusting our plans over time.</li>
+<li><strong>Pillars:</strong> Definition · KPIs · High-level Plan · Immediate Next Steps</li>
+</ul>
+</li>
+<li>🏗️ <strong>BullMQ:</strong> Queues help with reliability</li>
+<li>🌄 <strong>Record-level Metrics:</strong> Metrics per record instead of per batch of 100s of records</li>
+</ul>
+<h4>Metabase</h4>
+<p><img src="/assets/images/data-pipeline/metabase-services.png" alt="Metabase dashboard with per-service charts: queue items &amp; records processed for the Data Agent Service, HTTP Connector Service, Data Transform Service &amp; Public API"></p>
+<hr>
+<h2>Closing</h2>
+<p>When I gave this talk, RIVET was raising its Series A, planning to grow the team from 40 → 80 over the following 24 months &amp; moving to a larger office in downtown Detroit. If this kind of work sounds fun, check the <a href="https://www.rivet.work/careers/">RIVET careers page</a> for what's open now.</p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>

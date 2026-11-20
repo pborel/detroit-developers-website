@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Handling For Fun &amp; Profit in Express — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Error Handling For Fun &amp; Profit in Express — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/error-handling-in-express/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">error-handling-in-express.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// ERROR HANDLING FOR FUN &amp; PROFIT IN EXPRESS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Error Handling For Fun &amp; Profit in Express</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Jul 11, 2023
+       · Phil Borel
+      · 6 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. Most of it dates from mid-2023, when we were cleaning up error handling in RIVET's Express API. The section on logging was added in 2025. The code samples are simplified sketches of the pattern, not RIVET's actual source.</em></p>
+<hr>
+<h2>Goal</h2>
+<p>Standardize error handling throughout server code to decrease bugs &amp; reduce the complexity of writing new code &amp; modifying existing code. Consolidate router-level error handling into one place using purpose-specific middleware.</p>
+<h2>Why doesn't node/express already do this for me?</h2>
+<ul>
+<li>Configuration &gt; Convention</li>
+<li>It might! <em>Some day…</em> Express 5 <a href="https://zellwk.com/blog/async-await-express/">bakes in handling for async errors</a>.</li>
+</ul>
+<p><em>(Update from the future: Express 5 has since shipped. It forwards rejected promises from async handlers to your error middleware, which removes one of the reasons for <code>try/catch</code> listed below. Everything else here still applies.)</em></p>
+<h2>Benefits</h2>
+<h3>Less code</h3>
+<p>Less code has many sub-benefits:</p>
+<ul>
+<li>decreased complexity</li>
+<li>improved readability</li>
+<li>simpler discovery</li>
+<li>less time to release new features because a standard part of the work is handled in a standardized way</li>
+<li>lower chance for bugs to occur because there are no divergent implementations of the same error-handling logic throughout the codebase</li>
+<li>faster build time</li>
+</ul>
+<h3>Standardized error handling process</h3>
+<p>Increase error occurrence visibility by avoiding issues where one controller logs errors to Datadog &amp; Sentry and another logs errors to the server's console &amp; saves them to an <code>error.log</code> file. This allows you to debug issues more quickly, saving you valuable time to do more important things like not staying up all night to fix production outages.</p>
+<hr>
+<h2>Steps</h2>
+<ol>
+<li>Create standardized error definitions</li>
+<li>Create purpose-built error-handling middleware: custom errors, invalid routes &amp; unhandled errors</li>
+<li>Replace returning 500s with throwing errors, &amp; <code>console.error</code> with your logger</li>
+<li><strong>Bonus:</strong> know when you should still use <code>try/catch</code></li>
+<li><strong>Bonus:</strong> decide what actually deserves to be logged as an error</li>
+</ol>
+<h2>Throwing Errors</h2>
+<h3>Standardized error definitions</h3>
+<p>Give the codebase one vocabulary for errors. We wrapped <a href="https://www.npmjs.com/package/http-errors"><code>http-errors</code></a> in a small helper so nobody has to remember status codes or invent message formats:</p>
+<pre><code class="language-ts">// helpers/errors.ts
+import createError from 'http-errors';
+
+export const AppErrors = {
+  badRequest: (message = 'Bad Request') =&gt; createError(400, message),
+  unauthorized: (message = 'Unauthorized') =&gt; createError(401, message),
+  forbidden: (message = 'Access Denied') =&gt; createError(403, message),
+  notFound: (message = 'Not Found') =&gt; createError(404, message),
+  internalServerError: (cause?: unknown) =&gt; createError(500, 'Internal Server Error', { cause }),
+};
+</code></pre>
+<h3>Instances of throwing errors</h3>
+<p>Anywhere in the request lifecycle (controllers, actions, services), throw one of these instead of building a response by hand:</p>
+<pre><code class="language-ts">// before
+throw createError(403, 'Access Denied for that role');
+
+// after
+throw AppErrors.forbidden('Access Denied for that role');
+</code></pre>
+<h2>Catching Errors</h2>
+<p><strong>LET 500s PASS THROUGH.</strong></p>
+<p>If something unexpected blows up, you don't need to catch it where it happened. Let it travel up to a single fallback handler that logs it &amp; responds with a 500.</p>
+<p>Once that fallback exists, you can remove all of <em>these</em> from your request lifecycle (middlewares &amp; controllers):</p>
+<pre><code class="language-ts">export const readProfile = async (req: Request, res: Response) =&gt; {
+  try {
+    const id = Number(req.params.id);
+    const view = await profileView(req.user, id);
+    if (view) {
+      return res.json(view);
+    } else {
+      return res.status(404).json({ message: '404: Worker not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(error.status || 500).json({ message: error.message || 'internal server error' });
+  }
+};
+</code></pre>
+<p>The <code>catch</code> block there is doing three jobs (logging, picking a status code, shaping the response body) &amp; every controller does those jobs slightly differently. With the middleware below in place, the controller shrinks to the part that's actually about profiles:</p>
+<pre><code class="language-ts">export const readProfile = async (req: Request, res: Response) =&gt; {
+  const id = Number(req.params.id);
+  const view = await profileView(req.user, id);
+  if (!view) throw AppErrors.notFound('Worker not found');
+
+  return res.json(view);
+};
+</code></pre>
+<h3>Middleware</h3>
+<p>Three small pieces, each with one purpose:</p>
+<pre><code class="language-ts">// middleware/invalidRoute.ts
+// Nothing matched the request: turn it into a standard 404.
+export const invalidRoute: RequestHandler = (req, _res, next) =&gt; {
+  next(AppErrors.notFound(`Route not found: ${req.method} ${req.originalUrl}`));
+};
+</code></pre>
+<pre><code class="language-ts">// middleware/customError.ts
+// Errors we threw on purpose (4xx): respond with the status &amp; message we chose.
+export const customError: ErrorRequestHandler = (err, _req, res, next) =&gt; {
+  if (!createError.isHttpError(err) || err.status &gt;= 500) return next(err);
+
+  res.status(err.status).json({ message: err.message });
+};
+</code></pre>
+<pre><code class="language-ts">// middleware/unhandledError.ts
+// The fallback. Anything that gets here is a real problem: log it &amp; return a 500.
+export const unhandledError: ErrorRequestHandler = (err, _req, res, _next) =&gt; {
+  logger.error(err);
+
+  res.status(500).json({ message: 'Internal Server Error' });
+};
+</code></pre>
+<p><strong>Mount point:</strong> these go at the very end of your app setup, after every router, in this order:</p>
+<pre><code class="language-ts">// app.ts
+app.use('/api', apiRouter);
+
+app.use(invalidRoute);
+app.use(customError);
+app.use(unhandledError);
+</code></pre>
+<hr>
+<h2>When should you still use try/catch blocks?</h2>
+<ol>
+<li>You're on Express 4 with async controllers</li>
+<li>You want to handle an expected error in a non-standard way</li>
+<li>Your code is outside the bounds of a request (e.g. Actions, Repositories, Services, NOT controllers, NOT middleware)</li>
+</ol>
+<h3>Express 4 with async controllers</h3>
+<p>Express 4 doesn't know what to do with a rejected promise. If an async handler throws, the error never reaches your error middleware: the request hangs, or worse, the unhandled rejection takes the process down. You either <code>try/catch</code> &amp; call <code>next(error)</code>, or wrap your handlers once so you never have to think about it again:</p>
+<pre><code class="language-ts">const asyncHandler =
+  (fn: RequestHandler): RequestHandler =&gt;
+  (req, res, next) =&gt;
+    Promise.resolve(fn(req, res, next)).catch(next);
+
+router.get('/profiles/:id', asyncHandler(readProfile));
+</code></pre>
+<h3>Handling expected errors in a non-standard way</h3>
+<p>Sometimes one failure shouldn't fail the whole request. A bulk endpoint is the classic case: if 1 of 200 rows is bad, the caller wants to know which one, not get a 500 for the entire batch.</p>
+<pre><code class="language-ts">export const bulkUpsertEquipment = async (req: Request, res: Response) =&gt; {
+  const created: string[] = [];
+  const failed: string[] = [];
+
+  await Promise.all(
+    req.body.map(async (item: EquipmentRequest) =&gt; {
+      try {
+        await upsertEquipment(item);
+        created.push(item.name);
+      } catch (error) {
+        logger.error(error);
+        failed.push(item.name);
+      }
+    }),
+  );
+
+  return res.json({ created, failed });
+};
+</code></pre>
+<p>The <code>try/catch</code> earns its place here because it's doing something the standard path can't.</p>
+<h3>Handling errors outside the scope of a request</h3>
+<p>The error middleware only exists inside the request lifecycle. Code that can run outside of it (a queue worker, a cron job, a script calling straight into your actions, repositories or services) has nothing above it to catch a thrown error, so it has to handle its own failures.</p>
+<hr>
+<h2>Logging Errors</h2>
+<p>Route everything through one logger instead of <code>console.error</code> so every error ends up in the same place with the same shape. Then be picky about what you send it:</p>
+<ul>
+<li><strong>Logs cost money, &amp; they're useless if they're too noisy</strong> (log fatigue).</li>
+<li><strong>Stop catching, logging &amp; rethrowing.</strong> You should (&amp; we do) have a platform for catching &amp; logging errors. Catching just to log &amp; rethrow is an antipattern that bloats your logs with duplicates (cost &amp; noise).</li>
+<li><strong>Only log errors for legitimate errors:</strong> things you want to be alerted on so you can take action. A useful test: <em>&quot;If I was called every time the error rate spiked or reached a certain threshold, what kinds of 'errors' would I NOT want to trigger this alerting system?&quot;</em></li>
+</ul>
+<p>Examples of things we were logging as errors that aren't really errors:</p>
+<ul>
+<li>A user typed the wrong password (<code>info</code>?)</li>
+<li>A message couldn't be sent because the recipient unsubscribed (<code>warning</code>?)</li>
+<li>A frontend form was submitted with a validation issue that was only caught by the server (<code>info</code>?)</li>
+<li>Per-record upsert issues from the public API (still an error but filtered differently, or a <code>warning</code>?)</li>
+<li>A product analytics event failed to send (<code>warning</code>? different filtering?)</li>
+</ul>
+<p>The question marks are intentional. The right level is a judgment call per case, but &quot;error&quot; should mean &quot;someone needs to look at this.&quot;</p>
+<h2>Open Questions</h2>
+<ul>
+<li>How can we add additional metadata (e.g. <code>toast: boolean; route: string;</code>) to the error response payload so the client can decide how to present the error &amp; loggers can surface the information for debugging?</li>
+<li>Can we add the route to the error handling middleware so every unhandled error is logged with where it came from?</li>
+</ul>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>

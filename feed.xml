@@ -585,4 +585,1446 @@
 &lt;/div&gt;
 </content>
   </entry>
+  <entry>
+    <title>Getting Started with AI Agents in Production</title>
+    <link href="https://detroitdevelopers.com/blog/getting-started-ai-agents/"/>
+    <updated>2026-03-10T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/getting-started-ai-agents/</id>
+    <content type="html">&lt;p&gt;AI agents are transforming how we build software. In this post, we&#39;ll explore the fundamentals of deploying AI agents in production environments.&lt;/p&gt;
+&lt;h2&gt;What Are AI Agents?&lt;/h2&gt;
+&lt;p&gt;AI agents are autonomous systems that can perceive their environment, make decisions, and take actions to achieve specific goals. Unlike traditional chatbots, agents can use tools, maintain state across interactions, and handle multi-step workflows.&lt;/p&gt;
+&lt;h2&gt;Key Considerations&lt;/h2&gt;
+&lt;p&gt;When deploying AI agents in production, there are several important factors to keep in mind:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Reliability&lt;/strong&gt; - Agents need fallback strategies when tool calls fail&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Observability&lt;/strong&gt; - You need to see what decisions the agent is making and why&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cost management&lt;/strong&gt; - Token usage can scale quickly with complex agent workflows&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Safety&lt;/strong&gt; - Guardrails and human-in-the-loop patterns are essential&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;The simplest way to start is with a single-purpose agent that handles one well-defined task. From there, you can expand to multi-agent architectures as your confidence grows.&lt;/p&gt;
+&lt;p&gt;Stay tuned for our upcoming panel discussion on Agentic Software Development on March 23rd!&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Project Management for Software Development: How to deliver more value, more faster</title>
+    <link href="https://detroitdevelopers.com/blog/project-management-for-software-development/"/>
+    <updated>2025-09-10T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/project-management-for-software-development/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave at the &lt;a href=&quot;https://detroitdevelopers.com/events/pm-talk/&quot;&gt;Detroit Software Developers meetup&lt;/a&gt; on September 10, 2025. The process described here is how RIVET worked at that moment; it has kept evolving since.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/talk-photo.jpeg&quot; alt=&quot;Phil presenting this talk to a room of meetup attendees&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;h3&gt;Who is Phil?&lt;/h3&gt;
+&lt;p&gt;Engineering Manager @ RIVET Work; previously @ early-stage startups, mid-stage scaleups &amp;amp; late-stage large orgs.&lt;/p&gt;
+&lt;h3&gt;Why is project management important for software startups?&lt;/h3&gt;
+&lt;p&gt;VC-backed startups are unique. If they don&#39;t grow at exponential rates, they go out of business. The intensity of &amp;quot;the game&amp;quot; is very high - big risk &amp;amp; bigger rewards.&lt;/p&gt;
+&lt;p&gt;Well managed projects deliver value &amp;amp; everyone wins. Poorly managed projects result in missed goals &amp;amp; everyone loses (culminating in lack of growth, down-sizing &amp;amp; eventually shutdowns).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Thinking about exponential growth - a game:&lt;/strong&gt; You have a pond in your backyard. This pond has lots of beautiful &amp;amp; interesting flora &amp;amp; fauna in it. One day you notice a Lily Pad growing. The next you notice two Lily Pads. You know you can&#39;t let the Lily Pads take over the entire pond because they&#39;ll consume too many resources &amp;amp; decimate the other life in the pond. But you&#39;re busy &amp;amp; the Lily Pads are pleasant to look at, so you don&#39;t do anything about them at first. On the third day there are four Lily Pads in the pond. Every day after, the rate of growth remains constant. On the 20th day, half of the pond is covered with Lily Pads. How many days do you have to take care of the Lily Pads before they cover the entire pond?&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(One. That&#39;s the thing about exponential growth.)&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;What is RIVET Work?&lt;/h3&gt;
+&lt;p&gt;RIVET is an early-stage B2B SaaS startup HQ&#39;d in downtown Detroit. At RIVET, we&#39;re building &lt;strong&gt;a construction labor operating system for specialty contractors (e.g., Electricians).&lt;/strong&gt; Construction labor management is a highly technical discipline. Making high-quality, intuitive software to help professionals manage this process is difficult.&lt;/p&gt;
+&lt;h3&gt;The purpose of this post&lt;/h3&gt;
+&lt;p&gt;I&#39;ll walk you through how RIVET manages projects, organizes our product team &amp;amp; delivers software that our customers love. I&#39;ll also sprinkle in improvements to RIVET&#39;s process that I&#39;m experimenting with. My goal is to share practical takeaways you can apply in your own teams.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;How to ship more, faster - a philosophy&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;Insight:&lt;/strong&gt; Focus on shipping &lt;em&gt;value&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I see companies fail to deliver enough value to customers quickly enough due to 3 root causes:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Failure to ship the &lt;strong&gt;Right Things&lt;/strong&gt;™️&lt;/li&gt;
+&lt;li&gt;Shipping the &lt;strong&gt;Wrong Things&lt;/strong&gt;™️&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Not shipping&lt;/strong&gt; (often enough)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Shipping quickly doesn&#39;t matter if you&#39;re shipping the wrong things. Prioritize addressing these problems in this order:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Maximize shipping the Right Things&lt;/li&gt;
+&lt;li&gt;Minimize shipping the Wrong Things&lt;/li&gt;
+&lt;li&gt;Ship (often)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;How to ship the Right Things&lt;/h3&gt;
+&lt;h4&gt;You don&#39;t know what the Right Things are&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Plan in iterations&lt;/strong&gt; of increasing refinement:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Business-level Goal:&lt;/strong&gt; Start with a business outcome you&#39;d like to achieve (this is often handled at the executive level).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Example:&lt;/em&gt; &amp;quot;Increase revenue by &lt;code&gt;$x&lt;/code&gt; before &lt;code&gt;y date&lt;/code&gt; through increasing unit price by &lt;code&gt;$x&lt;/code&gt; via adoption by markets/user personas &lt;code&gt;a &amp;amp; b&lt;/code&gt;&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Product Initiative:&lt;/strong&gt; Define product direction based on business goals (often handled by Product Management).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Example:&lt;/em&gt; &amp;quot;To increase adoption of the &lt;code&gt;a&lt;/code&gt; market, we will build features &lt;code&gt;x, y &amp;amp; z&lt;/code&gt;&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Project Goal:&lt;/strong&gt; Projects should deliver a slice of the Product Initiative (the sum of many projects is a product initiative).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/project-goal.png&quot; alt=&quot;An example project goal with a deadline, a written goal, experience goals &amp;amp; technical goals&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example project goal&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Milestones:&lt;/strong&gt; Projects will have many milestones. Milestones are project-specific &amp;amp; should be logical slices of project delivery.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Example:&lt;/em&gt; &amp;quot;Feature X clickable prototype&amp;quot; or &amp;quot;Feature X in alpha for internal user acceptance testing&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Sprint Plans:&lt;/strong&gt; A sprint plan can be as simple as a list of experiences you plan to demo (and release) at the end of the sprint.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/sprint-plans.png&quot; alt=&quot;A list of dated sprint plan snapshots: &amp;quot;Plan as of July 9&amp;quot;, &amp;quot;Plan as of July 18&amp;quot; &amp;amp; so on&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;The whole project&#39;s sprint plan gets re-cut every week or two&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/sprint-3.png&quot; alt=&quot;An example sprint plan with a sprint goal, demo date, delivery outputs, convergence outputs &amp;amp; risks&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/sprint-5.png&quot; alt=&quot;A later sprint plan for the same project, with a goal, a trade show demo as the convergence goal &amp;amp; staffing risks&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example sprint plans&lt;/em&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Story Tickets:&lt;/strong&gt; Story tickets should be written by the Product Manager/Owner &amp;amp; detail the needs of the end user that are being met by this feature. They are usually feature-sized &amp;amp; consist of multiple PRs to finish. Don&#39;t size story tickets, or size them loosely (e.g., T-shirt sizes).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Task Tickets:&lt;/strong&gt; Task tickets should be written by the role doing the work (e.g., the Engineers on the team) &amp;amp; should culminate in completion of a Story Ticket. You may have a DB task, a backend task, an infra task &amp;amp; several FE tasks that together complete a Story Ticket. Size task tickets with more granularity than Story Tickets (e.g., Fibonacci points).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;You know what the Right Things are, but you aren&#39;t shipping them&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Embrace change&lt;/strong&gt; by making scope changes &amp;quot;free&amp;quot;. When a change is requested, prioritize it for a future project or reduce scope from the current focus.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;You can only do this if work is visible&lt;/li&gt;
+&lt;li&gt;You can only make work visible if work is at least roughly planned. Maintain a product backlog with a 🔭 zoomed-out view (quarters) &amp;amp; a 🔬 zoomed-in view (tickets)&lt;/li&gt;
+&lt;li&gt;Do not change focus mid-sprint (unless absolutely necessary). This one trips up non-engineers: context shifting kills the productivity of deep work (like design &amp;amp; coding).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How to avoid shipping the Wrong Things&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;What are the Wrong Things?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Things no one actually needs (a failure in discovery &amp;amp; convergence)&lt;/li&gt;
+&lt;li&gt;Things that are bad (bugs, tech debt that slows you down too much later, a feature that is good but has bad UX)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;How to avoid shipping the Wrong Things?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;🎯 Figure out what the Right Things are &amp;amp; do those things instead&lt;/li&gt;
+&lt;li&gt;🏎️ Quality built-in
+&lt;ul&gt;
+&lt;li&gt;DORA metrics
+&lt;ul&gt;
+&lt;li&gt;Deployment Frequency&lt;/li&gt;
+&lt;li&gt;Lead Time for Changes (merge to deploy)&lt;/li&gt;
+&lt;li&gt;⭐ Change Failure Rate (rate of bugs) ⭐&lt;/li&gt;
+&lt;li&gt;Mean Time to Recover (MTTR)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Build trust with non-technical stakeholders by delivering results (ship the right things, often). Your non-technical stakeholders don&#39;t understand &amp;quot;Tech Debt&amp;quot;, but they will understand that it&#39;s important if they trust you &amp;amp; you think it&#39;s important&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How to ship quickly&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Levers: thinking in iterations&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Concurrency:&lt;/code&gt; Run iterations concurrently (stand up more teams &amp;amp; run more projects simultaneously)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Iteration Performance:&lt;/code&gt; Shorten iteration time by using small batches (1-4 weeks is ideal)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;System Performance:&lt;/code&gt; Accomplish more value per iteration, requiring fewer iterations total to reach the end goal (ship only the next most valuable things)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Iteration performance maxing: small batch size&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1-4 weeks is good; 2 weeks seems to be a &amp;quot;sweet spot&amp;quot; for most teams I&#39;ve worked on&lt;/li&gt;
+&lt;li&gt;Ship what you planned to ship at the end of the cycle&lt;/li&gt;
+&lt;li&gt;Don&#39;t change course mid-cycle (unless you&#39;re going to crash)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;⭐ System performance maxing: aggressively obliterate scope creep ⭐&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The biggest issue I see pop up time &amp;amp; time again is what I call &amp;quot;&lt;em&gt;Kitchen Sink Scope Creep&lt;/em&gt;&amp;quot;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Kitchen Sink Scope Creep:&lt;/strong&gt; When you&#39;re working on a system/feature that is adjacent to another system/feature that could also use some attention, so you are now working on two things simply because they are adjacent. This process compounds over time so that soon you are working on four things, then eight, sixteen, etc.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Analogy:&lt;/strong&gt; You&#39;re repainting a kitchen &amp;amp; The Boss walks in and says &amp;quot;while you&#39;re in here, the sink needs to be replaced, too!&amp;quot;&lt;/p&gt;
+&lt;p&gt;This is great because you&#39;ve discovered a new need. However, if you try to replace the sink while painting you will end up with bad outcomes. And it could be that the sink doesn&#39;t need to be replaced at all (maybe it&#39;s a nice-to-have that is now being prioritized over everything else, like fixing the toilet &amp;amp; repairing the lock on the front door). The Boss feels that you should deliver both the paint &amp;amp; the sink together now because they&#39;ve been staring at the sink every time they come in to check on the painting progress.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; Finish painting. While you do that, plan the new sink installation with The Boss (what kind of sink do they want? what did they not like about the old sink?) by creating a story ticket in the backlog of the project (or even a new project). This way the sink replacement is documented &amp;amp; there is work being done on it (discovery &amp;amp; convergence), but the painting project is not immediately at risk because your team is trying to demo the old sink (dust) &amp;amp; test piping (water) while painting (bad outcomes when interacting with dust or water). Just as important, the kitchen sink can now be prioritized in line with other priorities instead of jumping the line ahead of much more important features (e.g., the front door lock).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;Insight:&lt;/strong&gt; Anytime scope is added mid-sprint or mid-project, said scope is implicitly prioritized above everything else that comes after this sprint &amp;amp; after this project.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hard Truth:&lt;/strong&gt; Prioritization &amp;amp; scope creep reduction is really difficult because it is a multiplayer, zero-sum game. Scope that is removed can be personally offensive to people (e.g., a design experience, a specific user request, an executive pet project/feature). The only way through it is by building trust with stakeholders &amp;amp; bringing them to your side. Many tough conversations are ahead. Enlist the help of your PM.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;How can I ensure I ship every cycle when feature delivery can take longer than 1 sprint? Release ≠ Launch&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Release:&lt;/em&gt; Code is released to Production (feature flags, experience toggles, new features that don&#39;t disrupt existing experiences, feature skeletons, component libraries, prototypes)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Launch:&lt;/em&gt; Feature is turned on in GA (feature flag removed, new experience enabled, users trained)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🧠 &lt;strong&gt;Takeaway:&lt;/strong&gt; Focus on shipping &lt;em&gt;value&lt;/em&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ship the Right Things
+&lt;ul&gt;
+&lt;li&gt;🤑 Make changes &amp;quot;free&amp;quot; by trading scope instead of adding hours or extending the deadline&lt;/li&gt;
+&lt;li&gt;🔄 Iterative planning process&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Don&#39;t ship the Wrong Things
+&lt;ul&gt;
+&lt;li&gt;🎯 Ship the Right Things instead&lt;/li&gt;
+&lt;li&gt;🏎️ Quality built-in (sell it as a way to prevent future disruptions)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Ship quickly
+&lt;ul&gt;
+&lt;li&gt;🥃 Small batch size&lt;/li&gt;
+&lt;li&gt;🚱 Efficient cycles (only prioritize the next most important things for delivery)&lt;/li&gt;
+&lt;li&gt;🚀 Frequent releases; purposeful launches&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;How RIVET builds product (with some seasoning) 🌶️&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 &lt;strong&gt;Insight:&lt;/strong&gt; Software development is a process of &lt;em&gt;iterative refinement&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;The Pipeline: Discover → Converge → Deliver&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/project-management/product-process.png&quot; alt=&quot;RIVET&#39;s product process: Discover (what &amp;amp; why, owned by Product Managers) → Converge (how, owned by Designers &amp;amp; Tech Leads) → Deliver (who &amp;amp; when, owned by Engineers)&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Our product development pipeline runs on three verbs:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Discover (What &amp;amp; Why)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tools:&lt;/strong&gt; ProductBoard + Notion&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Inputs:&lt;/strong&gt; Customer feedback, sales insights, market research, analytics, business goals&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Owners:&lt;/strong&gt; Product Managers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output:&lt;/strong&gt; Clear priorities that are &lt;em&gt;valuable&lt;/em&gt; to customers&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Checkpoint:&lt;/em&gt; 🏔 Product Steering Committee (every 12–18 weeks) for big-picture alignment. We use this to set quarterly goals.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Converge (How)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tools:&lt;/strong&gt; Figma + discovery interviews (2–3 per week)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Owners:&lt;/strong&gt; Product Designers, with engineering + product input&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output:&lt;/strong&gt; Tested prototypes, &amp;quot;Figma-as-spec,&amp;quot; validated solutions&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Checkpoint:&lt;/em&gt; ♠️ Betting Table (every 2 sprints) where we decide what&#39;s ready to move into delivery. We use this to set sprint goals for the length of a project.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Deliver (Who &amp;amp; When)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tools:&lt;/strong&gt; Notion + GitHub&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Owners:&lt;/strong&gt; Engineering Manager + Engineers, with continuous input from design &amp;amp; product via demos (WIP/pre-recorded demos, sprint demos)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Output:&lt;/strong&gt; Working software, released&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Checkpoints:&lt;/em&gt; 💈 Backlog Grooming (weekly) + 🧭 Sprint Planning (bi-weekly). We use these to ratify near-term sprint goals.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;The Battle Rhythm&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Steering Committee (quarterly)&lt;/li&gt;
+&lt;li&gt;Quarterly Goal Setting &amp;amp; Product Initiatives (quarterly)&lt;/li&gt;
+&lt;li&gt;Project Launch (monthly)&lt;/li&gt;
+&lt;li&gt;Product &amp;amp; Application Metrics Review (monthly)&lt;/li&gt;
+&lt;li&gt;Customer Empathy Indoctrination (monthly)
+&lt;ul&gt;
+&lt;li&gt;Types: PM-led (UX), SME-led (market), &amp;quot;Game Film&amp;quot; (customer calls)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Sprint Planning (bi-weekly)
+&lt;ul&gt;
+&lt;li&gt;PMs should bring groomed Story Tickets to Tech Leads ahead of Sprint Planning&lt;/li&gt;
+&lt;li&gt;Tech Leads bring Task Tickets &amp;amp; (updated) Sprint Plans to Sprint Planning&lt;/li&gt;
+&lt;li&gt;💡 The entire project has its full sprint plan updated as an input for every Sprint Planning session&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Internal Demos (bi-weekly)
+&lt;ul&gt;
+&lt;li&gt;Product Team demos: design progress, new devops features, API endpoints&lt;/li&gt;
+&lt;li&gt;Company-wide demos: features in varying grades of fidelity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Retros (bi-weekly)&lt;/li&gt;
+&lt;li&gt;Backlog Grooming - Story Tickets (weekly)&lt;/li&gt;
+&lt;li&gt;Standups (daily)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🧠 &lt;strong&gt;Takeaway:&lt;/strong&gt; Software development is a process of iterative refinement&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Discover &amp;gt; Converge &amp;gt; Deliver:&lt;/strong&gt; Start 🔭 zoomed-out &amp;amp; 🔬 zoom in each cycle&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Battle Rhythm:&lt;/strong&gt; Follow the plan with discipline&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Adapt to your needs:&lt;/strong&gt; This process works for RIVET at our current stage, but the process is far from what it was 6 months ago &amp;amp; will evolve over the next 6+ months&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;What can you do tomorrow to deliver more value, more faster?&lt;/h2&gt;
+&lt;h3&gt;Ship the Right Things &amp;amp; don&#39;t ship the Wrong Things&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Make work visible by &lt;code&gt;building &amp;amp; maintaining a backlog&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Have a conversation with your stakeholders about &lt;code&gt;Kitchen Sink Scope Creep&lt;/code&gt;. Find a way to gather &amp;amp; compile new needs without implicitly reprioritizing every time a &amp;quot;Kitchen Sink Replacement&amp;quot; opportunity arises (use the backlog you built in step 1)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Embrace gradual refinement&lt;/code&gt; by employing Sprint Plans. Plan ahead more than your next sprint, even if the plan is low fidelity past a few weeks out. Update this plan every 1-2 weeks.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Ship often (every 1-4 weeks at a minimum)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Release with rhythm:&lt;/strong&gt; do whatever is necessary to release every &lt;code&gt;x&lt;/code&gt; weeks. Shipping builds trust &amp;amp; you can&#39;t combat scope creep without trust.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Utilize iterations when releasing:&lt;/strong&gt; release things that help you learn &amp;amp; demo in production, even if they are behind a feature flag. Add more to your release in future iterations. Stop iterating &amp;amp; move on to the next most important thing once you&#39;ve met your original goal.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🧠 &lt;strong&gt;Takeaway:&lt;/strong&gt; Software development is a process of iterative refinement&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+  </entry>
+  <entry>
+    <title>RosieBot: MCP in action at RIVET</title>
+    <link href="https://detroitdevelopers.com/blog/rosiebot-mcp-at-rivet/"/>
+    <updated>2025-07-16T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/rosiebot-mcp-at-rivet/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on July 16, 2025. MCP &amp;amp; the tooling around it have moved a long way since, so treat the specifics as a snapshot. It&#39;s the hands-on follow-up to &lt;a href=&quot;https://detroitdevelopers.com/blog/ai-features-framework-for-saas/&quot;&gt;A Framework for Building AI Features in SaaS Applications&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Thesis: AI fills product gaps &amp;amp; AI features are product-feedback mechanisms built into your product&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SaaS companies (e.g., RIVET) will start to use AI (chatbot interfaces) to…&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fill gaps with easy-to-implement (low-quality) product development experiences powered by a chatbot interface&lt;/li&gt;
+&lt;li&gt;Plan high-quality product development experiences informed by customer usage of the chatbot interface&lt;/li&gt;
+&lt;li&gt;Expose chatbot interfaces powered by data integrated from other products to provide customer value enabled by that data&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Strengths:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;💬 Flexible interface (NLP) - fills gaps&lt;/li&gt;
+&lt;li&gt;📊 Usage patterns - feedback over millions of possible product outcomes&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Weaknesses:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;❌ &amp;quot;Good enough&amp;quot; is often not enough:
+&lt;ul&gt;
+&lt;li&gt;Accuracy&lt;/li&gt;
+&lt;li&gt;Consistency&lt;/li&gt;
+&lt;li&gt;Convention vs Configuration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;❌ Distribution (MCP is filling a gap, but there&#39;s a lack of easy setup for AI features)&lt;/li&gt;
+&lt;li&gt;❌ Advanced use cases need a sophisticated user (not everyone is a prompt engineer)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The chatbot has a place, but it is limited:&lt;/strong&gt; Users want to achieve &lt;code&gt;outcomes&lt;/code&gt;. They crave focused solutions to their problems - they don&#39;t want to ask the bot to design the dashboard every time, they just want the best dashboard for their problem. Once the AI novelty wears off (it already has for many), users will grow impatient with the &amp;quot;Chatbot UI for Everything&amp;quot; model.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Data Types: Peripheral vs Contextual&lt;/h2&gt;
+&lt;h3&gt;Peripheral Data&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Peripheral:&lt;/strong&gt; Generally available data (I can scrape this data off of a website without logging in)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;public API docs&lt;/li&gt;
+&lt;li&gt;public marketing materials&lt;/li&gt;
+&lt;li&gt;product training resources&lt;/li&gt;
+&lt;li&gt;sales collateral&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Contextual Data&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Contextual:&lt;/strong&gt; Data with context on the specific user &amp;amp; use case (the user must be authenticated)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;the user&#39;s own usage data&lt;/em&gt; (what did the user do right before querying the bot, which features does this user use most/least often, what is the user&#39;s persona)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;the user&#39;s data in the app&lt;/em&gt; (e.g., the user&#39;s org&#39;s workers, jobs, assignments)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;MCP: What is it &amp;amp; how does it work?&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Model Context Protocol (MCP) is a pre-agreed upon standard for structuring communications between &lt;code&gt;models&lt;/code&gt; (LLMs) and &lt;code&gt;tools&lt;/code&gt; (operations over datasets). MCP can be used to help AI devs create &lt;code&gt;Agents&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;💡 &lt;em&gt;MCP unlocks contextual data&lt;/em&gt; 💡&lt;/p&gt;
+&lt;p&gt;Think &amp;quot;REST for AI&amp;quot;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Data access for AI apps&lt;/h3&gt;
+&lt;p&gt;An AI app like Claude can&#39;t see your customers&#39; data in your product. An MCP server gives it a set of tools it can call to go get that data on the user&#39;s behalf. Here&#39;s Claude calling a RIVET &lt;code&gt;get_all_job_reports&lt;/code&gt; tool to answer a question about my jobs (and the tool failing, which will be a theme):&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/rosiebot/claude-tool-call.png&quot; alt=&quot;Claude calling a get_all_job_reports MCP tool to answer &amp;quot;How many jobs do I have this week that are active?&amp;quot; &amp;amp; getting &amp;quot;Failed to retrieve job reports data&amp;quot; back&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;Client-server design&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;User → MCP Client → LLM
+                  → MCP Server → Tools (e.g., external APIs)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The MCP client sits in the middle. It tells the LLM which tools exist, the LLM decides which tool (if any) would help answer the query, &amp;amp; the client asks the MCP server to actually run it.&lt;/p&gt;
+&lt;h3&gt;Ecosystem alternatives&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Function Calling&lt;/li&gt;
+&lt;li&gt;Vectorized DB access&lt;/li&gt;
+&lt;li&gt;A2A&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;How to get started?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Assuming you have public APIs&lt;/li&gt;
+&lt;li&gt;Set up an MCP client &amp;amp; server&lt;/li&gt;
+&lt;li&gt;Implement inter-service auth&lt;/li&gt;
+&lt;li&gt;Tune your settings&lt;/li&gt;
+&lt;li&gt;Figure out that your public APIs are not suited for this type of data access&lt;/li&gt;
+&lt;li&gt;Create purpose-built APIs for MCP&lt;/li&gt;
+&lt;li&gt;End up using vectorized data pipelines instead (haha jk)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;RosieBot: MCP Deep Dive&lt;/h2&gt;
+&lt;p&gt;RosieBot is a chatbot I built into RIVET (a labor planning &amp;amp; scheduling platform for construction contractors) as a prototype. You ask it questions about your jobs &amp;amp; workers; it uses MCP tools backed by RIVET&#39;s public API to answer.&lt;/p&gt;
+&lt;h3&gt;Example usage&lt;/h3&gt;
+&lt;p&gt;When it works, it&#39;s great. Against seeded data:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/rosiebot/rosiebot-success.png&quot; alt=&quot;RosieBot answering &amp;quot;Which workers are scheduled on jobs in the Detroit area today and tomorrow?&amp;quot; with a list of workers, jobs &amp;amp; shift times pulled via two tool calls&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Seeded data - success case (tool arguments redacted). Look closely &amp;amp; you&#39;ll see the dates don&#39;t agree between the first half of the answer &amp;amp; the second.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;When it doesn&#39;t, it politely tells you to go use the product:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/rosiebot/rosiebot-failure.png&quot; alt=&quot;RosieBot answering &amp;quot;how many jobs do I have with active workers in June 2025?&amp;quot; by apologizing &amp;amp; recommending the user log in &amp;amp; check the Jobs dashboard&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Failure case&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;System architecture&lt;/h3&gt;
+&lt;p&gt;There are four moving parts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;RIVET Web Application (RWA):&lt;/strong&gt; the UI the user types into&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RIVET Web Service (RWS):&lt;/strong&gt; RIVET&#39;s API, which also hosts the public API&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RIVET MCP Client (MCP-client):&lt;/strong&gt; talks to the LLM &amp;amp; the MCP server&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;RIVET MCP Server (MCP-server):&lt;/strong&gt; exposes tools that call RIVET&#39;s public API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Request cycle&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;The user enters a query into the RIVET Web Application UI (RWA)&lt;/li&gt;
+&lt;li&gt;RWA sends the query to the RIVET Web Service (RWS)&lt;/li&gt;
+&lt;li&gt;RWS authenticates the request, checks permissions &amp;amp; scopes the request to the current user&#39;s org&lt;/li&gt;
+&lt;li&gt;RWS sends the query to the RIVET MCP Client (MCP-client)&lt;/li&gt;
+&lt;li&gt;MCP-client adds some &amp;quot;magic sauce&amp;quot; (prompt context &amp;amp; the tools list) to the query &amp;amp; sends it to the LLM to see if the LLM thinks any of the tools will help it process the request
+&lt;ul&gt;
+&lt;li&gt;MCP-client gets the tools list from a prior registration handshake with the MCP-server&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The LLM uses NLP to understand the query &amp;amp; selects a tool to help it answer the query. It then responds to the MCP-client with a tool use request&lt;/li&gt;
+&lt;li&gt;The MCP-client authenticates the tool use request (in this case, with the requesting user&#39;s token) &amp;amp; forwards the tool use request to the RIVET MCP Server (MCP-server)&lt;/li&gt;
+&lt;li&gt;The MCP-server processes the request by calling on external data sources (in this case, the RIVET public API hosted on RWS) &amp;amp; returns data back to the MCP-client&lt;/li&gt;
+&lt;li&gt;The MCP-client sends this data to the LLM&lt;/li&gt;
+&lt;li&gt;The LLM determines if it has sufficient context to answer the question
+&lt;ul&gt;
+&lt;li&gt;If no, the LLM makes an additional tool use request to the MCP-client (this ends up being several responses)&lt;/li&gt;
+&lt;li&gt;If yes, the LLM processes the query &amp;amp; returns a response to the MCP-client&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The MCP-client stitches the responses together from the LLM &amp;amp; returns them to RWS&lt;/li&gt;
+&lt;li&gt;RWS returns the response to RWA&lt;/li&gt;
+&lt;li&gt;RWA formats the response &amp;amp; displays it to the user&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Lessons Learned&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Good surprises&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Setup was not very difficult - if you already have APIs to get started with&lt;/li&gt;
+&lt;li&gt;I spent &amp;lt;$5 on credits testing this over a week, &amp;amp; the API key comes with $5 of free credits&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Bad surprises&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Getting a good (accurate &amp;amp; consistent) result was very difficult:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Tool calls often exceeded the model&#39;s context window limit - I needed to make the data lean &amp;amp; specific&lt;/li&gt;
+&lt;li&gt;I needed to create MCP-specific API endpoints to get data the LLM could use optimally&lt;/li&gt;
+&lt;li&gt;Prompt engineering matters - a lot&lt;/li&gt;
+&lt;li&gt;Fixing issues with maths or other specific domains requires additional tool calls (call the calculator tool instead of having the LLM guess the maths)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The Future - Where is this going?&lt;/h2&gt;
+&lt;h3&gt;RosieBot primary use cases&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1. PM in my pocket&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;A request we&#39;ve heard: &lt;em&gt;&amp;quot;I want a PM in my pocket&amp;quot;&lt;/em&gt; via a phone app. One path there: AI apps like Claude let users plug in their own integrations, so RIVET&#39;s tools could show up in an app that&#39;s already on their phone:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/rosiebot/claude-add-integration.png&quot; alt=&quot;Claude&#39;s &amp;quot;Add integration&amp;quot; dialog asking for an integration name &amp;amp; URL&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Product-development feedback based on customer usage of the NLP input UX&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Every question a customer asks the bot is a feature request in disguise. The log of what people ask for (&amp;amp; where the bot fails them) tells the product team where a focused, high-quality experience is worth building.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. AI application integrations&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Meet customers in the AI apps they already use by exposing RIVET&#39;s data to those apps through an MCP server.&lt;/p&gt;
+&lt;h3&gt;Other use cases?&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;RIVET has job labor planning, worker scheduling &amp;amp; job performance data.&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PM in a pocket
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;Who has worked with JANE DOE over the last 30 days?&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;How can I get capacity for OPPORTUNITY X? Who could I move around to make them available for OPPORTUNITY X?&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Who is scheduled to work on JOB Y at the end of this week?&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Product usage &amp;amp; job performance analysis on the best performing contractors in RIVET (for internal use, publishing marketing materials &amp;amp; sharing with contractors in app)
+&lt;ul&gt;
+&lt;li&gt;Requires significant investment in a &amp;quot;Construction Model&amp;quot; that knows what &amp;quot;good&amp;quot; is for job performance, planning &amp;amp; scheduling&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>How to get your team to prioritize tech debt</title>
+    <link href="https://detroitdevelopers.com/blog/prioritize-tech-debt/"/>
+    <updated>2025-04-16T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/prioritize-tech-debt/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I wrote it in April 2025 as the outline for a talk, memes &amp;amp; all.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/once-again-asking.png&quot; alt=&quot;Meme: Sr Dev, &amp;quot;I am once again asking for us to focus on Tech Debt&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;1. Why is this a problem?&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/devs-waiting.png&quot; alt=&quot;Meme: &amp;quot;Devs waiting for PM to prioritize tech debt&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/features-vs-tech-debt.png&quot; alt=&quot;Meme: a dev reaching for &amp;quot;tech debt&amp;quot; while being held back by &amp;quot;features&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Trade-offs are hard.&lt;/li&gt;
+&lt;li&gt;Sprint points feel like a zero-sum game. Every point spent on tech debt is a point not spent on a feature someone is waiting for.
+&lt;ul&gt;
+&lt;li&gt;But it isn&#39;t actually zero-sum: less tech debt = greater efficiency in the future. The hard part is making that future efficiency visible to the people weighing it against a feature they can see today.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;2. Understand your stakeholders&#39; needs&lt;/h2&gt;
+&lt;p&gt;Treat your PM, designer, EM &amp;amp; leadership the way you&#39;d treat users: figure out what they need before you pitch them a solution. Start with a question: what does &amp;quot;tech debt&amp;quot; mean to the non-technical (or just other) stakeholders?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It&#39;s amorphous.&lt;/strong&gt; It lacks a clear definition, or language to discuss trade-offs.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Solution:&lt;/strong&gt; break tech debt down into &amp;quot;benefits&amp;quot; for an informed discussion of trade-offs. The conversation isn&#39;t &amp;quot;new feature or tech debt&amp;quot;, it&#39;s &amp;quot;new feature or this specific performance improvement&amp;quot;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/one-does-not-simply.png&quot; alt=&quot;Meme: &amp;quot;One does not simply fix tech debt&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;It has a reputation for being a black hole.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;It&#39;ll take 2 - 52 weeks to do this&amp;quot;, or &amp;quot;it&#39;ll take 1 quarter&amp;quot; &amp;amp; then it takes 3 quarters.&lt;/li&gt;
+&lt;li&gt;It&#39;s typically worse before it&#39;s better, OR you have to overhaul a whole pattern across the entire codebase to get the benefit (a huge initial investment, or living with multiple patterns).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Solution:&lt;/strong&gt; break down the problem (planning!) so you can give a realistic estimate &amp;amp; &lt;em&gt;&lt;strong&gt;options&lt;/strong&gt;&lt;/em&gt; (people love options).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/new-feature-or-draw-25.png&quot; alt=&quot;UNO meme: a card reading &amp;quot;new feature or draw 25&amp;quot; next to a Product Manager holding a huge hand of cards&quot; /&gt;&lt;/p&gt;
+&lt;h2&gt;3. Choose your path&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/choose-your-path.png&quot; alt=&quot;The red pill &amp;amp; the blue pill&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;1. 🌉 A culture that supports tech debt&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;The PM &amp;amp; EM trust engineering ICs to do the right thing. They don&#39;t need to know the ins &amp;amp; outs of the specific work &amp;amp; focus; they just trust you&#39;ll do the right thing.&lt;/li&gt;
+&lt;li&gt;This is really hard to achieve because you have to build up this trust by consistently doing the right thing in their eyes &amp;amp; for the business.&lt;/li&gt;
+&lt;li&gt;Popular for eng-run companies &amp;amp; small orgs that are extremely profitable / successful. It&#39;s easy to ask for budget when the money is flowing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. (Collaborative) non-compliance&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;It&#39;s not endorsed, but you can either just prioritize it &amp;amp; tell others to kick rocks, or&lt;/li&gt;
+&lt;li&gt;you can prioritize it without making it clear that you&#39;re working on it.&lt;/li&gt;
+&lt;li&gt;Popular for all orgs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/non-compliance.png&quot; alt=&quot;Meme: car swerving off the &amp;quot;assigned tickets&amp;quot; highway onto the &amp;quot;actually work on tech debt&amp;quot; exit, labeled &amp;quot;non-compliance&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/product-roadmap.png&quot; alt=&quot;Meme: &amp;quot;Product roadmap?&amp;quot; on fire while &amp;quot;tech debt&amp;quot; smiles at the camera&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;3. 🪣 Tech debt budgets&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;20% of everyone&#39;s points per sprint, or&lt;/li&gt;
+&lt;li&gt;1 sprint per quarter, or&lt;/li&gt;
+&lt;li&gt;1 in 5 people focused 100% on tech debt&lt;/li&gt;
+&lt;li&gt;Popular for big orgs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;4. 💡 Redefine &amp;quot;tech debt&amp;quot; in a language the team can collaborate on&lt;/h3&gt;
+&lt;p&gt;Ad hoc tech debt projects.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tech debt is a huge category. Be very specific with your ask. Make each piece of tech debt its own project.&lt;/li&gt;
+&lt;li&gt;There&#39;s friction per instance, but you can now have an informed discussion of trade-offs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/is-this-tech-debt.png&quot; alt=&quot;Meme: dev pointing at a feature &amp;amp; asking &amp;quot;Is this tech debt?&amp;quot;&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;5. ⭐ Break the false dichotomy of choice &amp;amp; mix &#39;n&#39; match 1-4&lt;/h3&gt;
+&lt;p&gt;You don&#39;t have to pick one. A budget gives you room to plan; specific, well-defined projects make the trade-offs discussable; delivering on both builds the trust that gets you closer to path 1.&lt;/p&gt;
+&lt;h2&gt;4. Conclusion&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Empathize with your collaborators (PMs, Designers, other engineers).&lt;/li&gt;
+&lt;li&gt;Build trust to help the cultural focus on tech debt &amp;amp; trade-offs improve.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DO NOT&lt;/strong&gt; act in bad faith (non-compliance).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DO&lt;/strong&gt; budget for tech debt. Start by using this time to define tech debt &amp;amp; plan how to solve it.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DO&lt;/strong&gt; redefine tech debt: &lt;em&gt;make trade-offs obvious&lt;/em&gt;.
+&lt;ul&gt;
+&lt;li&gt;Fair warning: this may result in not prioritizing some tech debt.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DO&lt;/strong&gt; plan your tech debt removal so you can give accurate estimates.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/tech-debt/trade-offs-and-benefits.png&quot; alt=&quot;Meme: Engineering &amp;amp; Product arm-wrestle handshake over &amp;quot;Trade Offs &amp;amp; Benefits&amp;quot;&quot; /&gt;&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>A Framework for Building AI Features in SaaS Applications</title>
+    <link href="https://detroitdevelopers.com/blog/ai-features-framework-for-saas/"/>
+    <updated>2025-04-10T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/ai-features-framework-for-saas/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on April 10, 2025. AI moves fast, so read it as a snapshot of how I was thinking about AI features at the time. A few months later I wrote about building one of these features for real in &lt;a href=&quot;https://detroitdevelopers.com/blog/rosiebot-mcp-at-rivet/&quot;&gt;RosieBot: MCP in action at RIVET&lt;/a&gt;.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;h3&gt;Who is Phil &amp;amp; why does he care about AI?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;I&#39;m an Engineering Manager at RIVET. Previously I held titles such as &amp;quot;Software Engineer&amp;quot;, &amp;quot;Lead Engineer&amp;quot; &amp;amp; &amp;quot;Founding Engineer&amp;quot; at Quicken Loans (pre-IPO), StockX (Seed &amp;amp; Series A), Procore (pre-IPO) &amp;amp; Portex (Pre-seed &amp;amp; Seed).&lt;/li&gt;
+&lt;li&gt;I specialize in 0-to-1 &amp;amp; 1-to-n product development, with skills in Engineering, Product Management &amp;amp; team building.&lt;/li&gt;
+&lt;li&gt;I&#39;ve used a myriad of AI systems &amp;amp; built exactly 1 AI-enabled feature. I&#39;m trying to learn more about this to build more AI features. I am an expert in product development, but by no means an expert in AI.&lt;/li&gt;
+&lt;li&gt;My interest in AI is centered around:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Me:&lt;/strong&gt; How can I use this to make my life/job easier? (vibe coding, copilots, image generation, trip itinerary planning)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Users:&lt;/strong&gt; How can I use this to build useful features into my products?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;What is AI?&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;A computer program that uses an LLM to &lt;em&gt;reason&lt;/em&gt; (make decisions)&lt;/li&gt;
+&lt;li&gt;Some of these programs are advanced enough to act out a subset of the decisions that they make (&amp;quot;agentic&amp;quot;)&lt;/li&gt;
+&lt;li&gt;The LLM is the result of an ML process&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;What is the scale of AI?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;There are 2 phases: the short tail (now - ? months) &amp;amp; the long tail (? months - years in the future)&lt;/li&gt;
+&lt;li&gt;AI is a revolution (think agricultural, trades, industrial, computer, internet, smart phone, etc). It is impressive. The short tail is firming up (chat interfaces as a big player). The long tail will blow our minds.&lt;/li&gt;
+&lt;li&gt;In this post, I&#39;m going to focus on the short tail &amp;amp; what we can build now as application developers, especially as SaaS app developers.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Why do we need an &amp;quot;AI Features Framework&amp;quot;?&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;There are a &lt;em&gt;finite number&lt;/em&gt; of AI feature categories that are being built in SaaS apps today. This will change some time in the future (maybe tomorrow, maybe in 5 years).&lt;/li&gt;
+&lt;li&gt;Cataloging the finite quantity of features available today helps product teams &lt;em&gt;focus&lt;/em&gt; on what they can build to benefit customers &amp;amp; where they can explore (push the boundary).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Thesis:&lt;/strong&gt; SaaS companies (e.g., RIVET) will start to use AI (chatbot interfaces) to…&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fill gaps with easy-to-implement (low-quality) product development experiences powered by a chatbot interface&lt;/li&gt;
+&lt;li&gt;Plan high-quality product development experiences informed by customer usage of the chatbot interface&lt;/li&gt;
+&lt;li&gt;Expose chatbot interfaces powered by data integrated from other products to provide customer value enabled by that data&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;The Framework&lt;/h2&gt;
+&lt;p&gt;The framework has two parts:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;&amp;quot;Rails&amp;quot;:&lt;/strong&gt;&lt;/em&gt; Environmental Constraints&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;&amp;quot;Building Blocks&amp;quot;:&lt;/strong&gt;&lt;/em&gt; Feature Categories by Ability
+&lt;ul&gt;
+&lt;li&gt;Example Use Cases&lt;/li&gt;
+&lt;li&gt;Environmental Form (&amp;quot;Rail&amp;quot;)&lt;/li&gt;
+&lt;li&gt;Data Sources&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;&amp;quot;Rails&amp;quot;: Environmental Constraints&lt;/h3&gt;
+&lt;p&gt;How tightly does the environment constrain what the AI actor can do? I think of it as states of matter:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Gas:&lt;/strong&gt; Environments where the AI actor can operate with limited constraints. Any constraints are usually offered in the prompt/instructions to the AI or at the model-level, and therefore not changeable without switching models. No ML expertise required.
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Example:&lt;/em&gt; basic image generation based on a user-provided prompt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Liquid:&lt;/strong&gt; Environments where the AI actor can operate with moderately firm constraints. These constraints are often inexpensive to change but require some engineering effort. Very little ML expertise required.
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Examples:&lt;/em&gt; modifying data in an application in a pre-defined way via an API; retrieving data from a pre-defined data source such as a database or website homepage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Solid:&lt;/strong&gt; Environments where the AI actor can operate with severely strict constraints. These constraints are often expensive to set up &amp;amp; change. Changes to the functionality of the feature cannot be achieved without physical &amp;quot;rails&amp;quot; changes and/or advanced ML expertise.
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Examples:&lt;/em&gt; self-driving car lanes, automated factory production lines, fine-tuning models using self-learning feedback loops&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;&amp;quot;Building Blocks&amp;quot;: Feature Categories&lt;/h3&gt;
+&lt;p&gt;These are the &amp;quot;Lego blocks&amp;quot; of AI products today. Each has an ability, example use cases, the rails it needs &amp;amp; the data it runs on.&lt;/p&gt;
+&lt;h4&gt;1. (Unpredictable / Dangerous) Data Mutation, aka Generative AI&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Example use cases:&lt;/strong&gt; Prototyping, asset creation, document drafting&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environmental constraints:&lt;/strong&gt; Gas Rails. Requires very little in the application environment on top of the base model to get started, but can expand greatly depending on how the application&#39;s users expect generation to work (e.g., generate a song vs generate a specific type of image vs generate a fullstack application)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data sources:&lt;/strong&gt; Static - e.g., an uploaded image, a chat prompt, a document with great detail on a plot for a book to be generated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2. Query (relatively) static data&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Example use cases:&lt;/strong&gt; Query static documents such as API documentation&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environmental constraints:&lt;/strong&gt; Gas Rails. Requires static data to be fed into the application environment on top of the base model - e.g., via web scraping based on a URL or OCR of a document&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data sources:&lt;/strong&gt; Static - e.g., product documentation, API documentation, customer help articles or a website&#39;s home page&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;3. Query dynamic data&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Example use cases:&lt;/strong&gt; Query an application for answers to questions involving my company&#39;s proprietary data in the SaaS application&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environmental constraints:&lt;/strong&gt; Liquid Rails. Requires an interface (today, these are APIs for real-time &amp;amp; data streams for close-to-real-time) with usage instructions to perform approved queries&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data sources:&lt;/strong&gt; Malleable - e.g., a transactional database that is hosting &lt;em&gt;individual end user&lt;/em&gt; data (today these are queried via API for certainty)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;4. Self-improving system (model fine-tuning)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Example use cases:&lt;/strong&gt; Netflix&#39;s movie recommendation engine, an ever-improving project schedule builder, a personalized tutor that &amp;quot;learns&amp;quot; the best way to help me learn&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environmental constraints:&lt;/strong&gt; Solid Rails. Requires a continuous feedback loop such as an ML engine fed by end user feedback - implicit (did the user pick this option or keep searching?) or explicit (thumbs up &amp;amp; down)
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Note: requires model fine-tuning, which is an advanced ML practice &amp;amp; compute-intensive&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data sources:&lt;/strong&gt; Malleable - feedback from the system&#39;s key metrics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;5. (Safe) Data Mutation: agentic workflows to &lt;em&gt;perform specific actions&lt;/em&gt; based on &lt;em&gt;reasoning&lt;/em&gt; informed by input data&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Example use cases:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;quot;Show me options for flights from A to B on date X. Book flight Y using my credit card.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&amp;quot;Why can&#39;t I schedule more field labor? Oh, I don&#39;t have enough seats in my subscription. Increase my subscription amount using my saved billing info.&amp;quot;&lt;/li&gt;
+&lt;li&gt;Self-driving cars in specific self-driving car lanes, or in specific cities that have municipal codes &amp;amp; streets mapped out in a way that an algorithm can take advantage of&lt;/li&gt;
+&lt;li&gt;&amp;quot;Dark Factories&amp;quot; where AI-enabled manufacturing machines perform actions based on very strict physical constraints&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Environmental constraints:&lt;/strong&gt; Solid Rails. Requires an interface (e.g., an API) with usage instructions to perform approved actions. These systems aren&#39;t AGI; they are an algorithm-behind-a-curtain that appears to be very smart.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data sources:&lt;/strong&gt; Malleable - e.g., sensor inputs, APIs returning data from a database, documents representing streets or a schematic for a widget to be built&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;These categories become more valuable for end user experiences when &lt;em&gt;combined&lt;/em&gt;.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Two kinds of data: peripheral &amp;amp; contextual&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;data fetch&lt;/code&gt; blocks above split along one more line that matters a lot for effort:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Peripheral data:&lt;/strong&gt; public or pseudo-public data &lt;em&gt;about&lt;/em&gt; an application &amp;amp; its service offerings (marketing materials, sales materials, public API documentation, user training materials). Chatbot providers like &lt;a href=&quot;https://www.chatbase.co/docs/user-guides/quick-start/introduction&quot;&gt;Chatbase&lt;/a&gt;, &lt;a href=&quot;https://www.ada.cx/&quot;&gt;Ada&lt;/a&gt; &amp;amp; Intercom can ingest this out of the box via PDF upload, copy/paste, wiki integrations &amp;amp; website crawlers. Little to no engineering effort.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Contextual (in-app) data:&lt;/strong&gt; the customer&#39;s own data &lt;em&gt;in&lt;/em&gt; the application. This needs an API or database integration, which means real engineering effort to build &amp;amp; maintain.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Applying it: what could a SaaS app like RIVET build?&lt;/h2&gt;
+&lt;p&gt;RIVET helps construction contractors plan &amp;amp; schedule their field labor. Here&#39;s how the building blocks map onto features for a product like ours.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Sales/Marketing chatbot&lt;/strong&gt; (data fetch - peripheral)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefit:&lt;/strong&gt; lets prospects learn about the product &amp;amp; service offerings on demand, &amp;amp; surfaces learning materials such as podcast bites, webinar clips &amp;amp; e-book excerpts&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effort:&lt;/strong&gt; can be set up out of the box with existing chatbot providers. Very little to no engineering effort required.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User:&lt;/strong&gt; customer prospect&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;2. Support chatbot&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;v1: data fetch - peripheral&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefit:&lt;/strong&gt; customers get on-demand answers to simple questions about use cases, training &amp;amp; documentation without waiting on a human. Should allow seamless escalation to human support.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effort:&lt;/strong&gt; out of the box with existing providers&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User:&lt;/strong&gt; active customer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Later: (safe) data mutation&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefit:&lt;/strong&gt; &amp;quot;Why is there a banner on my account? Oh, I haven&#39;t paid? How can I pay? Approve a transaction on my card on file.&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effort:&lt;/strong&gt; significant, because it needs purpose-built APIs &amp;amp; integration, &amp;amp; the self-serve features underneath it have to exist first&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;3. In-app product chatbot&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;v1: data fetch - in-app&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefit:&lt;/strong&gt; customers get information about their specific data (e.g., &amp;quot;There is a severe weather warning for Southeast Michigan this Friday. Who is working on jobs in Southeast Michigan this Friday &amp;amp; Saturday?&amp;quot;)
+&lt;ul&gt;
+&lt;li&gt;fills gaps in the current product experience with a low-quality interface&lt;/li&gt;
+&lt;li&gt;informs the product team of areas to focus on for high-quality interfaces to replace the chatbot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effort:&lt;/strong&gt; moderate, due to the need for API or database integration&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;User:&lt;/strong&gt; active customer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;v2: (safe) data mutation - in-app&lt;/em&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefit:&lt;/strong&gt; customers take specific actions on their data, such as &amp;quot;message everyone scheduled on jobs in Southeast Michigan this Friday with this content &amp;amp; show it to me before sending so I can approve it&amp;quot;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Effort:&lt;/strong&gt; significant, due to the purpose-built APIs required&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Example Product Roadmap&lt;/h2&gt;
+&lt;p&gt;Putting it in order of delivery:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AI &lt;code&gt;data fetch&lt;/code&gt; with access to &lt;em&gt;peripheral&lt;/em&gt; data (product help articles, podcasts, marketing material, API documentation)
+&lt;ul&gt;
+&lt;li&gt;Service customer questions about the product in sales, training &amp;amp; support contexts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;AI &lt;code&gt;data fetch&lt;/code&gt; with access to &lt;em&gt;contextual&lt;/em&gt; data (specific customer data in the database)
+&lt;ul&gt;
+&lt;li&gt;Unlock many new customer-driven query features&lt;/li&gt;
+&lt;li&gt;Use the queries customers generate in this feature to inform future product development experiences&lt;/li&gt;
+&lt;li&gt;Expose query features against imported partner &amp;amp; competitor datasets that help capture market share&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;AI &lt;code&gt;(safe) data mutation&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;Unlock many new customer-driven mutation features&lt;/li&gt;
+&lt;li&gt;Use the mutation queries customers generate in this feature to inform future product development experiences&lt;/li&gt;
+&lt;li&gt;Expose more features against imported partner &amp;amp; competitor datasets that help capture market share&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Within step 2, the freshness of the data is its own ladder, &amp;amp; each rung costs more engineering than the last:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Manual exports&lt;/strong&gt; of customer data fed to the chatbot. Limited data, not real-time, no engineering effort.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;quot;Slow&amp;quot; in-app data:&lt;/strong&gt; automated, batch-processed document-style exports. Still limited data, close to but not real-time. Significant engineering investment to implement &amp;amp; maintain.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;quot;Quick&amp;quot; in-app data:&lt;/strong&gt; automated, batch-processed exports to a vector data source. Data size is no longer the chief constraint. Massive engineering investment.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;quot;Real-time&amp;quot; in-app data:&lt;/strong&gt; change data capture streaming into a vector data source. 🙂 Massive engineering investment, &amp;amp; then some.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Technical challenges&lt;/h3&gt;
+&lt;p&gt;While there are many products that offer chatbot interfaces informed by specific APIs (e.g., Chatbase) or document uploads (e.g., &lt;a href=&quot;https://www.pinecone.io/blog/pinecone-assistant-generally-available/&quot;&gt;Pinecone Assistant&lt;/a&gt;), there are no systems with plug-and-play database integrations. The systems that exist today provide RAG services. Plug-and-play database services would require extremely massive &amp;amp; complicated document RAG implementations OR a data pipeline system that moves data into a vector database that the agent has access to.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Evolution of Data Pipeline Software Architecture at RIVET (2020 - 2025)</title>
+    <link href="https://detroitdevelopers.com/blog/evolution-of-data-pipeline-architecture/"/>
+    <updated>2025-02-27T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/evolution-of-data-pipeline-architecture/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave at the &lt;a href=&quot;https://detroitdevelopers.com/events/data-pipelines-sdlc/&quot;&gt;Detroit Software Developers meetup on February 27, 2025&lt;/a&gt;. The company numbers, team sizes &amp;amp; &amp;quot;future&amp;quot; plans are all a snapshot of that moment.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Intent:&lt;/strong&gt; A software architecture journey via a real-world case study on how a software startup grew &amp;amp; how the software architecture evolved to support the business&#39; growth.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Method:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;What a data pipeline is &amp;amp; how it works at a high level&lt;/li&gt;
+&lt;li&gt;What RIVET is &amp;amp; how a data pipeline helps solve problems at RIVET&lt;/li&gt;
+&lt;li&gt;Evolutionary history of software architecture at RIVET&lt;/li&gt;
+&lt;li&gt;A vision of what the future holds for RIVET&#39;s business &amp;amp; how the software architecture will evolve to meet the business&#39; needs&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;h3&gt;What is a data pipeline?&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;According to AI:&lt;/strong&gt; A &amp;quot;data pipeline&amp;quot; is a series of automated processes that move data from its source to a destination, often involving transformation and cleaning steps along the way, to prepare it for analysis and further use, essentially acting like a conveyor belt for data within a system; it allows organizations to collect, process, and deliver data from various sources in a structured manner for insights and decision-making.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;According to Phil:&lt;/strong&gt; A &amp;quot;data pipeline&amp;quot; is a tool used to move data from one place to another place.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For a good visual overview of both the low-res (ETL) &amp;amp; high-res versions of a data pipeline, watch ByteByteGo&#39;s &lt;a href=&quot;https://www.youtube.com/watch?v=kGT4PcTEPP8&quot;&gt;What is a Data Pipeline? | Why is it so popular?&lt;/a&gt; (there&#39;s also a &lt;a href=&quot;https://www.youtube.com/shorts/Yj9qOWnipTQ&quot;&gt;60-second version&lt;/a&gt;).&lt;/p&gt;
+&lt;h3&gt;Why should I care?&lt;/h3&gt;
+&lt;p&gt;Data pipelines allow you to achieve:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Business-scale, high-speed decision making across multiple datasets.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Functionality you just can&#39;t do without the data from multiple datasets.
+&lt;ul&gt;
+&lt;li&gt;Venmo can&#39;t work without data from the sender &amp;amp; receiver&#39;s banks.&lt;/li&gt;
+&lt;li&gt;RIVET can&#39;t work without data from your bidding system, project management system, employee system, employee certification system &amp;amp; accounting system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If you have several systems that your business relies on (e.g., HubSpot, Salesforce, Jira, Notion, GitHub, QuickBooks, etc) &amp;amp; want to take action informed by data in more than one of these systems at a time, then you will probably benefit from a data pipeline.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;This isn&#39;t just about having data on a screen that helps the [human | AI] operator make a choice somewhere else. &lt;strong&gt;The best case is the data is in the system where the decisions are being made.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;RIVET&#39;s business model &amp;amp; why data pipelines are important&lt;/h2&gt;
+&lt;h3&gt;What is RIVET?&lt;/h3&gt;
+&lt;p&gt;RIVET is a seed-stage, B2B SaaS startup in the construction tech industry, HQ&#39;d in Detroit. Started in 2020. At the time of this talk we were at 42 employees with 15 in Product &amp;amp; Engineering:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Engineers: 8&lt;/li&gt;
+&lt;li&gt;Engineering Managers: 2&lt;/li&gt;
+&lt;li&gt;CTO: 1&lt;/li&gt;
+&lt;li&gt;PMs: 1&lt;/li&gt;
+&lt;li&gt;Director of Product: 1&lt;/li&gt;
+&lt;li&gt;Product Designers: 2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Our stack: TypeScript, Node, React, Azure, K8s, Docker, Terraform, BullMQ, Redis &amp;amp; Postgres.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Customer:&lt;/strong&gt; Construction subcontractors involved in skilled trades (e.g., Electrical, Plumbing, Mechanical, etc). Specifically the &amp;quot;Labor Coordinator&amp;quot; &amp;amp; &amp;quot;Project Manager&amp;quot;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Customer problems&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Labor Coordinator:&lt;/strong&gt; As a Labor Coordinator at a skilled-trade Subcontractor, you have to manage the daily-shifting schedules of 100s-1000s of workers across 100s of job sites. If (when) you make mistakes, the wrong people show up to the wrong job sites. This hurts the company&#39;s profitability (because the people are still paid) &amp;amp; turns the job site managers (Foremen) into your enemies. You currently use Excel, a whiteboard &amp;amp; your phone to do this job.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Project Manager:&lt;/strong&gt; As a Project Manager at a skilled-trade Subcontractor, you are responsible for the profitability of the jobs under your management. You ensure your jobs are profitable by planning how the job is executed &amp;amp; then reviewing performance against your plan (usually by looking at % complete vs total cost to date). You must review &amp;amp; revise your plan &lt;em&gt;every week for every job&lt;/em&gt; (someone shows up to the wrong job site, someone is sick, someone quits or is fired, someone takes time off, the entire job schedule is pushed because of a delay with another subcontractor, etc). You use Excel, an ERP/Accounting report &amp;amp; some project management software to do this job.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; A software tool that allows you to match the optimal worker to the job &amp;amp; communicate this match across your company.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Why does RIVET need a data pipeline?&lt;/h3&gt;
+&lt;p&gt;Why use a data pipeline for anything?&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;You need to get data from multiple systems into 1 system to help you make decisions&lt;/li&gt;
+&lt;li&gt;You own the 1 system where decisions are made &amp;amp; you need to get your customers&#39; data from multiple systems into your 1 system&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;RIVET is the platform where construction Labor Coordinators &amp;amp; PMs are making &lt;em&gt;people &amp;amp; project scheduling decisions&lt;/em&gt;. In order to make these decisions, they need data on people &amp;amp; projects. This data usually lives in 3-5 separate places, half of which they may not have access to without RIVET.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In order to help our customers achieve the solution above, RIVET needs to provide information about the:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Jobs:&lt;/strong&gt; address, customer, financials, type of project&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Workers:&lt;/strong&gt; address, emergency contact info, pay rate / cost to company (~2x pay rate), experience, trade, classification&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker Certifications:&lt;/strong&gt; title, date attained, experience date, description, image/artifact&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Job Schedules:&lt;/strong&gt; start &amp;amp; end dates, what type of work is needed on the job &amp;amp; when&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker Schedules:&lt;/strong&gt; specifically who joins the job to fulfill the required work &amp;amp; when&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;🤯 Each type of data lives in a separate system:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;Source Systems&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Jobs&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;ERP, Accounting, Bidding Software&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Workers&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;HRIS&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Worker Certifications&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Excel, Google Drive&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Job Schedules&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Excel, P6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Worker Schedules&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;RIVET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Because all of the data that RIVET needs to work is maintained in other systems, RIVET needs a way to ingest this data. Options:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Manual data entry:&lt;/strong&gt; Some customers will do this; most won&#39;t&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One-time import (&amp;amp; then manual data entry to maintain):&lt;/strong&gt; Some customers will do this; most won&#39;t&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Automatic data updates:&lt;/strong&gt; 💰💰💰&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Past: Prologue&lt;/h2&gt;
+&lt;h3&gt;1. The Prototype: SFTP&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: Q2 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Pre-seed · ~$2.6m raised · ~6 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 100s of records going through the data pipeline · 1 integration&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; CTO: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.linkedin.com/in/andrewmlawrence/&quot;&gt;Andy Lawrence&lt;/a&gt;, Co-founder &amp;amp; CTO, created the original data pipeline for our first &amp;quot;big&amp;quot; customer. We call this the &lt;strong&gt;&amp;quot;ETL Service&amp;quot;&lt;/strong&gt; because it:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Extracts&lt;/strong&gt;&lt;/em&gt; files from our (or their) SFTP site&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Transforms&lt;/strong&gt;&lt;/em&gt; the data based on customer business logic per customer&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Loads&lt;/strong&gt;&lt;/em&gt; the data into our public API&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/topology-2022-q2.png&quot; alt=&quot;RIVET platform topology in Q2 2022: customer-generated CSV files land on an SFTP server, flow through the ETL Service into the Integrations API &amp;amp; the multi-tenant database&quot; /&gt;&lt;/p&gt;
+&lt;h4&gt;Coded transformation configs&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/etl-config.png&quot; alt=&quot;An example coded ETL config in TypeScript, mapping certification fields with keys &amp;amp; formatters&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Example coded ETL config&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;How do RIVET transformation configs work?&lt;/strong&gt; TS configuration files control how a series of functions processes data.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Fetch Logic:&lt;/strong&gt;&lt;/em&gt; How to get the data (SFTP server info, API endpoint auth info, fetch/poll frequency)&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Skip Logic:&lt;/strong&gt;&lt;/em&gt; Callback with rules run for each record in the incoming data set. If the return value is &lt;code&gt;true&lt;/code&gt;, that record will be skipped from further processing&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Field Ignore:&lt;/strong&gt;&lt;/em&gt; Source of truth / create vs update&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Key Mapping:&lt;/strong&gt;&lt;/em&gt; &lt;code&gt;hireDate, re_hire_date&lt;/code&gt; → &lt;code&gt;hiredate&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&lt;strong&gt;Formatters:&lt;/strong&gt;&lt;/em&gt; Callback transforms the given field&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;2. The First Iteration: ODBC&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: Q4 2022&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Pre-seed · ~$2.6m raised · ~10 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 1,000s of records going through the data pipeline · &amp;lt;5 integrations&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; CTO: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Another customer needs ODBC extraction, so Andy extends the SFTP prototype with three more components: the &lt;strong&gt;&amp;quot;Data Agent Client&amp;quot;&lt;/strong&gt;, &lt;strong&gt;&amp;quot;Data Agent Service&amp;quot;&lt;/strong&gt; &amp;amp; &lt;strong&gt;&amp;quot;Data Agent Admin&amp;quot;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Data Agent Client&lt;/strong&gt; is a .NET application that can be installed on customer servers (for security or cost-saving purposes) or RIVET-hosted (for ease of use &amp;amp; lower customer maintenance burden) that runs SQL queries against customer databases on a configurable frequency.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Data Agent Service&lt;/strong&gt; is a Node application for managing Data Agent Clients installed on RIVET VMs &amp;amp; customer servers. The data available to be managed includes: SQL queries to be run, the SQL query frequency, the source database connection credentials, the destination URL &amp;amp; API token, and various other options relevant to the system.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Data Agent Admin&lt;/strong&gt; is an internal React application used to manage Data Agent Clients via the Data Agent Service.&lt;/p&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/topology-2022-q4.png&quot; alt=&quot;RIVET platform topology in Q4 2022: a Data Agent Service joins the SFTP server as a second source feeding the ETL Service, fed by Data Agent Clients running next to customer SQL/ODBC data sources&quot; /&gt;&lt;/p&gt;
+&lt;h4&gt;ODBC connector: Data Agent Admin UI&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/data-agent-admin.png&quot; alt=&quot;Data Agent Admin UI showing a SQL query against an ERP&#39;s jobs tables, with connection, data type, frequency &amp;amp; timeout settings&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Data Agent Admin UI&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;3. The Data Pipeline Team begins to form &amp;amp; tooling gets an upgrade&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: Q1 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Pre-seed · ~$2.6m raised · ~12 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 1,000s of records going through the data pipeline per day · ~10 integrations&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; CTO: 1 · Engineers: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I&#39;m hired &amp;amp; promptly put in charge of onboarding new customers&#39; data into RIVET as well as extending the data pipeline&#39;s capabilities. Over the next 24 months, a team of several engineers, a designer &amp;amp; a PM is built to help support this function (and other responsibilities).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Creating &amp;amp; maintaining customer integrations mostly happens via &lt;code&gt;SQL queries&lt;/code&gt; in the Data Agent Service &amp;amp; &lt;code&gt;coded configs&lt;/code&gt; in the ETL Service&lt;/li&gt;
+&lt;li&gt;We deploy a &lt;code&gt;Data Agent Client&lt;/code&gt; on a RIVET VM so we can connect to customer cloud-based databases without installing the Data Agent Client on their machines (which was often a time suck)&lt;/li&gt;
+&lt;li&gt;We start to invest in internal tooling to help us better monitor &amp;amp; manage customer integrations &amp;amp; our data pipeline
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;RIVET CLI&lt;/code&gt; for ergonomic access to relevant data about a single &amp;quot;transaction&amp;quot; through the data pipeline&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Metabase&lt;/code&gt; for dashboards &amp;amp; metric aggregation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/topology-2023-q1.png&quot; alt=&quot;RIVET platform topology in Q1 2023: adds a RIVET-hosted Data Agent Client for customer cloud databases, a web Data Agent Admin, &amp;amp; a Metabase service reading from a database replica&quot; /&gt;&lt;/p&gt;
+&lt;h4&gt;Internal tooling&lt;/h4&gt;
+&lt;p&gt;We found that building new integrations was simple, but debugging running integrations was difficult. We tried many approaches to this, such as making it easier to deploy them in a sandbox environment where customers could review them before promoting to production, &amp;amp; making local development easier. One solution we landed on was creating an internal CLI tool for viewing the data flow between the different system components (Data Agent Service → ETL → Public API), which helped us debug issues (see where data fell off / had an issue). &lt;strong&gt;In order to do this, we used a &lt;code&gt;tracerId&lt;/code&gt; (uuid) that tied all of the data around the end-to-end transaction together.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Here&#39;s roughly what a trace looks like (anonymized &amp;amp; trimmed):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;% rivet trace -u &amp;lt;tracerId&amp;gt;
+PRODUCTION: Data Agent
+---
+Found: &amp;lt;tracerId&amp;gt;
+[
+  {
+    &amp;quot;name&amp;quot;: &amp;quot;rivet-hosted-agent&amp;quot;,
+    &amp;quot;hasRequest&amp;quot;: true,
+    &amp;quot;hasResponse&amp;quot;: true,
+    &amp;quot;hasSent&amp;quot;: true,
+    &amp;quot;status&amp;quot;: 17
+  }
+]
+PRODUCTION: ETL Service
+---
+Found: &amp;lt;tracerId&amp;gt;
+[
+  {
+    &amp;quot;name&amp;quot;: &amp;quot;agent_customerName_StateCode&amp;quot;,
+    &amp;quot;transactionStatus&amp;quot;: 7,
+    &amp;quot;streamStatus&amp;quot;: 5,
+    &amp;quot;recordsParsed&amp;quot;: 250,
+    &amp;quot;recordsSent&amp;quot;: 250,
+    &amp;quot;recordsSucceeded&amp;quot;: 250
+  }
+]
+PRODUCTION: Integration API
+---
+Found: &amp;lt;tracerId&amp;gt;
+[
+  {
+    &amp;quot;name&amp;quot;: &amp;quot;Customer Name [PRODUCTION]&amp;quot;,
+    &amp;quot;endpoint&amp;quot;: &amp;quot;/v1/jobs&amp;quot;,
+    &amp;quot;resStatusCode&amp;quot;: 200,
+    &amp;quot;resTime&amp;quot;: 30662,
+    &amp;quot;resDataSize&amp;quot;: &amp;quot;393757&amp;quot;
+  }
+]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We also built dashboards to help us visualize the health of the entire system &amp;amp; get more visibility into specific issues.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/metabase-integration-pipeline.png&quot; alt=&quot;Metabase &amp;quot;Integration Pipeline&amp;quot; dashboard: 427 active ETL configs, records parsed/sent/succeeded/failed today, &amp;amp; a daily summary chart&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Metabase (customer config names redacted)&lt;/em&gt;&lt;/p&gt;
+&lt;h3&gt;4. The Second Iteration: HTTP&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: Q3 2023&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Pre-seed · ~$2.6m raised · ~12 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 10s of thousands of records going through the data pipeline per day · ~100 integrations&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; CTO: 1 · Engineers: 1 · PM / Engineer: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.linkedin.com/in/louis-gelinas/&quot;&gt;Louis Gelinas&lt;/a&gt;, Co-founder, First Developer &amp;amp; Director of Product @ RIVET, builds the first HTTP extraction using the &lt;strong&gt;&amp;quot;Not HTTP Service&amp;quot;&lt;/strong&gt;, aka the &amp;quot;HTTP Connector&amp;quot;.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;HTTP Connector&lt;/strong&gt; periodically polls external APIs to extract JSON data using a customer-provided API key. The first one was a coded, per-integration fetcher: authenticate with the 3rd party API, page through the results, transform them &amp;amp; hand them to the ETL Service.&lt;/p&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/topology-2023-q3.png&quot; alt=&quot;RIVET platform topology in Q3 2023: an HTTP Connector Service joins the SFTP server &amp;amp; Data Agent Service as a third source feeding the ETL Service, polling external system APIs&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;5. GUI Tooling: CSSI&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: many iterations throughout 2024&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Seed · ~$9m raised · ~30 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 100-300k records going through the data pipeline per day · 100 integrations at the start, 427 as of this talk&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; Engineering Manager: 1 · Engineers: 1 - 3 · PM: 1 · Designer: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We started to build a GUI tool for configuring integrations in Q1 2024. This tool is called &amp;quot;Customer Success Configured Integrations&amp;quot; (CSSI).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DB-based integration configurations&lt;/code&gt;: CSSI moves the transformation logic from code to the database, which unlocks a UI to customize transforms per customer.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Manual file upload&lt;/code&gt;: CSSI also supports manual file upload, which allows for easier testing of data payloads &amp;amp; replaces our &amp;quot;bulk uploader&amp;quot; functionality.
+&lt;ul&gt;
+&lt;li&gt;We start to use manual file uploads for integrations that were SFTP, but were not automated exports &amp;amp; uploads to our SFTP server (so a customer had to upload using an SFTP client like FileZilla).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Dry Runs&lt;/code&gt;: The data pipeline now supports &amp;quot;dry runs&amp;quot;, which allow testing an integration in production &amp;amp; getting a snapshot of changes without committing the changes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;CSSI UI&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/cssi-integrations.png&quot; alt=&quot;CSSI integrations screen: an SFTP data source with a list of job, certification &amp;amp; worker transformations&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;List of integrations in the CSSI UI&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/cssi-transformation.png&quot; alt=&quot;CSSI transformation screen: a linked command running daily, recent run history &amp;amp; field mapping from data columns to RIVET fields&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Configuring an integration in the CSSI UI&lt;/em&gt;&lt;/p&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/topology-2024-q1.png&quot; alt=&quot;RIVET platform topology in Q1 2024: Public API, Web API &amp;amp; Jobs Service backed by Redis/BullMQ, with the ETL Service fed by the Data Agent Service, HTTP Connector Service &amp;amp; SFTP server&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Present: Where we are today&lt;/h2&gt;
+&lt;h3&gt;6. RIVET Data Services&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Snapshot: Q1 2025&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Company:&lt;/strong&gt; Seed + Bridge (mini A) · ~$15m raised · 42 employees&lt;br /&gt;
+&lt;strong&gt;Data:&lt;/strong&gt; 100s of thousands of records going through the data pipeline per day · 427 integrations&lt;br /&gt;
+&lt;strong&gt;Data team:&lt;/strong&gt; Engineering Manager: 1 · Engineers: 3 · PM: 1 · Designer: 1 · Director of Data Services: 1 · Integration Developers: 1&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;code&gt;Data Services Team&lt;/code&gt;: CSSI enables integration specialization apart from engineering. Data technicians can now create &amp;amp; maintain integrations without needing to write &amp;amp; deploy code.&lt;/p&gt;
+&lt;h4&gt;RIVET context&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/weekly-scheduled-workers.png&quot; alt=&quot;Chart of weekly scheduled workers in RIVET growing steadily from 2021 through 2024&quot; /&gt;&lt;/p&gt;
+&lt;h4&gt;System topology&lt;/h4&gt;
+&lt;p&gt;The topology is the same as the Q1 2024 diagram in the CSSI section above.&lt;/p&gt;
+&lt;h4&gt;Infra hosting &amp;amp; setup&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Azure VMs, Application Gateway&lt;/li&gt;
+&lt;li&gt;PM2&lt;/li&gt;
+&lt;li&gt;Nginx&lt;/li&gt;
+&lt;li&gt;Async jobs for messaging (SMS, email, in-app notifications) via BullMQ (Redis + TS)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Future: The RIVET data pipeline of the future™️&lt;/h2&gt;
+&lt;h3&gt;Problems: Reliability, Performance &amp;amp; Operations&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Acute Problem - Throughput (a performance issue leading to a reliability issue):&lt;/strong&gt; The data pipeline would not process jobs (batches of data) as quickly as it was receiving jobs. This led to a theoretical processing time of infinity. Most customers had 1-hour SLAs, some had 5-minute SLAs. The data pipeline was &lt;em&gt;slow&lt;/em&gt;, but for our customers it appeared &lt;em&gt;down&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Operations:&lt;/strong&gt; As we migrate from &amp;quot;Engineers write integrations&amp;quot; to &amp;quot;Data Services Integration Developers write integrations&amp;quot;, we need more robust tooling for debugging issues with integrations. Put another way: Engineers can dive into our prod SQL databases &amp;amp; ssh into VMs to discover issues; Integration Developers must use the tools provided by our Data Pipeline Engineering team.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Long-tail Performance:&lt;/strong&gt; With new customers &amp;amp; new data types, we plan to increase load on our data pipeline infra by 50-100x (quantity of records, not quantity of data) over the next 36 months.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tenant Isolation:&lt;/strong&gt; Noisy tenants shouldn&#39;t affect their neighbors by clogging up the queue for everyone.&lt;/li&gt;
+&lt;li&gt;etc, etc, etc - the list goes on&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Solutions: Strategy Documents, BullMQ &amp;amp; Record-level Metrics - Oh My!&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ &lt;strong&gt;Better Visibility:&lt;/strong&gt; More clarity on service health &amp;amp; bottlenecks&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;Horizontal Scaling:&lt;/strong&gt; More workers to process data&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;Strategy Docs:&lt;/strong&gt; We wrote a Data Pipeline Technical Strategy for Q1 2025.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Benefits:&lt;/strong&gt; Helps us know what to do &amp;amp; in what order, builds trust with other teams &amp;amp; parts of the business, and gives us a framework for adjusting our plans over time.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pillars:&lt;/strong&gt; Definition · KPIs · High-level Plan · Immediate Next Steps&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;🏗️ &lt;strong&gt;BullMQ:&lt;/strong&gt; Queues help with reliability&lt;/li&gt;
+&lt;li&gt;🌄 &lt;strong&gt;Record-level Metrics:&lt;/strong&gt; Metrics per record instead of per batch of 100s of records&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;Metabase&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;https://detroitdevelopers.com/assets/images/data-pipeline/metabase-services.png&quot; alt=&quot;Metabase dashboard with per-service charts: queue items &amp;amp; records processed for the Data Agent Service, HTTP Connector Service, Data Transform Service &amp;amp; Public API&quot; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Closing&lt;/h2&gt;
+&lt;p&gt;When I gave this talk, RIVET was raising its Series A, planning to grow the team from 40 → 80 over the following 24 months &amp;amp; moving to a larger office in downtown Detroit. If this kind of work sounds fun, check the &lt;a href=&quot;https://www.rivet.work/careers/&quot;&gt;RIVET careers page&lt;/a&gt; for what&#39;s open now.&lt;/p&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Error Handling For Fun &amp; Profit in Express</title>
+    <link href="https://detroitdevelopers.com/blog/error-handling-in-express/"/>
+    <updated>2023-07-11T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/error-handling-in-express/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. Most of it dates from mid-2023, when we were cleaning up error handling in RIVET&#39;s Express API. The section on logging was added in 2025. The code samples are simplified sketches of the pattern, not RIVET&#39;s actual source.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Goal&lt;/h2&gt;
+&lt;p&gt;Standardize error handling throughout server code to decrease bugs &amp;amp; reduce the complexity of writing new code &amp;amp; modifying existing code. Consolidate router-level error handling into one place using purpose-specific middleware.&lt;/p&gt;
+&lt;h2&gt;Why doesn&#39;t node/express already do this for me?&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Configuration &amp;gt; Convention&lt;/li&gt;
+&lt;li&gt;It might! &lt;em&gt;Some day…&lt;/em&gt; Express 5 &lt;a href=&quot;https://zellwk.com/blog/async-await-express/&quot;&gt;bakes in handling for async errors&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;(Update from the future: Express 5 has since shipped. It forwards rejected promises from async handlers to your error middleware, which removes one of the reasons for &lt;code&gt;try/catch&lt;/code&gt; listed below. Everything else here still applies.)&lt;/em&gt;&lt;/p&gt;
+&lt;h2&gt;Benefits&lt;/h2&gt;
+&lt;h3&gt;Less code&lt;/h3&gt;
+&lt;p&gt;Less code has many sub-benefits:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;decreased complexity&lt;/li&gt;
+&lt;li&gt;improved readability&lt;/li&gt;
+&lt;li&gt;simpler discovery&lt;/li&gt;
+&lt;li&gt;less time to release new features because a standard part of the work is handled in a standardized way&lt;/li&gt;
+&lt;li&gt;lower chance for bugs to occur because there are no divergent implementations of the same error-handling logic throughout the codebase&lt;/li&gt;
+&lt;li&gt;faster build time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Standardized error handling process&lt;/h3&gt;
+&lt;p&gt;Increase error occurrence visibility by avoiding issues where one controller logs errors to Datadog &amp;amp; Sentry and another logs errors to the server&#39;s console &amp;amp; saves them to an &lt;code&gt;error.log&lt;/code&gt; file. This allows you to debug issues more quickly, saving you valuable time to do more important things like not staying up all night to fix production outages.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Steps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Create standardized error definitions&lt;/li&gt;
+&lt;li&gt;Create purpose-built error-handling middleware: custom errors, invalid routes &amp;amp; unhandled errors&lt;/li&gt;
+&lt;li&gt;Replace returning 500s with throwing errors, &amp;amp; &lt;code&gt;console.error&lt;/code&gt; with your logger&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; know when you should still use &lt;code&gt;try/catch&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bonus:&lt;/strong&gt; decide what actually deserves to be logged as an error&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Throwing Errors&lt;/h2&gt;
+&lt;h3&gt;Standardized error definitions&lt;/h3&gt;
+&lt;p&gt;Give the codebase one vocabulary for errors. We wrapped &lt;a href=&quot;https://www.npmjs.com/package/http-errors&quot;&gt;&lt;code&gt;http-errors&lt;/code&gt;&lt;/a&gt; in a small helper so nobody has to remember status codes or invent message formats:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// helpers/errors.ts
+import createError from &#39;http-errors&#39;;
+
+export const AppErrors = {
+  badRequest: (message = &#39;Bad Request&#39;) =&amp;gt; createError(400, message),
+  unauthorized: (message = &#39;Unauthorized&#39;) =&amp;gt; createError(401, message),
+  forbidden: (message = &#39;Access Denied&#39;) =&amp;gt; createError(403, message),
+  notFound: (message = &#39;Not Found&#39;) =&amp;gt; createError(404, message),
+  internalServerError: (cause?: unknown) =&amp;gt; createError(500, &#39;Internal Server Error&#39;, { cause }),
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Instances of throwing errors&lt;/h3&gt;
+&lt;p&gt;Anywhere in the request lifecycle (controllers, actions, services), throw one of these instead of building a response by hand:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// before
+throw createError(403, &#39;Access Denied for that role&#39;);
+
+// after
+throw AppErrors.forbidden(&#39;Access Denied for that role&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Catching Errors&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;LET 500s PASS THROUGH.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If something unexpected blows up, you don&#39;t need to catch it where it happened. Let it travel up to a single fallback handler that logs it &amp;amp; responds with a 500.&lt;/p&gt;
+&lt;p&gt;Once that fallback exists, you can remove all of &lt;em&gt;these&lt;/em&gt; from your request lifecycle (middlewares &amp;amp; controllers):&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;export const readProfile = async (req: Request, res: Response) =&amp;gt; {
+  try {
+    const id = Number(req.params.id);
+    const view = await profileView(req.user, id);
+    if (view) {
+      return res.json(view);
+    } else {
+      return res.status(404).json({ message: &#39;404: Worker not found&#39; });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(error.status || 500).json({ message: error.message || &#39;internal server error&#39; });
+  }
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;catch&lt;/code&gt; block there is doing three jobs (logging, picking a status code, shaping the response body) &amp;amp; every controller does those jobs slightly differently. With the middleware below in place, the controller shrinks to the part that&#39;s actually about profiles:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;export const readProfile = async (req: Request, res: Response) =&amp;gt; {
+  const id = Number(req.params.id);
+  const view = await profileView(req.user, id);
+  if (!view) throw AppErrors.notFound(&#39;Worker not found&#39;);
+
+  return res.json(view);
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Middleware&lt;/h3&gt;
+&lt;p&gt;Three small pieces, each with one purpose:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// middleware/invalidRoute.ts
+// Nothing matched the request: turn it into a standard 404.
+export const invalidRoute: RequestHandler = (req, _res, next) =&amp;gt; {
+  next(AppErrors.notFound(`Route not found: ${req.method} ${req.originalUrl}`));
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// middleware/customError.ts
+// Errors we threw on purpose (4xx): respond with the status &amp;amp; message we chose.
+export const customError: ErrorRequestHandler = (err, _req, res, next) =&amp;gt; {
+  if (!createError.isHttpError(err) || err.status &amp;gt;= 500) return next(err);
+
+  res.status(err.status).json({ message: err.message });
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// middleware/unhandledError.ts
+// The fallback. Anything that gets here is a real problem: log it &amp;amp; return a 500.
+export const unhandledError: ErrorRequestHandler = (err, _req, res, _next) =&amp;gt; {
+  logger.error(err);
+
+  res.status(500).json({ message: &#39;Internal Server Error&#39; });
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Mount point:&lt;/strong&gt; these go at the very end of your app setup, after every router, in this order:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// app.ts
+app.use(&#39;/api&#39;, apiRouter);
+
+app.use(invalidRoute);
+app.use(customError);
+app.use(unhandledError);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;hr /&gt;
+&lt;h2&gt;When should you still use try/catch blocks?&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;You&#39;re on Express 4 with async controllers&lt;/li&gt;
+&lt;li&gt;You want to handle an expected error in a non-standard way&lt;/li&gt;
+&lt;li&gt;Your code is outside the bounds of a request (e.g. Actions, Repositories, Services, NOT controllers, NOT middleware)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Express 4 with async controllers&lt;/h3&gt;
+&lt;p&gt;Express 4 doesn&#39;t know what to do with a rejected promise. If an async handler throws, the error never reaches your error middleware: the request hangs, or worse, the unhandled rejection takes the process down. You either &lt;code&gt;try/catch&lt;/code&gt; &amp;amp; call &lt;code&gt;next(error)&lt;/code&gt;, or wrap your handlers once so you never have to think about it again:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;const asyncHandler =
+  (fn: RequestHandler): RequestHandler =&amp;gt;
+  (req, res, next) =&amp;gt;
+    Promise.resolve(fn(req, res, next)).catch(next);
+
+router.get(&#39;/profiles/:id&#39;, asyncHandler(readProfile));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Handling expected errors in a non-standard way&lt;/h3&gt;
+&lt;p&gt;Sometimes one failure shouldn&#39;t fail the whole request. A bulk endpoint is the classic case: if 1 of 200 rows is bad, the caller wants to know which one, not get a 500 for the entire batch.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;export const bulkUpsertEquipment = async (req: Request, res: Response) =&amp;gt; {
+  const created: string[] = [];
+  const failed: string[] = [];
+
+  await Promise.all(
+    req.body.map(async (item: EquipmentRequest) =&amp;gt; {
+      try {
+        await upsertEquipment(item);
+        created.push(item.name);
+      } catch (error) {
+        logger.error(error);
+        failed.push(item.name);
+      }
+    }),
+  );
+
+  return res.json({ created, failed });
+};
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;try/catch&lt;/code&gt; earns its place here because it&#39;s doing something the standard path can&#39;t.&lt;/p&gt;
+&lt;h3&gt;Handling errors outside the scope of a request&lt;/h3&gt;
+&lt;p&gt;The error middleware only exists inside the request lifecycle. Code that can run outside of it (a queue worker, a cron job, a script calling straight into your actions, repositories or services) has nothing above it to catch a thrown error, so it has to handle its own failures.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Logging Errors&lt;/h2&gt;
+&lt;p&gt;Route everything through one logger instead of &lt;code&gt;console.error&lt;/code&gt; so every error ends up in the same place with the same shape. Then be picky about what you send it:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Logs cost money, &amp;amp; they&#39;re useless if they&#39;re too noisy&lt;/strong&gt; (log fatigue).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stop catching, logging &amp;amp; rethrowing.&lt;/strong&gt; You should (&amp;amp; we do) have a platform for catching &amp;amp; logging errors. Catching just to log &amp;amp; rethrow is an antipattern that bloats your logs with duplicates (cost &amp;amp; noise).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Only log errors for legitimate errors:&lt;/strong&gt; things you want to be alerted on so you can take action. A useful test: &lt;em&gt;&amp;quot;If I was called every time the error rate spiked or reached a certain threshold, what kinds of &#39;errors&#39; would I NOT want to trigger this alerting system?&amp;quot;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples of things we were logging as errors that aren&#39;t really errors:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A user typed the wrong password (&lt;code&gt;info&lt;/code&gt;?)&lt;/li&gt;
+&lt;li&gt;A message couldn&#39;t be sent because the recipient unsubscribed (&lt;code&gt;warning&lt;/code&gt;?)&lt;/li&gt;
+&lt;li&gt;A frontend form was submitted with a validation issue that was only caught by the server (&lt;code&gt;info&lt;/code&gt;?)&lt;/li&gt;
+&lt;li&gt;Per-record upsert issues from the public API (still an error but filtered differently, or a &lt;code&gt;warning&lt;/code&gt;?)&lt;/li&gt;
+&lt;li&gt;A product analytics event failed to send (&lt;code&gt;warning&lt;/code&gt;? different filtering?)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The question marks are intentional. The right level is a judgment call per case, but &amp;quot;error&amp;quot; should mean &amp;quot;someone needs to look at this.&amp;quot;&lt;/p&gt;
+&lt;h2&gt;Open Questions&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;How can we add additional metadata (e.g. &lt;code&gt;toast: boolean; route: string;&lt;/code&gt;) to the error response payload so the client can decide how to present the error &amp;amp; loggers can surface the information for debugging?&lt;/li&gt;
+&lt;li&gt;Can we add the route to the error handling middleware so every unhandled error is logged with where it came from?&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
+  <entry>
+    <title>Save Time &amp; Money With This One Weird Trick! Dependency Injection in Express</title>
+    <link href="https://detroitdevelopers.com/blog/dependency-injection-in-express/"/>
+    <updated>2023-06-27T00:00:00Z</updated>
+    <id>https://detroitdevelopers.com/blog/dependency-injection-in-express/</id>
+    <content type="html">&lt;p&gt;&lt;em&gt;Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on June 27, 2023, so some of the details (library choices, code structure) are dated.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;What is Dependency Injection?&lt;/h2&gt;
+&lt;h3&gt;Dependency Injection&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Dependency injection is a solution to implement Inversion of Control, which is one of the &lt;a href=&quot;https://en.wikipedia.org/wiki/SOLID&quot;&gt;SOLID principles&lt;/a&gt; (D: Dependency Inversion). Very roughly, the Dependency inversion principle states that functions or classes shouldn&#39;t be concerned with building / instantiating their dependencies. Instead, they should receive their dependencies as arguments and let other code deal with setting up the dependency.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dependency injection is the group of techniques used to enable a class or function to specify which dependencies they need without needing to worry about the details on how to get or create each dependency.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Source: &lt;a href=&quot;https://peteranderson.me/articles/dependency-injection-with-nodejs-expressjs-and-typescript&quot;&gt;Dependency injection with Node.js, Express.js and TypeScript&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Inversion of Control&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In object-oriented design, the dependency inversion principle is a specific methodology for loosely coupled software modules. When following this principle, the conventional dependency relationships established from high-level, policy-setting modules to low-level, dependency modules are reversed, thus &lt;strong&gt;rendering high-level modules independent of the low-level module implementation details&lt;/strong&gt;. The principle states:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;High-level modules &lt;strong&gt;should not import&lt;/strong&gt; anything from low-level modules. Both should depend on abstractions (e.g., interfaces).&lt;/li&gt;
+&lt;li&gt;Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;em&gt;Source: &lt;a href=&quot;https://en.wikipedia.org/wiki/Dependency_inversion_principle&quot;&gt;Wikipedia: Dependency inversion principle&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Why should you care?&lt;/h2&gt;
+&lt;h3&gt;Cost efficiency of software maintenance&lt;/h3&gt;
+&lt;p&gt;If you want to switch from:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Mailgun &amp;lt;&amp;gt; Sendgrid&lt;/code&gt; || &lt;code&gt;Ajv &amp;lt;&amp;gt; Zod&lt;/code&gt; || &lt;code&gt;Sequelize &amp;lt;&amp;gt; Prisma&lt;/code&gt; || &lt;code&gt;Moment &amp;lt;&amp;gt; Luxon&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;you may have to do a significant rewrite in areas of your codebase that shouldn&#39;t care about the dependency you are changing. &lt;strong&gt;You will do more work&lt;/strong&gt; than is necessary each time you swap one dependency for another.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A note about Dependency Injection &amp;amp; the Single-responsibility Principle (SRP)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Building dependencies within your business logic code violates the SRP. The SRP is intended to make your code easier to comprehend &amp;amp; more resilient to change. In general, code costs more to maintain (extend &amp;amp; fix) than it did to develop initially. This is because requirements evolve during initial development (via scope creep or prototype feedback) &amp;amp; after initial release (via new features, changes to existing features &amp;amp; bug fixes). SRP is a time saving (&amp;amp; therefore cost saving) technique.&lt;/p&gt;
+&lt;h3&gt;Easier-to-write, quicker-to-run automated tests&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;If tests are easy to write, your dev team will write more tests.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;The problem:&lt;/strong&gt; Writing flexible code &amp;amp; performant automated tests is a difficult problem with a juicy reward. Business logic changes as requirements evolve. Business logic is the most likely part of your code to change over time. If your business logic is concerned with dependency implementation details, then you have a larger blast radius for each change you make &amp;amp; you likely have unnecessary amounts of code duplication to set up these dependencies. The problem is evident when trying to create a robust automated testing suite.&lt;/p&gt;
+&lt;p&gt;Unit tests are tests that act on a singular &amp;quot;unit&amp;quot; of your code. Each unit test will ideally test as little code as possible. This makes it easier to ensure your tests are easy to read, easy to write &amp;amp; easy to change when the code they test changes.&lt;/p&gt;
+&lt;p&gt;When working with 3rd party dependencies (e.g. your DB, the Twilio API, Plaid API, USPS API, PayPal API, etc), you have to mock these dependencies, otherwise you are testing them. This is bad for 3 reasons:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Waste of CI minutes &lt;code&gt;($)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Waste of developer time - waiting for a 3rd party call to return every time you run a test &lt;code&gt;($$)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Sometimes it&#39;s just not easy to write test code to work with 3rd party dependencies because these dependencies are not built for this purpose &lt;code&gt;($$$)&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;E.g. mocking calls to Twilio to send SMS, but not actually paying for SMS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Without DI, each unit test in your system will be responsible for stubbing calls to the tested code&#39;s dependencies (e.g. sending Twilio SMS or charging PayPal are things you don&#39;t want to actually do in a test).&lt;/p&gt;
+&lt;p&gt;With DI, you can write mocks for your dependency types/classes &amp;amp; stubs for your dependency methods once &amp;amp; re-use them throughout your tests. This makes it easier for your team to test a full user signup flow (including sending an SMS message via Twilio &amp;amp; charging their PayPal account) without actually calling any external dependencies.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h2&gt;How can you use it?&lt;/h2&gt;
+&lt;h3&gt;Example: RIVET&#39;s ETL pipeline&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Why is this a good candidate for Dependency Injection?&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ever-growing feature set
+&lt;ul&gt;
+&lt;li&gt;We want to reduce the impact of expensive &amp;amp; manual UAT every time new features &amp;amp; changes to old features are rolled out&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Arduous to test
+&lt;ul&gt;
+&lt;li&gt;Many separate systems → can&#39;t easily isolate testing to one system manually without building tooling → so if &lt;code&gt;Dev A&lt;/code&gt; wants to test &lt;code&gt;System C&lt;/code&gt;, but &lt;code&gt;Dev B&lt;/code&gt; is working on fixing upstream &lt;code&gt;System B&lt;/code&gt;, then &lt;code&gt;Dev A&lt;/code&gt; has difficulties in testing &lt;code&gt;System C&lt;/code&gt; because &lt;code&gt;System B&lt;/code&gt; has to be working or simulated&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Exhibit A: Health check endpoints that test DB connections&lt;/h3&gt;
+&lt;p&gt;This is the smallest useful example I could find in our codebase: a &lt;code&gt;/ping&lt;/code&gt; endpoint that checks whether the API can reach the database. It started life inline in &lt;code&gt;app.ts&lt;/code&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/app.ts
+
+// health check endpoint
+app.get(&#39;/ping&#39;, async (_req, res) =&amp;gt; {
+  try {
+    await sequelize.query(`SELECT 1`, { type: QueryTypes.SELECT });
+    return res.status(200).json({ message: &#39;service running&#39; });
+  } catch (error) {
+    return res.status(500).json({ message: &#39;service error&#39; });
+  }
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The handler reaches out &amp;amp; grabs the global &lt;code&gt;sequelize&lt;/code&gt; instance itself. To test it, you either need a real database or you need to mock a module import.&lt;/p&gt;
+&lt;h4&gt;1. Separate the ping endpoint from the main application constructor logic&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;1.a. Create &lt;code&gt;healthController.ts&lt;/code&gt; &amp;amp; move the ping logic to it&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/feature/api/controllers/healthController.ts
+import { QueryTypes } from &#39;sequelize&#39;;
+import { RivetApiResponse as Response, RivetRequest as Request, sequelize } from &#39;../../../rivet-foundation&#39;;
+
+export const ping = async (_req: Request, res: Response) =&amp;gt; {
+  try {
+    // test DB connection
+    await sequelize.query(`SELECT 1`, { type: QueryTypes.SELECT });
+
+    return res.status(200).json({ message: &#39;service running&#39; });
+  } catch (error) {
+    return res.status(500).json({ message: &#39;service error&#39; });
+  }
+};
+
+export * as HealthController from &#39;./healthController&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;1.b. Pass the &lt;code&gt;HealthController.ping&lt;/code&gt; method into Express&#39;s &lt;code&gt;.get()&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/app.ts
+
+// health check endpoint
+app.get(&#39;/ping&#39;, HealthController.ping);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Nothing about the behavior has changed yet. The logic just has a home of its own, which makes the next step possible.&lt;/p&gt;
+&lt;h4&gt;2. Rework &lt;code&gt;.ping()&lt;/code&gt; to accept dependencies (this is the Dependency Injection part)&lt;/h4&gt;
+&lt;p&gt;Instead of being a route handler, &lt;code&gt;ping&lt;/code&gt; becomes a function that &lt;em&gt;takes its dependencies as arguments &amp;amp; returns&lt;/em&gt; a route handler. The real &lt;code&gt;sequelize&lt;/code&gt; instance is the default, so production code doesn&#39;t have to care:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/feature/api/controllers/healthController.ts
+import { Sequelize } from &#39;sequelize-typescript&#39;;
+import { QueryTypes } from &#39;sequelize&#39;;
+import { NextFunction } from &#39;express&#39;;
+import {
+  RivetApiResponse as Response,
+  RivetRequest as Request,
+  ExpressRouteFunc,
+  sequelize,
+} from &#39;../../../rivet-foundation&#39;;
+
+export function ping(db: Sequelize = sequelize): ExpressRouteFunc {
+  return async function (_req: Request, res: Response, _next?: NextFunction) {
+    try {
+      // test DB connection
+      await db.query(`SELECT 1`, { type: QueryTypes.SELECT });
+
+      res.status(200);
+      return res.json({ message: &#39;service running&#39; });
+    } catch (error) {
+      res.status(500);
+      return res.json({ message: &#39;service error&#39; });
+    }
+  };
+}
+
+export * as HealthController from &#39;./healthController&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The route registration calls the function to get the handler:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/app.ts
+
+// health check endpoint
+app.get(&#39;/ping&#39;, HealthController.ping());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;3. Write tests that inject a mocked ORM dependency&lt;/h4&gt;
+&lt;p&gt;Now the test can hand &lt;code&gt;ping&lt;/code&gt; a fake database. No real DB, no module mocking, no network:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ts&quot;&gt;// server/src/tests/api/healthController.unit.test.ts
+import { RivetApiResponse as Response, RivetRequest as Request } from &#39;../../rivet-foundation&#39;;
+import { HealthController } from &#39;../../feature/api/controllers/healthController&#39;;
+import MockRequest from &#39;../mocks/request.mock&#39;;
+import MockResponse from &#39;../mocks/response.mock&#39;;
+import { NextFunction } from &#39;express&#39;;
+import { Sequelize } from &#39;sequelize-typescript&#39;;
+import { SequelizeMock } from &#39;../mocks/sequelize.mock&#39;;
+
+describe(&#39;HealthController&#39;, () =&amp;gt; {
+  let mockRequest: MockRequest;
+  let mockResponse: MockResponse;
+  let nextFunction: NextFunction;
+
+  beforeEach(() =&amp;gt; {
+    mockRequest = {};
+    mockResponse = {
+      json: jest.fn(),
+      status: jest.fn(),
+    };
+    nextFunction = jest.fn();
+  });
+
+  describe(&#39;/ping&#39;, () =&amp;gt; {
+    test(&#39;Application can connect to the database&#39;, async () =&amp;gt; {
+      const db: SequelizeMock = {
+        query: jest.fn().mockReturnValue(true),
+      };
+      const expectedResponse = { status: 200, json: { message: &#39;service running&#39; } } as unknown as Response;
+
+      await HealthController.ping(db as unknown as Sequelize)(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.json).toBeCalledWith(expectedResponse.json);
+      expect(mockResponse.status).toBeCalledWith(expectedResponse.status);
+      expect(nextFunction).toBeCalledTimes(0);
+    });
+
+    test(&#39;Application cannot connect to the database&#39;, async () =&amp;gt; {
+      const db: SequelizeMock = {
+        query: jest.fn().mockImplementation(() =&amp;gt; {
+          throw new Error();
+        }),
+      };
+      const expectedResponse = { status: 500, json: { message: &#39;service error&#39; } } as unknown as Response;
+
+      await HealthController.ping(db as unknown as Sequelize)(mockRequest as Request, mockResponse as Response);
+
+      expect(mockResponse.json).toBeCalledWith(expectedResponse.json);
+      expect(mockResponse.status).toBeCalledWith(expectedResponse.status);
+      expect(nextFunction).toBeCalledTimes(0);
+    });
+  });
+});
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Both the happy path &amp;amp; the &amp;quot;database is down&amp;quot; path are covered in a few milliseconds, &amp;amp; the &amp;quot;down&amp;quot; case is something you could never reliably reproduce against a real database in CI.&lt;/p&gt;
+&lt;h3&gt;Exhibit B: More complicated API endpoints &amp;amp; the repository pattern&lt;/h3&gt;
+&lt;p&gt;The health check is a toy. The same move works on real endpoints: we reworked an &lt;code&gt;upsertWorkers&lt;/code&gt; endpoint on our public API to accept its dependencies (via a repository that wraps the ORM) instead of importing them, then added tests against a mocked repository. This was still a work in progress when I gave the talk, so I don&#39;t have a tidy before/after to show, but the steps are identical:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Rework the handler to accept its dependencies&lt;/li&gt;
+&lt;li&gt;Add tests that inject mocks&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr /&gt;
+&lt;h2&gt;Additional Reading&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;A practical guide to DI with great examples: &lt;a href=&quot;https://peteranderson.me/articles/dependency-injection-with-nodejs-expressjs-and-typescript&quot;&gt;Dependency injection with Node.js, Express.js and TypeScript&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Read everything Martin Fowler writes: &lt;a href=&quot;https://martinfowler.com/articles/injection.html&quot;&gt;Inversion of Control Containers and the Dependency Injection pattern&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+  </entry>
 </feed>

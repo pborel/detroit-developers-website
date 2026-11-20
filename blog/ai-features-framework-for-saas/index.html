@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Framework for Building AI Features in SaaS Applications — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="A Framework for Building AI Features in SaaS Applications — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/ai-features-framework-for-saas/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">ai-features-framework-for-saas.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// A FRAMEWORK FOR BUILDING AI FEATURES IN SAAS APPLICATIONS</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">A Framework for Building AI Features in SaaS Applications</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Apr 10, 2025
+       · Phil Borel
+      · 9 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave on April 10, 2025. AI moves fast, so read it as a snapshot of how I was thinking about AI features at the time. A few months later I wrote about building one of these features for real in <a href="/blog/rosiebot-mcp-at-rivet/">RosieBot: MCP in action at RIVET</a>.</em></p>
+<hr>
+<h2>Introduction</h2>
+<h3>Who is Phil &amp; why does he care about AI?</h3>
+<ol>
+<li>I'm an Engineering Manager at RIVET. Previously I held titles such as &quot;Software Engineer&quot;, &quot;Lead Engineer&quot; &amp; &quot;Founding Engineer&quot; at Quicken Loans (pre-IPO), StockX (Seed &amp; Series A), Procore (pre-IPO) &amp; Portex (Pre-seed &amp; Seed).</li>
+<li>I specialize in 0-to-1 &amp; 1-to-n product development, with skills in Engineering, Product Management &amp; team building.</li>
+<li>I've used a myriad of AI systems &amp; built exactly 1 AI-enabled feature. I'm trying to learn more about this to build more AI features. I am an expert in product development, but by no means an expert in AI.</li>
+<li>My interest in AI is centered around:
+<ul>
+<li><strong>Me:</strong> How can I use this to make my life/job easier? (vibe coding, copilots, image generation, trip itinerary planning)</li>
+<li><strong>Users:</strong> How can I use this to build useful features into my products?</li>
+</ul>
+</li>
+</ol>
+<h3>What is AI?</h3>
+<ul>
+<li>A computer program that uses an LLM to <em>reason</em> (make decisions)</li>
+<li>Some of these programs are advanced enough to act out a subset of the decisions that they make (&quot;agentic&quot;)</li>
+<li>The LLM is the result of an ML process</li>
+</ul>
+<h3>What is the scale of AI?</h3>
+<ol>
+<li>There are 2 phases: the short tail (now - ? months) &amp; the long tail (? months - years in the future)</li>
+<li>AI is a revolution (think agricultural, trades, industrial, computer, internet, smart phone, etc). It is impressive. The short tail is firming up (chat interfaces as a big player). The long tail will blow our minds.</li>
+<li>In this post, I'm going to focus on the short tail &amp; what we can build now as application developers, especially as SaaS app developers.</li>
+</ol>
+<h3>Why do we need an &quot;AI Features Framework&quot;?</h3>
+<ol>
+<li>There are a <em>finite number</em> of AI feature categories that are being built in SaaS apps today. This will change some time in the future (maybe tomorrow, maybe in 5 years).</li>
+<li>Cataloging the finite quantity of features available today helps product teams <em>focus</em> on what they can build to benefit customers &amp; where they can explore (push the boundary).</li>
+</ol>
+<blockquote>
+<p><strong>Thesis:</strong> SaaS companies (e.g., RIVET) will start to use AI (chatbot interfaces) to…</p>
+<ol>
+<li>Fill gaps with easy-to-implement (low-quality) product development experiences powered by a chatbot interface</li>
+<li>Plan high-quality product development experiences informed by customer usage of the chatbot interface</li>
+<li>Expose chatbot interfaces powered by data integrated from other products to provide customer value enabled by that data</li>
+</ol>
+</blockquote>
+<hr>
+<h2>The Framework</h2>
+<p>The framework has two parts:</p>
+<ol>
+<li><em><strong>&quot;Rails&quot;:</strong></em> Environmental Constraints</li>
+<li><em><strong>&quot;Building Blocks&quot;:</strong></em> Feature Categories by Ability
+<ul>
+<li>Example Use Cases</li>
+<li>Environmental Form (&quot;Rail&quot;)</li>
+<li>Data Sources</li>
+</ul>
+</li>
+</ol>
+<h3>&quot;Rails&quot;: Environmental Constraints</h3>
+<p>How tightly does the environment constrain what the AI actor can do? I think of it as states of matter:</p>
+<ol>
+<li><strong>Gas:</strong> Environments where the AI actor can operate with limited constraints. Any constraints are usually offered in the prompt/instructions to the AI or at the model-level, and therefore not changeable without switching models. No ML expertise required.
+<ul>
+<li><em>Example:</em> basic image generation based on a user-provided prompt</li>
+</ul>
+</li>
+<li><strong>Liquid:</strong> Environments where the AI actor can operate with moderately firm constraints. These constraints are often inexpensive to change but require some engineering effort. Very little ML expertise required.
+<ul>
+<li><em>Examples:</em> modifying data in an application in a pre-defined way via an API; retrieving data from a pre-defined data source such as a database or website homepage</li>
+</ul>
+</li>
+<li><strong>Solid:</strong> Environments where the AI actor can operate with severely strict constraints. These constraints are often expensive to set up &amp; change. Changes to the functionality of the feature cannot be achieved without physical &quot;rails&quot; changes and/or advanced ML expertise.
+<ul>
+<li><em>Examples:</em> self-driving car lanes, automated factory production lines, fine-tuning models using self-learning feedback loops</li>
+</ul>
+</li>
+</ol>
+<h3>&quot;Building Blocks&quot;: Feature Categories</h3>
+<p>These are the &quot;Lego blocks&quot; of AI products today. Each has an ability, example use cases, the rails it needs &amp; the data it runs on.</p>
+<h4>1. (Unpredictable / Dangerous) Data Mutation, aka Generative AI</h4>
+<ul>
+<li><strong>Example use cases:</strong> Prototyping, asset creation, document drafting</li>
+<li><strong>Environmental constraints:</strong> Gas Rails. Requires very little in the application environment on top of the base model to get started, but can expand greatly depending on how the application's users expect generation to work (e.g., generate a song vs generate a specific type of image vs generate a fullstack application)</li>
+<li><strong>Data sources:</strong> Static - e.g., an uploaded image, a chat prompt, a document with great detail on a plot for a book to be generated</li>
+</ul>
+<h4>2. Query (relatively) static data</h4>
+<ul>
+<li><strong>Example use cases:</strong> Query static documents such as API documentation</li>
+<li><strong>Environmental constraints:</strong> Gas Rails. Requires static data to be fed into the application environment on top of the base model - e.g., via web scraping based on a URL or OCR of a document</li>
+<li><strong>Data sources:</strong> Static - e.g., product documentation, API documentation, customer help articles or a website's home page</li>
+</ul>
+<h4>3. Query dynamic data</h4>
+<ul>
+<li><strong>Example use cases:</strong> Query an application for answers to questions involving my company's proprietary data in the SaaS application</li>
+<li><strong>Environmental constraints:</strong> Liquid Rails. Requires an interface (today, these are APIs for real-time &amp; data streams for close-to-real-time) with usage instructions to perform approved queries</li>
+<li><strong>Data sources:</strong> Malleable - e.g., a transactional database that is hosting <em>individual end user</em> data (today these are queried via API for certainty)</li>
+</ul>
+<h4>4. Self-improving system (model fine-tuning)</h4>
+<ul>
+<li><strong>Example use cases:</strong> Netflix's movie recommendation engine, an ever-improving project schedule builder, a personalized tutor that &quot;learns&quot; the best way to help me learn</li>
+<li><strong>Environmental constraints:</strong> Solid Rails. Requires a continuous feedback loop such as an ML engine fed by end user feedback - implicit (did the user pick this option or keep searching?) or explicit (thumbs up &amp; down)
+<ul>
+<li><em>Note: requires model fine-tuning, which is an advanced ML practice &amp; compute-intensive</em></li>
+</ul>
+</li>
+<li><strong>Data sources:</strong> Malleable - feedback from the system's key metrics</li>
+</ul>
+<h4>5. (Safe) Data Mutation: agentic workflows to <em>perform specific actions</em> based on <em>reasoning</em> informed by input data</h4>
+<ul>
+<li><strong>Example use cases:</strong>
+<ul>
+<li>&quot;Show me options for flights from A to B on date X. Book flight Y using my credit card.&quot;</li>
+<li>&quot;Why can't I schedule more field labor? Oh, I don't have enough seats in my subscription. Increase my subscription amount using my saved billing info.&quot;</li>
+<li>Self-driving cars in specific self-driving car lanes, or in specific cities that have municipal codes &amp; streets mapped out in a way that an algorithm can take advantage of</li>
+<li>&quot;Dark Factories&quot; where AI-enabled manufacturing machines perform actions based on very strict physical constraints</li>
+</ul>
+</li>
+<li><strong>Environmental constraints:</strong> Solid Rails. Requires an interface (e.g., an API) with usage instructions to perform approved actions. These systems aren't AGI; they are an algorithm-behind-a-curtain that appears to be very smart.</li>
+<li><strong>Data sources:</strong> Malleable - e.g., sensor inputs, APIs returning data from a database, documents representing streets or a schematic for a widget to be built</li>
+</ul>
+<p>These categories become more valuable for end user experiences when <em>combined</em>.</p>
+<hr>
+<h2>Two kinds of data: peripheral &amp; contextual</h2>
+<p>The <code>data fetch</code> blocks above split along one more line that matters a lot for effort:</p>
+<ul>
+<li><strong>Peripheral data:</strong> public or pseudo-public data <em>about</em> an application &amp; its service offerings (marketing materials, sales materials, public API documentation, user training materials). Chatbot providers like <a href="https://www.chatbase.co/docs/user-guides/quick-start/introduction">Chatbase</a>, <a href="https://www.ada.cx/">Ada</a> &amp; Intercom can ingest this out of the box via PDF upload, copy/paste, wiki integrations &amp; website crawlers. Little to no engineering effort.</li>
+<li><strong>Contextual (in-app) data:</strong> the customer's own data <em>in</em> the application. This needs an API or database integration, which means real engineering effort to build &amp; maintain.</li>
+</ul>
+<h2>Applying it: what could a SaaS app like RIVET build?</h2>
+<p>RIVET helps construction contractors plan &amp; schedule their field labor. Here's how the building blocks map onto features for a product like ours.</p>
+<p><strong>1. Sales/Marketing chatbot</strong> (data fetch - peripheral)</p>
+<ul>
+<li><strong>Benefit:</strong> lets prospects learn about the product &amp; service offerings on demand, &amp; surfaces learning materials such as podcast bites, webinar clips &amp; e-book excerpts</li>
+<li><strong>Effort:</strong> can be set up out of the box with existing chatbot providers. Very little to no engineering effort required.</li>
+<li><strong>User:</strong> customer prospect</li>
+</ul>
+<p><strong>2. Support chatbot</strong></p>
+<ul>
+<li><em>v1: data fetch - peripheral</em>
+<ul>
+<li><strong>Benefit:</strong> customers get on-demand answers to simple questions about use cases, training &amp; documentation without waiting on a human. Should allow seamless escalation to human support.</li>
+<li><strong>Effort:</strong> out of the box with existing providers</li>
+<li><strong>User:</strong> active customer</li>
+</ul>
+</li>
+<li><em>Later: (safe) data mutation</em>
+<ul>
+<li><strong>Benefit:</strong> &quot;Why is there a banner on my account? Oh, I haven't paid? How can I pay? Approve a transaction on my card on file.&quot;</li>
+<li><strong>Effort:</strong> significant, because it needs purpose-built APIs &amp; integration, &amp; the self-serve features underneath it have to exist first</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. In-app product chatbot</strong></p>
+<ul>
+<li><em>v1: data fetch - in-app</em>
+<ul>
+<li><strong>Benefit:</strong> customers get information about their specific data (e.g., &quot;There is a severe weather warning for Southeast Michigan this Friday. Who is working on jobs in Southeast Michigan this Friday &amp; Saturday?&quot;)
+<ul>
+<li>fills gaps in the current product experience with a low-quality interface</li>
+<li>informs the product team of areas to focus on for high-quality interfaces to replace the chatbot</li>
+</ul>
+</li>
+<li><strong>Effort:</strong> moderate, due to the need for API or database integration</li>
+<li><strong>User:</strong> active customer</li>
+</ul>
+</li>
+<li><em>v2: (safe) data mutation - in-app</em>
+<ul>
+<li><strong>Benefit:</strong> customers take specific actions on their data, such as &quot;message everyone scheduled on jobs in Southeast Michigan this Friday with this content &amp; show it to me before sending so I can approve it&quot;</li>
+<li><strong>Effort:</strong> significant, due to the purpose-built APIs required</li>
+</ul>
+</li>
+</ul>
+<h2>Example Product Roadmap</h2>
+<p>Putting it in order of delivery:</p>
+<ol>
+<li>AI <code>data fetch</code> with access to <em>peripheral</em> data (product help articles, podcasts, marketing material, API documentation)
+<ul>
+<li>Service customer questions about the product in sales, training &amp; support contexts</li>
+</ul>
+</li>
+<li>AI <code>data fetch</code> with access to <em>contextual</em> data (specific customer data in the database)
+<ul>
+<li>Unlock many new customer-driven query features</li>
+<li>Use the queries customers generate in this feature to inform future product development experiences</li>
+<li>Expose query features against imported partner &amp; competitor datasets that help capture market share</li>
+</ul>
+</li>
+<li>AI <code>(safe) data mutation</code>
+<ul>
+<li>Unlock many new customer-driven mutation features</li>
+<li>Use the mutation queries customers generate in this feature to inform future product development experiences</li>
+<li>Expose more features against imported partner &amp; competitor datasets that help capture market share</li>
+</ul>
+</li>
+</ol>
+<p>Within step 2, the freshness of the data is its own ladder, &amp; each rung costs more engineering than the last:</p>
+<ol>
+<li><strong>Manual exports</strong> of customer data fed to the chatbot. Limited data, not real-time, no engineering effort.</li>
+<li><strong>&quot;Slow&quot; in-app data:</strong> automated, batch-processed document-style exports. Still limited data, close to but not real-time. Significant engineering investment to implement &amp; maintain.</li>
+<li><strong>&quot;Quick&quot; in-app data:</strong> automated, batch-processed exports to a vector data source. Data size is no longer the chief constraint. Massive engineering investment.</li>
+<li><strong>&quot;Real-time&quot; in-app data:</strong> change data capture streaming into a vector data source. 🙂 Massive engineering investment, &amp; then some.</li>
+</ol>
+<h3>Technical challenges</h3>
+<p>While there are many products that offer chatbot interfaces informed by specific APIs (e.g., Chatbase) or document uploads (e.g., <a href="https://www.pinecone.io/blog/pinecone-assistant-generally-available/">Pinecone Assistant</a>), there are no systems with plug-and-play database integrations. The systems that exist today provide RAG services. Plug-and-play database services would require extremely massive &amp; complicated document RAG implementations OR a data pipeline system that moves data into a vector database that the agent has access to.</p>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>

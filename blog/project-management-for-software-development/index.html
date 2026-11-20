@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Management for Software Development: How to deliver more value, more faster — Detroit Software Developers</title>
+  <meta name="description" content="Monthly meetups on software development and startups in Detroit">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Project Management for Software Development: How to deliver more value, more faster — Detroit Software Developers">
+  <meta property="og:description" content="Monthly meetups on software development and startups in Detroit">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://detroitdevelopers.com/blog/project-management-for-software-development/">
+  <meta property="og:image" content="https://detroitdevelopers.com/assets/images/og-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts (Google Fonts CDN for simplicity — can self-host later if needed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="alternate" type="application/rss+xml" title="Detroit Software Developers" href="/feed.xml">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6T55QEPGZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y6T55QEPGZ');
+  </script>
+</head>
+<body>
+
+  <!-- Mobile Nav (visible < 769px) -->
+  <div class="mobile-nav">
+    <a href="/" class="logo">detroit<span style="color: var(--subtext0);">.</span><span style="color: var(--green);">devs</span></a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
+  </div>
+
+  <div class="ide-layout">
+
+    <!-- Sidebar -->
+    <nav class="sidebar" role="navigation" aria-label="Site navigation">
+      <div class="sidebar-header">Explorer</div>
+      <div class="sidebar-section">▾ detroit-devs</div>
+
+      <a href="/" class="sidebar-item">
+        <span class="icon" style="color: var(--peach);">⬡</span> index.html
+      </a>
+      <a href="/events/" class="sidebar-item">
+        <span class="icon" style="color: var(--green);">⬡</span> events.html
+      </a>
+      <a href="/talks/" class="sidebar-item">
+        <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+      </a>
+      <a href="/blog/" class="sidebar-item active">
+        <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+      </a>
+      <a href="/about/" class="sidebar-item">
+        <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+      </a>
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/blog/" class="sidebar-section" style="text-decoration: none;">▾ posts/</a>
+      
+      <a href="/blog/agentic-coding-maturity/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">The Three Layers of...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-panel-takeaways/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Agentic Coding:...</span>
+      </a>
+      
+      <a href="/blog/agentic-coding-advanced-guide/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Advanced Agentic...</span>
+      </a>
+      
+      <a href="/blog/getting-started-ai-agents/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Getting Started with...</span>
+      </a>
+      
+      <a href="/blog/project-management-for-software-development/" class="sidebar-item active">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Project Management...</span>
+      </a>
+      
+      <a href="/blog/rosiebot-mcp-at-rivet/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">RosieBot: MCP in...</span>
+      </a>
+      
+      <a href="/blog/prioritize-tech-debt/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">How to get your team...</span>
+      </a>
+      
+      <a href="/blog/ai-features-framework-for-saas/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">A Framework for...</span>
+      </a>
+      
+      <a href="/blog/evolution-of-data-pipeline-architecture/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Evolution of Data...</span>
+      </a>
+      
+      <a href="/blog/error-handling-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Error Handling For...</span>
+      </a>
+      
+      <a href="/blog/dependency-injection-in-express/" class="sidebar-item">
+        <span class="icon" style="color: var(--teal);">◇</span>
+        <span style="font-size: 12px;">Save Time &amp; Money...</span>
+      </a>
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/events/" class="sidebar-section" style="text-decoration: none;">▾ events/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/events/automated-coding-pipeline/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Building an...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-advanced-practitioners-guide/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/agentic-software-development/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Agentic Software...</span>
+          </a>
+        
+      
+        
+          <a href="/events/sboms-frontend/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">SBOMs for Frontend...</span>
+          </a>
+        
+      
+        
+          <a href="/events/pm-talk/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Keep Projects on...</span>
+          </a>
+        
+      
+        
+          <a href="/events/ai-k8s/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Agents for...</span>
+          </a>
+        
+      
+        
+          <a href="/events/feature-flags-logging/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Feature Flag System...</span>
+          </a>
+        
+      
+        
+          <a href="/events/data-pipelines-sdlc/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">Workshop: Data...</span>
+          </a>
+        
+      
+      
+
+      
+      <div class="sidebar-divider"></div>
+      <a href="/talks/" class="sidebar-section" style="text-decoration: none;">▾ talks/</a>
+      <div class="sidebar-subsection">▾ upcoming/</div>
+      
+      
+        
+      
+      
+        <span class="sidebar-item sidebar-item--sub sidebar-item--empty">none</span>
+      
+      <div class="sidebar-subsection">▾ past/</div>
+      
+        
+          <a href="/talks/goto-accelerate-chicago/" class="sidebar-item sidebar-item--sub">
+            <span class="icon" style="color: var(--teal);">◇</span>
+            <span style="font-size: 12px;">AI Is an Amplifier:...</span>
+          </a>
+        
+      
+      
+
+    </nav>
+
+    <!-- Editor Area -->
+    <div class="editor-area">
+
+      <!-- Editor Tabs -->
+      <div class="editor-tabs">
+        <a href="/" class="editor-tab">
+          <span class="icon" style="color: var(--peach);">⬡</span> index.html
+        </a>
+        <a href="/events/" class="editor-tab">
+          <span class="icon" style="color: var(--green);">⬡</span> events.html
+        </a>
+        <a href="/talks/" class="editor-tab">
+          <span class="icon" style="color: var(--pink);">⬡</span> talks.html
+        </a>
+        <a href="/blog/" class="editor-tab active">
+          <span class="icon" style="color: var(--blue);">⬡</span> blog.html
+        </a>
+        <a href="/about/" class="editor-tab">
+          <span class="icon" style="color: var(--yellow);">⬡</span> about.html
+        </a>
+      </div>
+
+      <!-- Breadcrumb -->
+      <div class="breadcrumb">
+        detroit-devs
+        <span class="breadcrumb-separator">/</span>
+        src
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-current">project-management-for-software-development.html</span>
+      </div>
+
+      <!-- Page Content -->
+      <div class="content-area">
+        
+<div class="content-section">
+  <div class="line-gutter" aria-hidden="true">1<br>2<br>3<br>4</div>
+  <div class="section-content">
+    <div class="section-comment">// PROJECT MANAGEMENT FOR SOFTWARE DEVELOPMENT: HOW TO DELIVER MORE VALUE, MORE FASTER</div>
+
+    <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Project Management for Software Development: How to deliver more value, more faster</h1>
+    <div class="card-meta" style="margin-bottom: 32px;">
+      Sep 10, 2025
+       · Phil Borel
+      · 10 min read
+    </div>
+
+    <div class="prose">
+      <p><em>Note: this is an old post, ported from my old blog. I originally wrote it for a talk I gave at the <a href="/events/pm-talk/">Detroit Software Developers meetup</a> on September 10, 2025. The process described here is how RIVET worked at that moment; it has kept evolving since.</em></p>
+<hr>
+<p><img src="/assets/images/project-management/talk-photo.jpeg" alt="Phil presenting this talk to a room of meetup attendees"></p>
+<h2>Introduction</h2>
+<h3>Who is Phil?</h3>
+<p>Engineering Manager @ RIVET Work; previously @ early-stage startups, mid-stage scaleups &amp; late-stage large orgs.</p>
+<h3>Why is project management important for software startups?</h3>
+<p>VC-backed startups are unique. If they don't grow at exponential rates, they go out of business. The intensity of &quot;the game&quot; is very high - big risk &amp; bigger rewards.</p>
+<p>Well managed projects deliver value &amp; everyone wins. Poorly managed projects result in missed goals &amp; everyone loses (culminating in lack of growth, down-sizing &amp; eventually shutdowns).</p>
+<p><strong>Thinking about exponential growth - a game:</strong> You have a pond in your backyard. This pond has lots of beautiful &amp; interesting flora &amp; fauna in it. One day you notice a Lily Pad growing. The next you notice two Lily Pads. You know you can't let the Lily Pads take over the entire pond because they'll consume too many resources &amp; decimate the other life in the pond. But you're busy &amp; the Lily Pads are pleasant to look at, so you don't do anything about them at first. On the third day there are four Lily Pads in the pond. Every day after, the rate of growth remains constant. On the 20th day, half of the pond is covered with Lily Pads. How many days do you have to take care of the Lily Pads before they cover the entire pond?</p>
+<p><em>(One. That's the thing about exponential growth.)</em></p>
+<h3>What is RIVET Work?</h3>
+<p>RIVET is an early-stage B2B SaaS startup HQ'd in downtown Detroit. At RIVET, we're building <strong>a construction labor operating system for specialty contractors (e.g., Electricians).</strong> Construction labor management is a highly technical discipline. Making high-quality, intuitive software to help professionals manage this process is difficult.</p>
+<h3>The purpose of this post</h3>
+<p>I'll walk you through how RIVET manages projects, organizes our product team &amp; delivers software that our customers love. I'll also sprinkle in improvements to RIVET's process that I'm experimenting with. My goal is to share practical takeaways you can apply in your own teams.</p>
+<hr>
+<h2>How to ship more, faster - a philosophy</h2>
+<blockquote>
+<p>💡 <strong>Insight:</strong> Focus on shipping <em>value</em></p>
+</blockquote>
+<p>I see companies fail to deliver enough value to customers quickly enough due to 3 root causes:</p>
+<ul>
+<li>Failure to ship the <strong>Right Things</strong>™️</li>
+<li>Shipping the <strong>Wrong Things</strong>™️</li>
+<li><strong>Not shipping</strong> (often enough)</li>
+</ul>
+<p>Shipping quickly doesn't matter if you're shipping the wrong things. Prioritize addressing these problems in this order:</p>
+<ol>
+<li>Maximize shipping the Right Things</li>
+<li>Minimize shipping the Wrong Things</li>
+<li>Ship (often)</li>
+</ol>
+<h3>How to ship the Right Things</h3>
+<h4>You don't know what the Right Things are</h4>
+<p><strong>Plan in iterations</strong> of increasing refinement:</p>
+<ul>
+<li>
+<p><strong>Business-level Goal:</strong> Start with a business outcome you'd like to achieve (this is often handled at the executive level).</p>
+<ul>
+<li><em>Example:</em> &quot;Increase revenue by <code>$x</code> before <code>y date</code> through increasing unit price by <code>$x</code> via adoption by markets/user personas <code>a &amp; b</code>&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Product Initiative:</strong> Define product direction based on business goals (often handled by Product Management).</p>
+<ul>
+<li><em>Example:</em> &quot;To increase adoption of the <code>a</code> market, we will build features <code>x, y &amp; z</code>&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Project Goal:</strong> Projects should deliver a slice of the Product Initiative (the sum of many projects is a product initiative).</p>
+<p><img src="/assets/images/project-management/project-goal.png" alt="An example project goal with a deadline, a written goal, experience goals &amp; technical goals"></p>
+<p><em>Example project goal</em></p>
+</li>
+<li>
+<p><strong>Milestones:</strong> Projects will have many milestones. Milestones are project-specific &amp; should be logical slices of project delivery.</p>
+<ul>
+<li><em>Example:</em> &quot;Feature X clickable prototype&quot; or &quot;Feature X in alpha for internal user acceptance testing&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Sprint Plans:</strong> A sprint plan can be as simple as a list of experiences you plan to demo (and release) at the end of the sprint.</p>
+<p><img src="/assets/images/project-management/sprint-plans.png" alt="A list of dated sprint plan snapshots: &quot;Plan as of July 9&quot;, &quot;Plan as of July 18&quot; &amp; so on"></p>
+<p><em>The whole project's sprint plan gets re-cut every week or two</em></p>
+<p><img src="/assets/images/project-management/sprint-3.png" alt="An example sprint plan with a sprint goal, demo date, delivery outputs, convergence outputs &amp; risks"></p>
+<p><img src="/assets/images/project-management/sprint-5.png" alt="A later sprint plan for the same project, with a goal, a trade show demo as the convergence goal &amp; staffing risks"></p>
+<p><em>Example sprint plans</em></p>
+</li>
+<li>
+<p><strong>Story Tickets:</strong> Story tickets should be written by the Product Manager/Owner &amp; detail the needs of the end user that are being met by this feature. They are usually feature-sized &amp; consist of multiple PRs to finish. Don't size story tickets, or size them loosely (e.g., T-shirt sizes).</p>
+</li>
+<li>
+<p><strong>Task Tickets:</strong> Task tickets should be written by the role doing the work (e.g., the Engineers on the team) &amp; should culminate in completion of a Story Ticket. You may have a DB task, a backend task, an infra task &amp; several FE tasks that together complete a Story Ticket. Size task tickets with more granularity than Story Tickets (e.g., Fibonacci points).</p>
+</li>
+</ul>
+<h4>You know what the Right Things are, but you aren't shipping them</h4>
+<p><strong>Embrace change</strong> by making scope changes &quot;free&quot;. When a change is requested, prioritize it for a future project or reduce scope from the current focus.</p>
+<ul>
+<li>You can only do this if work is visible</li>
+<li>You can only make work visible if work is at least roughly planned. Maintain a product backlog with a 🔭 zoomed-out view (quarters) &amp; a 🔬 zoomed-in view (tickets)</li>
+<li>Do not change focus mid-sprint (unless absolutely necessary). This one trips up non-engineers: context shifting kills the productivity of deep work (like design &amp; coding).</li>
+</ul>
+<h3>How to avoid shipping the Wrong Things</h3>
+<p><strong>What are the Wrong Things?</strong></p>
+<ul>
+<li>Things no one actually needs (a failure in discovery &amp; convergence)</li>
+<li>Things that are bad (bugs, tech debt that slows you down too much later, a feature that is good but has bad UX)</li>
+</ul>
+<p><strong>How to avoid shipping the Wrong Things?</strong></p>
+<ul>
+<li>🎯 Figure out what the Right Things are &amp; do those things instead</li>
+<li>🏎️ Quality built-in
+<ul>
+<li>DORA metrics
+<ul>
+<li>Deployment Frequency</li>
+<li>Lead Time for Changes (merge to deploy)</li>
+<li>⭐ Change Failure Rate (rate of bugs) ⭐</li>
+<li>Mean Time to Recover (MTTR)</li>
+</ul>
+</li>
+<li>Build trust with non-technical stakeholders by delivering results (ship the right things, often). Your non-technical stakeholders don't understand &quot;Tech Debt&quot;, but they will understand that it's important if they trust you &amp; you think it's important</li>
+</ul>
+</li>
+</ul>
+<h3>How to ship quickly</h3>
+<p><strong>Levers: thinking in iterations</strong></p>
+<ul>
+<li><code>Concurrency:</code> Run iterations concurrently (stand up more teams &amp; run more projects simultaneously)</li>
+<li><code>Iteration Performance:</code> Shorten iteration time by using small batches (1-4 weeks is ideal)</li>
+<li><code>System Performance:</code> Accomplish more value per iteration, requiring fewer iterations total to reach the end goal (ship only the next most valuable things)</li>
+</ul>
+<p><strong>Iteration performance maxing: small batch size</strong></p>
+<ul>
+<li>1-4 weeks is good; 2 weeks seems to be a &quot;sweet spot&quot; for most teams I've worked on</li>
+<li>Ship what you planned to ship at the end of the cycle</li>
+<li>Don't change course mid-cycle (unless you're going to crash)</li>
+</ul>
+<p><strong>⭐ System performance maxing: aggressively obliterate scope creep ⭐</strong></p>
+<p>The biggest issue I see pop up time &amp; time again is what I call &quot;<em>Kitchen Sink Scope Creep</em>&quot;.</p>
+<p><strong>Kitchen Sink Scope Creep:</strong> When you're working on a system/feature that is adjacent to another system/feature that could also use some attention, so you are now working on two things simply because they are adjacent. This process compounds over time so that soon you are working on four things, then eight, sixteen, etc.</p>
+<p><strong>Analogy:</strong> You're repainting a kitchen &amp; The Boss walks in and says &quot;while you're in here, the sink needs to be replaced, too!&quot;</p>
+<p>This is great because you've discovered a new need. However, if you try to replace the sink while painting you will end up with bad outcomes. And it could be that the sink doesn't need to be replaced at all (maybe it's a nice-to-have that is now being prioritized over everything else, like fixing the toilet &amp; repairing the lock on the front door). The Boss feels that you should deliver both the paint &amp; the sink together now because they've been staring at the sink every time they come in to check on the painting progress.</p>
+<p><strong>Solution:</strong> Finish painting. While you do that, plan the new sink installation with The Boss (what kind of sink do they want? what did they not like about the old sink?) by creating a story ticket in the backlog of the project (or even a new project). This way the sink replacement is documented &amp; there is work being done on it (discovery &amp; convergence), but the painting project is not immediately at risk because your team is trying to demo the old sink (dust) &amp; test piping (water) while painting (bad outcomes when interacting with dust or water). Just as important, the kitchen sink can now be prioritized in line with other priorities instead of jumping the line ahead of much more important features (e.g., the front door lock).</p>
+<blockquote>
+<p>💡 <strong>Insight:</strong> Anytime scope is added mid-sprint or mid-project, said scope is implicitly prioritized above everything else that comes after this sprint &amp; after this project.</p>
+<p><strong>Hard Truth:</strong> Prioritization &amp; scope creep reduction is really difficult because it is a multiplayer, zero-sum game. Scope that is removed can be personally offensive to people (e.g., a design experience, a specific user request, an executive pet project/feature). The only way through it is by building trust with stakeholders &amp; bringing them to your side. Many tough conversations are ahead. Enlist the help of your PM.</p>
+</blockquote>
+<p><strong>How can I ensure I ship every cycle when feature delivery can take longer than 1 sprint? Release ≠ Launch</strong></p>
+<ul>
+<li><em>Release:</em> Code is released to Production (feature flags, experience toggles, new features that don't disrupt existing experiences, feature skeletons, component libraries, prototypes)</li>
+<li><em>Launch:</em> Feature is turned on in GA (feature flag removed, new experience enabled, users trained)</li>
+</ul>
+<blockquote>
+<p>🧠 <strong>Takeaway:</strong> Focus on shipping <em>value</em></p>
+<ol>
+<li>Ship the Right Things
+<ul>
+<li>🤑 Make changes &quot;free&quot; by trading scope instead of adding hours or extending the deadline</li>
+<li>🔄 Iterative planning process</li>
+</ul>
+</li>
+<li>Don't ship the Wrong Things
+<ul>
+<li>🎯 Ship the Right Things instead</li>
+<li>🏎️ Quality built-in (sell it as a way to prevent future disruptions)</li>
+</ul>
+</li>
+<li>Ship quickly
+<ul>
+<li>🥃 Small batch size</li>
+<li>🚱 Efficient cycles (only prioritize the next most important things for delivery)</li>
+<li>🚀 Frequent releases; purposeful launches</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<hr>
+<h2>How RIVET builds product (with some seasoning) 🌶️</h2>
+<blockquote>
+<p>💡 <strong>Insight:</strong> Software development is a process of <em>iterative refinement</em></p>
+</blockquote>
+<h3>The Pipeline: Discover → Converge → Deliver</h3>
+<p><img src="/assets/images/project-management/product-process.png" alt="RIVET's product process: Discover (what &amp; why, owned by Product Managers) → Converge (how, owned by Designers &amp; Tech Leads) → Deliver (who &amp; when, owned by Engineers)"></p>
+<p>Our product development pipeline runs on three verbs:</p>
+<ol>
+<li><strong>Discover (What &amp; Why)</strong>
+<ul>
+<li><strong>Tools:</strong> ProductBoard + Notion</li>
+<li><strong>Inputs:</strong> Customer feedback, sales insights, market research, analytics, business goals</li>
+<li><strong>Owners:</strong> Product Managers</li>
+<li><strong>Output:</strong> Clear priorities that are <em>valuable</em> to customers</li>
+<li><em>Checkpoint:</em> 🏔 Product Steering Committee (every 12–18 weeks) for big-picture alignment. We use this to set quarterly goals.</li>
+</ul>
+</li>
+<li><strong>Converge (How)</strong>
+<ul>
+<li><strong>Tools:</strong> Figma + discovery interviews (2–3 per week)</li>
+<li><strong>Owners:</strong> Product Designers, with engineering + product input</li>
+<li><strong>Output:</strong> Tested prototypes, &quot;Figma-as-spec,&quot; validated solutions</li>
+<li><em>Checkpoint:</em> ♠️ Betting Table (every 2 sprints) where we decide what's ready to move into delivery. We use this to set sprint goals for the length of a project.</li>
+</ul>
+</li>
+<li><strong>Deliver (Who &amp; When)</strong>
+<ul>
+<li><strong>Tools:</strong> Notion + GitHub</li>
+<li><strong>Owners:</strong> Engineering Manager + Engineers, with continuous input from design &amp; product via demos (WIP/pre-recorded demos, sprint demos)</li>
+<li><strong>Output:</strong> Working software, released</li>
+<li><em>Checkpoints:</em> 💈 Backlog Grooming (weekly) + 🧭 Sprint Planning (bi-weekly). We use these to ratify near-term sprint goals.</li>
+</ul>
+</li>
+</ol>
+<h3>The Battle Rhythm</h3>
+<ul>
+<li>Steering Committee (quarterly)</li>
+<li>Quarterly Goal Setting &amp; Product Initiatives (quarterly)</li>
+<li>Project Launch (monthly)</li>
+<li>Product &amp; Application Metrics Review (monthly)</li>
+<li>Customer Empathy Indoctrination (monthly)
+<ul>
+<li>Types: PM-led (UX), SME-led (market), &quot;Game Film&quot; (customer calls)</li>
+</ul>
+</li>
+<li>Sprint Planning (bi-weekly)
+<ul>
+<li>PMs should bring groomed Story Tickets to Tech Leads ahead of Sprint Planning</li>
+<li>Tech Leads bring Task Tickets &amp; (updated) Sprint Plans to Sprint Planning</li>
+<li>💡 The entire project has its full sprint plan updated as an input for every Sprint Planning session</li>
+</ul>
+</li>
+<li>Internal Demos (bi-weekly)
+<ul>
+<li>Product Team demos: design progress, new devops features, API endpoints</li>
+<li>Company-wide demos: features in varying grades of fidelity</li>
+</ul>
+</li>
+<li>Retros (bi-weekly)</li>
+<li>Backlog Grooming - Story Tickets (weekly)</li>
+<li>Standups (daily)</li>
+</ul>
+<blockquote>
+<p>🧠 <strong>Takeaway:</strong> Software development is a process of iterative refinement</p>
+<ol>
+<li><strong>Discover &gt; Converge &gt; Deliver:</strong> Start 🔭 zoomed-out &amp; 🔬 zoom in each cycle</li>
+<li><strong>Battle Rhythm:</strong> Follow the plan with discipline</li>
+<li><strong>Adapt to your needs:</strong> This process works for RIVET at our current stage, but the process is far from what it was 6 months ago &amp; will evolve over the next 6+ months</li>
+</ol>
+</blockquote>
+<hr>
+<h2>What can you do tomorrow to deliver more value, more faster?</h2>
+<h3>Ship the Right Things &amp; don't ship the Wrong Things</h3>
+<ol>
+<li>Make work visible by <code>building &amp; maintaining a backlog</code></li>
+<li>Have a conversation with your stakeholders about <code>Kitchen Sink Scope Creep</code>. Find a way to gather &amp; compile new needs without implicitly reprioritizing every time a &quot;Kitchen Sink Replacement&quot; opportunity arises (use the backlog you built in step 1)</li>
+<li><code>Embrace gradual refinement</code> by employing Sprint Plans. Plan ahead more than your next sprint, even if the plan is low fidelity past a few weeks out. Update this plan every 1-2 weeks.</li>
+</ol>
+<h3>Ship often (every 1-4 weeks at a minimum)</h3>
+<ol>
+<li><strong>Release with rhythm:</strong> do whatever is necessary to release every <code>x</code> weeks. Shipping builds trust &amp; you can't combat scope creep without trust.</li>
+<li><strong>Utilize iterations when releasing:</strong> release things that help you learn &amp; demo in production, even if they are behind a feature flag. Add more to your release in future iterations. Stop iterating &amp; move on to the next most important thing once you've met your original goal.</li>
+</ol>
+<blockquote>
+<p>🧠 <strong>Takeaway:</strong> Software development is a process of iterative refinement</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Status Bar -->
+  <div class="status-bar" aria-hidden="true">
+    <div class="status-bar-group">
+      <span>⑂ main</span>
+      <span>✓ 0 problems</span>
+    </div>
+    <div class="status-bar-group">
+      <a href="/slides/" style="color: inherit; text-decoration: none;">⬡ slides</a>
+      <span>detroit-devs</span>
+      <span>UTF-8</span>
+      <span>Nunjucks</span>
+    </div>
+  </div>
+
+</body>
+  <script>
+    document.addEventListener('click', function(event) {
+      const sidebar = document.querySelector('.sidebar');
+      const toggle = document.querySelector('.mobile-nav-toggle');
+      if (sidebar && toggle && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(event.target) && !toggle.contains(event.target)) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  </script>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#1e1e2e',
+        mainBkg: '#313244',
+        nodeBorder: '#89b4fa',
+        clusterBkg: '#181825',
+        clusterBorder: '#45475a',
+        titleColor: '#cdd6f4',
+        nodeTextColor: '#cdd6f4',
+        edgeLabelBackground: '#1e1e2e',
+        lineColor: '#6c7086',
+      }
+    });
+
+    // markdown-it renders ```mermaid as <pre><code class="language-mermaid">
+    // Mermaid needs <pre class="mermaid"> — convert before running
+    document.querySelectorAll('pre code.language-mermaid').forEach(el => {
+      const pre = el.parentElement;
+      const mermaidPre = document.createElement('pre');
+      mermaidPre.className = 'mermaid';
+      mermaidPre.textContent = el.textContent;
+      pre.replaceWith(mermaidPre);
+    });
+
+    await mermaid.run();
+  </script>
+</html>
